@@ -48,17 +48,44 @@
 \newsavebox{\smlmatc}
 \savebox{\smlmatc}{$\left(\begin{smallmatrix}1&1&1\\0&1&0\end{smallmatrix}\right)$}
 
+Throughout the paper, every time we speak about matrices we mean binary matrices and we omit the word binary. If we speak about a \emph{pattern}, we again mean a binary matrix and we use the word in order to distinguish among more matrices as well as to indicate relationship.
+
+When dealing with matrices, we always index rows and column starting with zero and if we speak about a \emph{line}, we mean either a row or a column. When we order a set of line indices, we first put all rows, again starting with zero, and then all columns. For $M\in\{0,1\}^{m\times n}$, $[m]$ is a set of all row indices and $[m+n]$ is a set of all lines, where $m$-th element is an index of the first column.
+\begin{ntn}
+For $n\in\mathbb{N}$ let $[n]:=\{0,1,\dots,n-1\}$ and for $m\in\mathbb{N}$, where $n<m$ let $[n,m]:=\{n,n+1,\dots,m-1\}$.
+\end{ntn}
+\begin{ntn}
+For an $m$ by $n$ matrix $M\in\{0,1\}^{m\times n}$ and $L\subseteq[m+n]$ let $M[L]$ denote a submatrix of $M$ induced by line indices in $L$.
+\end{ntn}
+\begin{ntn}
+For an $m$ by $n$ matrix $M\in\{0,1\}^{m\times n}$, $R\subseteq[m]$ and $C\subseteq[n]$ let $M[R,C]$ denote a submatrix of $M$ induced by row indices in $R$ and column indices in $C$. Furthermore, for $r\in[m]$ and $c\in[n]$ let $M[r,c]:=M[\{r\},\{c\}]=M[\{r,c\}]$.
+\end{ntn}
 \begin{defn}
-$P\leq M$ if $M$ \emph{contains} $P$ \emph{as a submatrix}.
+We say that a matrix $M\in\{0,1\}^{m\times n}$ \emph{contains} a pattern $P\in\{0,1\}^{h\times w}$ \emph{as a submatrix} and denote it by $P\leq M$ if there are $R\in[m]$ and $C\in[n]$ such that $|R|=h$ and $|C|=w$ for which for every $r\in R$ and $c\in C$ if $P[r,c]=1$, then $M[R,C][r,c]=1$.
 \end{defn}
+This does not necessarily mean $P=M[R,C]$ as $M[R,C]$ can have more one-entries than $P$ does.
+\begin{ntn}
+For an $m$ by $n$ matrix $M\in\{0,1\}^{m\times n}$ and $L\subseteq[m+n]$ in ascending order let $M_{\preceq}[L]$ denote a matrix acquired from $M$ by applying following operation for each $l\in L$:
+\begin{itemize}
+\item If $l$ is the first row index in $L$ replace the first $l+1$ rows by one row that is a bitwise or of replaced rows.
+\item If $l$ is the first column index in $L$ replace the first $l+1$ columns by one column that is a bitwise or of replaced columns.
+\item Otherwise, take $l$'s predecessor $l'\in L$ and replace lines $l'+1,l'+2,\dots,l$ by one line that is a bitwise or of replaced lines.
+\end{itemize}
+\end{ntn}
+\begin{ntn}
+For an $m$ by $n$ matrix $M\in\{0,1\}^{m\times n}$, $R\subseteq[m]$ and $C\subseteq[n]$ let $M_{\preceq}[R,C]:=M_{\preceq}[R\cup \{c+m|c\in C\}]$.
+\end{ntn}
+\textbf{Poznámka pro vedoucího:}
+
+With this notation, for $M\in\{0,1\}^{m\times n}$ we have: $$M_{\preceq}[\{m,m+k\}]=M_{\preceq}[[m]\cup\{m,m+k,m+n-1\}]$$ This means that I always get a correct matrix and the definition of containing should be alright, but it is not very nice that it is ambiguous.
 \begin{defn}
-$P\preceq M$ if $M$ \emph{contains} $P$ \emph{as an interval minor}.
+We say that a matrix $M\in\{0,1\}^{m\times n}$ \emph{contains} a pattern $P\in\{0,1\}^{h\times w}$ \emph{as an interval minor} and denote it by $P\preceq M$ if there are $R\in[m]$ and $C\in[n]$ such that $|R|=h$ and $|C|=w$ for which for every $r\in R$ and $c\in C$ if $P[r,c]=1$, then $M_{\preceq}[R,C][r,c]=1$.
 \end{defn}
 \begin{obs}
-$P\leq M\Rightarrow P\preceq M$.
+For all matrices $M$ and $P$, $P\leq M\Rightarrow P\preceq M$.
 \end{obs}
 \begin{obs}
-If $P$ permutation matrix, then $P\leq M\Leftrightarrow P\preceq M$.
+For all matrices $M$ and $P$, if $P$ is a permutation matrix, then $P\leq M\Leftrightarrow P\preceq M$.
 \end{obs}
 
 \section{Characterizations}
@@ -91,7 +118,7 @@ Let $P=\left(\begin{smallmatrix}1&1\\1&0\end{smallmatrix}\right)$, then for all 
 \end{figure}
 \begin{proof}
 \begin{itemize}
-\item[$\Rightarrow$] If $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)\not\preceq M$, then $M=M'$ and we are done. Else there are one-entries at $[r,c']$ and $[r',c]$, where $r'<r$ and $c'<c$. If there was a one-entry in regions outside $M'$, the $r$-th row and the $c$-th column, then $P\preceq M$, which would be a contradiction. If $M'$ is not a walking matrix, then it contains $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ and we again get a contradiction.
+\item[$\Rightarrow$] If $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)\not\preceq M$, then $M=M'$ and we are done. Else there are one-entries $M[r,c']$ and $M[r',c]$, where $r'<r$ and $c'<c$. If there was a one-entry in regions outside $M'$, the $r$-th row and the $c$-th column, then $P\preceq M$, which would be a contradiction. If $M'$ is not a walking matrix, then it contains $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ and we again get a contradiction.
 \item[$\Leftarrow$] For contradiction, assume that $M$ described in Figure~\ref{p21} contains $P$ as an interval minor. It means that there is a partition of the matrix into four quadrants such that there is at least one one-entry in each quadrant besides the bottom right one. If the matrix would be partitioned above the $r$-th row, then there would be only one column containing one-entries and it would not be possible for both top quadrants to have a one-entry. Similarly, if the matrix would be partitioned to the left of the $c$-th column, there would be only one row containing one-entries and there would not be one-entry in either top-left or bottom-left quadrant. Therefore, the partitioning lies bellow the $r$-th row and to the right of the $c$-th column, but if the quadrants contain one-entries, there is a $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ interval minor in $M'$, which is a contradiction.
 \end{itemize}
 \end{proof}
@@ -152,16 +179,16 @@ Let $P=\left(\begin{smallmatrix}1&1&1\\0&1&0\end{smallmatrix}\right)$, then for 
 
 \section{Extremal function}
 \begin{defn}
-$Ex(P,m,n):=\{oc(M)|M\in\{0,1\}^{m\times n},P\not\leq M\}$
+For a matrix $P$ and $n,m\in\mathbb{N}$ we define $Ex(P,m,n):=max\{\text{weight of }M|M\in\{0,1\}^{m\times n},P\not\leq M\}$. We denote $Ex(P,n):=Ex(P,n,n)$.
 \end{defn}
 \begin{defn}
-$Ex_{\preceq}(P,m,n):=\{oc(M)|M\in\{0,1\}^{m\times n},P\not\preceq M\}$
+For a matrix $P$ and $n,m\in\mathbb{N}$ we define $Ex_{\preceq}(P,m,n):=max\{\text{weight of }M|M\in\{0,1\}^{m\times n},P\not\preceq M\}$. We denote $Ex(P,n):=Ex(P,n,n)$.
 \end{defn}
 \begin{obs}
-For all $P$: $Ex_{\preceq}(P,m,n)\leq Ex(P,m,n)$.
+For all $P,m,n$; $Ex_{\preceq}(P,m,n)\leq Ex(P,m,n)$.
 \end{obs}
 \begin{obs}
-If $P\in\{0,1\}^{k\times l}$ has a one-entry at position $[a,b]$, then $$Ex(P,m,n)\geq\begin{array}{ll}
+If $P\in\{0,1\}^{k\times l}$ has a one-entry at position $[a,b]$, then $$Ex(P,m,n)\geq\Big\{\begin{array}{ll}
 m\cdot n & k>m\vee l>m \\
 (k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
 \end{array}$$
@@ -171,14 +198,14 @@ The same holds for $Ex_{\preceq}(P,m,n).$
 \end{obs}
 \begin{defn}
 $P\in\{0,1\}^{k\times l}$ is \emph{(strongly) minimalist} if
-$$Ex(P,m,n)=\begin{array}{ll}
+$$Ex(P,m,n)=\Big\{\begin{array}{ll}
 m\cdot n & k>m\vee l>m \\
 (k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
 \end{array}$$
 \end{defn}
 \begin{defn}
 $P\in\{0,1\}^{k\times l}$ is \emph{weakly minimalist} if
-$$Ex_{\preceq}(P,m,n)=\begin{array}{ll}
+$$Ex_{\preceq}(P,m,n)=\Big\{\begin{array}{ll}
 m\cdot n & k>m\vee l>m \\
 (k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
 \end{array}$$

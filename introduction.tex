@@ -1,0 +1,51 @@
+\chapter*{Introduction}
+Throughout the paper, every time we speak about matrices we mean binary matrices (also called 01-matrices) and we omit the word binary. If we speak about a \emph{pattern}, we again mean a binary matrix and we use the word in order to distinguish among more matrices as well as to indicate relationship.
+
+When dealing with matrices, we always index rows and column starting with one and when we speak about a row~$r$, we simply mean a row with index $r$. A \emph{line} is a common word for both a row and a column. When we order a set of lines, we first put all rows and then all columns. For $M\in\Mat$, $[m]$ is a set of all rows and $[m+n]$ is a set of all lines, where $m$-th element is the last row. This goes with the usual notation.
+\begin{ntn}
+For $n\in\mathbb{N}$ let $[n]:=\{1,2,\dots,n\}$ and for $m\in\mathbb{N}$, where $n\leq m$ let $[n,m]:=\{n,n+1,\dots,m\}$.
+\end{ntn}
+\begin{ntn}
+For a matrix $M\in\{0,1\}^{m\times n}$ and $L\subseteq[m+n]$ let $M[L]$ denote a submatrix of $M$ induced by lines in $L$.
+\end{ntn}
+\begin{ntn}
+For a matrix $M\in\Mat$, $R\subseteq[m]$ and $C\subseteq[n]$ let $M[R,C]$ denote a submatrix of $M$ induced by rows in $R$ and columns in $C$. Furthermore, for $r\in[m]$ and $c\in[n]$ let $M[r,c]:=M[\{r\},\{c\}]=M[\{r,c+m\}]$.
+\end{ntn}
+\begin{defn}
+We say a matrix $M\in\Mat$ \emph{contains} a pattern $P\in\Pat$ \emph{as a submatrix} and denote it by $\PsmM$ if there are $R\in[m]$ and $C\in[n]$ such that $|R|=k$, $|C|=l$ and for every $r\in R$ and $c\in C$ if $P[r,c]=1$, then $M[R,C][r,c]=1$.
+\end{defn}
+This does not necessarily mean $P=M[R,C]$ as $M[R,C]$ can have more one-entries than $P$ does.
+\begin{ntn}
+For a matrix $M\in\Mat$ and $L\subseteq[m+n]$ let $M_{\preceq}[L]$ denote a matrix acquired from $M$ by applying following operation for each $l\in L$:
+\begin{itemize}
+\item If $l$ is the first row in $L$ then we replace the first $l$ rows by one row that is a bitwise OR of replaced rows.
+\item If $l$ is the first column in $L$ then we replace the first $l-m$ columns by one column that is a bitwise OR of replaced columns.
+\item Otherwise, we take $l$'s predecessor $l'\in L$ in the standard ordering and replace lines $[l'+1,l]$ by one line that is a bitwise OR of replaced lines.
+\end{itemize}
+\end{ntn}
+\begin{ntn}
+For a matrix $M\in\Mat$, $R\subseteq[m]$ and $C\subseteq[n]$ let $M_{\preceq}[R,C]:=M_{\preceq}[R\cup \{c+m|c\in C\}]$.
+\end{ntn}
+%\textbf{Poznámka pro vedoucího:}
+
+%With this notation, for $M\in\{0,1\}^{m\times n}$ we have: $$M_{\preceq}[\{m,m+k\}]=M_{\preceq}[[m]\cup\{m,m+k,m+n-1\}]$$ This means that I always get a correct matrix and the definition of containing should be alright, but it is not very nice that it is ambiguous.
+\begin{defn}
+We say a matrix $M\in\Mat$ \emph{contains} a pattern $P\in\Pat$ \emph{as an interval minor} and denote it by $\PimM$ if there are $R\in[m]$ and $C\in[n]$ such that $|R|=k$, $|C|=l$ and for every $r\in R$ and $c\in C$ if $P[r,c]=1$, then $M_{\preceq}[R,C][r,c]=1$.
+\end{defn}
+%ordered bipartite graphs
+%
+%
+%
+%partitioning into rectangles (interval minors)
+\begin{obs}
+\label{obs1}
+For all matrices $M$ and $P$, $\PsmM\Rightarrow\PimM$.
+\end{obs}
+\begin{obs}
+For all matrices $M$ and $P$, if $P$ is a permutation matrix, then $\PsmM\Leftrightarrow\PimM$.
+\end{obs}
+\begin{proof}
+If we have $\PimM$, then there is a partitioning of $M$ into rectangles and for each one-entry of $P$ there is at least one one-entry in the corresponding rectangle of $M$. Since $P$ is a permutation matrix, it is sufficient to take rows and columns having at least one one-entry in the right rectangle and we can always do so.
+
+Together with Observation~\ref{obs1} this gives us the statement.
+\end{proof}

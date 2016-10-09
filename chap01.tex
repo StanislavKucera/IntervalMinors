@@ -23,7 +23,13 @@ Since $P$ is a permutation matrix, $\PnimM\Leftrightarrow\PnsmM$ and it is easy 
 
 \begin{thm}
 \label{theorem1}
-Let $P=\smm{1&1\\1&0}$, then for all $M\in\Mat$: $\PnimM\Leftrightarrow$ there exist a row~$r$ and a column~$c$, such that $M[[r-1],[c-1]],M[[r-1],[c+1,n]]$ and $M[[r+1,m],[c-1]]$ are empty and $M[[r,m],[c,n]]$ is a walking matrix (see Figure~\ref{p12}). % need to change the picture somehow
+Let $P=\smm{1&1\\1&0}$, then for all $M\in\Mat$: $\PnimM\Leftrightarrow$ there exist a row~$r$ and a column~$c$ such that (see Figure~\ref{p12})
+\begin{itemize}
+\item $M[[r-1],[c-1]]$ is empty,
+\item $M[[r-1],[c+1,n]]$ is empty,
+\item $M[[r+1,m],[c-1]]$ is empty and
+\item $M[[r,m],[c,n]]$ is a walking matrix.
+\end{itemize}
 \end{thm}
 \begin{figure}[h!]
 \centering
@@ -40,11 +46,21 @@ Let $P=\smm{1&1\\1&0}$, then for all $M\in\Mat$: $\PnimM\Leftrightarrow$ there e
 
 To characterize matrices avoiding $\smm{1&1\\1&1}$ as an interval minor, we first need to define a few useful terms.
 \begin{defn}
-For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is \emph{top-left empty} if $M[[r-1],[c-1]]$ is an empty matrix. Similarly, it is \emph{top-right empty} if $M[[r-1],[c+1,n]]$ is empty and so on.
+For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is
+\begin{itemize}
+\item \emph{top-left empty} if $M[[r-1],[c-1]]$ is an empty matrix,
+\item \emph{top-right empty} if $M[[r-1],[c+1,n]]$ is empty,
+\item \emph{bottom-left empty} if $M[[r-1],[c+1,n]]$ is empty,
+\item \emph{bottom-right empty} if $M[[r-1],[c+1,n]]$ is empty.
+\end{itemize}
 \end{defn}
 \begin{lemma}
 \label{lemma1}
-Let $P=\smm{1&1\\1&1}$ and let $M\in\Mat$ avoid $P$ as an interval minor, then there exists a row~$r$ and a column~$c$ such that $M[r,c]$ is either both top-left empty and bottom-right empty, in which case $[r,c]\not\in\{[0,n-1],[m-1,0]\}$ or both top-right empty and bottom-left empty, in which case $[r,c]\not\in\{[0,0],[m-1,n-1]\}$.
+Let $P=\smm{1&1\\1&1}$ and let $M\in\Mat$ avoid $P$ as an interval minor, then there exists a row~$r$ and a column~$c$ such that $M[r,c]$ is either
+\begin{enumerate}
+\item both top-left empty and bottom-right empty and $[r,c]\not\in\{[1,n],[m,1]\}$ or
+\item both top-right empty and bottom-left empty and $[r,c]\not\in\{[1,1],[m,n]\}$.
+\end{enumerate}
 \end{lemma}
 \begin{proof}
 
@@ -70,20 +86,24 @@ For bigger $M$ there is, from Lemma~\ref{lemma1}, ``the element''. Assume the fi
 
 \subsection{Matrices of size $2\times3$}
 \begin{thm}
-Let $P=\smm{1&0&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M=M_1\oplus_hM_2$, where $\smm{1&0\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$.
+Let $P=\smm{1&0&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M=M_1\oplus_hM_2$ where $\smm{1&0\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$.
 \end{thm}
 \begin{proof}
 \begin{itemize}
-\item[$\Rightarrow$] Let $e=[r,c]$ be the top-most one-entry of $M$. If $\smm{1&0\\0&1}\im M[[m],[c-1]]$, together with $e$ it would be the whole $P$. If $\smm{0&1\\1&0}\nim M[[m],[c,n]]$ then we are done. Let us assume it is not the case and let $e_{0,0},\ e_{1,1}$ be any two one-entries forming the forbidden pattern. Similarly, let $\smm{1&0\\0&1}\im M[[m],[c]]$ (else $\PimM$) and let $e_{0,1},\ e_{1,0}$ be any two one-entries forming the forbidden pattern. Now if we take $e_{0,0},\ e_{0,1}$ and $e_{1,0}$ or $e_{1,1}$ with bigger row, we get the forbidden pattern $P$ as an interval minor. 
+\item[$\Rightarrow$] Let $e=[r,c]$ be the top-most one-entry of $M$. If $\smm{1&0\\0&1}\im M[[m],[c-1]]$, together with $e$ it forms $P$. If $\smm{0&1\\1&0}\nim M[[m],[c,n]]$ then we are done. Let us assume it is not the case and let $e_{0,0},\ e_{1,1}$ be any two one-entries forming the forbidden pattern. Symmetrically, let $\smm{1&0\\0&1}\im M[[m],[c]]$ and let $e_{0,1},\ e_{1,0}$ be any two one-entries forming the forbidden pattern. Now if we take $e_{0,0},\ e_{0,1}$ and $e_{1,0}$ or $e_{1,1}$ with bigger row, we get the forbidden pattern $P$ as an interval minor of $M$. 
 \item[$\Leftarrow$] For contradiction, let us assume $\PimM$ and $M=M_1\oplus_hM_2$. If $\PimM$, look at the one-entry of $M$ where the bottom one-entry of $P$ is mapped. If it is in $M_1$ then $\PnimM$ because $\smm{0&1\\1&0}\nim M_1$. Otherwise, $\PnimM$ because $\smm{1&0\\0&1}\nim M_2$.
 \end{itemize}
 \end{proof}
 \begin{lemma}
 \label{lemma2}
-Let $P=\smm{1&1&1\\0&1&0}$, then for all $M$: $\PnimM\Rightarrow M=M_1\oplus_hM_2$, where $\smm{1&1\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$ or $\smm{1&0\\0&1}\nim M_1$ and $\smm{1&1\\1&0}\nim M_2$.
+Let $P=\smm{1&1&1\\0&1&0}$, then for all $M$: $\PnimM\Rightarrow M=M_1\oplus_hM_2$ where
+\begin{enumerate}
+\item $\smm{1&1\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$ or
+\item $\smm{1&0\\0&1}\nim M_1$ and $\smm{1&1\\1&0}\nim M_2$.
+\end{enumerate}
 \end{lemma}
 \begin{proof}
-Let $e=[r,c]$ be the top-most one-entry of $M$. If $\smm{1&1\\0&1}\im M[[m],[c-1]]$, together with $e$ it would be the whole $P$. Similarly, $\smm{1&1\\1&0}\nim M[[m],[c+1,n]]$. For contradiction with the statement, let $\smm{1&0\\0&1}\im M[[m],[c]]$ and $e_{0,0},\ e_{1,1}$ (non of them equal to $e$, since $e$ lies in the top-right corner) are any two one-entries forming the pattern. Similarly, let $\smm{0&1\\1&0}\im M[[m],[c,n]]$ and $e_{0,1},\ e_{1,0}$ are any two one-entries forming the pattern. In that case $e_{0,0},\ e,\ e_{0,1}$ and $e_{1,0}$ or $e_{1,1}$ with bigger row give us the forbidden pattern $P$ as an interval minor, which is a contradiction.
+Let $e=[r,c]$ be the top-most one-entry of $M$. If $\smm{1&1\\0&1}\im M[[m],[c-1]]$, together with $e$ it would be the whole $P$. Similarly, $\smm{1&1\\1&0}\nim M[[m],[c+1,n]]$. For contradiction with the statement, let $\smm{1&0\\0&1}\im M[[m],[c]]$ and $e_{0,0},\ e_{1,1}$ (none of them equal to $e$, since $e$ lies in the top-right corner) be any two one-entries forming the pattern. Symmetrically, let $\smm{0&1\\1&0}\im M[[m],[c,n]]$ and $e_{0,1},\ e_{1,0}$ be any two one-entries forming the pattern. In that case $e_{0,0},\ e,\ e_{0,1}$ and $e_{1,0}$ or $e_{1,1}$ with bigger row give us the forbidden pattern $P$ as an interval minor of $M$.
 \end{proof}
 \begin{thm}
 Let $P=\smm{1&1&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ looks like the matrix in Figure~\ref{p72} and $\smm{1&0\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$.
@@ -96,7 +116,7 @@ Let $P=\smm{1&1&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ looks li
 \end{figure}
 \begin{proof}
 \begin{itemize}
-\item[$\Rightarrow$] From Lemma~\ref{lemma2} we know $M=M_1'\oplus_hM_2'$ where $\smm{1&1\\0&1}\nim M_1'$ and $\smm{0&1\\1&0}\nim M_2'$. The second case would be dealt with symmetrically. From Theorem~\ref{theorem1} we have that $M_1'$ can be characterized exactly like $M[[m][c_2-1]$ and $M[[m][c_2,n]]$ forms a walking matrix. The only problem with our claim would be if there were two different columns having a one-entry above the $r$-th row. In that case, those two one-entries together with a one-entry in the $r$-th row between the columns $c_1$ and $c_2$ and a one-entry in the $c_1$-th column above the $r$-th row form $P$ as an interval minor.
+\item[$\Rightarrow$] From Lemma~\ref{lemma2} we know $M=M_1'\oplus_hM_2'$ where $\smm{1&1\\0&1}\nim M_1'$ and $\smm{0&1\\1&0}\nim M_2'$. The second case would be dealt with symmetrically. From Theorem~\ref{theorem1} we have that $M_1'$ can be characterized exactly like $M[[m],[c_2-1]$ and $M[[m],[c_2,n]]$ forms a walking matrix. The only problem with our claim would be if there were two different columns having a one-entry above the $r$-th row. In that case, those two one-entries together with a one-entry in the $r$-th row between the columns $c_1$ and $c_2$ and a one-entry in the $c_1$-th column above the $r$-th row form $P$ as an interval minor.
 \item[$\Leftarrow$] The bottom-middle one-entry of $P$ can not be mapped anywhere but to the $r$-th row, but in that case there are at most two columns having one-entries above it. %(will do better hopefully)
 \end{itemize}
 \end{proof}

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.2.5">
-<info created="D:20160812193334" modified="D:20160812193334"/>
+<info created="D:20160812193334" modified="D:20161008095105"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -266,11 +266,11 @@ h
 144 804 l
 144 804 l
 </path>
-<path matrix="1 0 0 1.14286 -8 -118.857" stroke="black">
+<path matrix="1 0 0 0.857167 -8 118.839" stroke="black">
 56 804 m
 56 832 l
 </path>
-<path matrix="1 0 0 1.14286 0 -118.857" stroke="black">
+<path matrix="1 0 0 0.857167 0 118.839" stroke="black">
 96 804 m
 96 832 l
 </path>
@@ -294,11 +294,11 @@ h
 92 800 m
 144 800 l
 </path>
-<path stroke="black" dash="dotted">
+<path matrix="1 0 0 1.05263 0 -38.3158" stroke="black" dash="dotted">
 96 804 m
 96 728 l
 </path>
-<path matrix="1 0 0 1 -8 0" stroke="black" dash="dotted">
+<path matrix="1 0 0 1.05263 -8 -38.3158" stroke="black" dash="dotted">
 56 804 m
 56 728 l
 </path>
@@ -307,25 +307,9 @@ h
 <text matrix="1 0 0 1 -4 0" transformations="translations" pos="92 836" stroke="black" type="label" width="8.897" height="4.294" depth="1.49" valign="baseline">c$_2$</text>
 <text matrix="1 0 0 1 -4 0" transformations="translations" pos="28 812" stroke="black" type="label" width="7.895" height="11.097" depth="0" valign="baseline" size="LARGE">0</text>
 <text matrix="1 0 0 1 -4 0" transformations="translations" pos="72 812" stroke="black" type="label" width="7.895" height="11.097" depth="0" valign="baseline" size="LARGE">0</text>
-<text matrix="1 0 0 1 -8 0" transformations="translations" pos="116 812" stroke="black" type="label" width="7.895" height="11.097" depth="0" valign="baseline" size="LARGE">0</text>
+<text matrix="1 0 0 1 -4 0" transformations="translations" pos="116 812" stroke="black" type="label" width="7.895" height="11.097" depth="0" valign="baseline" size="LARGE">0</text>
 <text matrix="1 0 0 1 -4 0" transformations="translations" pos="72 760" stroke="black" type="label" width="7.895" height="11.097" depth="0" valign="baseline" size="LARGE">0</text>
-<text matrix="1 0 0 1 -12 0" transformations="translations" pos="112 760" stroke="black" type="label" width="22.659" height="11.766" depth="2.58" valign="baseline" size="LARGE">$M_2$</text>
-<text transformations="translations" pos="20 760" stroke="black" type="label" width="22.659" height="11.766" depth="2.58" valign="baseline" size="LARGE">$M_1$</text>
-<text matrix="1 0 0 1 -6.77496 0" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 -6.77496 -8" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 -6.77496 -16" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 -6.77496 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 32.98 -0.245008" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 32.98 -8.24501" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 32.98 -16.245" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 32.98 -24.245" transformations="translations" pos="56 824" stroke="black" type="label" width="5.853" height="7.704" depth="0" valign="baseline" size="large">1</text>
-<text matrix="1 0 0 1 0 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 4 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 8 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 12 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 16 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 20 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 24 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
-<text matrix="1 0 0 1 28 -24" transformations="translations" pos="56 824" stroke="black" type="label" width="4.981" height="6.42" depth="0" valign="baseline">1</text>
+<text matrix="1 0 0 1 -8 0" transformations="translations" pos="112 760" stroke="black" type="label" width="22.659" height="11.766" depth="2.58" valign="baseline" size="LARGE">$M_2$</text>
+<text matrix="1 0 0 1 -4 0" transformations="translations" pos="20 760" stroke="black" type="label" width="22.659" height="11.766" depth="2.58" valign="baseline" size="LARGE">$M_1$</text>
 </page>
 </ipe>

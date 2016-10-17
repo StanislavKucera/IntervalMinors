@@ -6,19 +6,57 @@
 \savebox{\smlmatc}{$\smm{1&1&1\\0&1&0}$}
 
 \section{Characterizations}
+\begin{obs}
+Let $P\in\Pat$ and $P'\in\{0,1\}^{k\times l+1}$ such that $P'=P\oplus_h0^{k\times1}$, similarly let $M\in\Mat$ and $M'\in\{0,1\}^{m\times n+1}$ such that $M'=M\oplus_h0^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
+\end{obs}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] Clearly we can map the last column of $P'$ to the last column of $M'$ and then map (using OR) $P'[[k],[l]]$ to $M'[[m],[n]]$ the same way $P$ is mapped to $M$.
+\item[$\Leftarrow$] If $P'\im M$ we are done. Otherwise, the last column of $P'$ needs to be mapped to the last column of $M'$ and by deleting both from their matrix we get $P'[[k],[l]]\im M'[[m],[n]]$ which is the same as $\PimM$.
+\end{itemize}
+\end{proof}
+
+The same proof can be also used for adding an empty column as the first column or an empty row as the first or the last row. Using induction we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$ where $P$ is derived from $P'$ by excluding all empty beginning or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of beginning or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not need to consider patterns having empty rows or columns on their boundary.
+
 \begin{defn}
 A \emph{walk} in a matrix~$M$ is a sequence of some of its entries, beginning in the top left corner and ending in the bottom right one. If an entry $M[i,j]$ is in the sequence, the next one is either $M[i+1,j]$ or $M[i,j+1]$.
 \end{defn}
 \begin{defn}
 We call a binary matrix~$M$ a \emph{walking matrix} if there is a walk in $M$ such that all one-entries of $M$ are contained on the walk.
 \end{defn}
-
-\subsection{Patterns of size $2\times2$}
+\begin{defn}
+An \emph{extended walk of size $k\times l$} in a matrix~$M$ is a subset of some of its entries, beginning in the top left corner and ending in the bottom right one. If an entry $M[i,j]$ is in the subset there is also either $M[i+1,j]$ or $M[i,j+1]$. The size describes that no more than $k$ entries directly above each other are in the subset and no more than $l$ entries directly next to each other are in the subset. We say that an extended walk of size $k\times l$ in $M$ starts with a walk~$w$, if the extended walk is a subset of entries of $M$ that
+\begin{itemize}
+\item lie on $w$ or below $w$ and
+\item lie on $w$ shifted by $k-1$ down and by $l-1$ to the left or above it.
+\end{itemize}
+\end{defn}
+\begin{defn}
+For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is
+\begin{itemize}
+\item \emph{top-left empty} if $M[[r-1],[c-1]]$ is an empty matrix,
+\item \emph{top-right empty} if $M[[r-1],[c+1,n]]$ is empty,
+\item \emph{bottom-left empty} if $M[[r-1],[c+1,n]]$ is empty,
+\item \emph{bottom-right empty} if $M[[r-1],[c+1,n]]$ is empty.
+\end{itemize}
+\end{defn}
+\subsection{Patterns of size $2\times2$ and their generalization}
 \begin{thm}
 Let $P=\smm{0&1\\1&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ is a walking matrix.
 \end{thm}
 \begin{proof}
 Since $P$ is a permutation matrix, $\PnimM\Leftrightarrow\PnsmM$ and it is easy to see $\PnsmM\Leftrightarrow M$ is a walking matrix.
+\end{proof}
+
+Now consider a generalization of the pattern from above:
+\begin{thm}
+Let $P\in\Pat$ be a matrix having only two one-entries -- $P[1,n]$ and $P[m,1]$, then for all $M$: $\PnimM\Leftrightarrow M$ has an extended walk of size $k-1\times l-1$ containing all one-entries.
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] Let $\PnimM$ and consider the left-most top-right empty elements of $M$. They necessarily form a walk $w$. For contradiction, assume there is a one-entry $e$ below the extended walk of size $k-1\times l-1$ starting with $w$. Since $e$ is below the extended walk, there is an element $e'$ - the right-most element of $M$ that is neither below $e$ nor to the right from $e$ and at the same time still below the extended walk (it is possible $e=e'$). Let $e=M[r,c]$ and notice $M[r-k,c-l]$ is part of walk $w$ and because of the choice of $e'$ neither $M[r-k-1,c-l]$ nor $M[r-k,c-l-1]$ are on the walk $w$ and $M[r-k,c-l]$ must be a one-entry; therefore, together with $e$ it forms the forbidden pattern in $M$, which is a contradiction.
+\item[$\Leftarrow$] Let $M[r,c]$ be any one-entry of $M$, which then necessarily lie in the extended walk. Because the size of the walk is $k-1\times l-1$, $M[r-k+1,c-l+1]$ is top-left empty and $M[r+k-1,c+l-1]$ is bottom-right empty; therefore $e$ cannot be a part of a mapping of $P$. 
+\end{itemize}
 \end{proof}
 
 \begin{thm}
@@ -34,26 +72,32 @@ Let $P=\smm{1&1\\1&0}$, then for all $M\in\Mat$: $\PnimM\Leftrightarrow$ there e
 \begin{figure}[h!]
 \centering
 \includegraphics[width=60mm]{img/p12.pdf}
-\caption{Characterization of a matrix avoiding \usebox{\smlmat} as an interval minor.}
+\caption{Characterization of a matrix avoiding \usebox{\smlmat} as an interval minor. Matrix $M'$ is a walking matrix}
 \label{p12}
 \end{figure}
 \begin{proof}
 \begin{itemize}
-\item[$\Rightarrow$] If $\smm{0&1\\1&0}\nim M$, then $M$ is a walking matrix and we set $r=c=1$. Otherwise, there are one-entries $M[r,c']$ and $M[r',c]$ such that $r'<r$ and $c'<c$. If there is a one-entry in regions $M[[r-1],[c-1]],\ M[[r-1],\ [c+1,n]]$ or $M[[r+1,m],[c-1]]$ then $\PimM$. If $M[[r,m],[c,n]]$ is not a walking matrix then it contains $\smm{0&1\\1&0}$ and we again get a contradiction.
+\item[$\Rightarrow$] If $\smm{0&1\\1&0}\nim M$ then $M$ is a walking matrix and we set $r=c=1$. Otherwise, there are one-entries $M[r,c']$ and $M[r',c]$ such that $r'<r$ and $c'<c$. If there is a one-entry in regions $M[[r-1],[c-1]],\ M[[r-1],\ [c+1,n]]$ or $M[[r+1,m],[c-1]]$ then $\PimM$. If $M[[r,m],[c,n]]$ is not a walking matrix then it contains $\smm{0&1\\1&0}$ and we again get a contradiction.
 \item[$\Leftarrow$] For contradiction, assume that $M$ described in Figure~\ref{p12} contains $P$ as an interval minor. It means that there is a partition of the matrix into four quadrants such that there is at least one one-entry in each quadrant besides the bottom right one. If the matrix is partitioned above the $r$-th row, then there is only one column containing one-entries and it is not possible for both top quadrants to have a one-entry. Similarly, if the matrix is partitioned to the left of the $c$-th column, there is only one row containing one-entries and there is no one-entry in either top-left or bottom-left quadrant. Therefore, the partitioning lies bellow the $r$-th row and to the right of the $c$-th column, but if the quadrants contain one-entries, there is a $\smm{0&1\\1&0}$ interval minor in $M'$, which is a contradiction with it being a walking matrix. % there has to be a way to write this better
 \end{itemize}
 \end{proof}
 
-To characterize matrices avoiding $\smm{1&1\\1&1}$ as an interval minor, we first need to define a few useful terms.
-\begin{defn}
-For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is
+\begin{thm}
+Let $P\in\Pat$ be a matrix having only three one-entries -- $P[1,1],\ P[1,n]$ and $P[m,1]$, then for all $M$: $\PnimM\Leftrightarrow$ there exist a row~$r$ and a column~$c$ such that (see Figure~\ref{p12} and imagine rows and columns being extended)
 \begin{itemize}
-\item \emph{top-left empty} if $M[[r-1],[c-1]]$ is an empty matrix,
-\item \emph{top-right empty} if $M[[r-1],[c+1,n]]$ is empty,
-\item \emph{bottom-left empty} if $M[[r-1],[c+1,n]]$ is empty,
-\item \emph{bottom-right empty} if $M[[r-1],[c+1,n]]$ is empty.
+\item $M[[r-1],[c-1]]$ is empty,
+\item $M[[r-1],[c+l,n]]$ is empty,
+\item $M[[r+k,m],[c-1]]$ is empty and
+\item $M[[r,m],[c,n]]$ has an extended walk of size $k-1\times l-1$ containing all one-entries.
 \end{itemize}
-\end{defn}
+\end{thm}
+\begin{proof} Let $P'=P$ and set $P'[m,1]=0$ ($P'$ is a generalization of $\smm{0&1\\1&0}$). 
+\begin{itemize}
+\item[$\Rightarrow$] If $P'\nim M$ then $M$ is a matrix having an extended walk of size $k-1\times l-1$ containing all one-entries and we set $r=c=1$. Otherwise, there are one-entries $M[r_1,c_1]$ and $M[r_2,c_2]$ such that $r_2<r_1$ and $c_1<c_2$. We now choose $M[r_3,c_3]$ to be the bottom-most one-entry that still forms $P'$ with $M[r_2,c_2]$. We choose $M[r_4,c_4]$ to be the left-most one-entry that forms $P'$ with $M[r_3,c_3]$ and set $r=r_3-k+1$ and $c=c_4-l+1$. If there is a one-entry in regions $M[[r-1],[c-1]],\ M[[r-1],\ [c+l,n]]$ or $M[[r+k,m],[c-1]]$ then $\PimM$. If $M[[r,m],[c,n]]$ is not a walking matrix then it contains $P'$ and we again get a contradiction.
+\item[$\Leftarrow$] Because of the sizes of areas with no one-entries and the condition for $M[[r,m],[c,n]]$, there cannot be $P'$ anywhere but in $M[[r+k-1],[c+l-1]]$. Since $M[[r-1][c-1]]$ is empty, there is no one-entry to map $P[1,1]$ to; therefore, $\PnimM$.
+\end{itemize}
+\end{proof}
+
 \begin{lemma}
 \label{lemma1}
 Let $P=\smm{1&1\\1&1}$ and let $M\in\Mat$ avoid $P$ as an interval minor, then there exists a row~$r$ and a column~$c$ such that $M[r,c]$ is either
@@ -83,6 +127,10 @@ If $M\in\{0,1\}^{2\times2}$ then it either avoids $\smm{0&1\\1&1}$ or $\smm{1&1\
 For bigger $M$ there is, from Lemma~\ref{lemma1}, ``the element''. Assume the first case (top-right and bottom-left empty (will change this when I have some notation)). If $M_1$ is non-empty, then $\smm{0&1\\1&1}\nim M_2$; otherwise, $\PimM$. Similarly, $\smm{1&1\\1&0}\nim M_1$ if $M_2$ is non-empty. If one of them is empty, the other is a smaller matrix avoiding $P$ as an interval minor and by induction hypothesis, it can be partitioned. Adding empty rows and columns does not break any condition and we get a partitioning of the whole $M$.
 \item[$\Leftarrow$] Without loss of generality, let us assume $M$ looks like the left matrix in Figure~\ref{p33}. For contradiction, assume $\PimM$. In that case, we can partition $M$ into four quadrants such that there is at least one one-entry in each of them. It does not matter where we partition it, every time we either get $\smm{1&1\\1&0}\im M_1$ or $\smm{0&1\\1&1}\im M_2$, which is a contradiction.
 \end{proof}
+
+\begin{thm}
+Let $P\in\Pat$ be a matrix having only four one-entries -- $P[1,1],\ P[1,n],\ P[m,1]$ and $P[m,n]$, then for all $M$: $\PnimM\Leftrightarrow M$ looks like one of the matrices in Figure~\ref{p33}, where generalized $\smm{1&1\\1&0}\nim M_1$, $\smm{0&1\\1&1}\nim M_2$, $\smm{1&1\\0&1}\nim M_3$ and $\smm{1&0\\1&1}\nim M_4$.
+\end{thm}
 
 \subsection{Matrices of size $2\times3$}
 \begin{thm}

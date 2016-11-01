@@ -1,0 +1,55 @@
+\section{Operations with matrices}
+\begin{defn}
+For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\oplus_{0\times0}B\in\{0,1\}^{m+k\times n+l}$ such that $C[[m],[n]]=A$, $C[[m+1,m+k],[n+1,n+l]]=B$ and the rest is zero.
+\end{defn}
+We can generalize the definition to allow the matrices to overlap.
+\begin{defn}
+TODO $A\oplus_{k\times l}B$
+\end{defn}
+\begin{thm}
+Let $\mathcal{C}$ be any class of matrices such that
+\begin{itemize}
+\item $\mathcal{C}$ is closed under deleting of one-entries and
+\item $\mathcal{C}$ is closed under the direct sum with $k\times l$ overlap and
+\item there is any $M\in\Mat$ in $\mathcal{C}$
+\end{itemize}
+then $\mathcal{C}$ is also closed under direct sum with $m-2k\times n-2l$ overlap.
+\end{thm}
+\begin{proof}
+Choose any two $A,B\in\mathcal{C}$ and $C\mathcal{C}$ such that $C\in\Mat$. Let $D\in\mathcal{C}$ denote the direct sum with $k\times l$ overlap of $A$ and $C$. Finally, let $E$ be the direct sum with $k\times l$ overlap of $D$ and $B$. It has the same size as $F$, the direct sum with $m-2k\times n-2l$ overlap of $A$ and $B$, which set of one-entries is also a subset of one-entries of $E\in\mathcal{C}$; therefore $F\in\mathcal{C}$.
+\end{proof}
+\begin{thm}
+\label{hered}
+Let $\mathcal{C}$ be any class of matrices that is hereditary according to interval minors then for all $m,n,k,l$ if $\mathcal{C}$ is closed under the direct sum with $m\times n$ overlap then is is also closed under the direct sum with $m+k\times n+l$ overlap.
+\end{thm}
+\begin{proof}
+For contradiction, assume there are $A,B\in\mathcal{C}$ such that $A\oplus_{m+k\times n+l}B\not\in\mathcal{C}$.
+%% do not really know why this should hold, need to think it through
+\end{proof}
+\begin{obs}
+There is a $\mathcal{C}$ hereditary according to submatrices such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
+\end{obs}
+\begin{proof}
+Let $\mathcal{C}$ be a class of all matrices obtained by applying the direct sum on $\smm{0&1\\1&0}$. Clearly, it is closed under the direct sum. On the other hand, $\smm{0&1\\1&0}\oplus_{1\times1}\smm{0&1\\1&0}=\smm{0&1&0\\1&0&1\\0&1&0}\not\in\mathcal{C}$.
+\end{proof}
+\begin{ntn}
+We define Av($M$) to be a class of all matrices avoiding $M$ as 
+%% as what? Should it be Av_\preceq?
+\end{ntn}
+We state following characterization only for the direct sum with $1\times1$ overlap but, because of Theorem~\ref{hered}, it also holds for any other size of overlap.
+\begin{thm}
+Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=M_1\oplus_{1\times1}M_2\Leftrightarrow$ Av($M$) is not closed under the direct sum with $1\times1$ overlap.
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$]
+\item[$\Leftarrow$]
+\end{itemize}
+\end{proof}
+\begin{obs}
+Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=M_1\oplus_{1\times1}M_2\Leftrightarrow$ exists $r,c$ such that either
+\begin{enumerate}
+\item $M[r,c]$ is a one-entry and $(r,c)\in\{(1,1),(m,n)\}$ or
+\item $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$
+\end{enumerate}
+\end{obs}

@@ -102,12 +102,18 @@ Let $P\in\Pat$ be a matrix having only three one-entries -- $P[1,1],\ P[1,n]$ an
 \label{lemma1}
 Let $P=\smm{1&1\\1&1}$ and let $M\in\Mat$ avoid $P$ as an interval minor, then there exists a row~$r$ and a column~$c$ such that $M[r,c]$ is either
 \begin{enumerate}
-\item both top-left empty and bottom-right empty and $[r,c]\not\in\{[1,n],[m,1]\}$ or
-\item both top-right empty and bottom-left empty and $[r,c]\not\in\{[1,1],[m,n]\}$.
+\item a one-entry and $(r,c)\in\{(1,1),(1,n),(m,1),(m,n)\}$ or
+\item both top-left empty and bottom-right empty and $(r,c)\not\in\{(1,n),(m,1)\}$ or
+\item both top-right empty and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
+If there is a one-entry in any corner we are done. Otherwise, let $A$ be a set of all top-left empty entries of $M$ and $B$ be a set of all bottom-right empty entries of $M$. If there is an entry $M[r,c]\in A\cap B$ different from $(1,n)$ and $(m,1)$ we are done. Assume $A\cap B=\{(1,n),(m,1)\}$. Since $(m,1)\in A$, it also holds $(m-1,1)\in A$ and because it is not in the intersection we have $(m-1,1)\not\in B$. This means $M[m-1,1]$ is not bottom-right empty; therefore there is a one-entry somewhere in $M[{m},[2,n]]$. Moreover, no corner contains a one-entry so the is a one-entry in $M[{m},[2,n-1]]$. For simplicity, we will say that the last row in non-empty (knowing the corners are empty). Symmetrically, we also get that the first row is non-empty and both the first and the last columns are non-empty. If there is a one-entry $M[r_l,1]$ in a different row than a one-entry $M[r_r,n]$ and at the same time a one-entry $M[1,c_t]$ in a different column than a one-entry $M[m,c_b]$ then these four one-entries form a mapping of the forbidden pattern $P$.
 
+This is not true!!!
+%% the last statement is not true -- need to fix it, there is one more case and symmetry - will use a picture to deal with it
+
+Without loss of generality assume there is only one one-entry in both the first and the last column and they are both in the same row $r'$. Let $c'$ be a column such that there is a one-entry $M[1,c']$. Clearly, there is no other column that contains a one-entry above $r'$, because we would again get a contradiction. Symmetrically, let $c''$ be the only column containing one-entries below $r'$. If $c'\geq c''$ we have that both $M[r',c']$ and $M[r',c'']$ are both top-left empty and bottom-right empty, which is a contradiction with $A\cap B=\{(1,n),(m,1)\}$. Otherwise, $c'<c''$ and both $M[r',c']$ and $M[r',c'']$ are both top-right empty and bottom-left empty where $(r',c')\not\in\{(1,1),(m,n)\}$ which concludes the proof.
 \end{proof}
 
 \begin{thm}
@@ -124,13 +130,14 @@ Let $P=\smm{1&1\\1&1}$, then for all $M$: $\PnimM\Leftrightarrow M$ looks like o
 
 If $M\in\{0,1\}^{2\times2}$ then it either avoids $\smm{0&1\\1&1}$ or $\smm{1&1\\1&0}$ and we are done.
 
-For bigger $M$ there is, from Lemma~\ref{lemma1}, ``the element''. Assume the first case (top-right and bottom-left empty (will change this when I have some notation)). If $M_1$ is non-empty, then $\smm{0&1\\1&1}\nim M_2$; otherwise, $\PimM$. Similarly, $\smm{1&1\\1&0}\nim M_1$ if $M_2$ is non-empty. If one of them is empty, the other is a smaller matrix avoiding $P$ as an interval minor and by induction hypothesis, it can be partitioned. Adding empty rows and columns does not break any condition and we get a partitioning of the whole $M$.
+For bigger $M$ there is, from Lemma~\ref{lemma1}, $M[r,c]$ satisfying some conditions. If it is the first condition -- there is a one-entry in any corner, we are done because the matrix cannot contain one of the rotations of $\smm{1&1\\1&0}$. Assume the second case -- $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,n),(m,1)\}$. If $M_1$ is non-empty, then $\smm{0&1\\1&1}\nim M_2$; otherwise, $\PimM$. Similarly, $\smm{1&1\\1&0}\nim M_1$ if $M_2$ is non-empty. If one of them is empty, the other is a smaller matrix avoiding $P$ as an interval minor and by induction hypothesis, it can be partitioned. Adding empty rows and columns does not break any condition and we get a partitioning of the whole $M$.
 \item[$\Leftarrow$] Without loss of generality, let us assume $M$ looks like the left matrix in Figure~\ref{p33}. For contradiction, assume $\PimM$. In that case, we can partition $M$ into four quadrants such that there is at least one one-entry in each of them. It does not matter where we partition it, every time we either get $\smm{1&1\\1&0}\im M_1$ or $\smm{0&1\\1&1}\im M_2$, which is a contradiction.
 \end{proof}
 
 \begin{thm}
 Let $P\in\Pat$ be a matrix having only four one-entries -- $P[1,1],\ P[1,n],\ P[m,1]$ and $P[m,n]$, then for all $M$: $\PnimM\Leftrightarrow M$ looks like one of the matrices in Figure~\ref{p33}, where generalized $\smm{1&1\\1&0}\nim M_1$, $\smm{0&1\\1&1}\nim M_2$, $\smm{1&1\\0&1}\nim M_3$ and $\smm{1&0\\1&1}\nim M_4$.
 \end{thm}
+% a lot to do here - probably will need a generalization of the lemma1
 
 \subsection{Matrices of size $2\times3$}
 \begin{thm}
@@ -166,5 +173,14 @@ Let $P=\smm{1&1&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ looks li
 \begin{itemize}
 \item[$\Rightarrow$] From Lemma~\ref{lemma2} we know $M=M_1'\oplus_hM_2'$ where $\smm{1&1\\0&1}\nim M_1'$ and $\smm{0&1\\1&0}\nim M_2'$. The second case would be dealt with symmetrically. From Theorem~\ref{theorem1} we have that $M_1'$ can be characterized exactly like $M[[m],[c_2-1]$ and $M[[m],[c_2,n]]$ forms a walking matrix. The only problem with our claim would be if there were two different columns having a one-entry above the $r$-th row. In that case, those two one-entries together with a one-entry in the $r$-th row between the columns $c_1$ and $c_2$ and a one-entry in the $c_1$-th column above the $r$-th row form $P$ as an interval minor.
 \item[$\Leftarrow$] The bottom-middle one-entry of $P$ can not be mapped anywhere but to the $r$-th row, but in that case there are at most two columns having one-entries above it. %(will do better hopefully)
+\end{itemize}
+\end{proof}
+\begin{thm}
+Let $P=\smm{0&1&1\\1&0&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ contains a walk $w$, no one-entries below the walk and for each entry $M[r,c]$ of the walk there is at most one non-empty column in $M[[r-1],[c+1,n]]$.
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] Let $w$ be any walk containing all the top-most and right-most entries that are bottom-left empty. From the choice of $w$, there are no one-entries below it and if all $M[r,c]$, $M[r-1,c]$ and $M[r,c+1]$ are on $w$ then $M[r,c]$ is a one-entry as else $M[r,c]$ was neither top-most nor right-most bottom-left empty. As a consequence, whenever we choose $M[r,c]$ from $w$, it either is a one-entry or there is one-entry in the same row to the left of it. For contradiction let us now assume that there is an entry of the walk $M[r,c]$ for which there are two non-empty columns in $M[[r-1],[c+1,m]]$. Then a one-entry from each of those columns and a one-entry in $M[r,c]$ or to the left of it together give us $\PimM$ and consequently a contradiction. 
+\item[$\Leftarrow$] For contradiction let $\PimM$. Without loss of generality we can assume that the bottom-left entry of $P$ is mapped somewhere to the walk -- to $M[r,c]$. But then $\smm{1&1}\im M[[r-1],[c+1,n]]$ which is a contradiction with it having one-entries in at most one column.
 \end{itemize}
 \end{proof}

@@ -117,6 +117,7 @@ Without loss of generality assume there is only one one-entry in both the first 
 \end{proof}
 
 \begin{thm}
+\label{t33}
 Let $P=\smm{1&1\\1&1}$, then for all $M$: $\PnimM\Leftrightarrow M$ looks like one of the matrices in Figure~\ref{p33}, where $\smm{1&1\\1&0}\nim M_1$, $\smm{0&1\\1&1}\nim M_2$, $\smm{1&1\\0&1}\nim M_3$ and $\smm{1&0\\1&1}\nim M_4$.
 \end{thm}
 \begin{figure}[h!]
@@ -184,3 +185,14 @@ Let $P=\smm{0&1&1\\1&0&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ contains
 \item[$\Leftarrow$] For contradiction let $\PimM$. Without loss of generality we can assume that the bottom-left entry of $P$ is mapped somewhere to the walk -- to $M[r,c]$. But then $\smm{1&1}\im M[[r-1],[c+1,n]]$ which is a contradiction with it having one-entries in at most one column.
 \end{itemize}
 \end{proof}
+
+\subsection{Multiple patterns}
+\begin{thm}
+Let $P_1=\smm{0&0&1\\1&0&0}$ and $P_2=\smm{0&1\\0&0\\1&0}$, then for all $M$: $\PnimM\wedge\PnimM\Leftrightarrow M$ contains a walk $w$ and each one-entry $e$ is either on the walk $w$ or both element directly above $e$ and directly to the right of $e$ are on the walk $w$.
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] Let us take a walk $w$ containing all the left-most and bottom-most top-right empty elements of $M$. Clearly, every top-right ``corner'' entry of $w$ ($M[r,c]$ such that both $M[r+1,c]$ and $M[r,c-1]$ are on $w$) is a one-entry. Now consider for contradiction there is a one-entry anywhere but on $w$ or directly diagonally below any top-right corner of $w$. Then this one-entry together with at least one top-right corner of $w$ give us either $P_1$ or $P_2$ and thus a contradiction.
+\item[$\Leftarrow$] If we take any one-entry~$e$, from the description of $M$ there is no one-entry that would create either of $P_1$ or $P_2$ with $e$.
+\end{itemize}
+\end{proof}
+\end{thm}

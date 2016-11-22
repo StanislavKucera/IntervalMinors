@@ -1,31 +1,34 @@
 \section{Operations with matrices}
+\begin{ntn}
+When speaking about a class of matrices, unless stated otherwise, we always expect the class to be closed under minors. Also, all classes discussed are non-trivial. That means that there is at least one matrix of size $2$ by $1$ and at least one matrix of size $1$ by $2$ in each class. Moreover, at least one matrix is non-empty.
+\end{ntn}
 \begin{defn}
-For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\oplus_{0\times0}B\in\{0,1\}^{m+k\times n+l}$ such that $C[[m],[n]]=A$, $C[[m+1,m+k],[n+1,n+l]]=B$ and the rest is zero.
+Let $\mathcal{F}$ be any class of forbidden matrices. We denote by $Av(\mathcal{F})$ the set of all matrices that avoid every $F\in\mathcal{F}$ as an interval minor.
 \end{defn}
-TODO define Av(G)
+\begin{obs}
+Let $\mathcal{T}=Av(\mathcal{F})$ for some $\mathcal{F}$. Then $\mathcal{T}$ is closed under minors.
+\end{obs}
+\begin{obs}
+Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\mathcal{F}$ such that $\mathcal{M}=Av(\mathcal{F})$.
+\end{obs}
+\begin{defn}
+For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\nearrow B\in\{0,1\}^{m+k\times n+l}$ such that $D[[k+1,m+k],[n]]=A$, $D[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define $D:=A\searrow B\in\{0,1\}^{m+k\times n+l}$ such that $C[[m],[n]]=A$, $C[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
+\end{defn}
 \begin{thm}
-$Av(\smm{1&1\\1&1})=Av(\smm{1&0\\0&0})\ominus_{0\times0}Av(\smm{0&1\\1&0})\ominus_{0\times0}Av(\smm{0&0\\0&1})\cup$\\
-$\cup Av(\smm{0&0\\1&0})\oplus_{0\times0}Av(\smm{1&0\\0&1})\oplus_{0\times0}Av(\smm{0&1\\0&0})$.
+$Av(\smm{1&1\\1&1})=\left(Av(\smm{1&0\\0&0})\searrow Av(\smm{0&1\\1&0})\searrow Av(\smm{0&0\\0&1})\right)\cup$\\
+$\cup\left(Av(\smm{0&0\\1&0})\nearrow Av(\smm{1&0\\0&1})\nearrow Av(\smm{0&1\\0&0})\right)$.
 \end{thm}
 \begin{proof}
-If follows from Theorem~\ref{t33} and $Av(\smm{1&1\\1&0})=Av(\smm{1&0\\0&0})\ominus_{0\times0}Av(\smm{0&1\\1&0})$.
+If follows from Theorem~\ref{t33} and $Av(\smm{1&1\\1&0})=Av(\smm{1&0\\0&0})\searrow Av(\smm{0&1\\1&0})$.
 \end{proof}
-\begin{thm}
-Let $\mathcal{M}$ be a set containing $\smm{0&1\\1&0}$ and closed under the direct sum and minors, then $M=Av\left(\smm{0&0&1\\1&0&0},\smm{0&1\\0&0\\1&0}\right)$.
-\end{thm}
-\begin{proof}
-\begin{itemize}
-\item[$\subseteq$]
-\item[$\supseteq$]
-\end{itemize}
-\end{proof}
-\begin{thm}
-Let $\mathcal{M}$ be a set containing $\smm{0&1\\0&0\\1&0}$ and closed under the direct sum and minors, then $M=Av\left(\smm{0&0&1\\1&0&0},\smm{0&1\\0&0\\0&0\\1&0},\smm{0&1\\0&1\\1&0},\smm{0&1\\1&0\\1&0}\right)$.
-\end{thm}
-Need to define articulations are describe them in the statement
+\begin{ntn}
+Let $\mathcal{M}$ be a class of matrices. Denote by $Cl(\mathcal{M})$ a set containing each $M\in\mathcal{M}$ closed under direct sum and minors.
+\end{ntn}\begin{defn}
+Let $M\in\Mat$ be a matrix. We call an element $M[r,c]$ an \emph{articulation} of $M$ if both $M[[r-1],[c-1]]$ and $M[[r+1,m],[c+1,n]]$ are empty.
+\end{defn}
 \begin{lemma}
 \label{lemma3}
-Let $M\in\Pat$ and $\mathcal{M}$ be the closure of $M$ under direct sum and minors, then for all $X\in\Mat$ it holds $X\in\mathcal{M}\Leftrightarrow$ there exists a sequence of articulations such that each matrix in between two consecutive articulations of $X$ is a minor of $M\oplus M\oplus M$.  
+Let $M\in\Pat$, then for all $X\in\Mat$ it holds $X\in Cl(M)\Leftrightarrow$ there exists a sequence of articulations of $X$ such that each matrix in between two consecutive articulations of $X$ is a minor of $\smm{1}\nearrow M\nearrow\smm{1}$.  
 \end{lemma}
 \begin{proof}
 \begin{itemize}
@@ -34,11 +37,23 @@ Let $M\in\Pat$ and $\mathcal{M}$ be the closure of $M$ under direct sum and mino
 \end{itemize}
 \end{proof}
 \begin{thm}
-For all $M\in\Pat$ there exists $\mathcal{F}$ finite such that the closure of $M$ under direct sum and minors, denote it by $\mathbb{M}$, is equal to $Av(\mathcal{F})$.
+For all $M\in\Pat$ there exists $\mathcal{F}$ finite such that $Cl(M)=Av(\mathcal{F})$.
 \end{thm}
 \begin{proof}
 Using Lemma~\ref{lemma3}
 \end{proof}
+\begin{thm}
+$Cl(\smm{1&0\\0&1})=Av\left(\smm{1&0&0\\0&0&1},\smm{1&0\\0&0\\0&1}\right)$.
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item[$\subseteq$]
+\item[$\supseteq$]
+\end{itemize}
+\end{proof}
+\begin{thm}
+$Cl\left(\smm{1&0\\0&0\\0&1}\right)=Av\left(\smm{1&0&0\\0&0&1},\smm{1&0\\0&0\\0&0\\0&1},\smm{1&0\\1&0\\0&1},\smm{1&0\\0&1\\0&1}\right)$.
+\end{thm}
 We can generalize direct sum to allow the matrices to overlap.
 \begin{defn}
 TODO $A\oplus_{k\times l}B$
@@ -84,9 +99,24 @@ Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=
 \end{itemize}
 \end{proof}
 \begin{obs}
+\label{obsart}
 Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=M_1\oplus_{1\times1}M_2\Leftrightarrow$ exists $r,c$ such that either
 \begin{enumerate}
 \item $M[r,c]$ is a one-entry and $(r,c)\in\{(1,1),(m,n)\}$ or
 \item $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$
 \end{enumerate}
 \end{obs}
+\begin{defn}
+Let $F$ be a matrix. We denote $\mathcal{R}(F)$ to be a set of all minimal (relating to minors) matrices $F'$ such that $F\im F'$ and $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$.
+\end{defn}
+\begin{lemma}
+Let $\mathcal{T}$ and $\mathcal{F}$ be classes of matrices such that $\mathcal{T}=Av(\mathcal{F})$, then $Cl(\mathcal{T})=Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$.
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+\item[$\subseteq$] Instead of proving $M\in Cl(\mathcal{T})\Rightarrow M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ we show $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))\Rightarrow M\not\in Cl(\mathcal{T})$. Assume $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. It follow from the definition that $M\in\bigcup_{F\in\mathcal{F}}\mathcal{R}(F)$, in particular, $M\in\mathcal{R}(F)$ for some $f\in\mathcal{F}$. Because of the definition of $\mathcal{R}(F)$, $M$ is not a direct sum with $1\times1$ overlap of proper submatrices of $M$ which means, according to Observation~\ref{obsart}, there are no non-trivial articulations and both top-right and bottom-left corners are empty. For contradiction, assume $M\in Cl(\mathcal{T})$, then, according to a generalization of Lemma~\ref{lemma3}, there exists a sequence of articulations of $M$ such that each matrix in between two consecutive articulations of $M$ is a minor of $\smm{1}\nearrow T\nearrow\smm{1}$ for some $T\in\mathcal{T}$. Since $M$ has only trivial articulations and they are both empty, it holds $M\im T$ and because of the choice of $M$ is also holds $M\im F$ for some $F\in\mathcal{F}$ which together give us a contradiction with $\mathcal{T}=Av(\mathcal{F})$.
+\item[$\supseteq$] First of all, $Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ is closed under the direct sum with $1\times1$ overlap. For contradiction, assume there are $M_1,M_2\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ but $M=M_1\nearrow_{1}M_2\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. Then there exists $F'\in\mathcal{R}(F)$ for some $F\in\mathcal{F}$ such that $F'\im M$. Because $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$, it follows that either $F'\im M_1$ or $F'\im M_2$ and since $F\im F'$ we have a contradiction.
+
+Now that we know that both sides are closed under the direct sum with $1\times1$ overlap it sufficient to show that the inclusion holds for any $M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ that is not a direct sum with $1\times1$ overlap of proper submatrices of $M$. Such $M$ does not contain (again from Observation~\ref{obsart}) any non-trivial articulation and those trivial ones are empty. Because of that it holds $F\nim M$ for every $F\in\mathcal{F}$; otherwise either $M\in\mathcal{R}(F)$ or its minor would be there. Therefore $M\in\mathcal{T}$ and also $M\in Cl(\mathcal{T})$.
+\end{itemize}
+\end{proof}

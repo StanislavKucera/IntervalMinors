@@ -6,18 +6,6 @@
 \savebox{\smlmatc}{$\smm{1&1&1\\0&1&0}$}
 
 \section{Characterizations}
-\begin{obs}
-Let $P\in\Pat$ and $P'\in\{0,1\}^{k\times l+1}$ such that $P'=P\oplus_h0^{k\times1}$, similarly let $M\in\Mat$ and $M'\in\{0,1\}^{m\times n+1}$ such that $M'=M\oplus_h0^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
-\end{obs}
-\begin{proof}
-\begin{itemize}
-\item[$\Rightarrow$] Clearly we can map the last column of $P'$ to the last column of $M'$ and then map (using OR) $P'[[k],[l]]$ to $M'[[m],[n]]$ the same way $P$ is mapped to $M$.
-\item[$\Leftarrow$] If $P'\im M$ we are done. Otherwise, the last column of $P'$ needs to be mapped to the last column of $M'$ and by deleting both from their matrix we get $P'[[k],[l]]\im M'[[m],[n]]$ which is the same as $\PimM$.
-\end{itemize}
-\end{proof}
-
-The same proof can be also used for adding an empty column as the first column or an empty row as the first or the last row. Using induction we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$ where $P$ is derived from $P'$ by excluding all empty beginning or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of beginning or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not need to consider patterns having empty rows or columns on their boundary.
-
 \begin{defn}
 A \emph{walk} in a matrix~$M$ is a sequence of some of its entries, beginning in the top left corner and ending in the bottom right one. If an entry $M[i,j]$ is in the sequence, the next one is either $M[i+1,j]$ or $M[i,j+1]$.
 \end{defn}
@@ -185,6 +173,52 @@ Let $P=\smm{0&1&1\\1&0&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ contains
 \item[$\Leftarrow$] For contradiction let $\PimM$. Without loss of generality we can assume that the bottom-left entry of $P$ is mapped somewhere to the walk -- to $M[r,c]$. But then $\smm{1&1}\im M[[r-1],[c+1,n]]$ which is a contradiction with it having one-entries in at most one column.
 \end{itemize}
 \end{proof}
+
+\subsection{Empty rows and columns}
+\begin{obs}
+Let $P\in\Pat$ and $P'\in\{0,1\}^{k\times l+1}$ such that $P'=P\oplus_h0^{k\times1}$, similarly let $M\in\Mat$ and $M'\in\{0,1\}^{m\times n+1}$ such that $M'=M\oplus_h0^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
+\end{obs}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] Clearly we can map the last column of $P'$ to the last column of $M'$ and then map (using OR) $P'[[k],[l]]$ to $M'[[m],[n]]$ the same way $P$ is mapped to $M$.
+\item[$\Leftarrow$] If $P'\im M$ we are done. Otherwise, the last column of $P'$ needs to be mapped to the last column of $M'$ and by deleting both from their matrix we get $P'[[k],[l]]\im M'[[m],[n]]$ which is the same as $\PimM$.
+\end{itemize}
+\end{proof}
+
+The same proof can be also used for adding an empty column as the first column or an empty row as the first or the last row. Using induction we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$ where $P$ is derived from $P'$ by excluding all empty beginning or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of beginning or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not need to consider patterns having empty rows or columns on their boundary.
+
+For the following two statements, let $P\in\{0,1\}^{k\times2}$ be a forbidden pattern and $P^+\in\{0,1\}^{k\times3}$ be the pattern created from $P$ by adding a new column in between the two columns of $P$.
+\begin{lemma}
+\label{lemmamax}
+Let $M\in Av(P^+)$ be an inclusion maximal matrix in $Av(P^+)$, then each row of $M$ contains one interval of one-entries of length different from one (but can be zero).
+\end{lemma}
+\begin{proof}
+If there are two one-entries on the same row and there is a zero-entry in between them, we can change the zero-entry into a one-entry and the new matrix will still avoid $P^+$.
+
+If there is only one one-entry in a row, we can always change one of its neighbors into a one-entry. If the one-entry lies in the first column, we can insert another one-entry to the second column and the matrix will still avoid $P^+$, because if the new one-entry is used in a mapping of $P^+$ then it must as a part of the first column and we could use the one-entry to its left instead. Similarly, there is no one-entry in the last column that is the only one in it's row. For contradiction, assume there is the only one one-entry in a row, call it $e=M[r,c]$, that is not in the first nor in the last column and assume we cannot change neither $e_l=M[r,c-1]$ nor $e_r=M[r,c+1]$ to a one-entry, because then the matrix would contain the minor $P^+$.
+
+TODO
+\end{proof}
+\begin{thm}
+For all $M\in\Mat$ it holds $M\in Av(P^+)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-1)}$ such that $N\in Av(P)$ and $M$ is a submatrix of $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR.
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item[$\Rightarrow$] It suffices to only prove the statement for $M$ that is inclusion maximal. To do so, we use Lemma~\ref{lemmamax}. It say that each row of $M$ contains either no one-entry or an interval of length at least two. From that we define $N$ to be created from $M$ by deleting the last one-entry on each row and excluding the last column. Clearly, $M$ is equal to $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR. If $P\im N$ then each mapping of $P$ can be extended to a mapping of $P^+$ to $M$ by ... How to say this?
+
+TODO
+\item[$\Leftarrow$] It suffices to show that $M$ that is equal to $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR belongs to $Av(P^+)$. For contradiction, assume it does not. Then there is mapping of $P^+$ into elements of $M$ and we can assume that one-entries of the first column of $P^+$ are mapped to those one-entries of $M$ created from $N\oplus_h0^{m\times1}$. If it was not the case and there was a one-entry mapped to a one-entry of $M$ created only from $0^{m\times1}\oplus_hN$ we can take an element directly to its left and that is created from $N\oplus_h0^{m\times1}$. Symmetrically, all one-entries of the last column of $P^+$ are mapped to one-entries created from $0^{m\times1}\oplus_hN$. ...
+
+TODO
+\end{itemize}
+\end{proof}
+
+Open question:
+\begin{itemize}
+\item 2 rows, 1 interval of one-entries, 3 rows, 2 intervals... and generalization
+\item using the previous point to characterize insertion of an empty column to a bigger matrix
+\item insertion of an empty column in between all columns of $P$
+\end{itemize}
 
 \subsection{Multiple patterns}
 \begin{thm}

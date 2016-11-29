@@ -107,16 +107,99 @@ Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=
 \end{enumerate}
 \end{obs}
 \begin{defn}
-Let $F$ be a matrix. We denote $\mathcal{R}(F)$ to be a set of all minimal (relating to minors) matrices $F'$ such that $F\im F'$ and $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$.
+Let $F$ be a matrix. We denote $\mathcal{R}(F)$ to be a set of all minimal (relating to minors) matrices $F'$ such that $F\im F'$ and $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$. For a class of matrices $\mathcal{F}$ let $\mathcal{R}(\mathcal{F})$ denote a set of all minimal (relating to minors) matrices from the set $\bigcup_{F\in\mathcal{F}}\mathcal{R}(F)$.
 \end{defn}
-\begin{lemma}
-Let $\mathcal{T}$ and $\mathcal{F}$ be classes of matrices such that $\mathcal{T}=Av(\mathcal{F})$, then $Cl(\mathcal{T})=Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$.
-\end{lemma}
-\begin{proof}
+\begin{thm}
+\label{thmbasis}
+Let $\mathcal{T}$ and $\mathcal{F}$ be classes of matrices such that $\mathcal{T}=Av(\mathcal{F})$, then $Cl(\mathcal{T})=Av(\mathcal{R}(\mathcal{F}))$.
+\end{thm}
+\begin{proof}Need to change the proof a bit probably after changing the statement
 \begin{itemize}
 \item[$\subseteq$] Instead of proving $M\in Cl(\mathcal{T})\Rightarrow M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ we show $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))\Rightarrow M\not\in Cl(\mathcal{T})$. Assume $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. It follow from the definition that $M\in\bigcup_{F\in\mathcal{F}}\mathcal{R}(F)$, in particular, $M\in\mathcal{R}(F)$ for some $f\in\mathcal{F}$. Because of the definition of $\mathcal{R}(F)$, $M$ is not a direct sum with $1\times1$ overlap of proper submatrices of $M$ which means, according to Observation~\ref{obsart}, there are no non-trivial articulations and both top-right and bottom-left corners are empty. For contradiction, assume $M\in Cl(\mathcal{T})$, then, according to a generalization of Lemma~\ref{lemma3}, there exists a sequence of articulations of $M$ such that each matrix in between two consecutive articulations of $M$ is a minor of $\smm{1}\nearrow T\nearrow\smm{1}$ for some $T\in\mathcal{T}$. Since $M$ has only trivial articulations and they are both empty, it holds $M\im T$ and because of the choice of $M$ is also holds $M\im F$ for some $F\in\mathcal{F}$ which together give us a contradiction with $\mathcal{T}=Av(\mathcal{F})$.
 \item[$\supseteq$] First of all, $Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ is closed under the direct sum with $1\times1$ overlap. For contradiction, assume there are $M_1,M_2\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ but $M=M_1\nearrow_{1}M_2\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. Then there exists $F'\in\mathcal{R}(F)$ for some $F\in\mathcal{F}$ such that $F'\im M$. Because $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$, it follows that either $F'\im M_1$ or $F'\im M_2$ and since $F\im F'$ we have a contradiction.
 
 Now that we know that both sides are closed under the direct sum with $1\times1$ overlap it sufficient to show that the inclusion holds for any $M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ that is not a direct sum with $1\times1$ overlap of proper submatrices of $M$. Such $M$ does not contain (again from Observation~\ref{obsart}) any non-trivial articulation and those trivial ones are empty. Because of that it holds $F\nim M$ for every $F\in\mathcal{F}$; otherwise either $M\in\mathcal{R}(F)$ or its minor would be there. Therefore $M\in\mathcal{T}$ and also $M\in Cl(\mathcal{T})$.
 \end{itemize}
+\end{proof}
+\begin{defn}
+Let $T$ be a class of matrices. The \emph{basis} of $T$ is a set of all minimal (relating to minors) matrices that do not belong to $T$.
+\end{defn}
+\begin{cor}
+Let $\mathcal{T}$ and $\mathcal{F}$ be classes of matrices such that $\mathcal{T}=Av(\mathcal{F})$, then $\mathcal{R}(\mathcal{F})$ is a basis of $Cl(\mathcal{T})$.
+\end{cor}
+\begin{proof}
+The proof follow directly from Theorem~\ref{thmbasis}.
+\end{proof}
+A natural question follows, whether the closure under direct sum of a class with finite basis has final basis. We prove that this is not the case.
+
+\begin{defn}
+Let $Nucleus_n$ be a matrix described by the examples below
+\end{defn}
+$Nucleus_1=\smm{ &1& },\ Nucleus_2=\smm{1&1& \\ &1&1},\ Nucleus_3=\smm{ &1&1& \\1& & &1\\ &1&1& },\ Nucleus_4=\smm{ & &1&1& \\ &1& & &1\\1& & &1& \\ &1&1& & },\ Nucleus_n=\smm{ & & & & & &1&1& \\ & & & & &1& & &1\\ & & & &1& & &1& \\ & & &\dots& & &1& & \\ & &1& & &\dots& & & \\ &1& & &1& & & & \\1& & &1& & & & & \\ &1&1& & & & & & \\}$
+\begin{defn}
+Let $Candy_{k,n,l}$ be a matrix given by $I_k\nearrow_{1\times2}Nucleus_n\nearrow_{1\times2}I_l$, where $I_k,I_l$ are unit matrices of sizes $k\times k$ and $l\times l$ respectively.
+\end{defn}
+%$\smm{
+%  &   &   &   &   & 1 &   &   &   &   &   \\
+%  &   &   &   &   &   & 1 &   &   &   &   \\
+%  &   &   &   &   &   &   & 1 &   &   &   \\
+%  &   &   &   &   &   &   &   & 1 &   &   \\
+%  &   &   &   &   &   &   &   &   & 1 &   \\
+%1 &   &   &   &   & 1 &   &   &   &   & 1 \\
+%  & 1 &   &   &   &   &   &   &   &   &   \\
+%  &   & 1 &   &   &   &   &   &   &   &   \\
+%  &   &   & 1 &   &   &   &   &   &   &   \\
+%  &   &   &   & 1 &   &   &   &   &   &   \\
+%  &   &   &   &   & 1 &   &   &   &   & 
+%}$
+$Candy_{4,1,4}\smm{
+  &   &   & 1 &   &   &   \\
+  &   &   &   & 1 &   &   \\
+  &   &   &   &   & 1 &   \\
+1 &   &   & 1 &   &   & 1 \\
+  & 1 &   &   &   &   &   \\
+  &   & 1 &   &   &   &   \\
+  &   &   & 1 &   &   & 
+}$
+%$\smm{
+%  &   &   &   &   &   &   &   &   & 1 &   &   &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   & 1 &   &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   & 1 &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   &   & 1 &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   &   &   & 1 &   \\
+%  &   &   &   &   &   &   &   & 1 & 1 &   &   &   &   & 1 \\
+%  &   &   &   &   &   &   & 1 &   &   & 1 &   &   &   &   \\
+%  &   &   &   &   &   & 1 &   &   & 1 &   &   &   &   &   \\
+%  &   &   &   &   & 1 &   &   & 1 &   &   &   &   &   &   \\
+%  &   &   &   & 1 &   &   & 1 &   &   &   &   &   &   &   \\
+%1 &   &   &   &   & 1 & 1 &   &   &   &   &   &   &   &   \\
+%  & 1 &   &   &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   & 1 &   &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   & 1 &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   &   & 1 &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   &   &   & 1 &   &   &   &   &   &   &   &   & 
+%}$
+$Candy_{4,4,4}\smm{
+  &   &   &   &   & 1 &   &   &   \\
+  &   &   &   &   &   & 1 &   &   \\
+  &   &   &   &   &   &   & 1 &   \\
+  &   &   &   & 1 & 1 &   &   & 1 \\
+  &   &   & 1 &   &   & 1 &   &   \\
+  &   & 1 &   &   & 1 &   &   &   \\
+1 &   &   & 1 & 1 &   &   &   &   \\
+  & 1 &   &   &   &   &   &   &   \\
+  &   & 1 &   &   &   &   &   &   \\
+  &   &   & 1 &   &   &   &   & 
+}$
+\begin{thm}
+\label{thminf}
+There exists a matrix $F$ such that $\mathcal{R}(F)$ is infinite.
+\end{thm}
+\begin{proof}
+\end{proof}
+\begin{cor}
+There exists a class of matrices $\mathcal{C}$ having a finite basis such that $Cl(\mathcal{C})$ has an infinite basis.
+\end{cor}
+\begin{proof}
+From Theorem~\ref{thminf}, we have a matrix $F$ for which $\mathcal{R}(F)$ is infinite. Let $\mathcal{C}=Av(F)$. Clearly, $\mathcal{C}$ has a finite basis. On the other hand, from Theorem~\ref{thmbasis} we have $Cl(\mathcal{C})=Av(\mathcal{R}(F))$ and $\mathcal{R}(F)$ is infinite from the choice of $F$.
 \end{proof}

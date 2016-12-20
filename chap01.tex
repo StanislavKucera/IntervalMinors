@@ -195,9 +195,11 @@ Let $M\in Av(P^+)$ be an inclusion maximal matrix in $Av(P^+)$, then each row of
 \begin{proof}
 If there are two one-entries on the same row and there is a zero-entry in between them, we can change the zero-entry into a one-entry and the new matrix will still avoid $P^+$.
 
-If there is only one one-entry in a row, we can always change one of its neighbors into a one-entry. If the one-entry lies in the first column, we can insert another one-entry to the second column and the matrix will still avoid $P^+$, because if the new one-entry is used in a mapping of $P^+$ then it must as a part of the first column and we could use the one-entry to its left instead. Similarly, there is no one-entry in the last column that is the only one in it's row. For contradiction, assume there is the only one one-entry in a row, call it $e=M[r,c]$, that is not in the first nor in the last column and assume we cannot change neither $e_l=M[r,c-1]$ nor $e_r=M[r,c+1]$ to a one-entry, because then the matrix would contain the minor $P^+$.
-
-TODO
+If there is only one one-entry in a row, we can always change one of its neighbors into a one-entry. If the one-entry lies in the first column, we can insert another one-entry to the second column and the matrix will still avoid $P^+$, because if the new one-entry is used in a mapping of $P^+$ then it must as a part of the first column and we could use the one-entry to its left instead. Similarly, there is no one-entry in the last column that is the only one in it's row. For contradiction, assume there is the only one one-entry in a row, call it $e=M[r,c]$, that is not in the first nor in the last column and assume we cannot change neither $e_l=M[r,c-1]$ nor $e_r=M[r,c+1]$ to a one-entry, because then the matrix would contain the minor $P^+$. Clearly, all mappings of $P^+$ that are created by a change of $e_1$ contain $e_1$ and the element of $P^+$ that is mapped to $e_1$ comes from the first column and is on $r_1$-th row (there might be multiple of them so just take any), because if it came from the middle row, we could have used the original zero-entry instead as the middle columns is empty and if it came from the last row, we could have used $e$ instead. Similarly, $P^+[r_2,3]$ is mapped to $e_2$ when $e_2$ is changed into a one-entry. We now want to show that the two partitionings can be altered to have a mapping of $P^+$ to $M$. We can always map the middle column of $P^+$ to the single column where $e$ is presented and we describe how to partition $M$ into $k$ rows. We have two cases to go through:
+\begin{itemize}
+\item[$r_1\neq r_2$] 
+\item[$r_1=r_2$]
+\end{itemize}
 \end{proof}
 \begin{thm}
 For all $M\in\Mat$ it holds $M\in Av(P^+)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-1)}$ such that $N\in Av(P)$ and $M$ is a submatrix of $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR.
@@ -213,10 +215,74 @@ TODO
 \end{itemize}
 \end{proof}
 
-Open question:
+\begin{lemma}
+Let $P\in\Pat$ and let $M\in\Mat$ be an inclusion maximal matrix such that $\PimM$, then each row of $M$ contains at most $l-1$ intervals of one-entries and each column of $M$ contains at most $k-1$ intervals of one-entries.
+\end{lemma}
+\begin{proof}
+It suffices to prove the statement only for rows. Let us proceed by contradiction and let us have a row~$r$ that contains at least $l$ intervals of one-entries. Let $Z_1$ denote the interval of zero-entries following the first interval of one-entries and similarly $Z_i$ denote the interval of zero-entries following the $i$-th interval of one-entries for $i\in[k]$. Because $M$ is inclusion maximal, each change of a zero-entry to a one-entry will create a copy of the forbidden minor and the new one-entry will be a part of each such copy.
+
+We will show that changing a zero-entry from $Z_i$ can only create a copy where the changed entry is part of the $i+1$ or higher column. We proceed by induction:
 \begin{itemize}
-\item 2 rows, 1 interval of one-entries, 3 rows, 2 intervals... and generalization
-\item using the previous point to characterize insertion of an empty column to a bigger matrix
+\item[$i=1$] For contradiction assume that changing any $e\in Z_1$ creates a copy of minor $P$ where some element of the first column of $P$ is mapped to $e$. In this case, because $Z_1$ follows after an interval of one-entries, any one-entry lying before $e$ on the same row can play the same role in the mapping and we have $\PimM$ which is a contradiction. 
+\item[$i>1$] From the induction hypothesis, we know that changing a zero-entry of $Z_{i-1}$ will create a copy of $P$ where the changed element is used to map the $i$-th or further column of $P$. In particular, the first $i-1$ columns can always be mapped (even without changing any entry) to columns preceding $Z_{i-1}$ and therefore preceding $Z_{i}$. This means that if a change of a zero-entry of $Z_i$ introduces a mapping of $P$ that uses the new one-entry to map any of columns $1$ to $i-1$, we can combine the mapping with the fact that the first $i-1$ columns can be mapped before $Z_i$ and find that $\PimM$ in the following way:
+
+Similarly, we are done if any change of an element~$e'$ of $Z_{i-1}$ is used to map the $i+1$ or higher column of $P$; therefore, we assume each such change only allows $P$ to map the $i$-th column there. The last case we need to take care of is when the change of an element $e\in Z_i$ creates a mapping of $P$ where the $i$-th column uses $e$. Let $r$ denote a row of $P$ that is mapped to $e$ when $e$ is a one-entry and let $r'$ denote a row of $P$ that is mapped to $e'$ when $e'$ is a one-entry.
+\begin{itemize}
+\item[$r=r'$] ... This is really hard to describe, probably will use a picture ... In this case, we take the partitioning created by both mappings and extend it to a partitioning of mapping $P$ into $M$ without $e$ or $e'$ being one-entries. We simply
+\end{itemize}
+\end{itemize}
+\end{proof}
+
+\subsection{Pattern size constrains}
+In the previous sections, it always holds that for a pattern~$P$ of size $k\times l$ any inclusion maximal matrix $M$ that avoids $P$ as an interval minor has at most $l-1$ intervals of one-entries in each row and at most $k-1$ intervals of one-entries in each column. Is this a global phenomenon?
+
+\begin{thm}
+Let $P\in\{0,1\}^{k\times2}$ and $M\in\Mat$ be an inclusion maximal matrix such that $\PimM$, then $M$ contains at most one interval of one-entries in each row.
+\end{thm}
+\begin{proof}
+For contradiction, assume there are several intervals of one-entries in the same row of $M$. Because $M$ is inclusion maximal still avoiding $P$ as an interval minor, changing any one-entry~$e$ in between two consequtive intervals of one-entries will create a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',0]$. In the first case, the same mapping will work if we use any one-entry that is to the left from $e$ instead of $e$, which would lead to $\PimM$ and therefore cannot be. In the second case, the mapping can use any one-entry to the right from $e$ instead of $e$ and therefore, there is no mapping of $P$ to $M$ even if $e$ is a one-entry. That is a contradiction with $M$ being inclusion maximal.
+\end{proof}
+\begin{thm}
+Let $P\in\{0,1\}^{2\times k}$ and $M\in\Mat$ be an inclusion maximal matrix such that $\PimM$, then $M$ contains at most $O(k^2)$ intervals of one-entries in each row.
+\end{thm}
+\begin{proof}
+Let us fix a row of a big enough inclusion maximal matrix $M$ and let it have as many intervals of one-entries as possible without creating a mapping of $P$.
+\end{proof}
+We see that for patterns having only two rows or columns we can indeed find a structural property of any inclusion maximal matrix avoiding it. On the other hand, already for a pattern of size $3\times3$ we show that there are matrices with arbitrarily many intervals of one-entries and we cannot get their number smaller.
+\begin{thm}
+\label{manyints}
+Let $P=\smm{ &1& \\1& & \\ & &1}$. For every $k>1$ there is an inclusion maximal matrix $M$ avoiding $P$ as an interval minor having $k$ intervals of one-entries.
+!Need to check this really is an inclusion maximal matrix or restate!
+\end{thm}
+\begin{proof} Let $M$ be the $(2k-1)\times(2k-1)$ matrix described by the picture:
+$$\smm{	1&0&1&0&1&\cdots&1&0&1&0&1\\
+		 & & & & &\cdots& & &1&1&1\\
+		 & & & & &\cdots& & &1&1&1\\
+		 & & & & &\cdots&1&1&1& & \\
+		 & & & & &\cdots&1&1&1& & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\iddots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & &1&1&1&\cdots& & & & & \\
+		 & &1&1&1&\cdots& & & & & \\
+		1&1&1& & &\cdots& & & & & \\
+		1&1&1& & &\cdots& & & & & \\
+		 }$$
+$\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries of $M$ which only leaves zero-entries where we need to map $P[1,2]$.
+
+When we change any zero-entry of the first row into a one-entry (getting $M'$), not only $P\im M'$ but also any $P'\in\{0,1\}^{3\times3}$ such that $P\im P'$ will be the minor of $M'$.
+\end{proof}
+We have seen in the proof that already for matrices of size $3\times3$ there is a big portion of those patterns for which we can create an inclusion maximal matrix with many intervals of one-entries. Also, the pattern $P$ has a specific structure and we can extend the result.
+\begin{thm}
+Let $P=\smm{ &1& \\1& & \\ & &1}$. For every $P'$ such that $P\im P$ and every $k>1$ there is an inclusion maximal matrix $M$ avoiding $P'$ as an interval minor having $k$ intervals of one-entries.
+\end{thm}
+\begin{proof}
+First, assume there is a mapping of $P$ into $P'\in\Pat$ that assigns a one-entry of the first row to $P[1,2]$, a one-entry of the first column to $P[2,1]$ and a one-entry of the last row and column to $P[3,3]$. Then, we can construct a similar matrix as we did in the proof of Theorem~\ref{manyints} avoiding $P'$ but after changing one zero-entry of the first row it contains the whole $\{1\}^{k\times l}$.
+
+Let $P'$ be any pattern containing $P$ without additional restrictions. Let $P'[r_1,c_1],P'[r_2,c_2]$ and $P'[r_3,c_3]$ be one-entries of $P'$ that can be used to map $P[1,2],P[2,1]$ and $P[3,3]$ to it respectively. Then we take a submatrix $P'':=P'[[r_1,r_3],[c_2,c_3]]$. Such a matrix fulfills assumptions of the more restricted case stated at the beginning of the proof and we can find an inclusion maximal matrix $M'$ avoiding $P''$ having $k$ intervals. We construct $M$ from $M'$ by simply adding new rows and columns, all containing one-entries. We add $r_1-1$ rows in front of the first row and $k-r_3$ rows behind the last row. We also add $c_2-1$ columns in front of the first column and $l-c_3$ columns behind the last column. Constructed matrix $M$ avoids pattern $P'$ as its submatrix $P''$ cannot be mapped to $M$ without added rows and columns. At the same time, any change of a zero-entry of the $r_1$-th row of $M$ to one-entry creates a copy of ${1}^{k\times l}$ so the changed matrix contains $P'$.
+\end{proof}
+On the other hand, for different patterns of size $3\times3$ the number of intervals of one-entries of bounded by a constant. One such case is $I_3$ (unit matrix) and a different one $\smm{ &1& \\ &1& \\1& &1}$. The proof goes through a few cases.
+
+Open questions:
+\begin{itemize}
 \item insertion of an empty column in between all columns of $P$
 \end{itemize}
 

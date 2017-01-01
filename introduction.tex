@@ -1,4 +1,4 @@
-\chapter*{Introduction}
+\chapter{Introduction}
 Throughout the paper, every time we speak about matrices we mean binary matrices (also called 01-matrices) and we omit the word binary. If we speak about a \emph{pattern}, we again mean a binary matrix and we use the word in order to distinguish among more matrices as well as to indicate relationship.
 
 When dealing with matrices, we always index rows and column starting with one and when we speak about a row~$r$, we simply mean a row with index $r$. A \emph{line} is a common word for both a row and a column. When we order a set of lines, we first put all rows and then all columns. For $M\in\Mat$, $[m]$ is a set of all rows and $[m+n]$ is a set of all lines, where $m$-th element is the last row. This goes with the usual notation.
@@ -26,9 +26,6 @@ For a matrix $M\in\Mat$ and $L\subseteq[m+n]$ let $M_{\preceq}[L]$ denote a matr
 \begin{ntn}
 For a matrix $M\in\Mat$, $R\subseteq[m]$ and $C\subseteq[n]$ let $M_{\preceq}[R,C]:=M_{\preceq}[R\cup \{c+m|c\in C\}]$.
 \end{ntn}
-%\textbf{Poznámka pro vedoucího:}
-
-%With this notation, for $M\in\{0,1\}^{m\times n}$ we have: $$M_{\preceq}[\{m,m+k\}]=M_{\preceq}[[m]\cup\{m,m+k,m+n-1\}]$$ This means that I always get a correct matrix and the definition of containing should be alright, but it is not very nice that it is ambiguous.
 \begin{defn}
 We say a matrix $M\in\Mat$ \emph{contains} a pattern $P\in\Pat$ \emph{as an interval minor} and denote it by $\PimM$ if there are $R\in[m]$ and $C\in[n]$ such that $|R|=k$, $|C|=l$ and for every $r\in R$ and $c\in C$ if $P[r,c]=1$, then $M_{\preceq}[R,C][r,c]=1$.
 \end{defn}

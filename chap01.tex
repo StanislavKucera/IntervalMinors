@@ -5,7 +5,7 @@
 \newsavebox{\smlmatc}
 \savebox{\smlmatc}{$\smm{1&1&1\\0&1&0}$}
 
-\section{Characterizations}
+\chapter{Characterizations}
 \begin{defn}
 A \emph{walk} in a matrix~$M$ is a sequence of some of its entries, beginning in the top left corner and ending in the bottom right one. If an entry $M[i,j]$ is in the sequence, the next one is either $M[i+1,j]$ or $M[i,j+1]$.
 \end{defn}
@@ -28,8 +28,9 @@ For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is
 \item \emph{bottom-right empty} if $M[[r-1],[c+1,n]]$ is empty.
 \end{itemize}
 \end{defn}
-\subsection{Patterns of size $2\times2$ and their generalization}
+\section{Patterns of size $2\times2$ and their generalization}
 \begin{thm}
+\label{walkingthm}
 Let $P=\smm{0&1\\1&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ is a walking matrix.
 \end{thm}
 \begin{proof}
@@ -128,7 +129,7 @@ Let $P\in\Pat$ be a matrix having only four one-entries -- $P[1,1],\ P[1,n],\ P[
 \end{thm}
 % a lot to do here - probably will need a generalization of the lemma1
 
-\subsection{Matrices of size $2\times3$}
+\section{Matrices of size $2\times3$}
 \begin{thm}
 Let $P=\smm{1&0&1\\0&1&0}$, then for all $M$: $\PnimM\Leftrightarrow M=M_1\oplus_hM_2$ where $\smm{1&0\\0&1}\nim M_1$ and $\smm{0&1\\1&0}\nim M_2$.
 \end{thm}
@@ -174,9 +175,10 @@ Let $P=\smm{0&1&1\\1&0&0}$, then for all $M$: $\PnimM\Leftrightarrow M$ contains
 \end{itemize}
 \end{proof}
 
-\subsection{Empty rows and columns}
+\section{Empty rows and columns}
 \begin{obs}
-Let $P\in\Pat$ and $P'\in\{0,1\}^{k\times l+1}$ such that $P'=P\oplus_h0^{k\times1}$, similarly let $M\in\Mat$ and $M'\in\{0,1\}^{m\times n+1}$ such that $M'=M\oplus_h0^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
+\label{emptyrows}
+Let $P\in\Pat$ and $P'\in\{0,1\}^{k\times l+1}$ such that $P'=P\oplus_h0^{k\times1}$, similarly let $M\in\Mat$ and $M'\in\{0,1\}^{m\times n+1}$ such that $M'=M\oplus_h1^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
 \end{obs}
 \begin{proof}
 \begin{itemize}
@@ -190,19 +192,21 @@ The same proof can be also used for adding an empty column as the first column o
 For the following two statements, let $P\in\{0,1\}^{k\times2}$ be a forbidden pattern and $P^+\in\{0,1\}^{k\times3}$ be the pattern created from $P$ by adding a new column in between the two columns of $P$.
 \begin{lemma}
 \label{lemmamax}
-Let $M\in Av(P^+)$ be an inclusion maximal matrix in $Av(P^+)$, then each row of $M$ contains one interval of one-entries of length different from one (but can be zero).
+Let $M\in Av(P^+)$ be an inclusion maximal matrix, then each row of $M$ either contains no one-entries or exactly one interval of one-entries of length at least 2.
 \end{lemma}
 \begin{proof}
 If there are two one-entries on the same row and there is a zero-entry in between them, we can change the zero-entry into a one-entry and the new matrix will still avoid $P^+$.
 
 If there is only one one-entry in a row, we can always change one of its neighbors into a one-entry. If the one-entry lies in the first column, we can insert another one-entry to the second column and the matrix will still avoid $P^+$, because if the new one-entry is used in a mapping of $P^+$ then it must as a part of the first column and we could use the one-entry to its left instead. Similarly, there is no one-entry in the last column that is the only one in it's row. For contradiction, assume there is the only one one-entry in a row, call it $e=M[r,c]$, that is not in the first nor in the last column and assume we cannot change neither $e_l=M[r,c-1]$ nor $e_r=M[r,c+1]$ to a one-entry, because then the matrix would contain the minor $P^+$. Clearly, all mappings of $P^+$ that are created by a change of $e_1$ contain $e_1$ and the element of $P^+$ that is mapped to $e_1$ comes from the first column and is on $r_1$-th row (there might be multiple of them so just take any), because if it came from the middle row, we could have used the original zero-entry instead as the middle columns is empty and if it came from the last row, we could have used $e$ instead. Similarly, $P^+[r_2,3]$ is mapped to $e_2$ when $e_2$ is changed into a one-entry. We now want to show that the two partitionings can be altered to have a mapping of $P^+$ to $M$. We can always map the middle column of $P^+$ to the single column where $e$ is presented and we describe how to partition $M$ into $k$ rows. We have two cases to go through:
 \begin{itemize}
-\item[$r_1\neq r_2$] 
-\item[$r_1=r_2$]
+\item[$r_1\neq r_2$] TODO
+\item[$r_1=r_2$] TODO
 \end{itemize}
 \end{proof}
+TODO generalize the result for addition of multiple empty columns
 \begin{thm}
-For all $M\in\Mat$ it holds $M\in Av(P^+)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-1)}$ such that $N\in Av(P)$ and $M$ is a submatrix of $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR.
+\label{emptymiddle}
+For all $M\in\Mat$ it holds $M\in Av(P^+)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-1)}$ such that $N\in Av(P)$ is inclusion maximal and $M$ is a submatrix of $N\oplus_h0^{m\times1}$ placed over $0^{m\times1}\oplus_hN$ with an operation bitwise OR.
 \end{thm}
 \begin{proof}
 \begin{itemize}
@@ -233,7 +237,7 @@ Similarly, we are done if any change of an element~$e'$ of $Z_{i-1}$ is used to 
 \end{itemize}
 \end{proof}
 
-\subsection{Pattern size constrains}
+\section{Pattern size constrains}
 In the previous sections, it always holds that for a pattern~$P$ of size $k\times l$ any inclusion maximal matrix $M$ that avoids $P$ as an interval minor has at most $l-1$ intervals of one-entries in each row and at most $k-1$ intervals of one-entries in each column. Is this a global phenomenon?
 
 \begin{thm}
@@ -243,10 +247,13 @@ Let $P\in\{0,1\}^{k\times2}$ and $M\in\Mat$ be an inclusion maximal matrix such 
 For contradiction, assume there are several intervals of one-entries in the same row of $M$. Because $M$ is inclusion maximal still avoiding $P$ as an interval minor, changing any one-entry~$e$ in between two consequtive intervals of one-entries will create a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',0]$. In the first case, the same mapping will work if we use any one-entry that is to the left from $e$ instead of $e$, which would lead to $\PimM$ and therefore cannot be. In the second case, the mapping can use any one-entry to the right from $e$ instead of $e$ and therefore, there is no mapping of $P$ to $M$ even if $e$ is a one-entry. That is a contradiction with $M$ being inclusion maximal.
 \end{proof}
 \begin{thm}
+\label{smallintnum}
 Let $P\in\{0,1\}^{2\times k}$ and $M\in\Mat$ be an inclusion maximal matrix such that $\PimM$, then $M$ contains at most $O(k^2)$ intervals of one-entries in each row.
 \end{thm}
 \begin{proof}
 Let us fix a row of a big enough inclusion maximal matrix $M$ and let it have as many intervals of one-entries as possible without creating a mapping of $P$.
+
+TODO
 \end{proof}
 We see that for patterns having only two rows or columns we can indeed find a structural property of any inclusion maximal matrix avoiding it. On the other hand, already for a pattern of size $3\times3$ we show that there are matrices with arbitrarily many intervals of one-entries and we cannot get their number smaller.
 \begin{thm}
@@ -279,14 +286,64 @@ First, assume there is a mapping of $P$ into $P'\in\Pat$ that assigns a one-entr
 
 Let $P'$ be any pattern containing $P$ without additional restrictions. Let $P'[r_1,c_1],P'[r_2,c_2]$ and $P'[r_3,c_3]$ be one-entries of $P'$ that can be used to map $P[1,2],P[2,1]$ and $P[3,3]$ to it respectively. Then we take a submatrix $P'':=P'[[r_1,r_3],[c_2,c_3]]$. Such a matrix fulfills assumptions of the more restricted case stated at the beginning of the proof and we can find an inclusion maximal matrix $M'$ avoiding $P''$ having $k$ intervals. We construct $M$ from $M'$ by simply adding new rows and columns, all containing one-entries. We add $r_1-1$ rows in front of the first row and $k-r_3$ rows behind the last row. We also add $c_2-1$ columns in front of the first column and $l-c_3$ columns behind the last column. Constructed matrix $M$ avoids pattern $P'$ as its submatrix $P''$ cannot be mapped to $M$ without added rows and columns. At the same time, any change of a zero-entry of the $r_1$-th row of $M$ to one-entry creates a copy of ${1}^{k\times l}$ so the changed matrix contains $P'$.
 \end{proof}
-On the other hand, for different patterns of size $3\times3$ the number of intervals of one-entries of bounded by a constant. One such case is $I_3$ (unit matrix) and a different one $\smm{ &1& \\ &1& \\1& &1}$. The proof goes through a few cases.
+What makes it more interesting is that for any pattern that avoids any rotation of $P$ from the previous theorem, every inclusion maximal matrix avoiding it has a bounded number of intervals of one-entries in both rows and columns. To prove that we need a few partial results.
+\begin{thm}
+Let $P$ be a pattern avoiding all rotations of $P_1=\smm{ &1& \\1& & \\ & &1}$, then $P$:
+\begin{enumerate}
+\item contains one non-empty line or
+\item contains two non-empty lines or
+\item contains three non-empty lines or
+\item avoids $\smm{1& \\ &1}$ or $\smm{ &1\\1& }$.
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Assume $P$ has four one-entries that do not share any row or column. Then those one-entries induce a $4\times4$ permutation inside $P$ and because $P$ does not contain any rotation of $P_1$, the induced permutation is either $1234$ or $4321$. Without loss of generality, assume is the the first case and denote the one-entries by $e_1,e_2,e_3$ and $e_4$.
+
+For contradiction with the statement, assume $P$ also contains $P'=\smm{1& \\ &1}$. Clearly, any one-entry from $e_1,e_2,e_3$ and $e_4$ cannot be a part of any mapping of $P'$ because it would introduce a mapping of a rotation of $P_1$. Let $e_2=P[r_2,c_2]$ and $e_3=P[r_3,c_3]$. First, the submatrix $P[[r_2],[c_2,l]]$ does not contain $P'$ because then this copy of $P'$ together with $e_4$ would give us a rotated copy of $P_1$. Symmetrically, $P[[r_3,k],[c_3]]$ does not contain $P'$. Also, $P[[r_3-1],[c_3-1]]$ and $P[[r_2+1,k],[c_2+1,l]]$ are empty (else they would together with $e_2$ and $e_3$ give us a mapping of a rotation of $P_1$). Up to rotation, the only possible way to have $P'\im P$ is that the top one-entry of $P'$ is in the submatrix $P[[r_3-1],[c_2,c_3-1]]$ but then this entry together with $e_1$ and $e_3$ give us a mapping of a rotation of $P_1$ which is a contradiction.
+\end{proof}
+\begin{lemma}
+Let $P\in\Pat$ be a pattern having only one non-empty line. Then for every inclusion maximal matrix $M\in\Mat$ avoiding $P$ the number of intervals of one-entries in a row is bounded by $O(k)$ and in column is bounded by $O(l)$. 
+\end{lemma}
+\begin{proof}
+Let the non-empty line of $P$ be a row~$r$. Since $M$ is inclusion maximal, submatrices $M[[r-1],[n]]$ and $M[[m-r+1,m],[n]]$ contain no zero-entry, so each row contains just one interval of one-entries. If we look on any other row, it cannot contain $k$ one-entries, so the biggest possible number of intervals of one-entries is $k-1$.
+
+Let us look on an arbitrary column~$c$ of $M$. If there is at least one one-entry in $M[[r,m-r],c]$ then because $M$ is inclusion maximal, the whole column is made of one-entries. Otherwise, there are two intervals of one-entries -- $M[[r-1],c]$ and $M[[m-r,m],c]$.
+\end{proof}
+\begin{lemma}
+Let $P\in\Pat$ be a pattern having two non-empty lines. Then for every inclusion maximal matrix $M\in\Mat$ avoiding $P$ the number of intervals of one-entries in a row is bounded by $O(k^2+l)$ and in column is bounded by $O(k+l^2)$. 
+\end{lemma}
+\begin{proof}
+First we assume the two non-empty lines of $P$ are rows $r_1<r_2$ (or symmetrically columns). From Observation~\ref{emptyrows} and inclusion maximality of $M$ we have that $M[[r_1-1],[n]]$ and $M[[m-r_2+1,m],[n]]$ contain no zero-entry. This way we restrict ourselves to case $r_1=1$ and $r_2=k$. From Theorem~\ref{smallintnum} we know that every inclusion maximal $N$ avoiding $P[\{r_1,r_2\},[n]]$ has at most $O(k^2)$ intervals of one-entries in each row and at most $1$ interval of one-entries in each column. From Theorem~\ref{emptymiddle} we also know that for given $M$ there is an inclusion maximal $N$ avoiding $P[\{r_1,r_2\},[n]]$ such that $M$ is submatrix of shifted and ORed copies of $N$. Since $M$ is inclusion maximal it is equal to those shifted and ORed copies of $N$ and since the number of intervals of $N$ is bounded, so is the number of intervals of $M$.
+
+Now assume the two non-empty lines of $P$ are row~$r$ and column~$c$. We even prove that the number of intervals of one-entries is $O(k+l)$ in rows and $O(k+l)$ in columns. Also, because the proof is symmetric, we only show the bound for rows. The fact $M$ is inclusion maximal means that changing any zero-entry of $M$ to a one-entry creates a mapping of the forbidden pattern. We say that element~$e$ of $P$ is problematic, if it can be mapped to the changed one-entry of $M$. It can happen more elements are problematic for one zero-entry of $M$ but we assume there is always just one to get and upper bound of the number of intervals of ones. For simplicity of the proof, when we speak about two different zero-entries in a row, we mean two zero-entries separated by at least one one-entry. If the zero-entries are not separated by a one-entry, we consider them equivalent in terms of problematic elements.
+
+Let us now fix an arbitrary row $M$ an talk about its zero-entries. For every one-entry~$e$ of the pattern except those in the $r$-th row, there is at most one zero-entry for which $e$ is problematic. For contradiction, assume there are two such zero-entries. Let the two created mappings with problematic $e$ after the change of those two zero-entries look like in Figure~\ref{twolines}, where one mapping is dashed and the other dotted. When we take the outer two vertical and horizontal lines, we have a mapping of $P$ that can use an existing one-entry to also map $e$ which gives us a contradiction with $M\in Av(P)$. Therefore, for each one-entry of $P$ besides those on the $r$-th row we have at most one interval of one-entries in $M$. For every one-entry~$e$ of $P$ from the $r$-th row and column~$c$ and every zero-entry of $M$ for which $e$ is problematic there can be as most $c-1$ one-entries to the left of it and at most $l-c$ one-entries to the right of it. If there are $k$ intervals of one-entries such that for zero-entries in between them problematic one-entries of $P$ are those from $r$-th row, then the zero-entry in the middle has either too many one-entries to the left or to the right.
+\end{proof}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=60mm]{img/twolines.pdf}
+\caption{Dashed and dotted lines resembling two different mappings of a forbidden pattern, where two horizontal lines show the boundaries of the mapping of row~$r$ and the vertical lines show boundaries of the mapping of column~$c$.}
+\label{twolines}
+\end{figure}
+\begin{lemma}
+Let $P\in\Pat$ be a pattern having three non-empty lines. Then for every inclusion maximal matrix $M\in\Mat$ avoiding $P$ the number of intervals of one-entries in a row is bounded by $O(f(k+l))$ and in column is bounded by $O(f(k+l))$. 
+\end{lemma}
+\begin{proof}
+TODO - prove
+\end{proof}
+\begin{lemma}
+Let $P\in\Pat$ be a pattern avoiding $\smm{0&1\\1&0}$ (or $I_2$). Then for every inclusion maximal matrix $M\in\Mat$ avoiding $P$ the number of intervals of one-entries in a row is bounded by $O(k+l)$ and in column is bounded by $O(k+l)$. 
+\end{lemma}
+\begin{proof}
+From Theorem~\ref{walkingthm} we know that $P$ is a walking pattern. As such, it only contains up to $k+l-1$ one-entries. Assume $M$ has $k+l+1$ intervals of one-entries in some row~$r$. Then there are two zero entries in $r$-th row separated by at least one one-entry~$e'$ to which the same one-entry~$e=P[r_e,c_e]$ can be mapped when they are changed to one-entries. Call them $M[r_1,c_1]$ and $M[r_2,c_2]$. Clearly, $P[[r_e,k],[c_e]]$ besides $e$ can be mapped to $M[[r_1,m],[c_1]]$ and $P[[r_e],[c_e,l]]$ besides $e$ can be mapped to $M[[r_2],[c_2,n]]$. Also, $e$ can be mapped to $e'$ and since we mapped all one-entries of $P$ to $M$, we get a contradiction.
+\end{proof}
 
 Open questions:
 \begin{itemize}
 \item insertion of an empty column in between all columns of $P$
 \end{itemize}
 
-\subsection{Multiple patterns}
+\section{Multiple patterns}
 \begin{thm}
 Let $P_1=\smm{0&0&1\\1&0&0}$ and $P_2=\smm{0&1\\0&0\\1&0}$, then for all $M$: $\PnimM\wedge\PnimM\Leftrightarrow M$ contains a walk $w$ and each one-entry $e$ is either on the walk $w$ or both element directly above $e$ and directly to the right of $e$ are on the walk $w$.
 \begin{proof}

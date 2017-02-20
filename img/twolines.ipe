@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70107" creator="Ipe 7.2.2">
-<info created="D:20170101204405" modified="D:20170101205106"/>
+<ipe version="70107" creator="Ipe 7.1.10">
+<info created="D:20170101204405" modified="D:20170220155644"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -254,57 +254,56 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" stroke="black">
+<path layer="alpha" matrix="0.821429 0 0 1 0.714286 24" stroke="darkgray">
+4 804 m
+116 804 l
+116 804 l
+</path>
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="darkgray">
+116 800 m
+4 800 l
+</path>
+<text matrix="1 0 0 1 0 24.3187" transformations="translations" pos="32 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
+<text matrix="1 0 0 1 0 24.3187" transformations="translations" pos="64 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
+<text matrix="1 0 0 1 0 24.7968" transformations="translations" pos="48 800" stroke="black" type="label" width="3.667" height="2.456" depth="0" valign="baseline" size="tiny">$\bullet$</text>
+<path matrix="1 0 0 0.652174 0 292.174" stroke="black" dash="dotted">
+52 840 m
+52 748 l
+</path>
+<path matrix="1 0 0 0.652174 0 292.174" stroke="black" dash="dotted">
+72 840 m
+72 748 l
+</path>
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dotted">
+4 792 m
+116 792 l
+</path>
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dotted">
+4 772 m
+116 772 l
+</path>
+<path matrix="1 0 0 0.652174 -8 292.174" stroke="black" dash="dashed">
+48 748 m
+48 840 l
+</path>
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dashed">
+4 784 m
+116 784 l
+</path>
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dashed">
+4 768 m
+116 768 l
+</path>
+<path matrix="1 0 0 0.652174 -28 292.174" stroke="black" dash="dashed">
+48 748 m
+48 840 l
+</path>
+<path matrix="0.821429 0 0 0.652174 0.714286 292.174" stroke="black">
 4 840 m
 4 748 l
 116 748 l
 116 840 l
 h
-</path>
-<path stroke="black">
-4 804 m
-116 804 l
-116 804 l
-</path>
-<path stroke="black">
-116 800 m
-4 800 l
-</path>
-<text transformations="translations" pos="32 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
-<text transformations="translations" pos="64 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
-<text transformations="translations" pos="48 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">1</text>
-<path stroke="black" dash="dotted" pen="heavier">
-52 840 m
-52 748 l
-</path>
-<path stroke="black" dash="dotted" pen="heavier">
-72 840 m
-72 748 l
-</path>
-<path stroke="black" dash="dotted" pen="heavier">
-4 792 m
-116 792 l
-</path>
-<path stroke="black" dash="dotted" pen="heavier">
-4 772 m
-116 772 l
-</path>
-<path stroke="black" dash="dashed" pen="heavier">
-48 748 m
-48 840 l
-</path>
-<path stroke="black" dash="dashed" pen="heavier">
-4 784 m
-116 784 l
-</path>
-<path stroke="black" dash="dashed" pen="heavier">
-4 768 m
-116 768 l
-</path>
-<text matrix="1 0 0 1 0.565402 0.188467" transformations="translations" pos="116 800" stroke="black" type="label" width="3.3" height="3.432" depth="0" valign="baseline" size="footnote">r</text>
-<path matrix="1 0 0 1 -28 0" stroke="black" dash="dashed" pen="heavier">
-48 748 m
-48 840 l
 </path>
 </page>
 </ipe>

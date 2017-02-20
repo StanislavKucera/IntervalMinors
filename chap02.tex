@@ -41,7 +41,7 @@ If $P$ is strongly minimalist, then $P$ is weakly minimalist.
 \section{Known results}
 \begin{fct}
 \begin{enumerate}
-\item $\smm{1}$ is strongly minimalist.
+\item $\smm{\bullet}$ is strongly minimalist.
 \item If $P\in\Pat$ is strongly minimalist and there is a one-entry in the last row in the $c$-th column, then $P'\in\{0,1\}^{k+1\times l}$, which is created from $P$ by adding a new row having a one-entry only in the $c$-th column, is strongly minimalist.
 \item If $P$ is strongly minimalist, then after changing a one-entry into a zero-entry it is still strongly minimalist.
 \end{enumerate}
@@ -49,7 +49,7 @@ If $P$ is strongly minimalist, then $P$ is weakly minimalist.
 % TODO: cite properly Interval minors of complete bipartite graphs - Bojan Mohar, Arash Rafiey
 % Maybe mention that they were working with a different approach (ordered bigraphs) and also a different definition of an interval minor (allowing transposition) but it is not a problem for us and we show the proof in our notation.
 \begin{fct}
-Let $P=\smm{1\dots1\\1\dots1}$ have $l$ columns, then $P$ is weakly minimalist.
+Let $P=\smm{\bullet\dots\bullet\\\bullet\dots\bullet}$ have $l$ columns, then $P$ is weakly minimalist.
 \end{fct}
 \begin{proof}
 Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{2\times l}$ as an interval minor and $A_i=\{j\in[n]|\text{weight of }M[[i],\{j\}]>0\wedge \text{weight of }M[[i+1,m],\{j\}>0]\}$. Clearly $|A_i|\leq l-1$, otherwise $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ appears in at least $b_j-1$ of sets $A_i$, $0\leq i\leq m-2$. It follows that
@@ -57,7 +57,7 @@ $$\text{weight of }M=\sum\limits_{j=0}^nb_j=\sum\limits_{j=0}^n(b_j-1)+n\leq\sum
 \end{proof}
 This result is indeed very important because it shows that there are matrices like $\smm{11\\11}$, which are weakly minimalist, although it is known they are not strongly minimalist.
 \begin{fct}
-Let $P=\smm{1\dots1\\1\dots1\\1\dots1}$ have $l$ columns, then $P$ is weakly minimalist.
+Let $P=\smm{\bullet\dots\bullet\\\bullet\dots\bullet\\\bullet\dots\bullet}$ have $l$ columns, then $P$ is weakly minimalist.
 \end{fct}
 \begin{proof}
 Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{3\times l}$ as an interval minor and $A_i=\{j\in[n]|\text{ weight of }M[[i-1],\{j\}]>0\wedge \text{ weight of }M[[i+1,m],\{j\}>0\wedge M[i,j]\text{ one-entry}]\}$. Clearly $|A_i|\leq l-1$, otherwise $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ (for which $b_j\geq2$) appears in exactly $b_j-2$ of sets $A_i$, $1\leq i\leq m-1$. It follows that

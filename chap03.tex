@@ -15,11 +15,11 @@ Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\mat
 For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\nearrow B\in\{0,1\}^{m+k\times n+l}$ such that $D[[k+1,m+k],[n]]=A$, $D[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define $D:=A\searrow B\in\{0,1\}^{m+k\times n+l}$ such that $C[[m],[n]]=A$, $C[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
 \end{defn}
 \begin{thm}
-$Av(\smm{1&1\\1&1})=\left(Av(\smm{1&0\\0&0})\searrow Av(\smm{0&1\\1&0})\searrow Av(\smm{0&0\\0&1})\right)\cup$\\
-$\cup\left(Av(\smm{0&0\\1&0})\nearrow Av(\smm{1&0\\0&1})\nearrow Av(\smm{0&1\\0&0})\right)$.
+$Av(\smm{\bullet&\bullet\\\bullet&\bullet})=\left(Av(\smm{\bullet& \\ & })\searrow Av(\smm{ &\bullet\\\bullet& })\searrow Av(\smm{ & \\ &\bullet})\right)\cup$\\
+$\cup\left(Av(\smm{ & \\\bullet& })\nearrow Av(\smm{\bullet& \\ &\bullet})\nearrow Av(\smm{ &\bullet\\ & })\right)$.
 \end{thm}
 \begin{proof}
-If follows from Theorem~\ref{t33} and $Av(\smm{1&1\\1&0})=Av(\smm{1&0\\0&0})\searrow Av(\smm{0&1\\1&0})$.
+If follows from Theorem~\ref{t33} and $Av(\smm{\bullet&\bullet\\\bullet& })=Av(\smm{\bullet& \\ & })\searrow Av(\smm{ &\bullet\\\bullet& })$.
 \end{proof}
 \begin{ntn}
 Let $\mathcal{M}$ be a class of matrices. Denote by $Cl(\mathcal{M})$ a set containing each $M\in\mathcal{M}$ closed under direct sum and minors.
@@ -82,7 +82,7 @@ For contradiction, assume there are $A,B\in\mathcal{C}$ such that $A\oplus_{m+k\
 There is a $\mathcal{C}$ hereditary according to submatrices such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
 \end{obs}
 \begin{proof}
-Let $\mathcal{C}$ be a class of all matrices obtained by applying the direct sum on $\smm{0&1\\1&0}$. Clearly, it is closed under the direct sum. On the other hand, $\smm{0&1\\1&0}\oplus_{1\times1}\smm{0&1\\1&0}=\smm{0&1&0\\1&0&1\\0&1&0}\not\in\mathcal{C}$.
+Let $\mathcal{C}$ be a class of all matrices obtained by applying the direct sum on $\smm{ &\bullet\\\bullet& }$. Clearly, it is closed under the direct sum. On the other hand, $\smm{ &\bullet\\\bullet& }\oplus_{1\times1}\smm{ &\bullet\\\bullet& }=\smm{ &\bullet& \\\bullet& &\bullet\\ &\bullet& }\not\in\mathcal{C}$.
 \end{proof}
 \begin{ntn}
 We define Av($M$) to be a class of all matrices avoiding $M$ as 
@@ -133,8 +133,8 @@ The proof follow directly from Theorem~\ref{thmbasis}.
 A natural question follows, whether the closure under direct sum of a class with finite basis has final basis. We prove that this is not the case.
 
 \begin{defn}
-Let $Nucleus_1=\smm{1}$ and for $n>1$ let $Nucleus_n\in\{0,1\}^{n\times n+1}$ be a matrix described by the examples:\\
-$Nucleus_2=\smm{1&1& \\ &1&1},\ Nucleus_3=\smm{ &1&1& \\1& & &1\\ &1&1& },\ Nucleus_4=\smm{ & &1&1& \\ &1& & &1\\1& & &1& \\ &1&1& & },\\\ Nucleus_5=\smm{ & & &1&1& \\ & &1& & &1\\ &1& & &1& \\1& & &1& & \\ &1&1& & & },\ Nucleus_n=\smm{ & & & & & &1&1& \\ & & & & &1& & &1\\ & & & &1& & &1& \\ & & &\dots& & &1& & \\ & &1& & &\dots& & & \\ &1& & &1& & & & \\1& & &1& & & & & \\ &1&1& & & & & & \\}$.
+Let $Nucleus_1=\smm{\bullet}$ and for $n>1$ let $Nucleus_n\in\{0,1\}^{n\times n+1}$ be a matrix described by the examples:\\
+$Nucleus_2=\smm{\bullet&\bullet& \\ &\bullet&\bullet},\ Nucleus_3=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ &\bullet&\bullet& },\ Nucleus_4=\smm{ & &\bullet&\bullet& \\ &\bullet& & &\bullet\\\bullet& & &\bullet& \\ &\bullet&\bullet& & },\\\ Nucleus_5=\smm{ & & &\bullet&\bullet& \\ & &\bullet& & &\bullet\\ &\bullet& & &\bullet& \\\bullet& & &\bullet& & \\ &\bullet&\bullet& & & },\ Nucleus_n=\smm{ & & & & & &\bullet&\bullet& \\ & & & & &\bullet& & &\bullet\\ & & & &\bullet& & &\bullet& \\ & & &\dots& & &\bullet& & \\ & &\bullet& & &\dots& & & \\ &\bullet& & &\bullet& & & & \\\bullet& & &\bullet& & & & & \\ &\bullet&\bullet& & & & & & \\}$.
 \end{defn}
 \begin{defn}
 Let $Candy_{k,n,l}$ be a matrix given by $I_k\nearrow_{1\times2}Nucleus_n\nearrow_{1\times2}I_l$, where $I_k,I_l$ are unit matrices of sizes $k\times k$ and $l\times l$ respectively.
@@ -153,43 +153,43 @@ Let $Candy_{k,n,l}$ be a matrix given by $I_k\nearrow_{1\times2}Nucleus_n\nearro
 %  &   &   &   &   & 1 &   &   &   &   & 
 %}$
 $Candy_{4,1,4}\smm{
-  &   &   & 1 &   &   &   \\
-  &   &   &   & 1 &   &   \\
-  &   &   &   &   & 1 &   \\
-1 &   &   & 1 &   &   & 1 \\
-  & 1 &   &   &   &   &   \\
-  &   & 1 &   &   &   &   \\
-  &   &   & 1 &   &   & 
+  &   &   & \bullet &   &   &   \\
+  &   &   &   & \bullet &   &   \\
+  &   &   &   &   & \bullet &   \\
+\bullet &   &   & \bullet &   &   & \bullet \\
+  & \bullet &   &   &   &   &   \\
+  &   & \bullet &   &   &   &   \\
+  &   &   & \bullet &   &   & 
 }$
 %$\smm{
-%  &   &   &   &   &   &   &   &   & 1 &   &   &   &   &   \\
-%  &   &   &   &   &   &   &   &   &   & 1 &   &   &   &   \\
-%  &   &   &   &   &   &   &   &   &   &   & 1 &   &   &   \\
-%  &   &   &   &   &   &   &   &   &   &   &   & 1 &   &   \\
-%  &   &   &   &   &   &   &   &   &   &   &   &   & 1 &   \\
-%  &   &   &   &   &   &   &   & 1 & 1 &   &   &   &   & 1 \\
-%  &   &   &   &   &   &   & 1 &   &   & 1 &   &   &   &   \\
-%  &   &   &   &   &   & 1 &   &   & 1 &   &   &   &   &   \\
-%  &   &   &   &   & 1 &   &   & 1 &   &   &   &   &   &   \\
-%  &   &   &   & 1 &   &   & 1 &   &   &   &   &   &   &   \\
-%1 &   &   &   &   & 1 & 1 &   &   &   &   &   &   &   &   \\
-%  & 1 &   &   &   &   &   &   &   &   &   &   &   &   &   \\
-%  &   & 1 &   &   &   &   &   &   &   &   &   &   &   &   \\
-%  &   &   & 1 &   &   &   &   &   &   &   &   &   &   &   \\
-%  &   &   &   & 1 &   &   &   &   &   &   &   &   &   &   \\
-%  &   &   &   &   & 1 &   &   &   &   &   &   &   &   & 
+%  &   &   &   &   &   &   &   &   & \bullet &   &   &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   & \bullet &   &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   & \bullet &   &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   &   & \bullet &   &   \\
+%  &   &   &   &   &   &   &   &   &   &   &   &   & \bullet &   \\
+%  &   &   &   &   &   &   &   & \bullet & \bullet &   &   &   &   & \bullet \\
+%  &   &   &   &   &   &   & \bullet &   &   & \bullet &   &   &   &   \\
+%  &   &   &   &   &   & \bullet &   &   & \bullet &   &   &   &   &   \\
+%  &   &   &   &   & \bullet &   &   & \bullet &   &   &   &   &   &   \\
+%  &   &   &   & \bullet &   &   & \bullet &   &   &   &   &   &   &   \\
+%\bullet &   &   &   &   & \bullet & \bullet &   &   &   &   &   &   &   &   \\
+%  & \bullet &   &   &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   & \bullet &   &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   & \bullet &   &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   &   & \bullet &   &   &   &   &   &   &   &   &   &   \\
+%  &   &   &   &   & \bullet &   &   &   &   &   &   &   &   & 
 %}$
 $Candy_{4,4,4}\smm{
-  &   &   &   &   & 1 &   &   &   \\
-  &   &   &   &   &   & 1 &   &   \\
-  &   &   &   &   &   &   & 1 &   \\
-  &   &   &   & 1 & 1 &   &   & 1 \\
-  &   &   & 1 &   &   & 1 &   &   \\
-  &   & 1 &   &   & 1 &   &   &   \\
-1 &   &   & 1 & 1 &   &   &   &   \\
-  & 1 &   &   &   &   &   &   &   \\
-  &   & 1 &   &   &   &   &   &   \\
-  &   &   & 1 &   &   &   &   & 
+  &   &   &   &   & \bullet &   &   &   \\
+  &   &   &   &   &   & \bullet &   &   \\
+  &   &   &   &   &   &   & \bullet &   \\
+  &   &   &   & \bullet & \bullet &   &   & \bullet \\
+  &   &   & \bullet &   &   & \bullet &   &   \\
+  &   & \bullet &   &   & \bullet &   &   &   \\
+\bullet &   &   & \bullet & \bullet &   &   &   &   \\
+  & \bullet &   &   &   &   &   &   &   \\
+  &   & \bullet &   &   &   &   &   &   \\
+  &   &   & \bullet &   &   &   &   & 
 }$
 \begin{thm}
 \label{thminf}

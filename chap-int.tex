@@ -64,8 +64,6 @@ Let $P\in\{0,1\}^{k\times2}$ and for $l\geq1$ let $P^l\in\{0,1\}^{k\times l+2}$ 
 \end{itemize}
 \end{proof}
 
-In Lemma~\ref{lemma:twocols} we proved half of the condition for a $k$ by 2 pattern to be bounded, here comes the second half.
-
 \begin{obs}
 Let $P\in\Pat$ and $M\in\Mat$ such that $\PnimM$. Let $zi=M[\{r_1\},[c_1,c_2]]$ be a zero-interval of $M$ usable for one-entry~$e=P[r,c]$. If we change a zero-entry of $zi$ and create a mapping of $P$ that uses the changed entry to map $e$, then no such mapping can map column~$c$ outside of columns $[c_1,c_2]$. 
 \end{obs}
@@ -75,21 +73,18 @@ Since the changed entry is used to map $e$, clearly every mapping needs to use a
 
 \begin{lemma}
 \label{lemma:twocols2}
-Let $P\in\{0,1\}^{k\times 2}$ and $M\in\Mat$ be a maximal matrix avoiding $P$, then $M$ contains at most $2k^3+1$ one-intervals in each column.
+Let $P\in\{0,1\}^{k\times 2}$ and for $l\geq1$ let $P^l\in\{0,1\}^{k\times l+2}$ be a pattern created from $P$ by adding $l$ new empty columns in between the two columns of $P$. If an $m\times n$ matrix $M\in Av(P^l)$ is maximal, then for each one-entry~$e$ of $P$ there are at most $k^2$ zero-intervals usable for $e$.
 \end{lemma}
 \begin{proof}
-Given an arbitrary maximal matrix~$M$ avoiding $P$ let us look at an arbitrary column~$c$. For contradiction, assume it has at least $2k^3+2$ one-intervals which also means there are at least $2k^3+1$ zero-intervals in between. Since $P$ has at most $2k$ one-entries, from the Pigeonhole principle there are $k^2$ (+1) zero-intervals $zi_1<zi_2<\dots<zi_{k^2}$ usable for the same one-entry~$e$ of $P$. Without loss of generality let $e=P[r,1]$.
+Given an arbitrary maximal matrix~$M$ avoiding $P$ let us look at an arbitrary column~$c$ in $M$ and an arbitrary one-entry $e$ of $P$. Without loss of generality assume $e=P[r,1]$. For contradiction, assume there are $k^2+1$ zero-intervals $zi_1,\dots,zi_{k^2+1}$ in $c$ usable for $e$.
 \begin{itemize}
-	\item $\forall i<r:\ P[i,2]=0$: If we take the mapping created by changing a zero-entry of $zi_k$ and to map $P[i,1]$ we use one-intervals above $zi_k$ we map the whole $P$, contradicting $\PnimM$.
 	\item $P[r,2]=1$: Clearly, there is a one-entry next to each $zi_j$ and if we combine each such entry with a one-entry bounding each $zi_j$ we find a mapping of $\{1\}^{k^2\times2}$, contradicting $\PnimM$.
-	\item $\exists i<r:\ P[i,2]=1$: If there are multiple such $i$, choose the biggest one, so that for all $i<j\leq r$ it holds $P[j,2]=0$. For all those $j$ it holds that $j$-th row of $P$ can be mapped to just one row of $M$. So first, if for any mapping $Map_1\dots Map_{k^2}$, created by changing a zero-entry of $zi_1\dots zi_{k^2}$ respectively to map $e$, is $i<l<r$ using two rows such that both have a one-entry in column~$c$, we can only use the first of them, shift the mapping off all following rows up to $r$ and find a mapping of $P$ to $M$. Therefore, we assume this is not the case and every mapping uses up to $r-i\leq k$ one-entries right above $zi_l$ it to map rows $[i,r-1]$.
-	
-		We combine the one-entry used to map $P[i,2]$ in mapping $Map_l$ with a one-entry bounding zero-interval $zi_l$. Since we have $k^2$ such mappings and each of them only goes through at most $k$ one-intervals to map $P[i,2]$ and therefore find a one-entry in a column~$c'>c$, we find at least $k$ distinct pairs and therefore a mapping of $\{1\}^{k\times2}$, contradicting $\PnimM$.
+	\item $P[r,2]=0$: We define extended interval $zi^*_i$ for each $i\in[t]$ to be the interval containing $zi_i$ and also all element of $c$ between $zi_i$ and $zi_{i+1}$. Because of the pidgeon hole principle we find either $k$ consecutive $zi^*_i$ extended intervals such that there are no one-entries in columns $[c+l+1,n]$ in the rows they cover or $k$ extended intervals such that there is a one-entry next to each. Because each extended intervals contains a one-entry, in the second case we find $\left(\{1\}^{k\times2}\right)^l$ as an intervals minor. In the first case, without loss of generality assume $P[r_1,2]=1$ and it is the minimum such $r_1>r$. Also let $zi_{first},\dots,zi_{last}$ be the consecutive zero-intervals, which extended intervals have no one-entries next to them. Now consider the mapping of $P$ created when a zero-entry of $zi_{first}$ gets changed to a one-entry used to map $e$. Since $P[r_1,2]=1$ and there are no one-entries next to $zi_{first}-zi_{last}$, it has to be mapped to the rows of $M$ passed the end of $zi_{last}$. This leaves $k$ one-entries to be used to map potential one-entries in $P[[r,r_2-1],\{2\}]$ and so $\PimM$.
 \end{itemize}
 \end{proof}
 
 \begin{cor}
-Every $P\in\{0,1\}^{k\times 2}$ is bounded.
+Let $P\in\{0,1\}^{k\times 2}$ and for $l\geq1$ let $P^l\in\{0,1\}^{k\times l+2}$ be a pattern created from $P$ by adding $l$ new empty columns in between the two columns of $P$. Then $P^l$ is bounded for any $l\geq1$.
 \end{cor}
 
 \section{Pattern complexity}
@@ -126,7 +121,7 @@ $$\smm{	\bullet& &\bullet& &\bullet&\cdots&\bullet& &\bullet& &\bullet\\
 		\bullet&\bullet&\bullet& & &\cdots& & & & & \\
 		\bullet&\bullet&\bullet& & &\cdots& & & & & \\
 		 }$$
-$\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries of $M$ which only leaves a zero-entry where we need to map $P[1,2]$.
+We see that $\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries which only leaves a zero-entry for $P[1,2]$.
 
 When we change any zero-entry of the first row into a one-entry we get a matrix containing a minor of $\{1\}^{3\times3}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
 \end{proof}
@@ -237,12 +232,12 @@ Let $P\in\Pat$ be a pattern structured like one of the matrices in Figure~\ref{f
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/lemmaI.pdf}
-\caption{Patterns for which one-entries in column~$c$ are row-bounded. One-entries may only be in the areas enclosed by bold lines.}
+\caption{Patterns for which one-entries in column~$c$ and rows $r_1+1$ to $r_2-1$ are row-bounded. One-entries may only be in the areas enclosed by bold lines.}
 \label{fig:lemmaI}
 \end{figure}
 \end{lemma}
 \begin{proof}
-Let $P$ be the first described pattern. We show that for each one-entry $e$ from row~$r_2$ and every $M$ maximal matrix avoiding $P$ there is at most one zero-interval for which it is usable. For contradiction assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Look at Figure~\ref{fig:lemmaI1} and let the dashed partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and let the dotted partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map column $c$ to where it is mapped in both mappings together and map rows $r_1$ and $r_2$ as suggested in the picture, we get a partitioning of $P$ inside $M$ and so a contradiction with $\PnimM$.
+Let $P$ be the first described pattern. We show that for each one-entry from $P[[r_1+1,r_2-1],\{c\}]$ and every $M$ maximal matrix avoiding $P$ there is at most one zero-interval for which it is usable. For contradiction assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Look at Figure~\ref{fig:lemmaI1} and let the dashed partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and let the dotted partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map column $c$ to where it is mapped in both mappings together and map rows $r_1$ and $r_2$ as suggested in the picture, we get a partitioning of $P$ inside $M$ and so a contradiction with $\PnimM$.
 
 \begin{figure}[!ht]
 \centering
@@ -252,22 +247,6 @@ Let $P$ be the first described pattern. We show that for each one-entry $e$ from
 \end{figure}
 
 Proofs of cases two and three are similar to the first one and we skip them.
-\end{proof}
-
-\begin{thm}
-Let $P$ be a pattern and $e$ be any of its one-entries. Then $e$ is row-unbounded if and only if it can be used to map:
-\begin{itemize}
-\item $P_1[1,2]$ in any mapping of $P_1$ to $P$ or
-\item $P_2[1,2]$ in any mapping of $P_2$ to $P$ or
-\item $P_3[3,2]$ in any mapping of $P_3$ to $P$ or
-\item $P_4[3,2]$ in any mapping of $P_4$ to $P$.
-\end{itemize}
-\end{thm}
-\begin{proof}
-\begin{itemize}
-\item[$\Leftarrow$] If $e$ is contained in any of those mappings, we can use the construction from Theorem~\ref{thm:manyints} to show that $e$ is row-unbounded.
-\item[$\Rightarrow$] TODO
-\end{itemize}
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% First non-empty column bounded
@@ -438,6 +417,121 @@ Combining all the lemmata we finally get the following result.
 \begin{thm}
 Let $P$ be a pattern avoiding all rotations of $P_1=\smm{ &\bullet& \\\bullet& & \\ & &\bullet}$, then $P$ is bounded. \qed
 \end{thm}
+
+\section{Complexity of one-entries}
+So far we have been working with the whole patterns and determining their complexity. To make the results even more general, we can analyze the complexity of each one-entry.
+
+\begin{lemma}
+\label{lemma:cross}
+Let $P\in\Pat$ be a pattern such that all its one-entries are either in rows $r_1<r_2$ or in $P[[r_2],\{c\}]$. Then $P[r_1,c]$ is row-bounded.
+\end{lemma}
+\begin{proof}
+We prove there are at most $k^4$ zero-intervals usable for $P[r_1,c]$ in each row of any maximal matrix $M$ avoiding $P$. For contradiction, let there be more than $k^4$ of them ($zi_1,\dots,zi_{k^4}$) in some row and for each of them, consider the top most row $r'_j$ used to map $r_2$-th row of $P$ in a mapping created when a zero-entry of $zi_j$ is changed to a one-entry used to map $P[r_1,c]$. Then pairs $[zi_1,r'_1],[zi_2,r'_2],\dots,[zi_{k^4},r'_{k^4}]$ form a sequence of distinct pairs and thanks to the Pidgeonhole principle, there is a subsequence of length at least $k^2$ such that the values of $r'_j$ are either non-increasing or non-decreasing. Without loss of generality, assume they are non-decreasing and let $zi'_1,\dots,zi'_{k^2}$ be their corresponding zero-intervals.
+
+What if $P[r_2,c]=0$? TODO
+\end{proof}
+
+\begin{lemma}
+\label{lemma:unbound}
+Let $P=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ & &\bullet& }$. For every $n>1$ there is a maximal matrix $M$ avoiding $P$ as an interval minor having $n$ zero-intervals usable for $P[1,3]$.
+\end{lemma}
+\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
+$$\smm{	 & &\circ& &\bullet& & &\circ& &\bullet&\cdots&\bullet& & &\circ& &\bullet&\bullet&\bullet&\circ&\bullet\\
+		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet& &\bullet& &\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & & & & \\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & & & & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & & & & &\bullet&\bullet& &\bullet& &\cdots& & & & & & & \\
+		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & & & \\
+		\bullet&\bullet& &\bullet& &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & & & \\
+		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & & & \\
+		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & & & \\
+		 }$$
+We see that $\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries of $M$ which only leaves a zero-entry where we need to map $P[1,3]$ or $P[2,4]$.
+
+When we change any marked zero-entry of the first row into a one-entry we get a matrix containing a minor of $\{1\}^{3\times4}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
+\end{proof}
+
+\begin{lemma}
+\label{lemma:unbound2}
+Let $P=\smm{\bullet& & & & \\ &\bullet& &\bullet& \\ & &\bullet& & \\ & & & &\bullet}$ and $P'=\smm{\bullet& & & & \\ &\bullet& &\bullet& \\ & & & &\bullet\\ & &\bullet& & }$. For every $n>1$ there is a maximal matrix $M$ avoiding both $P$ and $P'$ as an interval minor having $n$ zero-intervals usable for $P[2,2]$ and $P'[2,2]$. Moreover, for every pattern containing $P$ or $P'$ as a submatrix, the one-entry that can be used to map $P[2,2]$ or $P'[2,2]$ is also row-unbounded.
+\end{lemma}
+\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
+$$\smm{	 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet& &\bullet&\bullet&\bullet\\
+		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
+		 & & & & & & & & & & & &\cdots& &\bullet& &\bullet&\bullet&\bullet& & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		 & & & & & &\bullet& &\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
+		\bullet& &\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
+		 &\circ& & & &\bullet& &\circ& & & &\bullet&\cdots&\bullet& &\circ& & & &\bullet& &\circ& & & \\
+		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
+		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
+		 }$$
+We see that $\PnimM$.
+
+When we change any marked zero-entry of the middle row into a one-entry we get a matrix containing $\{1\}^{4\times5}$; therefore, both containing $P$ and $P'$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
+
+TODO general argument for bigger patterns.
+\end{proof}
+
+\begin{lemma}
+\label{lemma:unbound3}
+Let $P=\smm{\bullet& & & \\ &\bullet&\bullet& \\ &\bullet& & \\ & & &\bullet}$ and $P'=\smm{\bullet& & & \\ &\bullet&\bullet& \\ & & &\bullet\\ &\bullet& & }$. For every $n>1$ there is a maximal matrix $M$ avoiding both $P$ and $P'$ as an interval minor having $n$ zero-intervals usable for $P[2,2]$ and $P'[2,2]$.
+\end{lemma}
+\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
+$$\smm{	 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& & & & & & &\bullet& &\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
+		 & & & & & & & & & &\cdots& &\bullet& &\bullet&\bullet& & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		 & & & & &\bullet& &\bullet&\bullet& &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
+		\bullet& &\bullet&\bullet& & & & & & &\cdots& & & & & \\
+		 &\circ& & &\bullet& &\circ& & &\bullet&\cdots&\bullet& &\circ& & &\bullet& &\circ& & \\
+		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
+		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
+		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
+		 }$$
+We see that $\PnimM$.
+
+When we change any marked zero-entry of the middle row into a one-entry we get a matrix containing $\{1\}^{4\times5}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
+\end{proof}
+
+\begin{thm}
+Let $P$ be a pattern. Any one-entry $P[r,c]$ is row-unbounded if (and only if) there is a trivially unbounded one-entry $P[r,c']$ and we cannot apply the fourth case of Lemma~\ref{lemma:H} nor Lemma~\ref{lemma:cross} to $P[r,c]$.
+\end{thm}
+\begin{proof}
+Without loss of generality, let $P[r,c']$ be part of mapping of $P_1$, where $P_1[1,2]$ is mapped to it. Let $P_1[2,1]$ be mapped to $P[r_2,c_2]$ and $P_1[3,3]$ be mapped to $P[r_3,c_3]$. We go through all potential one-entries $P[r,c]$ and show that either we can use one of the lemmata mentioned in the statement or the one-entry is row-unbounded.
+\begin{itemize}
+	\item $c<c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound2}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use $P[r,c],P[r',c']$ and $P[r_3,c_3]$ to again find either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded once again.
+	\item $c=c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first assume there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_3$, entries $P[r,c],P[r',c']$ and $P[r_3,c_3]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_3$, then what?
+	
+	Cannot just use lemma even if it was proved.
+	
+	TOOD
+	\item $c_2<c<c_3$: In this case $P[r,c]$ is trivially unbounded as together with $P[r_2,c_2]$ and $P[r_3,c_3]$ it forms $P_1$.
+	\item $c=c_3$: If there is no one-entry in $P[[r-1],[c+1,l]]$ nor $P[[r+1,k],[c+1,l]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c+1,l]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use the construction from Lemma~\ref{lemma:unbound} to show $P[r,c]$ is row-unbounded once again.
+	\item $c>c_3$: There are three cases to go through and we can handle them the same way as we did in case $c<c_2$.
+\end{itemize}
+\end{proof}
 
 \section{Chain rules}
 In this section, we study what happens when we combine multiple classes that are bounded or unbounded.

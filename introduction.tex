@@ -50,3 +50,81 @@ Together with Observation~\ref{obs1} this gives us the statement.
 Let $M\in\Mat$ and $P\in\Pat$, $\PimM\Leftrightarrow P^T\im M^T$.
 \end{obs}
 Because of this observation we will usually only show results only for rows or columns and expect both to hold and only show results for $P\in\Pat$ but assume the symmetrical results for $P^T$.
+
+\begin{defn}
+Let $\mathcal{F}$ be any class of forbidden matrices. We denote by $Av(\mathcal{F})$ the set of all matrices that avoid every $F\in\mathcal{F}$ as an interval minor.
+\end{defn}
+\begin{obs}
+For all patterns $P,P'$: $P\im P'\Leftrightarrow\Avm{P}\subseteq\Avm{P'}$.
+\end{obs}
+\begin{proof}
+Every $M\in\Avm{P}$ avoids $P$ and because $P\im P'$, it also avoids $P'$; therefore, it belongs to $\Avm{P'}$.
+
+If $P\nim P'$ then $P'\in\Avm{P}$. As $P'\not\in\Avm{P'}$ we have $\Avm{P}\not\subseteq\Avm{P'}$.
+\end{proof}
+
+\section{Extremal function}
+\begin{ntn}
+Let $M$ be a matrix. We denote $|M|$ the weight of $M$, the number of one-entries in $M$.
+\end{ntn}
+Usually $|M|$ stands for a determinant of matrix $M$. However, in this paper we do not work with determinants at all so the notation should not lead to misunderstanding.
+\begin{defn}
+For a matrix $P$ we define $Ex(P,m,n):=\max\{|M||M\in\Mat,\ \PnsmM\}$. We denote $Ex(P,n):=Ex(P,n,n)$.
+\end{defn}
+\begin{defn}
+For a matrix $P$ we define $Ex_{\preceq}(P,m,n):=max\{|M||M\in\Mat,\ \PnimM\}$. We denote $Ex_{\preceq}(P,n):=Ex_{\preceq}(P,n,n)$.
+\end{defn}
+\begin{obs}
+For all $P,m,n$; $Ex_{\preceq}(P,m,n)\leq Ex(P,m,n)$.
+\end{obs}
+\begin{obs}
+If $P\in\{0,1\}^{k\times l}$ has a one-entry at position $[a,b]$, then $$Ex(P,m,n)\geq\Big\{\begin{array}{ll}
+m\cdot n & k>m\vee l>m \\
+(k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
+\end{array}$$
+\end{obs}
+\begin{obs}
+The same holds for $Ex_{\preceq}(P,m,n).$
+\end{obs}
+\begin{defn}
+$P\in\{0,1\}^{k\times l}$ is \emph{(strongly) minimalist} if
+$$Ex(P,m,n)=\Big\{\begin{array}{ll}
+m\cdot n & k>m\vee l>m \\
+(k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
+\end{array}$$
+\end{defn}
+\begin{defn}
+$P\in\{0,1\}^{k\times l}$ is \emph{weakly minimalist} if
+$$Ex_{\preceq}(P,m,n)=\Big\{\begin{array}{ll}
+m\cdot n & k>m\vee l>m \\
+(k-1)n+(l-1)m-(k-1)(l-1) & \text{otherwise.}
+\end{array}$$
+\end{defn}
+\begin{obs}
+If $P$ is strongly minimalist, then $P$ is weakly minimalist.
+\end{obs}
+\subsection{Known results}
+\begin{fct}
+\begin{enumerate}
+\item $\smm{\bullet}$ is strongly minimalist.
+\item If $P\in\Pat$ is strongly minimalist and there is a one-entry in the last row in the $c$-th column, then $P'\in\{0,1\}^{k+1\times l}$, which is created from $P$ by adding a new row having a one-entry only in the $c$-th column, is strongly minimalist.
+\item If $P$ is strongly minimalist, then after changing a one-entry into a zero-entry it is still strongly minimalist.
+\end{enumerate}
+\end{fct}
+% TODO: cite properly Interval minors of complete bipartite graphs - Bojan Mohar, Arash Rafiey
+% Maybe mention that they were working with a different approach (ordered bigraphs) and also a different definition of an interval minor (allowing transposition) but it is not a problem for us and we show the proof in our notation.
+\begin{fct}[\cite{bigraphs}]
+Let $P=\{1\}^{2\times l}$, then $P$ is weakly minimalist.
+\end{fct}
+\begin{proof}
+Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{2\times l}$ as an interval minor and $A_i=\{j\in[n]|\text{weight of }M[[i],\{j\}]>0\wedge \text{weight of }M[[i+1,m],\{j\}>0]\}$. Clearly $|A_i|\leq l-1$, otherwise $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ appears in at least $b_j-1$ of sets $A_i$, $0\leq i\leq m-2$. It follows that
+$$\text{weight of }M=\sum\limits_{j=0}^nb_j=\sum\limits_{j=0}^n(b_j-1)+n\leq\sum\limits_{i=0}^{m-2}|A_i|+n\leq(l-1)(m-1)+n$$
+\end{proof}
+This result is indeed very important because it shows that there are matrices like $\smm{11\\11}$, which are weakly minimalist, although it is known they are not strongly minimalist.
+\begin{fct}[\cite{bigraphs}]
+Let $P=\{1\}^{3\times l}$, then $P$ is weakly minimalist.
+\end{fct}
+\begin{proof}
+Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{3\times l}$ as an interval minor and $A_i=\{j\in[n]|\text{ weight of }M[[i-1],\{j\}]>0\wedge \text{ weight of }M[[i+1,m],\{j\}>0\wedge M[i,j]\text{ one-entry}]\}$. Clearly $|A_i|\leq l-1$, otherwise $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ (for which $b_j\geq2$) appears in exactly $b_j-2$ of sets $A_i$, $1\leq i\leq m-1$. It follows that
+$$\text{weight of }M=\sum\limits_{j=0}^nb_j=\sum\limits_{j=0}^n(b_j-2)+2n\leq\sum\limits_{i=1}^{m-2}|A_i|+2n\leq(l-1)(m-2)+2n$$
+\end{proof}

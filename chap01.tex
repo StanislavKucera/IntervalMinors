@@ -26,7 +26,7 @@ For $M\in\Mat$ and $r\in[m],c\in[n]$ we say $M[r,c]$ is
 \end{defn}
 
 \begin{defn}
-For $M\in\Mat$ and $M'\in\{0,1\}^{m\times l}$ we define $M\rightarrow M'\in\{0,1\}^{m\times(n+l)}$ to be a matrix created by extending $M$ by adding columns of $M'$.
+For $M\in\Mat$ and $M'\in\{0,1\}^{m\times l}$ we define $M\hsum M'\in\{0,1\}^{m\times(n+l)}$ to be a matrix created by extending $M$ by adding columns of $M'$.
 \end{defn}
 
 \section{Empty rows and columns}
@@ -34,7 +34,7 @@ For $M\in\Mat$ and $M'\in\{0,1\}^{m\times l}$ we define $M\rightarrow M'\in\{0,1
 
 \begin{obs}
 \label{obs:emptyrows}
-For any $P\in\Pat$ let $P'=P\oplus_h0^{k\times1}$, and for any $M\in\Mat$ let $M'=M\oplus_h1^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
+For any $P\in\Pat$ let $P'=P\hsum 0^{k\times1}$, and for any $M\in\Mat$ let $M'=M\hsum 1^{m\times1}$, then $\PimM\Leftrightarrow P'\im M'$.
 \end{obs}
 \begin{proof}
 \begin{itemize}
@@ -49,7 +49,7 @@ The following theorem shows what happens when we add empty columns in between tw
 
 \begin{thm}
 \label{thm:emptymiddle}
-For all $M\in\Mat$ it holds $M\in Av(P^l)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-l)}$ such that $N\in Av(P)$ is inclusion maximal and $M$ is a submatrix of $N\oplus_h0^{m\times l}$ placed over $0^{m\times l}\oplus_hN$ with elementwise OR.
+For all $M\in\Mat$ it holds $M\in Av(P^l)\Leftrightarrow$ there exists $N\in\{0,1\}^{m\times(n-l)}$ such that $N\in Av(P)$ is inclusion maximal and $M$ is a submatrix of $N\hsum 0^{m\times l}$ placed over $0^{m\times l}\hsum N$ with elementwise OR.
 \end{thm}
 
 Open questions
@@ -146,7 +146,7 @@ For all matrices $M$: $P_4\nim M\Leftrightarrow$ for the top-left most reverse w
 \end{proof}
 
 \begin{thm}
-For all matrices $M$: $P_5\nim M\Leftrightarrow M=M_1\rightarrow M_2$ where $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$.
+For all matrices $M$: $P_5\nim M\Leftrightarrow M=M_1\hsum M_2$ where $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$.
 \end{thm}
 \begin{proof}
 \begin{itemize}
@@ -210,7 +210,7 @@ For bigger $M$ there is, from Lemma~\ref{lemma:p33}, $M[r,c]$ satisfying some co
 
 \begin{lemma}
 \label{lemma:p72}
-For all matrices $M$: $P_8\nim M\Rightarrow M=M_1\rightarrow M_2$ where
+For all matrices $M$: $P_8\nim M\Rightarrow M=M_1\hsum M_2$ where
 \begin{enumerate}
 \item $\smm{\bullet&\bullet\\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$ or
 \item $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{\bullet&\bullet\\\bullet& }\nim M_2$.
@@ -231,16 +231,17 @@ For all matrices $M$: $P_8\nim M\Leftrightarrow M$ is structured like the matrix
 \end{figure}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] From Lemma~\ref{lemma:p72} we know $M=M_1'\rightarrow M_2'$ where $\smm{\bullet&\bullet\\ &\bullet}\nim M_1'$ and $\smm{ &\bullet\\\bullet& }\nim M_2'$. The second case can be dealt with symmetrically. From Theorem~\ref{thm:p31} we have that $M_1'$ can be characterized exactly like $M[[m],[c_2-1]$ and $M[[m],[c_2,n]]$ forms a walking matrix. If there are two different columns having a one-entry above the $r$-th row, together with a one-entry in the $r$-th row between the columns $c_1$ and $c_2$ and a one-entry in the $c_1$-th column above the $r$-th row they form a mapping of $P_8$.
+	\item[$\Rightarrow$] From Lemma~\ref{lemma:p72} we know $M=M_1'\hsum M_2'$ where $\smm{\bullet&\bullet\\ &\bullet}\nim M_1'$ and $\smm{ &\bullet\\\bullet& }\nim M_2'$. The second case can be dealt with symmetrically. From Theorem~\ref{thm:p31} we have that $M_1'$ can be characterized exactly like $M[[m],[c_2-1]$ and $M[[m],[c_2,n]]$ forms a walking matrix. If there are two different columns having a one-entry above the $r$-th row, together with a one-entry in the $r$-th row between the columns $c_1$ and $c_2$ and a one-entry in the $c_1$-th column above the $r$-th row they form a mapping of $P_8$.
 	\item[$\Leftarrow$] One-entry $P_8[2,2]$ can not be mapped anywhere but to the $r$-th row, but in that case there are at most two columns having one-entries above it.
 \end{itemize}
 \end{proof}
 
 \section{Multiple patterns}
 
-\begin{thm}
+\begin{prop}
+\label{prop:twopatterns}
 Let $P_{10}=\smm{\circ&\circ&\bullet\\\bullet&\circ&\circ}$ and $P_{11}=\smm{\circ&\bullet\\\circ&\circ\\\bullet&\circ}$, then for all matrices $M$: $\{P_{10},P_{11}\}\nim M\Leftrightarrow$ for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$.
-\end{thm}
+\end{prop}
 \begin{proof}
 \begin{itemize}
 	\item[$\Rightarrow$] For contradiction assume there is a one-entry anywhere but on $w$ or directly diagonally above any bottom-left corner of $w$. Then this one-entry together with at least one bottom-left corner of $w$ give us $P_{10}$ or $P_{11}$ and a contradiction.

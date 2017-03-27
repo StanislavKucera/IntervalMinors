@@ -34,20 +34,19 @@
 %%% Macros for definitions, theorems, claims, examples, ... (requires amsthm package)
 
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}
+\newtheorem{thm}{Theorem}[chapter]
 \newtheorem{lemma}[thm]{Lemma}
-\newtheorem{claim}[thm]{Claim}
 \newtheorem{obs}[thm]{Observation}
 \newtheorem{fct}[thm]{Fact}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
 
 \theoremstyle{definition}
-\newtheorem{defn}{Definition}
-\newtheorem{ntn}{Notation}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ntn}[thm]{Notation}
 
 \theoremstyle{remark}
-\newtheorem*{rem}{Remark}
-\newtheorem*{example}{Example}
+\newtheorem{rem}[thm]{Remark}
 
 %%% An environment for proofs
 
@@ -64,40 +63,32 @@
 
 \DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small, frame=single}
 
-%%% The field of all real and natural numbers
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-
-%%% Useful operators for statistics and probability
-\DeclareMathOperator{\pr}{\textsf{P}}
-\DeclareMathOperator{\E}{\textsf{E}\,}
-\DeclareMathOperator{\var}{\textrm{var}}
-\DeclareMathOperator{\sd}{\textrm{sd}}
-
 %%% Transposition of a vector/matrix
 \newcommand{\T}[1]{#1^\top}
 
-%%% Various math goodies
-\newcommand{\goto}{\rightarrow}
-\newcommand{\gotop}{\stackrel{P}{\longrightarrow}}
-\newcommand{\maon}[1]{o(n^{#1})}
-\newcommand{\abs}[1]{\left|{#1}\right|}
-\newcommand{\dint}{\int_0^\tau\!\!\int_0^\tau}
-\newcommand{\isqr}[1]{\frac{1}{\sqrt{#1}}}
-
-%%% Various table goodies
-\newcommand{\pulrad}[1]{\raisebox{1.5ex}[0pt]{#1}}
-\newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
-
 %%% My macros
-\newcommand{\Mat}{\{0,1\}^{m\times n}}
-\newcommand{\Pat}{\{0,1\}^{k\times l}}
+\newcommand{\bin}{\{0,1\}}
+
+\newcommand{\Mat}{\bin^{m\times n}}
+\newcommand{\Pat}{\bin^{k\times l}}
+
 \newcommand{\smm}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
-\newcommand{\PimM}{P\preceq M}
-\newcommand{\PnimM}{P\not\preceq M}
-\newcommand{\PsmM}{P\leq M}
-\newcommand{\PnsmM}{P\not\leq M}
+
 \newcommand{\im}{\preceq}
 \newcommand{\nim}{\not\preceq}
-\newcommand{\sm}{\leq}
-\newcommand{\nsm}{\not\leq}
+\newcommand{\PimM}{P\im M}
+\newcommand{\PnimM}{P\nim M}
+\newcommand{\PsmM}{P\leq M}
+\newcommand{\PnsmM}{P\not\leq M}
+
+\newcommand{\Av}[1]{Av\left(#1\right)}
+\newcommand{\Avm}[1]{Av_{\im}\left(#1\right)}
+\newcommand{\Avmax}[1]{Av_{max}\left(#1\right)}
+
+\newcommand{\Cl}[1]{Cl\left(#1\right)}
+\newcommand{\class}[1]{\mathcal{#1}}
+\newcommand{\R}[1]{\mathcal{R}\left(#1\right)}
+
+\newcommand{\hsum}{\rightarrow}
+\newcommand{\dsum}{\nearrow}
+\newcommand{\odsum}{\searrow}

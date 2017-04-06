@@ -2,12 +2,14 @@
 When speaking about a class of matrices, unless stated otherwise, the class is always closed under interval minors. Also, all classes discussed are non-trivial. That means that there is at least one matrix of size $2$ by $1$ and at least one matrix of size $1$ by $2$ in each class. Moreover, at least one matrix is non-empty.
 
 \begin{obs}
-Let $\class{T}=Av(\class{F})$ for some $\class{F}$. Then $\class{T}$ is closed under interval minors.
+Let $\class{M}=Av(\class{P})$ for some $\class{P}$. Then $\class{M}$ is closed under interval minors.
 \end{obs}
 
 \begin{obs}
-Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\class{F}$ such that $\class{M}=\Avm{\class{F}}$.
+Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
 \end{obs}
+
+\section{Direct sum}
 
 \begin{defn}
 For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\dsum B\in\bin^{(m+k)\times(n+l)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define $D:=A\odsum B\in\bin^{(m+k)\times(n+l)}$ such that $D[[m],[n]]=A$, $D[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
@@ -22,148 +24,153 @@ If follows from Theorem~\ref{thm:p33} and $\Avm{\smm{\bullet&\bullet\\\bullet& }
 \end{proof}
 
 \begin{defn}
-For a class of matrices $\class{M}$, let $\Cl{\class{M}}$ denote a set containing each $M\in\class{M}$ closed under direct sum and minors.
+For a set of matrices $\class{M}$, let $\Cl{\class{M}}$ denote a class containing each $M\in\class{M}$ closed under direct sum and interval minors.
 \end{defn}
 
 \begin{obs}
-For every $\class{P}$, any $M\in\Cl{\class{P}}$ is an interval minor direct sum of multiple copies of $P$.
+For every $\class{P}$, each $M\in\Cl{\class{P}}$ is an interval minor of the direct sum of multiple copies of $P$.
 \end{obs}
 
-%\begin{defn}
-%Let $M\in\Mat$ be a matrix. We call an element $M[r,c]$ an \emph{articulation} of $M$ if both $M[[r-1],[c-1]]$ and $M[[r+1,m],[c+1,n]]$ are empty.
-%\end{defn}
-\begin{defn}
-Let $M\in\Mat$ be a matrix. We call a pair $(r,c)$ an \emph{articulation} of $M$ if both $M[[r],[c]]$ and $M[[r+1,m],[c+1,n]]$ are empty. For two articulations $(r_1,c_1)<(r_2,c_2)$ the matrix between them is $M[[r_2-1,r_1],[c_1+1,c_2]]$.
-\end{defn}
-
-\begin{lemma}
-\label{lemma:artic}
-Let $P\in\Pat$, then for all $M\in\Mat$ it holds $M\in\Cl{P}\Leftrightarrow$ there exists a sequence of articulations of $M$ such that each matrix in between two consecutive articulations of $M$ is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$.
-\end{lemma}
-\begin{proof}
-\begin{itemize}
-	\item[$\Rightarrow$] If we look at the direct sum of multiple copies of $P$ and consider each articulation between two consecutive copies of $P$ together with pairs $(m,0),(0,n)$ ordered by the second coordinate, then between each pair we have exactly matrix $P$ and so the statement holds. If we take an interval minor and still consider the original articulations (multiple can become one) it holds that the matrix between two consecutive articulations only contain at most one original copy of $P$, but it may happen that the bottom-left and top-right corners become one-entries even though they were zero-entries before. The matrix does not have to be an interval minor of $P$, but it is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$.
-	\item[$\Leftarrow$] We can simply blow up each matrix $M'$ between two consecutive articulation into a direct sum of three copies of $P$, because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$.
-\end{itemize}
-\end{proof}
-
-\begin{thm}
-For all $P\in\Pat$ there exists $\class{F}$ finite such that $\Cl{P}=\Avm{\class{F}}$.
-\end{thm}
-\begin{proof}
-Using Lemma~\ref{lemma:artic}. Really, how? 
-
-TODO
-\end{proof}
-
-\begin{thm}
+\begin{prop}
 $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
-\end{thm}
+\end{prop}
 \begin{proof}
 The direct sum of an arbitrary number of copies of $\smm{\bullet&\circ\\\circ&\bullet}$ avoids both forbidden patterns and because the relation of being an interval minor is transitive, we have $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}\subseteq\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
 
-From Proposition~\ref{prop:twopatterns} we have that every $M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$ it holds that for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the direct sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the direct sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and potential one-entries outside of it and so we also have the second inclusion.
+From Proposition~\ref{prop:twopatterns}, we have that every $M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$ it holds that for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the direct sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the direct sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and potential one-entries outside of it and so we also have the second inclusion.
 \end{proof}
 
-\begin{thm}
+\begin{prop}
 $\Cl{\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\bullet&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\circ&\bullet\\\circ&\bullet}}$.
-\end{thm}
-
-We generalize the direct sum to allow the matrices to overlap.
+\end{prop}
 
 \begin{defn}
-For matrices $A\in\Mat,B\in\Pat$ and integers $a,b$ we define their \emph{direct sum with $a\times b$ overlap} as a matrix $C:=A\dsum_{a\times b}B\in\bin^{(m+k-a)\times(n+l-b)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. At the part that overlaps we take a bitwise OR of both entries. Symmetrically, we define $D:=A\odsum_{a\times b}B\in\bin^{(m+k-a)\times(n+l-b)}$ such that $D[[m],[n]]=A$, $D[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
+For matrices $A\in\Mat,B\in\Pat$ and integers $a,b$, we define the \emph{direct sum with $a\times b$ overlap} of $A$ and $B$ as a matrix $C:=A\dsum_{a\times b}B\in\bin^{(m+k-a)\times(n+l-b)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. At the part that overlaps, we take a elementwise OR of both entries.
 \end{defn}
 
 \begin{thm}
-Let $\class{M}$ be any class of matrices such that
+Let $\class{M}$ be any set of matrices, not necessarily closed under interval minors, such that
 \begin{itemize}
-\item $\class{M}$ is closed under deleting of one-entries and
+\item $\class{M}$ is closed under deletion of one-entries and
 \item $\class{M}$ is closed under the direct sum with $a\times b$ overlap and
-\item there is any $M\in\Mat$ in $\class{M}$
+\item there is a $m\times n$ matrix $M\in\class{M}$,
 \end{itemize}
-then $\class{M}$ is also closed under direct sum with $(m-2a)\times(n-2b)$ overlap.
+then $\class{M}$ is also closed under the direct sum with $(m-2a)\times(n-2b)$ overlap.
 \end{thm}
 \begin{proof}
-Choose any two $A,B\in\class{M}$ and $M\in\class{M}$ such that $M\in\Mat$. Let $D=A\dsum_{a\times b}M\dsum_{a\times b}B$. It has the same size as $E=A\dsum_{(m-2a)\times(n-2b)}B$, whos set of one-entries is a subset of one-entries of $D\in\class{M}$; therefore $E\in\class{M}$.
-\end{proof}
-
-\begin{thm}
-\label{thm:hered}
-Let $\class{M}$ be any class of matrices. For all integers $a,b,m,n$, if $\class{M}$ is closed under the direct sum with $m\times n$ overlap then it is also closed under the direct sum with $(m+a)\times(n+b)$ overlap.
-\end{thm}
-\begin{proof}
-For contradiction, assume there are $A,B\in\class{M}$ such that $A\dsum_{(m+a)\times(n+b)}B\not\in\class{C}$.
-
-TODO
+Given arbitrary $A,B\in\class{M}$ and $M\in\class{M}$ such that $M\in\Mat$. Let $C=A\dsum_{a\times b}M\dsum_{a\times b}B$. It has the same size as $D=A\dsum_{(m-2a)\times(n-2b)}B$, whose set of one-entries is a subset of one-entries of $C\in\class{M}$; therefore $D\in\class{M}$.
 \end{proof}
 
 \begin{obs}
-There is a $\class{M}$ closed under submatrices but not interval minors such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
+\label{obs:0to1}
+Every class of matrices closed under the direct sum is also closed under the direct sum with $1\times1$ overlap.
+\end{obs}
+
+NOTE: originally this was here to show that while for classes closed under minors a bigger overlap always works (now this is disproved in the following observation) so the question is whether there is any point in having this here anymore.
+\begin{obs}
+There is a set of matrices $\class{M}$ closed under submatrices but not interval minors such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
 \end{obs}
 \begin{proof}
-Let $\class{M}$ be a class of all matrices obtained by applying the direct sum to $\smm{\bullet& \\\ &\bullet}$. Clearly, it is closed under the direct sum. On the other hand, $\smm{\bullet& \\\ &\bullet}\dsum_{1\times1}\smm{\bullet& \\\ &\bullet}=\smm{ &\bullet& \\\bullet& &\bullet\\ &\bullet& }\not\in\class{C}$.
+Let $\class{M}$ be a class of matrices obtained by applying the direct sum to $\smm{\bullet& \\\ &\bullet}$. Clearly, it is closed under the direct sum. On the other hand, it is not closed under the direct sum with $1\times1$ overlap, as $\smm{\bullet& \\\ &\bullet}\dsum_{1\times1}\smm{\bullet& \\\ &\bullet}=\smm{ &\bullet& \\\bullet& &\bullet\\ &\bullet& }\not\in\class{C}$.
 \end{proof}
 
-We state the following characterization only for the direct sum with $1\times1$ overlap but, thanks to Theorem~\ref{thm:hered}, it also holds for any other size of the overlap.
-
-\begin{thm}
-Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=M_1\dsum_{1\times1}M_2\Leftrightarrow\Avm{M}$ is not closed under the direct sum with $1\times1$ overlap.
-\end{thm}
+\begin{obs}
+There is a class of matrices $\class{M}$ such that it is closed under the direct sum with $1\times1$ overlap but it is not closed under the direct sum with $2\times2$ overlap.
+\end{obs}
 \begin{proof}
-\begin{itemize}
-	\item[$\Rightarrow$] TODO
-	\item[$\Leftarrow$] TODO
-\end{itemize}
+Let $\class{M}$ consist of all matrices such that all one-entries are contained on a single reverse walk (a sequence of entries from the top-right corner to the bottom-left corner). Clearly, $\class{M}$ is hereditary and closed under the direct sum with $1\times1$ overlap.
+On the other hand, $\class{M}$ is not closed under the direct sum with $2\times2$ overlap. While $\smm{\bullet&\bullet\\\bullet& },\smm{ &\bullet\\\bullet&\bullet}\in\class{M}$, it holds $\smm{\bullet&\bullet\\\bullet& }\dsum_{2\times2}\smm{ &\bullet\\\bullet&\bullet}=\smm{\bullet&\bullet\\\bullet&\bullet}\not\in\class{M}$.
 \end{proof}
+
+\section{Articulations}
+
+\begin{defn}
+Let $M\in\Mat$ be a matrix. An element $M[r,c]$ is an \emph{articulation} if both $M[[r-1],[c-1]]$ and $M[[r+1,m],[c+1,n]]$ are empty. We say that an articulation $M[r,c]$ is \emph{trivial} if $(r,c)\in\{(m,1),(1,n)\}$.
+\end{defn}
+
+\begin{obs}
+\label{obs:keep}
+Let $P\in\Pat$ be a matrix. If there are integers $r,c$ such that $P[r,c]$ is an articulation, then for every $P'$ such that $P'\im P$, if we let $P'[r',c']$ be an element created from $P[r,c]$, $P'[r',c']$ is an articulation.
+
+TODO state it better - what if row~$r$ is deleted? What does "created from" mean?
+\end{obs}
 
 \begin{obs}
 \label{obs:art}
-Let $M$ be a matrix. There are $M_1,M_2$ proper submatrices of $M$ such that $M=M_1\dsum_{1\times1}M_2\Leftrightarrow$ there exist integers $r,c$ such that either
-\begin{enumerate}
-	\item $M[r,c]$ is a one-entry and $(r,c)\in\{(1,1),(m,n)\}$ or
-	\item $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$.
-\end{enumerate}
+Let $P\in\Pat$ be a matrix. There are $P_1,P_2$ non-empty interval minors of $P$ such that $P=P_1\dsum_{1\times1}P_2\Leftrightarrow$ there exist integers $r,c$ such that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty.
 \end{obs}
 
+\begin{obs}
+\label{obs:rel}
+Let $\class{P}$ be a set of matrices. There is a minimal (with respect to minors) $P\in\class{P}$ there are $P_1,P_2$ non-empty interval minors of $P$ such that $P=P_1\dsum_{1\times1}P_2\Leftrightarrow\Avm{P}$ is not closed under the direct sum with $1\times1$ overlap.
+\end{obs}
+\begin{proof}
+\begin{itemize}
+	\item[$\Rightarrow$] While $P\nim P_1$ and $P\nim P_2$, we have $P\im P_1\dsum_{1\times1}P_2$.
+	\item[$\Leftarrow$] Consider Observation~\ref{obs:art} and assume there are no such $r,c$ that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty. Let $M_1,M_2\in\Avm{P}$ be arbitrary matrices and let $M=M_1\dsum_{1\times1}M_2$. Matrix $M$ contains an articulation and from Observation~\ref{obs:keep} follows $M\in\Avm{P}$. This holds for each minimal $P\in\class{P}$; thus $M\in\Avm{\class{P}}$.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+\label{lemma:artic}
+Let $\class{P}$ be a set of matrices, then for all $M\in\Mat$ it holds that $M\in\Cl{\class{P}}\Leftrightarrow$ there exists a sequence of articulations of $M$ such that for each matrix~$M'$ in between two consecutive articulations of $M$ exists $P\in\class{P}$ such that $M'\im\smm{1}\dsum P\dsum\smm{1}$.
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+	\item[$\Rightarrow$] Let us look at the direct sum of multiple copies of elements of $\class{P}$ and consider one articulation (out of all four) between each pair of consecutive copies of matrices from $P$, together with articulations $M[m,1],M[1,n]$. Between each pair of consecutive articulations, we have a matrix from $\class{P}$ and so the statement holds. When we consider an arbitrary interval minor and keep original articulations, each matrix between two consecutive articulations only contains at most one original copy of an element of $\class{P}$, but it may happen that the bottom-left and top-right corners become one-entries even though they were zero-entries before. The matrix does not have to be an interval minor of $P$, but it is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$ for some $P\in\class{P}$.
+	\item[$\Leftarrow$] We can simply blow up each matrix $M'$ between two consecutive articulation into a direct sum of three copies of  the corresponding matrix $P$, because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$.
+\end{itemize}
+\end{proof}
+
+\begin{thm}
+For all $M\in\Mat$ there exists a finite set of matrices $\class{P}$ such that $\Cl{M}=\Avm{\class{P}}$.
+\end{thm}
+\begin{proof}
+Let $\class{F}$ be the set of all minimal (with respect to interval minors) matrices such that $\Cl{M}=\Avm{\class{F}}$. We need to prove that $F$ is finite. Thanks to Observation~\ref{obs:0to1}, $\Avm{\class{F}}$ is closed under the direct sum with $1\times1$ overlap and from Observation~\ref{obs:rel} follows that for no $F\in\class{F}$ there are its non-empty interval minors $F_1,F_2$ such that $F=F_1\dsum{1\times1}F_2$.
+
+We denote by $\class{P}$ a set of matrices from $\class{F}$ such that they have at most $2m+4$ rows and $2n+4$ columns. Such a set is finite and we immediately see that $\Cl{M}\subseteq\Avm{\class{P}}$. For contradiction with the other inclusion, let us consider the minimum $X\in\Avm{\class{P}}-\Cl{M}$.
+
+There are no $X_1,X_2$ non-empty interval minors of $X$ such that $X=X_1\dsum{1\times1}X_2$; otherwise, as $X_1,X_2\in\Avm{\class{P}}$ and $X$ is the minimum matrix such that $X\not\in\Cl{M}$, we would have $X_1,X_2\in\Cl{M}$; therefore, $X\in\class{M}$ and a contradiction.
+
+Without loss of generality, we assume $X\in\Pat$ has at least $2m+5$ rows. Let $X'$ denote a matrix created from $X$ by deletion of the first row. We have $X'\in\Avm{\class{P}}$ and from minimality of $X$ also $X'\in\Cl{M}$. From Lemma~\ref{lemma:artic}, there is a sequence of articulations of $X'$ such that it is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$. Let $X'[r,c]$ be the first articulation from the sequence for which $c>1$. Together with the previous articulation in the sequence, they form a matrix that is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$, which also means that $c<n+3$. Since $X[r,c]$ is not an articulation, it must hold that $X[1,c_1]=1$ for some $c_1<c<n+3$. Symmetrically, let $X''$ denote a matrix created from $X$ by deletion of the last row. Following the same steps as we did before, we get the last articulation $X''[r,c]$ such that $c<l$ and the observation that $c>l-n-2$. Since $X[r,c]$ is not an articulation, it must hold that $X[k,c_2]=1$ for some $c_2>c>l-n-2$.
+
+We showed that $Y\in\bin^{(m+1)\times2}$ such that the only one-entries are $Y[1,1]$ and $Y[m+1,2]$ is an interval minor of $X$. To reach a contradiction, it suffices to show that there is a $P\in\class{P}$ such that $P\im Y$. For contradiction, let $Y\in\Avm{\class{P}}$ and since $Y\im X$ and $X$ is minimum such that $X\not\in\Cl{M}$ it holds $Y\in\Cl{M}$. But this cannot be, because $Y$ contains no non-trivial articulation and from Observation~\ref{obs:keep}, we know that every $Z\in\Cl{M}$ that is bigger than $m\times n$ contains at least one.
+\end{proof}
+
+\section{Basis}
+
 \begin{defn}
-Let $P$ be a matrix. We denote $\R{P}$ to be a set of all minimal (relating to minors) matrices $P'$ such that $P\im P'$ and $P'$ is not the direct sum with $1\times1$ overlap of proper submatrices of $P'$. For a class of matrices $\class{P}$ let $\R{\class{P}}$ denote a set of all minimal (relating to minors) matrices from the set $\bigcup_{P\in\class{P}}\R{P}$.
+Let $P$ be a matrix. Let $\R{P}$ denote a set of all minimal (with respect to minors) matrices $P'$ such that $P\im P'$ and $P'$ is not the direct sum with $1\times1$ overlap of non-empty interval minors of $P'$. For a set of matrices $\class{P}$, let $\R{\class{P}}$ denote a set of all minimal (with respect to minors) matrices from the set $\bigcup_{P\in\class{P}}\R{P}$.
 \end{defn}
 
 \begin{thm}
 \label{thm:basis}
-Let $\class{M}$ and $\class{P}$ be classes of matrices such that $\class{M}=\Avm{\class{P}}$, then $\Cl{\class{M}}=\Avm{\R{\class{P}}}$.
+Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\class{P}}$, then $\Cl{\class{M}}=\Avm{\R{\class{P}}}$.
 \end{thm}
 \begin{proof}
-TODO: Need to change the proof a bit probably after changing the statement
 \begin{itemize}
-	\item[$\subseteq$] Instead of proving $M\in Cl(\mathcal{T})\Rightarrow M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ we show $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))\Rightarrow M\not\in Cl(\mathcal{T})$. Assume $M\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. It follow from the definition that $M\in\bigcup_{F\in\mathcal{F}}\mathcal{R}(F)$, in particular, $M\in\mathcal{R}(F)$ for some $f\in\mathcal{F}$. Because of the definition of $\mathcal{R}(F)$, $M$ is not a direct sum with $1\times1$ overlap of proper submatrices of $M$ which means, according to Observation~\ref{obs:art}, there are no non-trivial articulations and both top-right and bottom-left corners are empty. For contradiction, assume $M\in Cl(\mathcal{T})$, then, according to a generalization of Lemma~\ref{lemma:artic}, there exists a sequence of articulations of $M$ such that each matrix in between two consecutive articulations of $M$ is a minor of $\smm{1}\dsum T\dsum\smm{1}$ for some $T\in\mathcal{T}$. Since $M$ has only trivial articulations and they are both empty, it holds $M\im T$ and because of the choice of $M$ is also holds $M\im F$ for some $F\in\mathcal{F}$ which together give us a contradiction with $\mathcal{T}=Av(\mathcal{F})$.
-	\item[$\supseteq$] First of all, $Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ is closed under the direct sum with $1\times1$ overlap. For contradiction, assume there are $M_1,M_2\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ but $M=M_1\dsum_{1}M_2\not\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$. Then there exists $F'\in\mathcal{R}(F)$ for some $F\in\mathcal{F}$ such that $F'\im M$. Because $F'$ is not a direct sum with $1\times1$ overlap of proper submatrices of $F'$, it follows that either $F'\im M_1$ or $F'\im M_2$ and since $F\im F'$ we have a contradiction.
+	\item[$\subseteq$] Assume $M\not\in\Avm{\R{\class{P}}}$ and without loss of generality, because $\Cl{\class{M}}$ is hereditary, let $M$ be minimal (with respect to minors). It follows that $M\in\R{\class{P}}$. As such, matrix $M$ is not a direct sum with $1\times1$ overlap of non-empty interval minors of $M$; therefore, according to Observation~\ref{obs:art}, there is no articulations $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty. For contradiction, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, $M$ is a minor of $\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations (top-right and bottom-left corners) contain zero-entries, it even holds $M\im M'$. We also have $M\im P$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
+	\item[$\supseteq$] First of all, $\Avm{\R{\class{P}}}$ is closed under the direct sum with $1\times1$ overlap. For contradiction, assume there are $M_1,M_2\in\Avm{\R{\class{P}}}$ but $M=M_1\dsum_{1\times1}M_2\not\in\Avm{\R{\class{P}}}$. Then there exists $P\in\R{\class{P}}$ such that $P\im M$. Because $P$ is not a direct sum with $1\times1$ overlap of non-empty interval minors of $P$, it follows that either $P\im M_1$ or $P\im M_2$ and we have a contradiction.
 
-Now that we know that both sides are closed under the direct sum with $1\times1$ overlap it sufficient to show that the inclusion holds for any $M\in Av(\bigcup_{F\in\mathcal{F}}\mathcal{R}(F))$ that is not a direct sum with $1\times1$ overlap of proper submatrices of $M$. Such $M$ does not contain (again from Observation~\ref{obs:art}) any non-trivial articulation and those trivial ones are empty. Because of that it holds $F\nim M$ for every $F\in\mathcal{F}$; otherwise either $M\in\mathcal{R}(F)$ or its minor would be there. Therefore $M\in\mathcal{T}$ and also $M\in Cl(\mathcal{T})$.
+It suffices to show that the inclusion holds for any $M\in\Avm{\R{\class{P}}}$ that is not a direct sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
 \end{itemize}
 \end{proof}
 
 \begin{defn}
-Let $\class{M}$ be a class of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (relating to minors) matrices that do not belong to $\class{M}$.
+Let $\class{M}$ be a set of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices that do not belong to $\class{M}$.
 \end{defn}
 
 \begin{cor}
-Let $\class{M}$ and $\class{P}$ be classes of matrices such that $\class{M}=\Avm{\class{P}}$, then $\R{\class{P}}$ is the basis of $\Cl{\class{T}}$.
+Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\class{P}}$, then $\R{\class{P}}$ is the basis of $\Cl{\class{M}}$.
 \end{cor}
-\begin{proof}
-The proof follows directly from Theorem~\ref{thm:basis}.
-\end{proof}
 
-A natural question then is whether the closure under direct sum of a class with finite basis has final basis. We prove that this is not the case.
+A natural question is whether the closure under the direct sum of a class with finite basis has final basis. We prove that this is not the case.
 
 \begin{defn}
 Let $Nucleus_1=\smm{\bullet}$ and for $n>1$ let $Nucleus_n\in\bin^{n\times n+1}$ be a matrix described by the examples:
 \begin{center}
-$Nucleus_2=\smm{\bullet&\bullet& \\ &\bullet&\bullet},\ 
-Nucleus_3=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ &\bullet&\bullet& },\ 
-Nucleus_4=\smm{ & &\bullet&\bullet& \\ &\bullet& & &\bullet\\\bullet& & &\bullet& \\ &\bullet&\bullet& & },$\\
-$Nucleus_5=\smm{ & & &\bullet&\bullet& \\ & &\bullet& & &\bullet\\ &\bullet& & &\bullet& \\\bullet& & &\bullet& & \\ &\bullet&\bullet& & & },\ 
+$Nucleus_2=\smm{\bullet&\bullet& \\ &\bullet&\bullet}\ \ 
+Nucleus_3=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ &\bullet&\bullet& }\ \ 
 Nucleus_n=\smm{ & & & & & &\bullet&\bullet& \\ & & & & &\bullet& & &\bullet\\ & & & &\bullet& & &\bullet& \\ & & &\dots& & &\bullet& & \\ & &\bullet& & &\dots& & & \\ &\bullet& & &\bullet& & & & \\\bullet& & &\bullet& & & & & \\ &\bullet&\bullet& & & & & & \\}$.
 \end{center}
 \end{defn}
@@ -196,14 +203,12 @@ $Candy_{4,4,4}=\smm{
 There exists a matrix $P$ such that $\R{P}$ is infinite.
 \end{thm}
 \begin{proof}
-Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is minimal.
-
-TODO: there is no articulation in $Candy_{4,n,4}$ and every interval minor of it contains at least one articulation
+Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is a minimal matrix (with respect to minors) that is not the direct sum of two proper submatrices. According to Observation~\ref{obs:art}, the second condition holds as $Candy_{4,n,4}$ contains no non-trivial articulation. To show it is minimal such matrix, we need to consider any interval minor $M$ and argue that either $P\nim M$ or $M$ contains an articulation. Observation~\ref{obs:keep} allows us to only consider one minoring operation at a time. It is easy to see that when a one-entry is changed to a zero-entry, then the matrix does not belong to $\R{P}$ anymore. Consider that rows $r_1,r_2,\dots,r_k$ are chosen to become one. If $r_1<4$ or $r_k>n+3$ then $P$ is no longer an interval minor of such matrix. Otherwise, the original $Candy_{4,n,4}[r_1,n-r_1+2]$ becomes an articulation. Symmetrically, the same holds for columns and we are done.
 \end{proof}
 
 \begin{cor}
 There exists a class of matrices $\class{M}$ having a finite basis such that $\Cl{\class{M}}$ has an infinite basis.
 \end{cor}
 \begin{proof}
-From Theorem~\ref{thm:inf} we have a matrix $P$ for which $\R{P}$ is infinite. Let $\class{M}=\Avm{P}$. Class $\class{M}$ has a finite basis (equal to $P$). On the other hand, from Theorem~\ref{thm:basis} we have $\Cl{\class{M}}=\Avm{\R{P}}$ and $\R{P}$ is infinite.
+From Theorem~\ref{thm:inf}, we have a matrix $P$ for which $\R{P}$ is infinite. Class $\class{M}=\Avm{P}$ has a finite basis. On the other hand, from Theorem~\ref{thm:basis} we have $\Cl{\class{M}}=\Avm{\R{P}}$ and $\R{P}$ is infinite.
 \end{proof}

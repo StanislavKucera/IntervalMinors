@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20170219162531" modified="D:20170228103509"/>
+<info created="D:20170219162531" modified="D:20170408194012"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -356,8 +356,8 @@ h
 32 736 m
 52 712 l
 </path>
-<text matrix="1 0 0 1 32 -8" transformations="translations" pos="40 804" stroke="black" type="label" width="12.723" height="6.812" depth="1.49" valign="baseline">$M_l$</text>
-<text matrix="1 0 0 1 32 -8" transformations="translations" pos="40 732" stroke="black" type="label" width="14.077" height="6.812" depth="1.49" valign="baseline">$M_r$</text>
+<text matrix="1 0 0 1 32 -8" transformations="translations" pos="40 804" stroke="black" type="label" width="11.805" height="4.294" depth="1.49" valign="baseline">$m_l$</text>
+<text matrix="1 0 0 1 32 -8" transformations="translations" pos="40 732" stroke="black" type="label" width="13.159" height="4.294" depth="1.49" valign="baseline">$m_r$</text>
 <path matrix="5 0 0 1.04348 -80 -44" stroke="darkgray">
 20 832 m
 20 736 l
@@ -464,8 +464,8 @@ h
 32 736 m
 52 712 l
 </path>
-<text matrix="1 0 0 1 244 -8" transformations="translations" pos="40 804" stroke="black" type="label" width="12.723" height="6.812" depth="1.49" valign="baseline">$M_l$</text>
-<text matrix="1 0 0 1 244 -8" transformations="translations" pos="40 732" stroke="black" type="label" width="14.077" height="6.812" depth="1.49" valign="baseline">$M_r$</text>
+<text matrix="1 0 0 1 244 -8" transformations="translations" pos="40 804" stroke="black" type="label" width="11.805" height="4.294" depth="1.49" valign="baseline">$m_l$</text>
+<text matrix="1 0 0 1 244 -8" transformations="translations" pos="40 732" stroke="black" type="label" width="13.159" height="4.294" depth="1.49" valign="baseline">$m_r$</text>
 <path matrix="5 0 0 1 132 -12" stroke="darkgray">
 20 832 m
 20 736 l

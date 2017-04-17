@@ -200,7 +200,7 @@ It is important to realize we could not have used the same proof we used for the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Lemma I
 \begin{lemma}
 \label{lemma:I}
-Let $P\in\Pat$ be a pattern structured like one of the matrices in Figure~\ref{fig:lemmaI}. Then every one-entry in $P[[r_1+1,r_2-1],\{c\}]$ is row-bounded.
+Let $P\in\Pat$ be a pattern structured like one of the matrices in Figure~\ref{fig:lemmaI}. Then every one-entry in $P[[r_1+1,r_2-1],\{c\}]$ is row-bounded. Moreover, in the first two cases, if $c=l-1$ and there are no one-entries in $P[[r_1-1],\{c\}]$ and $P[[r_2+1,k],\{c\}]$, then also one-entries $P[r_1,c]$ and $P[r_2,c]$ are row-bounded.
 
 \begin{figure}[!ht]
 \centering
@@ -218,8 +218,11 @@ Let $P$ be the first described pattern. We show that for each one-entry from $P[
 \caption{}
 \label{fig:lemmaI1}
 \end{figure}
-
 Proofs of cases two and three are similar to the first one and we skip them.
+
+From now on, consider there are no one-entries in $P[[r_1-1],\{c\}]$ and $P[[r_2+1,k],\{c\}]$. Let $P$ be the second described pattern and let $c=l-1$. One-entry in $P[r_1,c]$ is row-bounded thanks to the fourth case of Lemma~\ref{lemma:H}. Without loss of generality assume $P[r_1,l]=1$, as otherwise, the pattern avoids $\smm{ &\bullet\\\bullet& }$ and in Lemma~\ref{lemma:walkpat} we will show that each one-entry is then row-bounded. Without loss of generality, when a zero-entry of a zero-interval is changed to a one-entry that is used to map $P[r_2,c]$, the row~$r_2$ is mapped to just one row because we can always use the one-entry bounding the corresponding interval to map $P[r_2,l]$ (if we do not consider the only potential zero-interval that is bounded by the edge of matrix). If $z_1<z_2$ are two zero-intervals usable for $P[r_2,c]$ then in each mapping created by changing a zero-entry of $z_1$ to a one-entry used to map $P[r_2,c]$, one-entry $P[r_1,l]$ is mapped to a column smaller than the first column of $z_2$. Otherwise, we could combine the mapping with a one-entry in between $z_1$ and $z_2$ and a mapping created when a zero-entry of $z_2$ is changed to a one-entry to find a mapping of $P$. Assume, there are $l$ zero-intervals usable for $P[r_2,c]$ and for each consider a one-entry used to map $P[r_1,l]$ in the corresponding mapping created when a zero-entry is changed to a one-entry. If there is a non-decreasing pair of them, the corresponding mappings can be combined to find a mapping of $P$. Otherwise, the one-entries form a decreasing sequence of length $l$ and if we consider the last used zero-interval and its mapping, we can use the decreasing sequence of one-entries to map all one-entries from row~$r_1$ and we can still take a one-entry bounding the zero-interval from left and use it to map $P[r_2,c]$. This proves there are at most $l+1$ zero-intervals usable for $P[r_2,c]$.
+
+The proof that $P[r_1,c]$ and $P[r_2,c]$ are row-bounded in the same setting when $P$ is described by the first picture is analogous.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% First non-empty column bounded
@@ -254,65 +257,29 @@ Let us prove that each pattern having one-entries in three rows is bounded. Patt
 	\caption{Structure of a pattern only having three non-empty rows and avoiding all rotations of $P_1$.}
 	\label{fig:threelines}
 \end{figure}
-
-Before we start going through cases, it is easy to see that from the fourth case of Lemma~\ref{lemma:H}, all one-entries in $a,b,A,C$ and $\gamma$ are row-bounded. Similarly, from Lemma~\ref{lemma:First}, we have that one-entries in $a,c,d,A,C$ and $\gamma$ are column-bounded.
-\begin{itemize}
-	\item $\gamma$ contains a one-entry $\Rightarrow f=0\Rightarrow$ because $\smm{\bullet& \\ &\bullet}$ needs to be there it holds $a=1\Rightarrow\alpha=0$
-		\begin{itemize}
-			\item $d=1\Rightarrow b=0,\ \beta=0,\ e=0$:\\
-				Lemma~\ref{lemma:H} (case 4): $c$ is row-bounded.\\
-				Lemma~\ref{lemma:I} (case 1): $B$ is row-bounded.\\				
-				\textbf{TODO} what about $d$?\\
-				
-				Lemma~\ref{lemma:H} (case 1): $B$ is column-bounded.
+\begin{enumerate}
+	\item $\gamma$ contains a one-entry $\Rightarrow f=0\Rightarrow$ because $\smm{\bullet& \\ &\bullet}\im P$, it holds $a=1\Rightarrow\alpha=0$
+		\begin{enumerate}
+			\item $d=1\Rightarrow b=0,\ \beta=0,\ e=0$
 			\item $d=0$
-				\begin{itemize}
-					\item $c=1\Rightarrow\beta=0,\ e=0$:\\
-						Lemma~\ref{lemma:H} (case 4): $c$ is row-bounded.\\
-						Lemma~\ref{lemma:H} (case 1): $B$ is row-bounded.\\
-						
-						Lemma~\ref{lemma:H} (case 2): $b,B$ are column-bounded.
-					\item $c=0$:\\
-						Lemma~\ref{lemma:H} (case 1): one-entries in $b,e,B$ and $\beta$ are row-bounded.\\
-						
-						Lemma~\ref{lemma:I} (case 2): one-entries in $B$ and $\beta$ are column-bounded.\\
-						\textbf{TODO} what about $b,e$?
-				\end{itemize}
-		\end{itemize}
-	\item $\gamma=0$: one-entries in $e$ and $f$ are row-bounded from Lemma~\ref{lemma:First}.
-		\begin{itemize}
-			\item $\alpha$ contains a one-entry $\Rightarrow a=0,\ b=0$:\\
-				The pattern is rotation symmetric around $\beta$ and we have already gone through all cases.
-			\item $\alpha=0$:\\
-				Without loss of generality, we assume that $a=1$, because there needs to be $\smm{\bullet& \\ &\bullet}$ and if we set $a=0$, it must hold $f=1$ and then we can just rotate the pattern by 180 degrees and get the case $a=1$.
-				\begin{itemize}
+				\begin{enumerate}
+					\item $c=1\Rightarrow\beta=0,\ e=0$
+					\item $c=0$
+				\end{enumerate}
+		\end{enumerate}
+	\item $\gamma=0$
+		\begin{enumerate}
+			\item $\alpha$ contains a one-entry $\Rightarrow a=0,\ b=0$. If $f=0$ we have case 1.(b) ii. otherwise, we have case 1.(a).
+			\item $\alpha=0$
+				\begin{enumerate}
 					\item $c=1,\ d=1\Rightarrow b=0,\ e=0,\ \beta=0$
-						Lemma~\ref{lemma:I} (case 1): $B$ is row-bounded.\\
-						\textbf{TODO} what about $c,d$?\\
-						
-						Lemma~\ref{lemma:H} (case 1): $B$ is column-bounded.
-					\item $c=1,\ d=0\Rightarrow e=0,\ \beta=0$: Without loss of generality, $b=1$. Otherwise, we have the previous case. Therefore, $f=0$.
-						Lemma~\ref{lemma:H} (case 4): $c$ is row-bounded.\\
-						Lemma~\ref{lemma:H} (case 1): $B$ is row-bounded.\\
-						
-						Lemma~\ref{lemma:H} (case 4): $b$ is column-bounded.\\
-						Lemma~\ref{lemma:H} (case 1): $B$ is column-bounded.
-					\item $c=0,\ d=1\Rightarrow b=0$: Without loss of generality, $e=1$ or $\beta$ contains a one-entry. Otherwise, we have the case $c=1,\ d=1$. Therefore, $a=0$.
-						Lemma~\ref{lemma:H} (case 4): $d$ is row-bounded.\\
-						Lemma~\ref{lemma:H} (case 1): one-entries in $B$ and $\beta$ are row-bounded.\\
-						
-						Lemma~\ref{lemma:H} (case 1): $B$ is column-bounded.\\
-						Lemma~\ref{lemma:I} (case 2): one-entries in $\beta$ are column-bounded.\\
-						\textbf{TODO} what about $e$?
-					\item $c=0,\ d=0$:
-						Lemma~\ref{lemma:H} (case 1): one-entries in $B$ and $\beta$ are row-bounded.\\
-						
-						Lemma~\ref{lemma:I} (case 1): one-entries in $B$ and $\beta$ are column-bounded.\\
-						\textbf{TODO} what about $b,e$?
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-The same analysis also proves that if the pattern with the same restrictions only has three non-empty columns then it is bounded.
+					\item $c=1,\ d=0\Rightarrow e=0,\ \beta=0$ and without loss of generality, $b=1$. Otherwise, we have the previous case. Therefore, $f=0$
+					\item $c=0,\ d=1\Rightarrow b=0$: Without loss of generality, $e=1$ or $\beta$ contains a one-entry. Otherwise, we have the case $c=1,\ d=1$. Therefore, $a=0$
+					\item $c=0,\ d=0$
+				\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
+The same analysis also proves that if a pattern with the same restrictions only has three non-empty columns then it is bounding.
 
 Let us now look at the case when all one-entries of the pattern are in either one of two rows $r_1,r_2$ or in a column~$c_1$. Without loss of generality, we again assume permutation 123 is present and we distinguish three cases. Consider Figure~\ref{fig:twoplusone}:
 \begin{figure}[!ht]
@@ -321,42 +288,27 @@ Let us now look at the case when all one-entries of the pattern are in either on
 	\caption{Structure of a pattern only having one-entries in two rows and one column that avoids all rotations of $P_1$.}
 	\label{fig:twoplusone}
 \end{figure}
-\begin{itemize}
-\item $C$ lies in column~$c_1$: Thanks to Lemma~\ref{lemma:First} are one-entries in $a,c,d,A,C$ and $\gamma$ row-bounded and one-entries in $b,d,A$ and $\alpha$ column-bounded. From the fourth case of Lemma~\ref{lemma:H}, we have that one-entries in $c,C$ and $\gamma$ are column-bounded.
-	\begin{itemize}
-		\item $a=1\Rightarrow b=0,\ \alpha=0$:\\
-			Lemma~\ref{lemma:H} (case 2): one-entries in $B$ and $\beta$ are row-bounded.\\
-			
-			Lemma~\ref{lemma:I} (case 1): one-entries in $B$ and $\beta$ are column-bounded.\\
-			\textbf{TODO} what about $a,c$?
-		\item $a=0$:\\
-			Lemma~\ref{lemma:H} (case 4): one-entries in $b$ and $\alpha$ are row-bounded.\\
-			Lemma~\ref{lemma:H} (case 2): one-entries in $B$ and $\beta$ are row-bounded.\\
-			
-			Lemma~\ref{lemma:I} (case 2): one-entries in $\beta$ are column-bounded.\\
-			\textbf{TODO} what about $c,B$?
-	\end{itemize}
-\item $B$ lies in column~$c_1$: Thanks to Lemma~\ref{lemma:First} are one-entries in $a,d,A,C$ row-bounded and one-entries in $a,b,c,d,A,C,\alpha$ and $\gamma$ column-bounded. From the first case of Lemma~\ref{lemma:I}, we have that one-entries in $B$ and $\beta$ are row-bounded and from the first case of Lemma~\ref{lemma:H}, one-entries in $b,c,B$ and $\beta$ are column-bounded. Thus, every one-entry is column-bounded.
-	\begin{itemize}
-		\item $a=1\Rightarrow\alpha=0$
-			\begin{itemize}
-				\item $d=1\Rightarrow\gamma=0$:\\
-					\textbf{TODO} what about $b,c$?\\
-				\item $d=0$:\\
-					Lemma~\ref{lemma:H} (case 4): one-entries in $b$ and $\gamma$ are row-bounded.\\
-					\textbf{TODO} what about $c$?
-			\end{itemize}
+\begin{enumerate}
+\item $C$ lies in column~$c_1$
+	\begin{enumerate}
 		\item $a=0$
-			\begin{itemize}
-				\item $d=1\Rightarrow\gamma=0$:\\
-					Lemma~\ref{lemma:H} (case 4): one-entries in $c$ and $\alpha$ are row-bounded.\\
-					\textbf{TODO} what about $c$?
-				\item $d=0$: The pattern avoids $\smm{\bullet& \\ &\bullet}$ so it is bounded from Lemma~\ref{lemma:walkpat}.
-			\end{itemize}
-	\end{itemize}
-\item $A$ lies in column~$c_1$:\\
-	This is symmetric to the first situation.
-\end{itemize}
+		\item $a=1\Rightarrow b=0,\ \alpha=0$
+	\end{enumerate}
+\item $B$ lies in column~$c_1$: Thanks to Lemma~\ref{lemma:First} are one-entries in $a,d,A,C$ row-bounded and one-entries in $a,b,c,d,A,C,\alpha$ and $\gamma$ column-bounded. From the first case of Lemma~\ref{lemma:I}, we have that one-entries in $B$ and $\beta$ are row-bounded and from the first case of Lemma~\ref{lemma:H}, one-entries in $b,c,B$ and $\beta$ are column-bounded. Thus, every one-entry is column-bounded.
+	\begin{enumerate}
+		\item $a=1,\ d=1\Rightarrow\alpha=0,\ \gamma=0$
+		\item $a=1,\ d=0\Rightarrow\alpha=0$
+		\item $a=0,\ d=1\Rightarrow\gamma=0$
+		\item $a=0,\ d=0$: The pattern avoids $\smm{\bullet& \\ &\bullet}$ so it is bounded according to Lemma~\ref{lemma:walkpat}.
+	\end{enumerate}
+\item $A$ lies in column~$c_1$: This is symmetric to the first situation.
+\end{enumerate}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm]{img/caseana.pdf}
+	\caption{A figure showing which lemma can be used to proof row-boundness and column-boundness for each one-entry of patterns discussed in the case analysis. The left half of the picture deals with the situation where there are three non-empty rows and the right half with the situation where there are two non-empty rows and one non-empty column. Each case either contains a picture showing row-boundedness and column-boundeness or an arrow describing that the case can be easily reduced to a different one.}
+	\label{fig:pictproof1}
+\end{figure}
 The same analysis also proves that if one-entries of a pattern with the same restrictions are in one row or two columns then the pattern is bounded.
 \end{proof}
 
@@ -458,98 +410,16 @@ To prove that $\mathcal{P}$ is row-bounded, we take any $M$ maximal avoiding $\m
 \section{Complexity of one-entries}
 So far we have been working with the whole patterns and determining their complexity. To make the results even more general, we can analyze the complexity of each one-entry.
 
+In spare time, I will have a look at this. 
+
 \begin{lemma}
 \label{lemma:cross}
-Let $P\in\Pat$ be a pattern such that all its one-entries are either in rows $r_1<r_2$ or in $P[[r_2],\{c\}]$. Then $P[r_1,c]$ is row-bounded.
+Let $P\in\Pat$ be a pattern such that all its one-entries are either in rows $r_1,r_2$ ($r_1<r_2$) and $P[[r_2],\{c\}]$. Then $P[r_1,c]$ is row-bounded.
 \end{lemma}
 \begin{proof}
 We prove there are at most $k^4$ zero-intervals usable for $P[r_1,c]$ in each row of any maximal matrix $M$ avoiding $P$. For contradiction, let there be more than $k^4$ of them ($zi_1,\dots,zi_{k^4}$) in some row and for each of them, consider the top most row $r'_j$ used to map $r_2$-th row of $P$ in a mapping created when a zero-entry of $zi_j$ is changed to a one-entry used to map $P[r_1,c]$. Then pairs $[zi_1,r'_1],[zi_2,r'_2],\dots,[zi_{k^4},r'_{k^4}]$ form a sequence of distinct pairs and thanks to the Pidgeonhole principle, there is a subsequence of length at least $k^2$ such that the values of $r'_j$ are either non-increasing or non-decreasing. Without loss of generality, assume they are non-decreasing and let $zi'_1,\dots,zi'_{k^2}$ be their corresponding zero-intervals.
 
 What if $P[r_2,c]=0$? TODO
-\end{proof}
-
-\begin{lemma}
-\label{lemma:unbound}
-Let $P=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ & &\bullet& }$. For every $n>1$ there is a maximal matrix $M$ avoiding $P$ as an interval minor having $n$ zero-intervals usable for $P[1,3]$.
-\end{lemma}
-\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
-$$\smm{	 & &\circ& &\bullet& & &\circ& &\bullet&\cdots&\bullet& & &\circ& &\bullet&\bullet&\bullet&\circ&\bullet\\
-		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet& &\bullet& &\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & & & & \\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & & & & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
-		 & & & & &\bullet&\bullet& &\bullet& &\cdots& & & & & & & \\
-		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & & & \\
-		\bullet&\bullet& &\bullet& &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & & & \\
-		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & & & \\
-		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & & & \\
-		 }$$
-We see that $\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries of $M$ which only leaves a zero-entry where we need to map $P[1,3]$ or $P[2,4]$.
-
-When we change any marked zero-entry of the first row into a one-entry we get a matrix containing a minor of $\{1\}^{3\times4}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
-\end{proof}
-
-\begin{lemma}
-\label{lemma:unbound2}
-Let $P=\smm{\bullet& & & & \\ &\bullet& &\bullet& \\ & &\bullet& & \\ & & & &\bullet}$ and $P'=\smm{\bullet& & & & \\ &\bullet& &\bullet& \\ & & & &\bullet\\ & &\bullet& & }$. For every $n>1$ there is a maximal matrix $M$ avoiding both $P$ and $P'$ as an interval minor having $n$ zero-intervals usable for $P[2,2]$ and $P'[2,2]$. Moreover, for every pattern containing $P$ or $P'$ as a submatrix, the one-entry that can be used to map $P[2,2]$ or $P'[2,2]$ is also row-unbounded.
-\end{lemma}
-\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
-$$\smm{	 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet& &\bullet&\bullet&\bullet\\
-		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
-		 & & & & & & & & & & & &\cdots& &\bullet& &\bullet&\bullet&\bullet& & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
-		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		 & & & & & &\bullet& &\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
-		\bullet& &\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
-		 &\circ& & & &\bullet& &\circ& & & &\bullet&\cdots&\bullet& &\circ& & & &\bullet& &\circ& & & \\
-		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & & & &\cdots& & & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
-		 & & & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet&\bullet& & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
-		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		 & & & & & &\bullet&\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet&\bullet& & & & & & & &\cdots& & & & & \\
-		 }$$
-We see that $\PnimM$.
-
-When we change any marked zero-entry of the middle row into a one-entry we get a matrix containing $\{1\}^{4\times5}$; therefore, both containing $P$ and $P'$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
-
-TODO general argument for bigger patterns.
-\end{proof}
-
-\begin{lemma}
-\label{lemma:unbound3}
-Let $P=\smm{\bullet& & & \\ &\bullet&\bullet& \\ &\bullet& & \\ & & &\bullet}$ and $P'=\smm{\bullet& & & \\ &\bullet&\bullet& \\ & & &\bullet\\ &\bullet& & }$. For every $n>1$ there is a maximal matrix $M$ avoiding both $P$ and $P'$ as an interval minor having $n$ zero-intervals usable for $P[2,2]$ and $P'[2,2]$.
-\end{lemma}
-\begin{proof} Let $M$ be a $(2n-1)\times(2n-1)$ matrix described by the picture:
-$$\smm{	 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& & & & & & &\bullet& &\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
-		 & & & & & & & & & &\cdots& &\bullet& &\bullet&\bullet& & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
-		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		 & & & & &\bullet& &\bullet&\bullet& &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
-		\bullet& &\bullet&\bullet& & & & & & &\cdots& & & & & \\
-		 &\circ& & &\bullet& &\circ& & &\bullet&\cdots&\bullet& &\circ& & &\bullet& &\circ& & \\
-		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& & & & & & &\bullet&\bullet&\bullet&\bullet\\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
-		 & & & & & & & & & &\cdots& &\bullet&\bullet&\bullet&\bullet& & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
-		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		 & & & & &\bullet&\bullet&\bullet&\bullet& &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
-		\bullet&\bullet&\bullet&\bullet& & & & & & &\cdots& & & & & \\
-		 }$$
-We see that $\PnimM$.
-
-When we change any marked zero-entry of the middle row into a one-entry we get a matrix containing $\{1\}^{4\times5}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
 \end{proof}
 
 \begin{thm}
@@ -569,9 +439,3 @@ Without loss of generality, let $P[r,c']$ be part of mapping of $P_1$, where $P_
 	\item $c>c_3$: There are three cases to go through and we can handle them the same way as we did in case $c<c_2$.
 \end{itemize}
 \end{proof}
-
-Open questions:
-\begin{itemize}
-	\item Is $\Avm{\smm{ &\bullet& \\\bullet& & \\ & &\bullet},\smm{ &\bullet& \\ & &\bullet\\\bullet& & }}$ \emph{hereditarily} bounded?
-	\item Can an non-bounding pattern become bounding after a change of a one-entry to a zero-entry?
-\end{itemize}

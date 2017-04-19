@@ -1,4 +1,6 @@
 \chapter{Operations with matrices}
+CURRENTLY HERE
+
 When speaking about a class of matrices, unless stated otherwise, the class is always closed under interval minors. Also, all classes discussed are non-trivial. That means that there is at least one matrix of size $2$ by $1$ and at least one matrix of size $1$ by $2$ in each class. Moreover, at least one matrix is non-empty.
 
 \begin{obs}
@@ -9,7 +11,7 @@ Let $\class{M}=Av(\class{P})$ for some $\class{P}$. Then $\class{M}$ is closed u
 Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
 \end{obs}
 
-\section{Direct sum}
+\section{The direct sum}
 
 \begin{defn}
 For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\dsum B\in\bin^{(m+k)\times(n+l)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define $D:=A\odsum B\in\bin^{(m+k)\times(n+l)}$ such that $D[[m],[n]]=A$, $D[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.

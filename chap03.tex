@@ -1,100 +1,123 @@
 \chapter{Operations with matrices}
-CURRENTLY HERE
 
-When speaking about a class of matrices, unless stated otherwise, the class is always closed under interval minors. Also, all classes discussed are non-trivial. That means that there is at least one matrix of size $2$ by $1$ and at least one matrix of size $1$ by $2$ in each class. Moreover, at least one matrix is non-empty.
 
-\begin{obs}
-Let $\class{M}=Av(\class{P})$ for some $\class{P}$. Then $\class{M}$ is closed under interval minors.
-\end{obs}
-
-\begin{obs}
-Let $\mathcal{M}$ be a finite class of matrices. There exists a finite set $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
-\end{obs}
-
-\section{The direct sum}
+When speaking about class of matrices, unless stated otherwise, they are closed under interval minors, which means that whenever a matrix belong to a class, all its minors belong there too. All classes discussed are also non-trivial. This means, there is at least one matrix of size $2\times1$, at least one matrix of size $1\times2$ and at least one matrix is non-empty in each class.
 
 \begin{defn}
-For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{direct sum} as a matrix $C:=A\dsum B\in\bin^{(m+k)\times(n+l)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define $D:=A\odsum B\in\bin^{(m+k)\times(n+l)}$ such that $D[[m],[n]]=A$, $D[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
+Let $\class{M}$ be a class of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
 \end{defn}
+
+Let us start with a few simple observations, regarding classes of matrices and their bases. 
+
+\begin{obs}
+Let $\class{M}=\Avm{\class{P}}$ for some set of matrices $\class{P}$. Then $\class{M}$ is closed under interval minors.
+\end{obs}
+
+\begin{obs}
+Every finite class of matrices has a finite basis.
+\end{obs}
+
+\section{The skew and direct sums}
+In the realm of permutations, the skew and direct sums are very useful operations. What follows is a direct generalization to our settings and a few simple results. More interesting statements and the relation with interval minors follow in the next section.
+
+\begin{defn}
+For matrices $A\in\Mat$ and $B\in\Pat$ we define their \emph{skew sum} as a matrix $C:=A\dsum B\in\bin^{(m+k)\times(n+l)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. Symmetrically, we define their \emph{direct sum} $D:=A\odsum B\in\bin^{(m+k)\times(n+l)}$ such that $D[[m],[n]]=A$, $D[[m+1,m+k],[n+1,n+l]]=B$ and the rest is empty.
+\end{defn}
+
+Using this notation, we can very easily rewrite the results from the previous chapter. Here is an example of Proposition~\ref{prop:p31} and Proposition~\ref{prop:p33}:
 
 \begin{prop}
-$\Avm{\smm{\bullet&\bullet\\\bullet&\bullet}}=\{\Avm{\smm{\bullet& \\ & }}\odsum\Avm{\smm{ &\bullet\\\bullet& }}\odsum\Avm{\smm{ & \\ &\bullet}}\}\cup$\\
-$\cup\{\Avm{\smm{ & \\\bullet& }}\dsum\Avm{\smm{\bullet& \\ &\bullet}}\dsum\Avm{\smm{ &\bullet\\ & }}\}$.
+$\Avm{\smm{\bullet&\bullet\\\bullet&\circ}}=\Avm{\smm{\bullet&\circ\\\circ&\circ}}\odsum\Avm{\smm{\circ&\bullet\\\bullet&\circ}}$
 \end{prop}
-\begin{proof}
-If follows from Proposition~\ref{prop:p33} and $\Avm{\smm{\bullet&\bullet\\\bullet& }}=\Avm{\smm{\bullet& \\ & }}\odsum\Avm{\smm{ &\bullet\\\bullet& }}$.
-\end{proof}
+
+\begin{prop}
+$\Avm{\smm{\bullet&\bullet\\\bullet&\bullet}}=\left(\Avm{\smm{\bullet&\circ\\\circ&\circ}}\odsum\Avm{\smm{\circ&\bullet\\\bullet&\circ}}\odsum\Avm{\smm{\circ&\circ\\\circ&\bullet}}\right)\cup$
+
+\hspace{54mm}$\left(\Avm{\smm{\circ&\circ\\\bullet&\circ}}\dsum\Avm{\smm{\bullet&\circ\\\circ&\bullet}}\dsum\Avm{\smm{\circ&\bullet\\\circ&\circ}}\right)$.
+\end{prop}
+
+Something, we get a great use of later is a closure under the skew sum.
 
 \begin{defn}
-For a set of matrices $\class{M}$, let $\Cl{\class{M}}$ denote a class containing each $M\in\class{M}$ closed under direct sum and interval minors.
+For a set of matrices $\class{M}$, let $\Cl{\class{M}}$ denote a class of matrices containing each $M\in\class{M}$ and closed under the skew sum and interval minors.
 \end{defn}
 
+When speaking about graph minors, we can always imagine that the contractions of edges are done after all deletions. Similarly, an element derived from a matrix~$M$ by reapplying the skew sum and taking its interval minor can be also derived by taking an interval minor of the skew sum of an appropriate number of copies of $M$.
+
 \begin{obs}
-For every $\class{P}$, each $M\in\Cl{\class{P}}$ is an interval minor of the direct sum of multiple copies of $P$.
+For every set of matrices $\class{P}$, each $M\in\Cl{\class{P}}$ is an interval minor of the skew sum of multiple copies of $P$.
 \end{obs}
+
+What follows are two simple results of the relation of closures under the skew sum and the description using interval minors that we greatly generalize in the next section.
 
 \begin{prop}
 $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
 \end{prop}
 \begin{proof}
-The direct sum of an arbitrary number of copies of $\smm{\bullet&\circ\\\circ&\bullet}$ avoids both forbidden patterns and because the relation of being an interval minor is transitive, we have $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}\subseteq\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
+The skew sum of an arbitrary number of copies of $\smm{\bullet&\circ\\\circ&\bullet}$ avoids both forbidden patterns and because the relation of being an interval minor is transitive, we have $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}\subseteq\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
 
-From Proposition~\ref{prop:twopatterns}, we have that every $M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$ it holds that for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the direct sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the direct sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and potential one-entries outside of it and so we also have the second inclusion.
+From Proposition~\ref{prop:twopatterns}, for every matrix~$M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$, it holds that for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the skew sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the skew sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and all one-entries outside of it. Thus, we have the other inclusion.
 \end{proof}
 
-\begin{prop}
-$\Cl{\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\bullet&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\circ&\bullet\\\circ&\bullet}}$.
-\end{prop}
+%\begin{prop}
+%$\Cl{\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\bullet&\circ\\\circ&\bullet},\smm{\bullet&\circ\\\circ&\bullet\\\circ&\bullet}}$.
+%\end{prop}
+
+While it does not make sense for permutations, we can generalize the skew sum to also allow some overlap between the summed matrices.
 
 \begin{defn}
-For matrices $A\in\Mat,B\in\Pat$ and integers $a,b$, we define the \emph{direct sum with $a\times b$ overlap} of $A$ and $B$ as a matrix $C:=A\dsum_{a\times b}B\in\bin^{(m+k-a)\times(n+l-b)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$ and the rest is empty. At the part that overlaps, we take a elementwise OR of both entries.
+For matrices $A\in\Mat,\ B\in\Pat$ and integers $a,b$, let a matrix~$C:=A\dsum_{a\times b}B\in\bin^{(m+k-a)\times(n+l-b)}$ such that $C[[k+1,m+k],[n]]=A$, $C[[k],[n+1,n+l]]=B$, the part that overlaps is an elementwise OR of both submatrices and the rest of $C$ is empty. We say $C$ is the \emph{skew sum with $a\times b$ overlap} of $A$ and $B$.
 \end{defn}
 
 \begin{thm}
-Let $\class{M}$ be any set of matrices, not necessarily closed under interval minors, such that
+For integers $a,b,m,n$ such that $a\leq m\leq2a$ and $b\leq n\leq2b$, let $\class{M}$ be an arbitrary set of matrices, not necessarily closed under interval minors, such that:
 \begin{itemize}
-\item $\class{M}$ is closed under deletion of one-entries and
-\item $\class{M}$ is closed under the direct sum with $a\times b$ overlap and
-\item there is a $m\times n$ matrix $M\in\class{M}$,
+	\item $\class{M}$ is closed under deletion of one-entries,
+	\item $\class{M}$ is closed under the skew sum with $a\times b$ overlap and
+	\item there is a $m\times n$ matrix $M\in\class{M}$,
 \end{itemize}
-then $\class{M}$ is also closed under the direct sum with $(m-2a)\times(n-2b)$ overlap.
+then $\class{M}$ is also closed under the skew sum with $(2a-m)\times(2b-n)$ overlap.
 \end{thm}
 \begin{proof}
-Given arbitrary $A,B\in\class{M}$ and $M\in\class{M}$ such that $M\in\Mat$. Let $C=A\dsum_{a\times b}M\dsum_{a\times b}B$. It has the same size as $D=A\dsum_{(m-2a)\times(n-2b)}B$, whose set of one-entries is a subset of one-entries of $C\in\class{M}$; therefore $D\in\class{M}$.
+Given any $A,B\in\class{M}$ and a matrix~$M\in\class{M}$ such that $M\in\Mat$, let $C=A\dsum_{a\times b}M\dsum_{a\times b}B$. It has the same size as $D=A\dsum_{(2a-m)\times(2b-n)}B$, whose set of one-entries is a subset of one-entries of $C\in\class{M}$; therefore, $D\in\class{M}$.
 \end{proof}
+
+We see that already with pretty reasonable assumptions, whenever a set of matrices is closed under the skew sum with some overlap, it is also closed under the skew sum with smaller overlap. On the other hand, in general the opposite does not hold even if we work with classes of matrices.
+
+%NOTE: originally this was here to show that while for classes closed under minors a bigger overlap always works (now this is disproved in the following observation) so the question is whether there is any point in having this here anymore.
+%\begin{obs}
+%There is a set of matrices $\class{M}$ closed under submatrices but not interval minors such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
+%\end{obs}
+%\begin{proof}
+%Let $\class{M}$ be a class of matrices obtained by applying the direct sum to $\smm{\bullet& \\\ &\bullet}$. Clearly, it is closed under the direct sum. On the other hand, it is not closed under the direct sum with $1\times1$ overlap, as $\smm{\bullet& \\\ &\bullet}\dsum_{1\times1}\smm{\bullet& \\\ &\bullet}=\smm{ &\bullet& \\\bullet& &\bullet\\ &\bullet& }\not\in\class{C}$.
+%\end{proof}
+
+\begin{obs}
+There is a class of matrices closed under the skew sum with $1\times1$ overlap that is not closed under the skew sum with $2\times2$ overlap.
+\end{obs}
+\begin{proof}
+Let $\class{M}=\Avm{\smm{\bullet& \\ &\bullet}}$. Clearly, $\class{M}$ is hereditary and closed under the skew sum with $1\times1$ overlap. On the other hand, $\class{M}$ is not closed under the skew sum with $2\times2$ overlap, because for matrices $\smm{\bullet&\bullet\\\bullet& },\smm{ &\bullet\\\bullet&\bullet}\in\class{M}$, it holds $\smm{\bullet&\bullet\\\bullet& }\dsum_{2\times2}\smm{ &\bullet\\\bullet&\bullet}=\smm{\bullet&\bullet\\\bullet&\bullet}\not\in\class{M}$.
+\end{proof}
+
+A similar proof shows that for all $a\geq1,b>1$ there is a class of matrices closed under the skew sum with $a\times b$ overlap that is not closed under the skew sum with $(a+1)\times b$ (or $a\times(b+1)$) overlap. Luckily for us, this does not hold for $a=0$ or $b=0$:
 
 \begin{obs}
 \label{obs:0to1}
-Every class of matrices closed under the direct sum is also closed under the direct sum with $1\times1$ overlap.
+Every class of matrices closed under the skew sum is also closed under the skew sum with $1\times1$ overlap.
 \end{obs}
-
-NOTE: originally this was here to show that while for classes closed under minors a bigger overlap always works (now this is disproved in the following observation) so the question is whether there is any point in having this here anymore.
-\begin{obs}
-There is a set of matrices $\class{M}$ closed under submatrices but not interval minors such that it is closed under the direct sum but it is not closed under the direct sum with $1\times1$ overlap.
-\end{obs}
-\begin{proof}
-Let $\class{M}$ be a class of matrices obtained by applying the direct sum to $\smm{\bullet& \\\ &\bullet}$. Clearly, it is closed under the direct sum. On the other hand, it is not closed under the direct sum with $1\times1$ overlap, as $\smm{\bullet& \\\ &\bullet}\dsum_{1\times1}\smm{\bullet& \\\ &\bullet}=\smm{ &\bullet& \\\bullet& &\bullet\\ &\bullet& }\not\in\class{C}$.
-\end{proof}
-
-\begin{obs}
-There is a class of matrices $\class{M}$ such that it is closed under the direct sum with $1\times1$ overlap but it is not closed under the direct sum with $2\times2$ overlap.
-\end{obs}
-\begin{proof}
-Let $\class{M}$ consist of all matrices such that all one-entries are contained on a single reverse walk (a sequence of entries from the top-right corner to the bottom-left corner). Clearly, $\class{M}$ is hereditary and closed under the direct sum with $1\times1$ overlap.
-On the other hand, $\class{M}$ is not closed under the direct sum with $2\times2$ overlap. While $\smm{\bullet&\bullet\\\bullet& },\smm{ &\bullet\\\bullet&\bullet}\in\class{M}$, it holds $\smm{\bullet&\bullet\\\bullet& }\dsum_{2\times2}\smm{ &\bullet\\\bullet&\bullet}=\smm{\bullet&\bullet\\\bullet&\bullet}\not\in\class{M}$.
-\end{proof}
 
 \section{Articulations}
+Our next goal is to show that whenever we have a matrix closed under the skew sum and interval minors, the obtained class has a finite basis. In order to prove it, we define and get familiar with articulations.
 
 \begin{defn}
-Let $M\in\Mat$ be a matrix. An element $M[r,c]$ is an \emph{articulation} if both $M[[r-1],[c-1]]$ and $M[[r+1,m],[c+1,n]]$ are empty. We say that an articulation $M[r,c]$ is \emph{trivial} if $(r,c)\in\{(m,1),(1,n)\}$.
+Let $M\in\Mat$ be a matrix. An element $M[r,c]$ is an \emph{articulation} if it is top-left empty ($M[[r-1],[c-1]]$ is empty) and bottom-right empty ($M[[r+1,m],[c+1,n]]$ is empty). We say that an articulation $M[r,c]$ is \emph{trivial} if $(r,c)\in\{(m,1),(1,n)\}$.
 \end{defn}
+
+Whenever $P\im M$, for every $M[r,c]$ there is some $P[r',c']$ that can be mapped to $M[r,c]$; therefore, the following observation shows that once there is an articulation in $M$, it also exists in $P$ and it is not necessarily trivial.
 
 \begin{obs}
 \label{obs:keep}
-Let $P\in\Pat$ be a matrix. If there are integers $r,c$ such that $P[r,c]$ is an articulation, then for every $P'$ such that $P'\im P$, if we let $P'[r',c']$ be an element created from $P[r,c]$, $P'[r',c']$ is an articulation.
-
-TODO state it better - what if row~$r$ is deleted? What does "created from" mean?
+Let $M$ be a matrix. If there are integers $r,c$ such that $M[r,c]$ is an articulation, then for every matrix~$P$ such that $P\im M$, if $P[r',c']$ can be mapped to $M[r,c]$ then it is an articulation.
 \end{obs}
 
 \begin{obs}
@@ -104,45 +127,55 @@ Let $P\in\Pat$ be a matrix. There are $P_1,P_2$ non-empty interval minors of $P$
 
 \begin{obs}
 \label{obs:rel}
-Let $\class{P}$ be a set of matrices. There is a minimal (with respect to minors) $P\in\class{P}$ there are $P_1,P_2$ non-empty interval minors of $P$ such that $P=P_1\dsum_{1\times1}P_2\Leftrightarrow\Avm{P}$ is not closed under the direct sum with $1\times1$ overlap.
+Let $\class{P}$ be a set of matrices. There is a minimal (with respect to interval minors) matrix~$P\in\class{P}$ and there are $P_1,P_2$ non-empty interval minors of $P$ such that $P=P_1\dsum_{1\times1}P_2\Leftrightarrow\Avm{\class{P}}$ is not closed under the skew sum with $1\times1$ overlap.
 \end{obs}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] While $P\nim P_1$ and $P\nim P_2$, we have $P\im P_1\dsum_{1\times1}P_2$.
-	\item[$\Leftarrow$] Consider Observation~\ref{obs:art} and assume there are no such $r,c$ that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty. Let $M_1,M_2\in\Avm{P}$ be arbitrary matrices and let $M=M_1\dsum_{1\times1}M_2$. Matrix $M$ contains an articulation and from Observation~\ref{obs:keep} follows $M\in\Avm{P}$. This holds for each minimal $P\in\class{P}$; thus $M\in\Avm{\class{P}}$.
+	\item[$\Rightarrow$] Let $P_1\in\bin^{k_1\times l_1}$ and $P_2\in\bin^{k_2\times l_2}$. While $P\nim P_1\dsum_{1\times1}0^{k_2\times l_2}$ and $P\nim0^{k_1\times l_1}\dsum_{1\times1}P_2$, we have $P\im P_1\dsum_{1\times1}0^{k_2\times l_2}\dsum0^{k_1\times l_1}\dsum_{1\times1}P_2$.
+	\item[$\Leftarrow$] If there is no minimal matrix~$P\in\class{P}$ that is the skew sum of its non-empty interval minors, we want to show it makes $\Avm{\class{P}}$ closed under the skew sum with $1\times1$ overlap. From Observation~\ref{obs:art}, for every $P\class{P}$ there are no $r,c$ that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty. Let $M_1,M_2\in\Avm{P}$ be arbitrary matrices and let $M=M_1\dsum_{1\times1}M_2$. The matrix~$M$ contains a non-trivial articulation and from Observation~\ref{obs:keep} it follows $M\in\Avm{P}$ for each minimal $P\in\class{P}$; thus, $M\in\Avm{\class{P}}$.
 \end{itemize}
 \end{proof}
+
+In the following, we always expect articulations to be on a reverse walk (no two articulations forming $\smm{\bullet& \\ &\bullet}$) and by a matrix between two articulations $M[r_1,c_1]$ and $M[r_2,c_2]$ we mean the matrix $M[[r_2,r_1],[c_1,c_2]]$.
 
 \begin{lemma}
 \label{lemma:artic}
-Let $\class{P}$ be a set of matrices, then for all $M\in\Mat$ it holds that $M\in\Cl{\class{P}}\Leftrightarrow$ there exists a sequence of articulations of $M$ such that for each matrix~$M'$ in between two consecutive articulations of $M$ exists $P\in\class{P}$ such that $M'\im\smm{1}\dsum P\dsum\smm{1}$.
+Let $\class{P}$ be a set of matrices, then for all matrices $M\in\Mat$ it holds that $M\in\Cl{\class{P}}\Leftrightarrow$ there exists a sequence of articulations of $M$ on a reverse walk such that for each matrix~$M'$ in between two consecutive articulations of $M$ there exists $P\in\class{P}$ such that $M'\im\smm{1}\dsum P\dsum\smm{1}$.
 \end{lemma}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] Let us look at the direct sum of multiple copies of elements of $\class{P}$ and consider one articulation (out of all four) between each pair of consecutive copies of matrices from $P$, together with articulations $M[m,1],M[1,n]$. Between each pair of consecutive articulations, we have a matrix from $\class{P}$ and so the statement holds. When we consider an arbitrary interval minor and keep original articulations, each matrix between two consecutive articulations only contains at most one original copy of an element of $\class{P}$, but it may happen that the bottom-left and top-right corners become one-entries even though they were zero-entries before. The matrix does not have to be an interval minor of $P$, but it is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$ for some $P\in\class{P}$.
-	\item[$\Leftarrow$] We can simply blow up each matrix $M'$ between two consecutive articulation into a direct sum of three copies of  the corresponding matrix $P$, because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$.
+	\item[$\Rightarrow$] With Observation~\ref{obs:0to1} in mind, consider the skew sum with $1\times1$ overlap of multiple copies of elements of $\class{P}$ and let the sequence contain an articulation between each pair of consecutive copies of matrices from $P$, together with the trivial articulations~$M[m,1]$ and $M[1,n]$.
+	
+	Between each pair of consecutive articulations, we have a matrix from $\class{P}$ and so the statement holds. When we take an arbitrary interval minor and keep original articulations, each matrix between two consecutive articulations only contains at most one original copy of some matrix~$P\in\class{P}$, but it may happen that the bottom-left and top-right corners become one-entries even though they were zero-entries before. The matrix does not have to be an interval minor of $P$ anymore, but it is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$ for the corresponding $P\in\class{P}$.
+	\item[$\Leftarrow$] We can simply blow up each matrix~$M'$ between two consecutive articulation to the skew sum of three copies of the corresponding matrix $P$ and because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$ it holds $M\in\Cl{\class{P}}$.
 \end{itemize}
 \end{proof}
 
+Finally, we show that a closure under the skew sum can always be described by a finite number of forbidden patterns.
+
 \begin{thm}
-For all $M\in\Mat$ there exists a finite set of matrices $\class{P}$ such that $\Cl{M}=\Avm{\class{P}}$.
+For all matrices~$M\in\Mat$, $\Cl{M}$ has a finite basis.
 \end{thm}
 \begin{proof}
-Let $\class{F}$ be the set of all minimal (with respect to interval minors) matrices such that $\Cl{M}=\Avm{\class{F}}$. We need to prove that $F$ is finite. Thanks to Observation~\ref{obs:0to1}, $\Avm{\class{F}}$ is closed under the direct sum with $1\times1$ overlap and from Observation~\ref{obs:rel} follows that for no $F\in\class{F}$ there are its non-empty interval minors $F_1,F_2$ such that $F=F_1\dsum{1\times1}F_2$.
+Let $\class{F}$ be the set of all minimal (with respect to interval minors) matrices such that $\Cl{M}=\Avm{\class{F}}$. We need to prove that $\class{F}$ is finite. Thanks to Observation~\ref{obs:0to1}, $\Avm{\class{F}}$ is closed under the direct sum with $1\times1$ overlap and from Observation~\ref{obs:rel} follows that for no $F\in\class{F}$ there are its non-empty interval minors $F_1,F_2$ such that $F=F_1\dsum{1\times1}F_2$. We denote by $\class{P}$ a set of matrices $F\in\class{F}$ such that $F$ has at most $2m+4$ rows and $2n+4$ columns. We want to show $\Cl{M}=\Avm{\class{P}}$.
+\begin{itemize}
+	\item[$\subseteq$] Clearly, $\class{P}$ is finite and we immediately see that $\Cl{M}\subseteq\Avm{\class{P}}$.
+	\item[$\supseteq$] For contradiction, consider a minimal matrix $X\in\Avm{\class{P}}-\Cl{M}$.
+There are no $X_1,X_2$ non-empty interval minors of $X$ such that $X=X_1\dsum{1\times1}X_2$; otherwise, as $X_1,X_2\in\Avm{\class{P}}$ and $X$ is the minimum matrix such that $X\not\in\Cl{M}$, we would have $X_1,X_2\in\Cl{M}$; therefore, $X\in\Cl{M}$ and a contradiction.
 
-We denote by $\class{P}$ a set of matrices from $\class{F}$ such that they have at most $2m+4$ rows and $2n+4$ columns. Such a set is finite and we immediately see that $\Cl{M}\subseteq\Avm{\class{P}}$. For contradiction with the other inclusion, let us consider the minimum $X\in\Avm{\class{P}}-\Cl{M}$.
+Without loss of generality, we assume $X\in\Pat$ has at least $2m+5$ rows. Let $X'$ denote a matrix created from $X$ by deletion of the first row. We have $X'\in\Avm{\class{P}}$ and from minimality of $X$ also $X'\in\Cl{M}$. From Lemma~\ref{lemma:artic}, there is a sequence of articulations of $X'$ on a reverse walk such that each matrix between two consecutive articulations is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$. Let $X'[r,c]$ be the first articulation from the sequence (sorted by the second coordinate in ascending order) for which $c>1$. The matrix between $X'[r,c]$ and the previous articulation in the sequence is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$, which also means that $c\leq n+2$. Since $X[r,c]$ is not an articulation, it must hold that $X[1,c_1]=1$ for some $c_1<c\leq n+2$. Symmetrically, let $X''$ denote a matrix created from $X$ by deletion of the last row. Following the same steps we did before, we get the last articulation $X''[r,c]$ such that $c<l$ and the observation that $c\geq l-n-1$. Since $X[r,c]$ is not an articulation, it must hold that $X[k,c_2]=1$ for some $c_2>c\geq l-n-1$.
 
-There are no $X_1,X_2$ non-empty interval minors of $X$ such that $X=X_1\dsum{1\times1}X_2$; otherwise, as $X_1,X_2\in\Avm{\class{P}}$ and $X$ is the minimum matrix such that $X\not\in\Cl{M}$, we would have $X_1,X_2\in\Cl{M}$; therefore, $X\in\class{M}$ and a contradiction.
-
-Without loss of generality, we assume $X\in\Pat$ has at least $2m+5$ rows. Let $X'$ denote a matrix created from $X$ by deletion of the first row. We have $X'\in\Avm{\class{P}}$ and from minimality of $X$ also $X'\in\Cl{M}$. From Lemma~\ref{lemma:artic}, there is a sequence of articulations of $X'$ such that it is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$. Let $X'[r,c]$ be the first articulation from the sequence for which $c>1$. Together with the previous articulation in the sequence, they form a matrix that is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$, which also means that $c<n+3$. Since $X[r,c]$ is not an articulation, it must hold that $X[1,c_1]=1$ for some $c_1<c<n+3$. Symmetrically, let $X''$ denote a matrix created from $X$ by deletion of the last row. Following the same steps as we did before, we get the last articulation $X''[r,c]$ such that $c<l$ and the observation that $c>l-n-2$. Since $X[r,c]$ is not an articulation, it must hold that $X[k,c_2]=1$ for some $c_2>c>l-n-2$.
-
-We showed that $Y\in\bin^{(m+1)\times2}$ such that the only one-entries are $Y[1,1]$ and $Y[m+1,2]$ is an interval minor of $X$. To reach a contradiction, it suffices to show that there is a $P\in\class{P}$ such that $P\im Y$. For contradiction, let $Y\in\Avm{\class{P}}$ and since $Y\im X$ and $X$ is minimum such that $X\not\in\Cl{M}$ it holds $Y\in\Cl{M}$. But this cannot be, because $Y$ contains no non-trivial articulation and from Observation~\ref{obs:keep}, we know that every $Z\in\Cl{M}$ that is bigger than $m\times n$ contains at least one.
+We showed that a matrix~$Y\in\bin^{(m+1)\times2}$ such that the only one-entries are $Y[1,1]$ and $Y[m+1,2]$ is an interval minor of $X$. To reach a contradiction, it suffices to show that there is a matrix~$P\in\class{P}$ such that $P\im Y$. For contradiction, let $Y\in\Avm{\class{P}}$ and since $Y\im X$ and $X$ is minimum such that $X\not\in\Cl{M}$ it holds $Y\in\Cl{M}$. But this cannot be, because $Y$ contains no non-trivial articulation and from Observation~\ref{obs:keep}, we know that every matrix $Z\in\Cl{M}$ bigger than $m\times n$ contains at least one.
+\end{itemize}
 \end{proof}
 
 \section{Basis}
+We recall that the basis of a class of matrices $\class{M}$ is a set of all minimal (with respect to interval minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$. It goes without saying that it does not make sense to consider a basis of a set of matrices that is not closed under interval minors.
+
+So far, we showed that whenever $\class{M}$ is finite, its basis is also finite. The same hold when $\class{M}=\Cl{M}$ for some $M$. We show next that, unlike in graph theory, there are classes that does not have a finite basis. Moreover, we show that even for a class $\class{M}$ with finite basis, its closure $\Cl{\class{M}}$ can have an infinite basis.
 
 \begin{defn}
-Let $P$ be a matrix. Let $\R{P}$ denote a set of all minimal (with respect to minors) matrices $P'$ such that $P\im P'$ and $P'$ is not the direct sum with $1\times1$ overlap of non-empty interval minors of $P'$. For a set of matrices $\class{P}$, let $\R{\class{P}}$ denote a set of all minimal (with respect to minors) matrices from the set $\bigcup_{P\in\class{P}}\R{P}$.
+Let $P$ be a matrix. We denote by $\R{P}$ a set of all minimal (with respect to minors) matrices $P'$ such that $P\im P'$ and $P'$ is not the skew sum with $1\times1$ overlap of non-empty interval minors of $P'$. For a set of matrices $\class{P}$, let $\R{\class{P}}$ denote a set of all minimal (with respect to minors) matrices from the set $\bigcup_{P\in\class{P}}\R{P}$.
 \end{defn}
 
 \begin{thm}
@@ -151,22 +184,18 @@ Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\c
 \end{thm}
 \begin{proof}
 \begin{itemize}
-	\item[$\subseteq$] Assume $M\not\in\Avm{\R{\class{P}}}$ and without loss of generality, because $\Cl{\class{M}}$ is hereditary, let $M$ be minimal (with respect to minors). It follows that $M\in\R{\class{P}}$. As such, matrix $M$ is not a direct sum with $1\times1$ overlap of non-empty interval minors of $M$; therefore, according to Observation~\ref{obs:art}, there is no articulations $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty. For contradiction, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, $M$ is a minor of $\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations (top-right and bottom-left corners) contain zero-entries, it even holds $M\im M'$. We also have $M\im P$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
-	\item[$\supseteq$] First of all, $\Avm{\R{\class{P}}}$ is closed under the direct sum with $1\times1$ overlap. For contradiction, assume there are $M_1,M_2\in\Avm{\R{\class{P}}}$ but $M=M_1\dsum_{1\times1}M_2\not\in\Avm{\R{\class{P}}}$. Then there exists $P\in\R{\class{P}}$ such that $P\im M$. Because $P$ is not a direct sum with $1\times1$ overlap of non-empty interval minors of $P$, it follows that either $P\im M_1$ or $P\im M_2$ and we have a contradiction.
+	\item[$\subseteq$] Assume $M\not\in\Avm{\R{\class{P}}}$ and without loss of generality, because $\Cl{\class{M}}$ is hereditary, let $M$ be minimal (with respect to interval minors). It follows that $M\in\R{\class{P}}$. As such, the matrix $M$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$; therefore, according to Observation~\ref{obs:art}, there is no articulations $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty. For contradiction, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, $M$ is a minor of $\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations (top-right and bottom-left corners) contain zero-entries, it even holds $M\im M'$. We also have $M\im P$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
+	\item[$\supseteq$] First of all, $\Avm{\R{\class{P}}}$ is closed under the skew sum with $1\times1$ overlap. For contradiction, assume there are matrices $M_1,M_2\in\Avm{\R{\class{P}}}$ but $M=M_1\dsum_{1\times1}M_2\not\in\Avm{\R{\class{P}}}$. Then there exists a matrix~$P\in\R{\class{P}}$ such that $P\im M$. Because $P$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $P$, it follows that either $P\im M_1$ or $P\im M_2$ and we have a contradiction.
 
-It suffices to show that the inclusion holds for any $M\in\Avm{\R{\class{P}}}$ that is not a direct sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
+It suffices to show that the inclusion holds for any $M\in\Avm{\R{\class{P}}}$ that is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
 \end{itemize}
 \end{proof}
-
-\begin{defn}
-Let $\class{M}$ be a set of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices that do not belong to $\class{M}$.
-\end{defn}
 
 \begin{cor}
 Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\class{P}}$, then $\R{\class{P}}$ is the basis of $\Cl{\class{M}}$.
 \end{cor}
 
-A natural question is whether the closure under the direct sum of a class with finite basis has final basis. We prove that this is not the case.
+What follows is a construction of parameterized matrices that become the main tool of finding a class of matrices with an infinite basis.
 
 \begin{defn}
 Let $Nucleus_1=\smm{\bullet}$ and for $n>1$ let $Nucleus_n\in\bin^{n\times n+1}$ be a matrix described by the examples:
@@ -202,15 +231,17 @@ $Candy_{4,4,4}=\smm{
 
 \begin{thm}
 \label{thm:inf}
-There exists a matrix $P$ such that $\R{P}$ is infinite.
+There exists a matrix $P$ for which $\R{P}$ is infinite.
 \end{thm}
 \begin{proof}
-Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is a minimal matrix (with respect to minors) that is not the direct sum of two proper submatrices. According to Observation~\ref{obs:art}, the second condition holds as $Candy_{4,n,4}$ contains no non-trivial articulation. To show it is minimal such matrix, we need to consider any interval minor $M$ and argue that either $P\nim M$ or $M$ contains an articulation. Observation~\ref{obs:keep} allows us to only consider one minoring operation at a time. It is easy to see that when a one-entry is changed to a zero-entry, then the matrix does not belong to $\R{P}$ anymore. Consider that rows $r_1,r_2,\dots,r_k$ are chosen to become one. If $r_1<4$ or $r_k>n+3$ then $P$ is no longer an interval minor of such matrix. Otherwise, the original $Candy_{4,n,4}[r_1,n-r_1+2]$ becomes an articulation. Symmetrically, the same holds for columns and we are done.
+Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is a minimal matrix (with respect to minors) that is not the skew sum of two of its non-empty interval minors. According to Observation~\ref{obs:art}, the second condition holds as $Candy_{4,n,4}$ contains no non-trivial articulation. To show it is minimal, we need to consider any matrix $M\im Candy_{4,n,4}$ and argue that either $P\nim M$ or $M$ contains an articulation.
+
+Thanks to Observation~\ref{obs:keep}, we can only consider one minoring operation at a time. It is easy to see that when a one-entry is changed to a zero-entry, then the matrix does not belong to $\R{P}$ anymore. Consider that rows $r_1,r_2,\dots,r_k$ are chosen to be merged into one with an elementwise OR. If $r_1<4$ or $r_k>n+3$ then $P$ is no longer an interval minor of such matrix. Otherwise, the original $Candy_{4,n,4}[r_1,n-r_1+2]$ becomes an articulation. Symmetrically, the same holds for columns which concludes the proof.
 \end{proof}
 
 \begin{cor}
 There exists a class of matrices $\class{M}$ having a finite basis such that $\Cl{\class{M}}$ has an infinite basis.
 \end{cor}
 \begin{proof}
-From Theorem~\ref{thm:inf}, we have a matrix $P$ for which $\R{P}$ is infinite. Class $\class{M}=\Avm{P}$ has a finite basis. On the other hand, from Theorem~\ref{thm:basis} we have $\Cl{\class{M}}=\Avm{\R{P}}$ and $\R{P}$ is infinite.
+From Theorem~\ref{thm:inf}, we have a matrix $P$ for which $\R{P}$ is infinite. Class $\class{M}=\Avm{P}$ has a finite basis. On the other hand, from Theorem~\ref{thm:basis}, we have $\Cl{\class{M}}=\Avm{\R{P}}$.
 \end{proof}

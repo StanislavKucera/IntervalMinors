@@ -1,91 +1,97 @@
 \chapter{Zero-intervals}
 \label{intervals}
-In Chapter~\ref{chap:chars}, we characterized matrices avoiding small patterns. Their structure is very dependent on the pattern and the results are hard to generalize for arbitrary patterns. In this chapter, we look for a more general property that restricts the complexity that a class of matrices can have.
+In Chapter~\ref{chap:chars}, we characterized matrices avoiding small patterns. Their structure is very dependent on the pattern they avoid and the results are hard to generalize for arbitrary patterns. In this chapter, we look for a more general property that restricts the complexity of a class of matrices.
 
 \begin{defn}
-For a matrix~$M\in\Mat$, a row interval $M[\{r\},[c_1,c_2]]$ is a \emph{zero-interval} if all entries are zero-entries, $c_1=0$ or $M[r,c_1-1]=1$ and $c_2=n$ or $M[r,c_2+1]=1$. In other words, it is an interval of zero-entries bounded by one-entries. Symmetrically, we also call a single column sequence $M[[r_1,r_2,\{c\}]]$ a \emph{zero-interval} if all entries are zero-entries, $r_1=0$ or $M[r_1-1,c]=1$ and $r_2=m$ or $M[r_2+1,c]=1$. In the same spirit, we define a \emph{one-interval} to be an interval of one-entries in a single line of $M$ bounded by zero-entries (or edges of the matrix).
+For a matrix~$M\in\Mat$, a row interval $M[\{r\},[c_1,c_2]]$ is a \emph{zero-interval} if all entries are zero-entries, $c_1=0$ or $M[r,c_1-1]=1$ and $c_2=n$ or $M[r,c_2+1]=1$. In other words, it is an interval of zero-entries bounded by one-entries. Symmetrically, we also call a column interval $M[[r_1,r_2,\{c\}]]$ a \emph{zero-interval} if all entries are zero-entries, $r_1=0$ or $M[r_1-1,c]=1$ and $r_2=m$ or $M[r_2+1,c]=1$. In the same spirit, we define a \emph{one-interval} to be an interval of one-entries in a single line of $M$ bounded by zero-entries (or edges of the matrix).
 \end{defn}
 
-In the previous chapter, for pattern~$P\in\Pat$ it very often holds that any inclusion maximal matrix $M$ avoiding $P$ as an interval minor has at most $l$ zero-intervals in each row and at most $k$ zero-intervals in each column. The main goal of this chapter is to describe patterns for which the size of a pattern bounds the number of zero-intervals of any inclusion maximal matrix that avoids it.
+\begin{defn}
+For a class of matrices $\class{M}$, we say that a matrix $M\in\class{M}$ is \emph{critical} in $\class{M}$ if the change of any zero-entry to a one-entry creates a matrix that does not belong to $\class{M}$. For any set of matrices~$\class{P}$, let $\Avmax{\class{P}}$ be a set of all critical matrices avoiding $\class{P}$ as an interval minor.
+\end{defn}
 
-$$P_1=\smm{ &\bullet& \\\bullet& & \\ & &\bullet}\ P_2=\smm{ &\bullet& \\ & &\bullet\\\bullet& & }\ P_3=\smm{\bullet& & \\ & &\bullet\\ &\bullet& }\ P_4=\smm{ & &\bullet\\\bullet& & \\ &\bullet& }$$
-
-Ultimately, we show that for every matrix $P$, there is an inclusion maximal matrix $M\in\Avm{P}$ with arbitrarily many zero-intervals if and only if $P$ contains an interval minor $P_1,P_2,P_3$ or $P_4$.
+In Chapter~\ref{chap:chars}, for a pattern~$P\in\Pat$ it very often holds that any matrix from $\Avmax{P}$ has at most $k$ zero-intervals in each row and at most $l$ zero-intervals in each column. The main goal of this chapter is to describe patterns~$P$ for which there can be arbitrarily many zero-intervals in matrices from $\Avmax{P}$.
 
 \section{Pattern complexity}
-
-Let us present some useful notion. First of all, every time we speak about a \emph{maximal} matrix of a class, we mean inclusion maximal -- it has no zero-entry that can be changed to a one-entry so that it still belongs to the class. In terms of pattern avoidance, maximal matrices are those for which a change of a zero-entry creates a mapping of the pattern (or possibly many mappings).
+We define the complexity of a class of matrices as the maximum number of zero-intervals (or one intervals as they go in pair) a critical matrix from the class can have.
 
 \begin{defn}
-For any matrix $P$, let $\Avmax{P}$ be a set of all maximal matrices avoiding $P$ as an interval minor.
+For a class of matrices $\class{M}$, we define its \emph{row-complexity} $\rc{\class{M}}$ to be the supremum of the number of zero-intervals in a single row of any critical matrix~$M\in\class{M}$. We say that $\class{M}$ is \emph{row-bounded}, if its row-complexity is finite, and \emph{row-unbounded} otherwise. Symmetrically, we define its \emph{column-complexity}~$\cc{\class{M}}$ and the property of being \emph{column-bounded} and \emph{column-unbounded}. The class $\class{M}$ is \emph{bounded} if it is both row-bounded and column-bounded; otherwise, it is \emph{unbounded}.
 \end{defn}
 
 \begin{defn}
-Let $P$ be a pattern, let $e$ a one-entry of $P$, $M\in\Avm{P}$ and let $z$ be an arbitrary zero-interval of $M$. We say that $z$ is \emph{usable for} $e$ if there is a zero-entry contained in $z$ such that if we change it to a one-entry, it creates a mapping that uses the new one-entry to map $e$. This way, $z$ can be usable for many one-entries of $P$ at the same time. 
+We say that a set of patterns $\class{P}$ is \emph{bounding}, if the class $\Avm{\class{P}}$ is bounded; otherwise, it is \emph{non-bounding}.
+\end{defn}
+
+Now that we introduced the most essential definitions in this chapter, it is time to state the main theorem:
+
+\begin{thm}
+A pattern~$P$ is bounding $\Leftrightarrow P_i\nim P$ for all $1\leq i\leq4$.
+$$P_1=\smm{ &\bullet& \\\bullet& & \\ & &\bullet}\ P_2=\smm{ &\bullet& \\ & &\bullet\\\bullet& & }\ P_3=\smm{\bullet& & \\ & &\bullet\\ &\bullet& }\ P_4=\smm{ & &\bullet\\\bullet& & \\ &\bullet& }$$
+\end{thm}
+
+We prove the statement in several steps. We show the first implication in Subsection~\ref{subsec:nonbound}, then we proof multiple lemmata so that we finally show the other implication at the end of Subsection~\ref{subsec:bound}. Before we start proving the main result, we introduce some useful notation and get more familiar with zero-intervals.
+
+\begin{defn}
+Let $P$ be a pattern, let $e$ be a one-entry of $P$, consider a matrix $M\in\Avm{P}$ and let $z$ be an arbitrary zero-interval of $M$. We say that $z$ is \emph{usable for} $e$ if there is a zero-entry contained in $z$ such that if we change it to a one-entry, it creates a mapping of $P$ to $M$ that uses the new one-entry to map $e$. This way, $z$ can be usable for many one-entries of $P$ at once. 
 \end{defn}
 
 \begin{obs}
-Let $P\in\Pat$ and $M\in\Mat$ be matrices such that $\PnimM$. Let $z=M[\{r_1\},[c_1,c_2]]$ be a zero-interval of $M$ usable for a one-entry~$e=P[r,c]$. If we change a zero-entry of $z$ and create a mapping of $P$ that uses the changed entry to map $e$, then no such mapping can map column~$c$ outside of columns $[c_1,c_2]$ of $M$. 
+Let $P\in\Pat$ and $M\in\Mat$ be matrices such that $\PnimM$. Let $z=M[\{r_1\},[c_1,c_2]]$ be a zero-interval of $M$ usable for a one-entry~$e=P[r,c]$. If we change a zero-entry of $z$ and create a mapping of $P$ that uses the changed entry to map $e$, then the mapping can only map column~$c$ of $P$ to columns $[c_1,c_2]$ of $M$. 
 \end{obs}
 \begin{proof}
-Since the changed entry is used to map $e$, clearly every mapping needs to use a column from $[c_1,c_2]$ to map column~$c$. If, for contradiction, after a change of a zero-entry there is a mapping using columns outside $[c_1,c_2]$ then it, without loss of generality. uses $c_1-1$ but since it bounds zero-interval~$z$, it is a one-entry and this one-entry can be used in the mapping instead of the changed entry, which gives us a contradiction with $\PnimM$.
+Since the changed entry is used to map $e$, clearly the mapping needs to use a column from $[c_1,c_2]$ to map column~$c$. If, for contradiction, the mapping uses columns outside $[c_1,c_2]$ then, without loss of generality, it uses the column $c_1-1$. Since that column bounds the zero-interval~$z$, $M[r_1,c_1-1]=1$ and this one-entry can be used in the mapping instead of the changed entry, which gives us a contradiction with $\PnimM$.
 \end{proof}
 
 \begin{defn}
-For a class of matrices $\class{M}$, we define its \emph{row-complexity}, $\rc{\class{M}}$ to be the supremum of the number of zero-intervals in a single row of any maximal $M\in\class{M}$. We say that $\class{M}$ is \emph{row-bounded}, if its row-complexity is finite, and \emph{row-unbounded} otherwise. Symmetrically, we define \emph{column-complexity}~$\cc{\class{M}}$ and the property of being \emph{column-bounded} and \emph{column-unbounded}. Class $\class{M}$ is \emph{bounded} if it is both row-bounded and column-bounded and it is \emph{unbounded} otherwise.
-\end{defn}
-
-\begin{defn}
-We say that a set of pattern $\class{P}$ is \emph{bounding}, if the class $\Avm{\class{P}}$ is bounded and is \emph{non-bounding} otherwise.
-\end{defn}
-
-\begin{defn}
-Let $\class{P}$ be a set of patterns and let $e$ be a one-entry of any $P\in\class{P}$. We define the \emph{row-complexity} of $e$, $\rce{\Avm{\class{P}}}{e}$ to be the supremum of the number of zero-intervals of a single row of any $M\in\Avmax{\class{P}}$ that are usable for $e$. We say that $e$ is \emph{row-unbounded} in $\Avm{\class{P}}$ if $\rce{\Avm{\class{P}}}{e}=\infty$ and \emph{row-bounded} otherwise. Symmetrically, we define the \emph{column-complexity}~$e$, $\cce{\Avm{\class{P}}}{e}$ to be the maximum number of zero-intervals of a single column of any matrix from $\Avmax{\class{P}}$ that are usable for $e$ and say $e$ is \emph{column-unbounded} if it is infinite and \emph{column-bounded} otherwise.
+Let $\class{P}$ be a set of patterns and let $e$ be a one-entry of any matrix~$P\in\class{P}$. We define the \emph{row-complexity} of $e$, $\rce{\Avm{\class{P}}}{e}$ to be the supremum of the number of zero-intervals of a single row of any $M\in\Avmax{\class{P}}$ that are usable for $e$. We say that $e$ is \emph{row-unbounded} in $\Avm{\class{P}}$ if $\rce{\Avm{\class{P}}}{e}=\infty$ and \emph{row-bounded} otherwise. Symmetrically, we define the \emph{column-complexity} of $e$, $\cce{\Avm{\class{P}}}{e}$ to be the maximum number of zero-intervals of a single column of any matrix from $\Avmax{\class{P}}$ that are usable for $e$, and  we say $e$ is \emph{column-unbounded} if it is infinite and \emph{column-bounded} otherwise.
 \end{defn}
 
 The following observation follows directly from the definition and we use it heavily throughout the chapter to break symmetries.
 
 \begin{obs}
 \label{obs:transposebounded}
-For every set $\class{M}$, $\class{M}$ is row-bounded if and only if $\class{M}^\top$ is column-bounded.
+For every set $\class{M}$, $\class{M}$ is row-bounded $\Leftrightarrow\class{M}^\top$ is column-bounded.
 \end{obs}
 
 \subsection{Adding empty lines}
-
-Similarly, as we did in Chapter~\ref{chap:chars}, we show that we do not need to consider patterns with leading (and ending) empty rows (and columns).
+As in Chapter~\ref{chap:chars}, we show that we do not need to consider patterns with leading and ending empty rows and columns.
 
 \begin{obs}
-For a matrix~$P\in\Pat$ and integer $n$, let $P'=P\hsum0^{k\times n}$. Matrix $P$ is bounding if and only if $P'$ is bounding. Moreover, if $P$ is bounding, then $\rc{\Avm{P'}}=\rc{\Avm{P}}+1$.
+For a matrix~$P\in\Pat$ and an integer $n$, let $P'=P\hsum0^{k\times n}$. The matrix~$P$ is bounding $\Leftrightarrow P'$ is bounding. Moreover, if $P$ is bounding, then $\rc{\Avm{P'}}\leq\rc{\Avm{P}}+1$.
 \end{obs}
 
 \begin{lemma}
 \label{lemma:twocols2}
-Let $P\in\bin^{2\times k}$ and for any $l\geq1$ let $P^l\in\bin^{(l+2)\times k}$ be a pattern created from $P$ by adding $l$ new empty rows in between the two row of $P$. For every one-entry~$e$ of $P^l$ $\rce{\Avm{P^l}}{e}\leq k^2$.
+Let $P\in\bin^{2\times k}$ be a matrix and for any $l\geq1$, let $P^l\in\bin^{(l+2)\times k}$ be a pattern created from $P$ by adding $l$ new empty rows in between the two row of $P$. For every one-entry~$e$ of $P^l$ it holds $\rce{\Avm{P^l}}{e}\leq k^2$.
 \end{lemma}
 \begin{proof}
-Given $M\in\Avmax{P}$, let us look at an arbitrary row~$r$ of $M$. Without loss of generality assume $e=P[1,c]$. For contradiction, assume there are $k^2+1$ zero-intervals $z_1,\dots,z_{k^2+1}$ in $r$ usable for $e$.
+Given a matrix~$M\in\Avmax{P}$, consider an arbitrary row~$r$ of $M$. Without loss of generality, assume $e=P[1,c]$. For contradiction, assume there are $k^2+1$ zero-intervals $z_1,\dots,z_{k^2+1}$ in $r$ usable for $e$. In particular, the first $k^2$ of them are bounded by a one-entry from the right side.
 \begin{itemize}
 	\item $P[2,c]=1$: Clearly, there is a one-entry in rows $[r+l+1,m]$ underneath each $z_j$ and if we combine each such one-entry with a one-entry bounding corresponding $z_j$, we find a mapping of $\left(\{1\}^{2\times k^2}\right)^l$, contradicting $\PnimM$.
-	\item $P[2,c]=0$: For each $i\in[t]$, we define an extended interval $z^*_i$ to be the interval containing $z_i$ and also all elements of $r$ between $z_i$ and $z_{i+1}$. Because of the Pigeonhole principle, we can find either $k$ consecutive extended intervals such that there are no one-entries in rows $[r+l+1,m]$ underneath them, or $k$ extended intervals such that there is a one-entry in rows $[r+l+1,m]$ underneath each of them. Because each extended interval contains a one-entry, in the second case we find $\left(\{1\}^{k\times2}\right)^l$ as an intervals minor. In the first case, without loss of generality, assume $P[2,c_1]=1$ and it is the minimum such $c_1>c$. Also let $z_{first},\dots,z_{last}$ be the consecutive zero-intervals. Now consider the mapping of $P^l$ created when a zero-entry of $z_{first}$ gets changed to a one-entry used to map $e$. Since $P[2,c_1]=1$ and there are no one-entries in rows $[r+l+1,m]$ underneath extended intervals $z_{first}$-$z_{last}$, $P^l[l+2,c_1]$ has to be mapped to the columns of $M$ after the end of $z_{last}$. This leaves $k$ one-entries to be used to map potential one-entries in $P^l[\{l+2\},[c,c_2-1]]$ and so $P^l\im M$.
+	\item $P[2,c]=0$: For each $i\in[k^2]$, we define an extended interval $z^*_i$ to be the interval containing $z_i$ and also all entries on the row~$r$ between $z_i$ and $z_{i+1}$. Because of the Pigeonhole principle, we can find either $k$ consecutive extended intervals such that there are no one-entries in rows $[r+l+1,m]$ underneath them, or $k$ (not necessarily consecutive) extended intervals such that there is a one-entry in rows $[r+l+1,m]$ underneath each of them. Because each extended interval contains a one-entry, in the second case we find $\left(\{1\}^{k\times2}\right)^l$ as an intervals minor.
+	
+	In the first case, without loss of generality, assume $P[2,c_1]=1$ and it is the minimum such $c_1>c$. Let $z'_1,\dots,z'_k$ be the consecutive zero-intervals. Consider the mapping of $P^l$ created when a zero-entry of $z'_1$ is changed to a one-entry used to map $e$. Since $P[2,c_1]=1$ and there are no one-entries in rows $[r+l+1,m]$ underneath extended intervals $z'_1,\dots,z'_k$, $P^l[l+2,c_1]$ has to be mapped to the columns of $M$ after the end of $z'_k$. This leaves $k$ one-entries to be used to map potential one-entries in $P^l[\{l+2\},[c,c_1-1]]$ and so $P^l\im M$, which is again a contradiction.
 \end{itemize}
 \end{proof}
 
 \begin{cor}
 \label{cor:twocols}
-Let $P\in\bin^{k\times2}$ and for any $l\geq1$ let $P^l\in\bin^{k\times(l+2)}$ be a pattern created from $P$ by adding $l$ new empty columns in between the two columns of $P$. Then $\Avm{P^l}$ is bounded for any $l\geq1$.
+Let $P\in\bin^{k\times2}$ be a matrix and for any $l\geq1$, let $P^l\in\bin^{k\times(l+2)}$ be a matrix created from $P$ by adding $l$ new empty columns in between the two columns of $P$. Then $\Avm{P^l}$ is bounded for any $l\geq1$.
 \end{cor}
 \begin{proof}
 We know $\Avm{P^l}$ is row-bounded from Lemma~\ref{lemma:twocols}. From Lemma~\ref{lemma:twocols2} and Observation~\ref{obs:transposebounded} we have that the class is also column-bounded.
 \end{proof}
 
 \subsection{Non-bounding patterns}
-We see that for patterns having only two rows or columns we can indeed bound the number of zero-intervals of maximal matrices avoiding them. On the other hand, already for a pattern of size $3\times3$ we show that there are maximal matrices with arbitrarily many zero-intervals.
+\label{subsec:nonbound}
+We see that for patterns having only two non-empty rows or columns we can indeed bound the number of zero-intervals of critical matrices avoiding them. On the other hand, already for a pattern of size $3\times3$ we show that there are maximal matrices with arbitrarily many zero-intervals.
 
 \begin{lemma}
 \label{lemma:manyints}
-Class $\Avm{P_1}$ is unbounded.
+A class $\Avm{P_1}$ is unbounded.
 \end{lemma}
-\begin{proof} For given $n$, let $M$ be a $(2n+1)\times(2n+1)$ matrix described by the picture:
+\begin{proof} For a given integer $n$, let $M$ be a $(2n+1)\times(2n+1)$ matrix described by the picture:
 $$\smm{	\bullet& &\bullet& &\bullet&\cdots&\bullet& &\bullet& &\bullet\\
 		 & & & & &\cdots& & &\bullet&\bullet&\bullet\\
 		 & & & & &\cdots& & &\bullet&\bullet&\bullet\\
@@ -99,18 +105,18 @@ $$\smm{	\bullet& &\bullet& &\bullet&\cdots&\bullet& &\bullet& &\bullet\\
 		 }$$
 We see that $P_1\nim M$ because we always need to map $P_1[2,1]$ and $P_1[3,3]$ to just one ``block'' of one-entries, which only leaves a zero-entry for $P_1[1,2]$.
 
-If we change any zero-entry of the first row into a one-entry we get a matrix containing an interval minor of $\{1\}^{3\times3}$; therefore, containing $P_1$ as an interval minor. In case $M$ is not maximal, we can add some more one-entries to make it maximal but it will still contain a row with $n$ zero-intervals.
+If we change any zero-entry of the first row into a one-entry, we get a matrix containing an interval minor of $\{1\}^{3\times3}$; therefore, containing $P_1$ as an interval minor. In case $M$ is not critical, we add some more one-entries to make it critical but it will still contain a row with $n$ zero-intervals.
 \end{proof}
 
-Not only $M\in\Avmax{P_1}$ but it also avoids any $P\in\bin^{3\times3}$ such that $P_1\im P$. Its rotations avoid rotations of $P_1$ and we can deduce that a big portion of patterns of size $3\times3$ are non-bounding. Moreover, the result can be generalized also for bigger matrices.
+Not only $M\in\Avmax{P_1}$ but it also avoids any $P\in\bin^{3\times3}$ such that $P_1\im P$. Its rotations avoid rotations of $P_1$ and we conclude that a big portion of patterns of size $3\times3$ are non-bounding. Moreover, the result can be generalized also for bigger matrices.
 
 \begin{thm}
-For every $P$ such that $P_1\im P$, $\Avm{P}$ is unbounded.
+For every matrix $P$ such that $P_1\im P$, $\Avm{P}$ is unbounded.
 \end{thm}
 \begin{proof}
-First, assume there is a mapping of $P_1$ into $P\in\Pat$ that assigns a one-entry of the first row to $P_1[1,2]$, a one-entry of the first column to $P_1[2,1]$ and a one-entry of the last row and column to $P_1[3,3]$. Then, we use a similar construction to what we did in the proof of Lemma~\ref{lemma:manyints} to find a matrix $M\in\Avmax{P}$ with $n$ zero-intervals for any $n$.
+First, assume there is a mapping of $P_1$ into $P\in\Pat$ that maps $P_1[1,2]$ to a one-entry of the first row of $P$, $P_1[2,1]$ to a one-entry of the first column of $P$ and $P_1[3,3]$ to the bottom-right corner of $P$. Then, we use a similar construction as we did in the proof of Lemma~\ref{lemma:manyints} to find a matrix $M\in\Avmax{P}$ with $n$ zero-intervals for any $n$.
 
-Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_1,c_1],P[r_2,c_2]$ and $P[r_3,c_3]$ be one-entries that can be used to map $P_1[1,2],P_1[2,1]$ and $P_1[3,3]$ respectively. We take a submatrix~$P':=P[[r_1,r_3],[c_2,c_3]]$. Such a pattern fulfills assumptions of the more restricted case above and we can find a matrix $M'\in\Avmax{P'}$ having $n$ zero-intervals. We construct $M$ from $M'$ by simply adding new rows and columns containing only one-entries. We add $r_1-1$ rows in front of the first row and $k-r_3$ rows behind the last row. We also add $c_2-1$ columns in front of the first column and $l-c_3$ columns behind the last column. Constructed matrix~$M$ avoids $P$ an an interval minor because its submatrix $P'$ cannot be mapped to $M'$. At the same time, any change of a zero-entry of the $r_1$-th row of $M$ to a one-entry creates a copy of ${1}^{k\times l}$. Constructed $M$ can be seen in Figure~\ref{fig:manyints}.
+Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_1,c_1],P[r_2,c_2]$ and $P[r_3,c_3]$ be one-entries that can be used to map $P_1[1,2]$, $P_1[2,1]$ and $P_1[3,3]$ respectively. We take a submatrix~$P':=P[[r_1,r_3],[c_2,c_3]]$. Such a matrix fulfills assumptions of the more restricted case above and we find a matrix $M'\in\Avmax{P'}$ having $n$ zero-intervals. We construct $M$ from $M'$ by simply adding new rows and columns containing only one-entries. We add $r_1-1$ rows in front of the first row and $k-r_3$ rows behind the last row. We also add $c_2-1$ columns in front of the first column and $l-c_3$ columns behind the last column. The constructed matrix~$M$ avoids $P$ an an interval minor because its submatrix $P'$ cannot be mapped to $M'$. At the same time, any change of a zero-entry of the $r_1$-th row of $M$ to a one-entry creates a copy of ${1}^{k\times l}$. The constructed matrix $M$ can be seen in Figure~\ref{fig:manyints}.
 
 \begin{figure}[!ht]
 \centering
@@ -121,33 +127,33 @@ Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_
 \end{proof}
 
 \subsection{Bounding patterns}
-
-What makes it even more interesting is that any pattern avoiding all rotations of $P_1$ is already bounding.
+\label{subsec:bound}
+What makes it even more interesting is that any pattern avoiding all rotations of $P_1$ as interval minors is already bounding. For simplicity, whenever we say that a matrix has only $k$ non-empty lines, we mean that every one-entry belongs to one of the $k$ lines.
 
 \begin{thm}
 \label{thm:boundedints}
-Let $P$ be a pattern avoiding all rotations of $P_1$, then $P$:
+Let $P$ be a pattern avoiding all rotations of $P_1$, then $P$
 \begin{enumerate}
 	\item contains at most three non-empty lines or
 	\item avoids $\smm{\bullet& \\ &\bullet}$ or $\smm{ &\bullet\\\bullet& }$.
 \end{enumerate}
 \end{thm}
 \begin{proof}
-Assume $P$ has four one-entries that do not share any row or column. Then those one-entries induce a $4\times4$ permutation inside $P$ and because $P$ does not contain any rotation of $P_1$, the induced permutation is either $1234$ or $4321$. Without loss of generality, assume it is the first one and denote its one-entries by $e_1,e_2,e_3$ and $e_4$.
+Assume $P$ has four one-entries that do not share any row or column. Then those one-entries induce a $4\times4$ permutation inside $P$ and because $P$ does not contain any rotation of $P_1$, the induced permutation is either $1234$ or $4321$. Without loss of generality, assume it is the first one and denote its one-entries by $e_1,e_2,e_3$ and $e_4$. Clearly, no one-entry from $e_1,e_2,e_3$ and $e_4$ can be part of any mapping of $P'=\smm{\bullet& \\ &\bullet}$ because it would induce a mapping of a rotation of $P_1$.
 
-For contradiction, assume $P$ also contains $P'=\smm{\bullet& \\ &\bullet}$. Clearly, no one-entry from $e_1,e_2,e_3$ and $e_4$ can be part of any mapping of $P'$ because it would induce a mapping of a rotation of $P_1$.
-
-Let $e_2=P[r_2,c_2]$ and $e_3=P[r_3,c_3]$. The submatrix~$P[[r_2],[c_2,l]]$ avoids $P'$; otherwise, together with $e_1$ it would give us a rotated copy of $P_1$. Symmetrically, $P[[r_3,k],[c_3]]$ does not contain $P'$. Also, $P[[r_3-1],[c_3-1]]$ and $P[[r_2+1,k],[c_2+1,l]]$ are empty; otherwise, they would together with $e_2$ and $e_3$ give us a rotation of $P_1$. Up to rotation, the only possible way to have $P'\im P$ is that $P'[1,1]$ is mapped to a one-entry from $P[[r_3-1],[c_2,c_3-1]]$ but then this entry together with $e_1$ and $e_3$ give us a rotation of $P_1$, which is a contradiction.
+Let $e_2=P[r_2,c_2]$ and $e_3=P[r_3,c_3]$. The submatrix~$P[[r_2],[c_2,l]]$ avoids $P'$; otherwise, together with $e_1$ it would give $P_2$ as an interval minor. Symmetrically, $P'\nim P[[r_3,k],[c_3]]$. The submatrix~$P[[r_3-1],[c_3-1]]$ is empty; as otherwise, any one-entry would create a rotation of $P_1$ with $e_3$ and either $e_1$ or $e_2$. Symmetrically, the submatrix $P[[r_2-1],[c_2-1]]$ is also empty. This leave no one-entry in $P$ to be used to map $P'[1,1]$ and so $P'\nim P$.
 \end{proof}
+
+We now need to prove that whenever $P$ avoids all rotations of $P_1$ (and satisfies one of the conditions we just showed) it is bounding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% one non-empty line
 \begin{lemma}
 Let $P\in\Pat$ be a pattern having one non-empty line. Then $\rc{\Avm{P}}\leq k$ and $\cc{\Avm{P}}\leq l$.
 \end{lemma}
 \begin{proof}
-Without loss of generality, let the non-empty line be a row~$r$. Consider any $M\Avmax{P}$. Matrices $M[[r-1],[n]]$ and $M[[m-r+1,m],[n]]$ contain no zero-entry. If we look at any other row, it cannot contain $k$ one-entries, so the maximum number of zero-intervals is $k$.
+Without loss of generality, let the non-empty line be a row~$r$. Consider any matrix~$M\in\Avmax{P}$. Submatrices $M[[r-1],[n]]$ and $M[[m-r+1,m],[n]]$ contain no zero-entry. If we look at any other row, it cannot contain $k$ one-entries, so the maximum number of zero-intervals is $k$.
 
-Consider a column~$c$ of $M$. If there is at least one one-entry in $M[[r,m-r],c]$ then because $M$ is maximal, the whole column is made of one-entries. Otherwise, there are two one-intervals $M[[r-1],c]$ and $M[[m-r,m],c]$.
+Consider a column~$c$ of $M$. If there is at least one one-entry in $M[[r,m-r-1],c]$ then because $M$ is critical, the whole column is made of one-entries. Otherwise, there are two one-intervals $M[[r-1],c]$ and $M[[m-r,m],c]$.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% two non-empty lines
@@ -155,9 +161,9 @@ Consider a column~$c$ of $M$. If there is at least one one-entry in $M[[r,m-r],c
 Let $P\in\Pat$ be a pattern having two non-empty lines. Then $\rc{\Avm{P}}\leq k^2+l$ and $\cc{\Avm{P}}\leq l^2+k$.
 \end{lemma}
 \begin{proof}
-First, we assume the two non-empty lines of $P$ are rows $r_1<r_2$ (or symmetrically columns). From Observation~\ref{obs:emptyrows} and maximality of $M$ we have that $M[[r_1-1],[n]]$ and $M[[m-r_2+1,m],[n]]$ contain no zero-entry. Therefore, we may restrict ourselves to the case when $r_1=1$ and $r_2=k$. From Corollary~\ref{cor:twocols}, we have that there are at most $k^2$ zero-intervals in each $M\in\Avmax{P}$.
+First, we assume the two non-empty lines of $P$ are rows $r_1<r_2$ (or symmetrically columns) and consider any matrix~$M\in\Avmax{P}$. From Observation~\ref{obs:emptyrows} and maximality of $M$, we have that the submatrices $M[[r_1-1],[n]]$ and $M[[m-r_2+1,m],[n]]$ contain no zero-entry. Therefore, we may restrict ourselves to the case when $r_1=1$ and $r_2=k$. From Corollary~\ref{cor:twocols}, we have that there are at most $k^2$ zero-intervals in each row of $M$ and there are at most two zero-intervals in each column of $M$.
 
-Let the two non-empty lines of $P$ be a row~$r$ and a column~$c$. Because of symmetry, we only show the bound for rows. Let us take an arbitrary row of $M$ an look at its zero-intervals. For every one-entry~$e$ of the pattern except those in the $r$-th row, there is at most one zero-interval usable for $e$. For contradiction, assume there are two such zero-intervals $z_1$ and $z_2$. Let Figure~\ref{fig:twolines} illustrate the situation where dashed and dotted lines form mappings of an interval minor $P$ to $M$ when a zero-entry of $z_1$ and $z_2$ respectively is changed to a one-entry. When we take the outer two vertical and horizontal lines, we get a mapping of $P$ that can use an existing one-entry in between $z_1$ and $z_2$ to map $e$. This gives us a contradiction with $\PnimM$.
+Let the two non-empty lines of $P$ be a row~$r$ and a column~$c$. Because of symmetry, we only show the bound for rows. For every one-entry~$e$ of $P$, except those in the row~$r$, there is at most one zero-interval usable for $e$ in each row of any $M\Avmax{P}$. For contradiction, assume there are two such zero-intervals $z_1$ and $z_2$ in the same row. Let Figure~\ref{fig:twolines} illustrate the situation where dashed and dotted lines form two mappings of $P$ to $M$ when a zero-entry of $z_1$ and $z_2$ respectively is changed to a one-entry used to map $e$. When we take the outer two vertical and horizontal lines, we get a mapping of $P$ that uses an existing one-entry in between $z_1$ and $z_2$ to map $e$. This is a contradiction with $\PnimM$.
 
 \begin{figure}[!ht]
 \centering
@@ -169,48 +175,61 @@ Let the two non-empty lines of $P$ be a row~$r$ and a column~$c$. Because of sym
 For a one-entry $e=P[r,c']$, if $c'\leq c$ then there must be less than $c'$ one-entries before any zero-intervals usable for $e$; otherwise, we could map $P[r,[1,c']]$ just to the single row of $M$. It follows that $e$ is row-bounded. Symmetrically, the same holds in case $c'>c$ and together we have at most $k+l$ zero-intervals in each $M\in\Avmax{P}$.
 \end{proof}
 
+Before we proof the other cases, let us introduce three useful lemmata that make the future case analysis bearable.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Lemma H
 \begin{lemma}
 \label{lemma:H}
-Let $P\in\Pat$ be a pattern structured like one of the matrices in Figure~\ref{fig:lemmaH}. Then every one-entry in $P[\{r_2\},[c_1,c_2]]$ is row-bounded.
+Let $P\in\Pat$ be one of the four matrices in Figure~\ref{fig:lemmaH}. Then every one-entry in $P[\{r_2\},[c_1,c_2]]$ is row-bounded. Moreover, the same also holds if we change some one-entries to zero-entries.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\textwidth]{img/lemmaH.pdf}
-\caption{Patterns for which one-entries in row~$r_2$ and columns $c_1$ to $c_2$ are row-bounded. One-entries may only be in the areas enclosed by bold lines.}
+\caption{Patterns for which one-entries in row~$r_2$ and columns $[c_1,c_2]$ are row-bounded. One-entries are in the areas enclosed by bold lines and on bold lines.}
 \label{fig:lemmaH}
 \end{figure}
 \end{lemma}
 \begin{proof}
-Let $P$ be the first described pattern and let $k'=c_2-c_1$. We show that for each one-entry $e$ from row~$r_2$ and every $M\in\Avmax{P}$ there is at most $k'$ zero-intervals for which it is usable. For contradiction assume there is a row~$r$ with $k'+1$ zero-intervals usable for $e$. It follows that there are at least $k'$ one-entries in between two most distant zero-intervals $z_1$ and $z_2$. Therefore, the whole row~$r_2$ can be mapped just to $r$. Since changing a zero-entry of $z_1$ to a one-entry to which $e$ can be mapped creates a partitioning of $M$ where all one-entries from columns $1$ to $c_1$ are mapped to columns up to $z_1$ and similarly all one-entries from columns $c_2$ to $l$ can be mapped to columns from and past $z_2$, we can simply map empty rows from $r_1+1$ to $r_3-1$ around row $r$ and use the rest to map rows $r_1$ and $r_2$. Described partitioning gives us $\PimM$ and a contradiction. We can see the partitioning in Figure~\ref{fig:lemmaH1}.
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\textwidth]{img/lemmaH1.pdf}
-\caption{Mapping of a pattern into a matrix only using one line to map an empty line of the pattern and only using one line to map row~$r_2$.}
-\label{fig:lemmaH1}
-\end{figure}
+Let a pattern~$P$ be the first described matrix and let $k'=c_2-c_1$. We show that for each one-entry~$e\in P[\{r_2\},[c_1,c_2]]$ and every matrix~$M\in\Avmax{P}$ there are at most $k'$ zero-intervals usable for $e$ in each row of $M$. For contradiction, assume there is a row~$r$ with $k'+1$ zero-intervals usable for some $e$. It follows that there are at least $k'$ one-entries in between the two most distant zero-intervals $z_1$ and $z_2$. Therefore, the whole row~$r_2$ can be mapped just to the row~$r$. Changing a zero-entry of $z_1$ to a one-entry, to which $e$ can be mapped, creates a mapping of $P$ to $M$, in which all one-entries from columns $[c_1]$ are mapped to columns before $z_1$ (and $z_1$) and similarly all one-entries from columns $[c_2,l]$ can be mapped to columns past $z_2$ (and $z_2$). It also holds that all the one-entries from the row~$r_1$ are mapped (in both mappings) to one-entries of $M$ in rows $[r-r_2+r_1]$ (and symmetrically for one-entries from the row~$r_3$). Thus, we can simply map empty rows $[r_1+1,r_3-1]$ around row $r$ and use the rest to map rows $r_1$ and $r_2$.
+%The described mapping gives us $\PimM$ and a contradiction. We can see the mapping in Figure~\ref{fig:lemmaH1}.
+%\begin{figure}[!ht]
+%\centering
+%\includegraphics[width=\textwidth]{img/lemmaH1.pdf}
+%\caption{Mapping of a pattern into a matrix only using one line to map an empty line of the pattern and only using one line to map row~$r_2$.}
+%\label{fig:lemmaH1}
+%\end{figure}
 
 Proofs of cases two and three are similar to the first one and we skip them.
 
-Let us look on the fourth case. For $i$-th one-entry in row~$r_2$ (ordered from left to right and only considering those in columns $c_1$ to $c_2$) no zero-interval of a maximal matrix avoiding the pattern cannot have $i$ one-entries to the left of it and so each such one-entry is bounded by $i\geq l$.
+Let a pattern~$P$ be the fourth described matrix and consider any matrix~$M\in\Avmax{P}$. For the $i$-th one-entry~$e$ in the row~$r_2$ (ordered from left to right and only considering those in columns $[c_1,c_2]$) no zero-interval of $M$ usable for $e$ cannot have $i$ one-entries before it and so the row-complexity of each such one-entry is bounded by $i\geq l$.
 
-It is important to realize we could not have used the same proof we used for the first three cases also for the fourth case, because we can never rely on the fact a mapping of $P$ only uses one row of $M$ to map row~$r_2$. This is because in the fourth case, unlike the first three, there are also potential one-entries in $P[\{r_2\},[c_2,l]]$.
+Throughout the proof, we have never used as a fact that an entry of $M$ is a one-entry and so the proof also holds for any pattern~$P$ created from any of the fourth described matrices by deletion of one-entries.
 \end{proof}
+
+It is important to realize that we could not have used the same proof we used for the first three cases also for the fourth case, because we can never rely on the fact a mapping of $P$ only uses one row of $M$ to map the row~$r_2$. This is because in the fourth case, there are also potential one-entries in $P[\{r_2\},[c_2+1,l]]$.
+
+What follows is a direct corollary of the fourth case of just stated Lemma~\ref{lemma:H}. Even though it is very simple and straightforward, it is going to be used so often that it is worth stating it apart from the rest.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% First non-empty column bounded
+\begin{lemma}
+\label{lemma:First}
+Let $P$ be a matrix and let $c$ be its first non-empty column. Then every one-entry from $c$ is row-bounded. \qed
+\end{lemma}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Lemma I
 \begin{lemma}
 \label{lemma:I}
-Let $P\in\Pat$ be a pattern structured like one of the matrices in Figure~\ref{fig:lemmaI}. Then every one-entry in $P[[r_1+1,r_2-1],\{c\}]$ is row-bounded. Moreover, in the first two cases, if $c=l-1$ and there are no one-entries in $P[[r_1-1],\{c\}]$ and $P[[r_2+1,k],\{c\}]$, then also one-entries $P[r_1,c]$ and $P[r_2,c]$ are row-bounded.
+Let $P\in\Pat$ be one of the three matrices in Figure~\ref{fig:lemmaI}. Then every one-entry in $P[[r_1+1,r_2-1],\{c\}]$ is row-bounded. Moreover, the same also holds if we change some one-entries to zero-entries.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/lemmaI.pdf}
-\caption{Patterns for which one-entries in column~$c$ and rows $r_1+1$ to $r_2-1$ are row-bounded. One-entries may only be in the areas enclosed by bold lines.}
+\caption{Patterns for which one-entries in column~$c$ and rows $[r_1+1,r_2-1]$ are row-bounded. One-entries are in the areas enclosed by bold lines and on bold lines.}
 \label{fig:lemmaI}
 \end{figure}
 \end{lemma}
 \begin{proof}
-Let $P$ be the first described pattern. We show that for each one-entry from $P[[r_1+1,r_2-1],\{c\}]$ and every $M$ maximal matrix avoiding $P$ there is at most one zero-interval for which it is usable. For contradiction assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Look at Figure~\ref{fig:lemmaI1} and let the dashed partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and let the dotted partitioning be a mapping of $P$ to $M$ when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map column $c$ to where it is mapped in both mappings together and map rows $r_1$ and $r_2$ as suggested in the picture, we get a partitioning of $P$ inside $M$ and so a contradiction with $\PnimM$.
+Let $P$ be a submatrix of the first described matrix. We show that for each one-entry~$e$ from $P[[r_1+1,r_2-1],\{c\}]$ and every matrix $M\in\Avmax{P}$ there is at most one zero-interval usable for $e$ in $M$. For contradiction, assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Consider Figure~\ref{fig:lemmaI1}, where the dashed lines show a mapping of $P$ to $M$ created when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and the dotted lines show a mapping of $P$ to $M$ created when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map the column~$c$ to the columns of $M$ enclosed by the two outer vertical lines and map rows $r_1$ and $r_2$ again to rows enclosed by the corresponding two outer horizontal lines, we get a mapping of $P$ to $M$ and so a contradiction with $\PnimM$.
 
 \begin{figure}[!ht]
 \centering
@@ -220,45 +239,65 @@ Let $P$ be the first described pattern. We show that for each one-entry from $P[
 \end{figure}
 Proofs of cases two and three are similar to the first one and we skip them.
 
-From now on, consider there are no one-entries in $P[[r_1-1],\{c\}]$ and $P[[r_2+1,k],\{c\}]$. Let $P$ be the second described pattern and let $c=l-1$. One-entry in $P[r_1,c]$ is row-bounded thanks to the fourth case of Lemma~\ref{lemma:H}. Without loss of generality assume $P[r_1,l]=1$, as otherwise, the pattern avoids $\smm{ &\bullet\\\bullet& }$ and in Lemma~\ref{lemma:walkpat} we will show that each one-entry is then row-bounded. Without loss of generality, when a zero-entry of a zero-interval is changed to a one-entry that is used to map $P[r_2,c]$, the row~$r_2$ is mapped to just one row because we can always use the one-entry bounding the corresponding interval to map $P[r_2,l]$ (if we do not consider the only potential zero-interval that is bounded by the edge of matrix). If $z_1<z_2$ are two zero-intervals usable for $P[r_2,c]$ then in each mapping created by changing a zero-entry of $z_1$ to a one-entry used to map $P[r_2,c]$, one-entry $P[r_1,l]$ is mapped to a column smaller than the first column of $z_2$. Otherwise, we could combine the mapping with a one-entry in between $z_1$ and $z_2$ and a mapping created when a zero-entry of $z_2$ is changed to a one-entry to find a mapping of $P$. Assume, there are $l$ zero-intervals usable for $P[r_2,c]$ and for each consider a one-entry used to map $P[r_1,l]$ in the corresponding mapping created when a zero-entry is changed to a one-entry. If there is a non-decreasing pair of them, the corresponding mappings can be combined to find a mapping of $P$. Otherwise, the one-entries form a decreasing sequence of length $l$ and if we consider the last used zero-interval and its mapping, we can use the decreasing sequence of one-entries to map all one-entries from row~$r_1$ and we can still take a one-entry bounding the zero-interval from left and use it to map $P[r_2,c]$. This proves there are at most $l+1$ zero-intervals usable for $P[r_2,c]$.
-
-The proof that $P[r_1,c]$ and $P[r_2,c]$ are row-bounded in the same setting when $P$ is described by the first picture is analogous.
+Throughout the proof, we have never used as a fact that an entry of $M$ is a one-entry and so the proof also holds for any pattern~$P$ created from any of the fourth described matrices by deletion of one-entries.
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% First non-empty column bounded
 \begin{lemma}
-\label{lemma:First}
-Let $P$ be a pattern and $c$ be its first non-empty column. Then every one-entry from $c$ is row-bounded.
+\label{lemma:I2}
+Let a pattern~$P\in\Pat$ be created from one of the matrices in Figure~\ref{fig:lemmaI2} by deletion of one-entries and let $c=l-1$. Then every one-entry in $P[[r_1,r_2],\{c\}]$ is row-bounded.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=50mm]{img/lemmaI2.pdf}
+\caption{Patterns for which one-entries in column~$c$ and rows $[r_1,r_2]$ are row-bounded. One-entries are on bold lines and the column $c$ is the second last.}
+\label{fig:lemmaI2}
+\end{figure}
 \end{lemma}
 \begin{proof}
-The result follows immediately from the fourth case of Lemma~\ref{lemma:H}.
+Let a pattern~$P$ be created from the first described matrix. From~\ref{lemma:I}, we know that all one-entries in $P[[r_1+1,r_2-1],\{c\}]$ are row-bounded. Thank to symmetry, it suffices to show that the one-entry~$e=P[r_1,c]$ is row-bounded. Without loss of generality, we have $P[r_2,l]=1$; otherwise, we can use the fourth case of Lemma~\ref{fig:lemmaH} to prove that $e$ is row-bounded.
+
+Consider any matrix~$M\in\Avmax{P}$ and let $z_1<z_2$ be any two zero-intervals from the same row usable for $e$. Without loss of generality, in any mapping of $P$ to $M$, created when a zero-entry of $z_1$ is changed to a one-entry used to map $e$, the one-entry~$P[r_2,l]$ is mapped to a column before $z_2$. Otherwise, if we map $e$ to the one-entry between $z_1$ and $z_2$ and map $P[r_1,l]$ to any one-entry behind $z_2$ we get a mapping showing $P\im M$.
+
+We prove there are at most $l$ zero-intervals usable for $e$ on every row of $M$. For contradiction, let there be such zero-intervals $z_1,\dots,z_l$ that there is a one-entry behind each of them. For each zero-interval $z_i$, let $e_i$ be any one-entry of $M$ that can be used to map the one-entry~$P[r_2,l]$ if a zero-entry of $z_i$ is changed to a one-entry used to map $e$. In the sequence $e_1,\dots,e_l$ there either are two one-entries $M[r'_1,c'_1],M[r'_2,c'_2]$ such that $r'_1\leq r'_2$, or the rows of one-entries form a decreasing sequence.
+
+Let us first consider the first case and let $e_i=M[r'_1,c'_1]$ and $e_j=M[r'_2,c'_2]$. Consider a mapping of $P$ to $M$ created when a zero-entry of $z_i$ is changed to a one-entry used to map $e$. If in this mapping, we map $e$ to a one-entry between $z_i$ and $z_j$, map $P[r_1,l]$ to a one-entry behind $z_j$, map $P[r_2,l-1]$ to $e_i$ and map $P[r_2,l]$ to $e_j$, we get a mapping of $P$ to $M$, which is a contradiction.
+
+And so it holds that the one-entries $e_1,\dots,e_l$ form a row decreasing sequence. We can pair every $e_i$ with a one-entry bounding $z_i$ from the right and so we can map the whole submatrix $P[[k],[l-2]]$ just to columns before $z_{l-1}$ of $M$. Because $z_l$ is usable for $e$, there are enough one-entries to map the whole column~$c$ there and there are one-entries where $P[r_1,l]$ and $P[r_2,l]$ can be mapped. The only problem is that $e$ is mapped to a one-entry created by changing a zero-entry of $z_l$ but we can also map it to a one-entry between zero-intervals $z_{l-1}$ and $z_l$ and we have $P\im M$ and a contradiction.\\
+
+Let a pattern~$P$ be created from the second described matrix. All one-entries in $P[[r_1+1,r_2-1],\{c\}]$ are row-bounded thanks to (the second case of) Lemma~\ref{lemma:I}. From the fourth case of Lemma~\ref{lemma:H}, the one-entry~$P[r_1,c]$ is also row-bounded. So we only need to prove that the one-entry~$P[r_2,c]$ is row-bounded.
+
+Without loss of generality, $P[r_1,l]=1$; otherwise, $\smm{ &\bullet\\\bullet& }\nim P$ and in the following Lemma~\ref{lemma:walkpat}, we show that every such $P$ is bounding. We once again define one-entries $e_1,\dots,e_l$ and use the same analysis as we did in the first case.
 \end{proof}
+
+Now that the very technical lemmata are stated, we just use them to easily prove that the remaining patterns described in Theorem~\ref{thm:boundedints} are also bounding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% walking patterns
 \begin{lemma}
 \label{lemma:walkpat}
-Let $P\in\Pat$ be a pattern avoiding $\smm{ &\bullet\\\bullet& }$ (or $\smm{\bullet& \\ &\bullet}$). Then $\Avm{P}$ is bounded.
+Let $P\in\Pat$ be a pattern avoiding $\smm{ &\bullet\\\bullet& }$ or $\smm{\bullet& \\ &\bullet}$. Then $P$ is bounding.
 \end{lemma}
 \begin{proof}
-From Proposition~\ref{prop:walking} we know that $P$ is a walking pattern. Every one-entry of $P$ satisfies either conditions of the third case of Lemma~\ref{lemma:H} or it satisfies conditions of the third case of Lemma~\ref{lemma:I} and therefore is row-bounded. From Observation~\ref{obs:transposebounded}, we know it is also column-bounded.
+From Proposition~\ref{prop:walking}, we know that $P$ is a walking pattern. Every one-entry of $P$ satisfies either conditions of the third case of Lemma~\ref{lemma:H} or it satisfies conditions of the third case of Lemma~\ref{lemma:I} and therefore is row-bounded. From Observation~\ref{obs:transposebounded}, we know it is also column-bounded.
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% three non-empty lines - it is super long
+What follows is the last and the most difficult case of our analysis. Its length is caused by the fact that it is harder to describe symmetries than it is to just use the previous lemmata to show that each pattern is bounding.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% three non-empty lines
 \begin{lemma}
-Let $P\in\Pat$ be a pattern having three non-empty lines and avoiding all rotations of $P_1$. Then $\Avm{P}$ is bounded.
+Let $P\in\Pat$ be a pattern having three non-empty lines and avoiding all rotations of $P_1$. Then $P$ is bounding.
 \end{lemma}
 \begin{proof}
-First of all, if $P$ avoids $\smm{ &\bullet\\\bullet& }$ or $\smm{\bullet& \\ &\bullet}$, we use Lemma~\ref{lemma:walkpat}. From now on, we assume it contains both.
+First of all, if $P$ avoids $\smm{ &\bullet\\\bullet& }$ or $\smm{\bullet& \\ &\bullet}$, we use Lemma~\ref{lemma:walkpat}.
 
-Let us prove that each pattern having one-entries in three rows is bounded. Pattern $P$ has one-entries in at least three columns; therefore, it contains a three by three permutation matrix as a submatrix. Since rotations of $P_1$ are avoided, only feasible permutations are 123 and 321 and without loss of generality we assume the first case. In Figure~\ref{fig:threelines} we see the structure of each such pattern. Capital letters stand for one-entries of the permutation, letters $a-f$ stand each for a potential one-entry and Greek letters stand each for a potential sequence of one-entries and zero-entries. Everything else is empty. Not all one-entries can be there at the same time, because that would create a mapping of $P_1$ or its rotation. We also need to find $\smm{\bullet& \\ &\bullet}$. The following analysis only uses hereditary arguments, which means that if we prove $P$ is bounded, we also prove that each submatrix of $P$ is bounded. With this in mind, we restrict ourselves to maximal patterns.
+Let the three non-empty lines be three rows and let a pattern~$P$ have one-entries in at least three columns. Then it contains a $3\times3$ permutation matrix as a submatrix. Since the rotations of $P_1$ are avoided, the only feasible permutations are 123 and 321 and without loss of generality, we assume the first case. In Figure~\ref{fig:threelines} we see the structure of $P$. The capital letters stand for one-entries of the permutation and are chosen to be the left-most possible, letters $a-f$ stand each for a potential one-entry and the Greek letters stand each for a potential sequence of one-entries. Everything else is empty. Not all one-entries can be there at the same time, because that would create a mapping of $P_1$ or its rotation. We also need to find $\smm{\bullet& \\ &\bullet}\im P$. The following analysis only uses hereditary arguments, which means that if we prove that $P$ is bounding, we also prove that each submatrix of $P$ is bounding. With this in mind, we restrict ourselves to critical patterns.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=70mm]{img/threelines.pdf}
-	\caption{Structure of a pattern only having three non-empty rows and avoiding all rotations of $P_1$.}
+	\caption{The structure of a pattern only having three non-empty rows and avoiding all rotations of $P_1$.}
 	\label{fig:threelines}
 \end{figure}
 \begin{enumerate}
-	\item $\gamma$ contains a one-entry $\Rightarrow f=0\Rightarrow$ because $\smm{\bullet& \\ &\bullet}\im P$, it holds $a=1\Rightarrow\alpha=0$
+	\item $\gamma=1\Rightarrow f=0\Rightarrow$ because $\smm{\bullet& \\ &\bullet}\im P$, it holds $a=1\Rightarrow\alpha=0$
 		\begin{enumerate}
 			\item $d=1\Rightarrow b=0,\ \beta=0,\ e=0$
 			\item $d=0$
@@ -269,23 +308,23 @@ Let us prove that each pattern having one-entries in three rows is bounded. Patt
 		\end{enumerate}
 	\item $\gamma=0$
 		\begin{enumerate}
-			\item $\alpha$ contains a one-entry $\Rightarrow a=0,\ b=0$. If $f=0$ we have case 1.(b) ii. otherwise, we have case 1.(a).
+			\item $\alpha=1\Rightarrow a=0,\ b=0$. If $f=0$ we have case 1. (b) ii.; otherwise, we have case 1. (a).
 			\item $\alpha=0$
 				\begin{enumerate}
 					\item $c=1,\ d=1\Rightarrow b=0,\ e=0,\ \beta=0$
 					\item $c=1,\ d=0\Rightarrow e=0,\ \beta=0$ and without loss of generality, $b=1$. Otherwise, we have the previous case. Therefore, $f=0$
-					\item $c=0,\ d=1\Rightarrow b=0$: Without loss of generality, $e=1$ or $\beta$ contains a one-entry. Otherwise, we have the case $c=1,\ d=1$. Therefore, $a=0$
+					\item $c=0,\ d=1\Rightarrow b=0$. Without loss of generality, $e=1,\ \beta=1$. Otherwise, we have the case $c=1,\ d=1$. Therefore, $a=0$
 					\item $c=0,\ d=0$
 				\end{enumerate}
 		\end{enumerate}
 \end{enumerate}
 The same analysis also proves that if a pattern with the same restrictions only has three non-empty columns then it is bounding.
 
-Let us now look at the case when all one-entries of the pattern are in either one of two rows $r_1,r_2$ or in a column~$c_1$. Without loss of generality, we again assume permutation 123 is present and we distinguish three cases. Consider Figure~\ref{fig:twoplusone}:
+Let $P$ be a pattern having two non-empty rows~$r_1,r_2$ and one non-empty column~$c_1$. Without loss of generality, we again assume permutation 123 is present and we distinguish three cases. Consider Figure~\ref{fig:twoplusone}:
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=120mm]{img/twoplusone.pdf}
-	\caption{Structure of a pattern only having one-entries in two rows and one column that avoids all rotations of $P_1$.}
+	\caption{The structure of a pattern only having one-entries in two rows and one column that avoids all rotations of $P_1$.}
 	\label{fig:twoplusone}
 \end{figure}
 \begin{enumerate}
@@ -294,14 +333,14 @@ Let us now look at the case when all one-entries of the pattern are in either on
 		\item $a=0$
 		\item $a=1\Rightarrow b=0,\ \alpha=0$
 	\end{enumerate}
-\item $B$ lies in column~$c_1$: Thanks to Lemma~\ref{lemma:First} are one-entries in $a,d,A,C$ row-bounded and one-entries in $a,b,c,d,A,C,\alpha$ and $\gamma$ column-bounded. From the first case of Lemma~\ref{lemma:I}, we have that one-entries in $B$ and $\beta$ are row-bounded and from the first case of Lemma~\ref{lemma:H}, one-entries in $b,c,B$ and $\beta$ are column-bounded. Thus, every one-entry is column-bounded.
+\item $B$ lies in column~$c_1$
 	\begin{enumerate}
 		\item $a=1,\ d=1\Rightarrow\alpha=0,\ \gamma=0$
 		\item $a=1,\ d=0\Rightarrow\alpha=0$
 		\item $a=0,\ d=1\Rightarrow\gamma=0$
-		\item $a=0,\ d=0$: The pattern avoids $\smm{\bullet& \\ &\bullet}$ so it is bounded according to Lemma~\ref{lemma:walkpat}.
+		\item $a=0,\ d=0$. The pattern avoids $\smm{\bullet& \\ &\bullet}$.
 	\end{enumerate}
-\item $A$ lies in column~$c_1$: This is symmetric to the first situation.
+\item $A$ lies in column~$c_1$. This is symmetric to the first situation.
 \end{enumerate}
 \begin{figure}[!ht]
 	\centering
@@ -309,14 +348,26 @@ Let us now look at the case when all one-entries of the pattern are in either on
 	\caption{A figure showing which lemma can be used to proof row-boundness and column-boundness for each one-entry of patterns discussed in the case analysis. The left half of the picture deals with the situation where there are three non-empty rows and the right half with the situation where there are two non-empty rows and one non-empty column. Each case either contains a picture showing row-boundedness and column-boundeness or an arrow describing that the case can be easily reduced to a different one.}
 	\label{fig:pictproof1}
 \end{figure}
-The same analysis also proves that if one-entries of a pattern with the same restrictions are in one row or two columns then the pattern is bounded.
+The same analysis also proves that if a pattern~$P$ has two non-empty columns and one non-empty row then the pattern is bounding.
 \end{proof}
 
-Combining all the lemmata we finally get the following result.
+Combining the lemmata we finally get the following result.
 
 \begin{thm}
-Let $P$ be a pattern avoiding all rotations of $P_1$, then $\Avm{P}$ is bounded. \qed
+Let $P$ be a pattern avoiding all rotations of $P_1$, then $P$ is bounding. \qed
 \end{thm}
+
+A lot can be implied from this theorem. Here are two straightforward corollaries for which we do not know any other proof.
+
+\begin{cor}
+For every pattern $P$: $\Avm{P}$ is row-bounded $\Leftrightarrow\Avm{P}$ is column-bounded.
+\end{cor}
+
+\begin{cor}
+For every bounding pattern $P$ and every $P'\im P$ it holds $P'$ is bounding.
+\end{cor}
+
+\textbf{CURRENTLY HERE}
 
 \section{Chain rules}
 In this section, we study what happens when we combine multiple classes that are bounded or unbounded.

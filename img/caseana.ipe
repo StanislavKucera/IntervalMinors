@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20170417181645" modified="D:20170417192416"/>
+<info created="D:20170417181645" modified="D:20170423230132"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -461,11 +461,11 @@ h
 <use matrix="1 0 0 1 -4 -16" name="mark/disk(sx)" pos="76 652" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -4 -16" name="mark/disk(sx)" pos="76 660" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -4 -16" name="mark/disk(sx)" pos="76 644" size="normal" stroke="black"/>
-<path matrix="1 0 0 1 -4 -16" stroke="black" arrow="linear/normal">
+<path matrix="1 0 0 1 8 -16" stroke="black" arrow="linear/normal">
 84 652 m
 96 652 l
 </path>
-<text matrix="1 0 0 1 -4 -16" transformations="translations" pos="100 648" stroke="black" type="label" width="26.567" height="7.473" depth="2.49" valign="baseline">1(b)ii.</text>
+<text matrix="1 0 0 1 8 -16" transformations="translations" pos="100 648" stroke="black" type="label" width="26.567" height="7.473" depth="2.49" valign="baseline">1(b)ii.</text>
 <text matrix="1 0 0 1 -4 -24" transformations="translations" pos="4 628" stroke="black" type="label" width="31.825" height="7.473" depth="2.49" valign="baseline">2.(b)iv.</text>
 <use matrix="1 0 0 1 -4 -20" name="mark/disk(sx)" pos="44 632" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 -4 -20" name="mark/disk(sx)" pos="44 624" size="normal" stroke="black"/>
@@ -485,14 +485,14 @@ h
 <use matrix="1 0 0 1 60 -20" name="mark/disk(sx)" pos="76 624" size="normal" stroke="purple"/>
 <use matrix="1 0 0 1 60 -20" name="mark/disk(sx)" pos="76 616" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 60 -20" name="mark/disk(sx)" pos="76 632" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 -108 -264" transformations="translations" pos="128 832" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 4.18 (case 1)</text>
-<text matrix="1 0 0 1 -108 -264" transformations="translations" pos="128 820" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 4.18 (case 2)</text>
-<text matrix="1 0 0 1 -108 -252" transformations="translations" pos="128 796" stroke="black" type="label" width="98.16" height="7.473" depth="2.49" valign="baseline">Lemma 4.18 (case 1.1)</text>
-<text matrix="1 0 0 1 -108 -252" transformations="translations" pos="128 784" stroke="black" type="label" width="98.16" height="7.473" depth="2.49" valign="baseline">Lemma 4.18 (case 2.1)</text>
-<text matrix="1 0 0 1 44 -204" transformations="translations" pos="128 772" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 4.17 (case 1)</text>
-<text matrix="1 0 0 1 44 -204" transformations="translations" pos="128 760" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 4.17 (case 2)</text>
-<text matrix="1 0 0 1 44 -192" transformations="translations" pos="128 736" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 4.17 (case 4)</text>
-<text matrix="1 0 0 1 44 -192" transformations="translations" pos="128 724" stroke="black" type="label" width="53.273" height="6.808" depth="0" valign="baseline">Lemma 4.19</text>
+<text matrix="1 0 0 1 -108 -264" transformations="translations" pos="128 832" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.20 (case 1)</text>
+<text matrix="1 0 0 1 -108 -264" transformations="translations" pos="128 820" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.20 (case 2)</text>
+<text matrix="1 0 0 1 -108 -252" transformations="translations" pos="128 796" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.21 (case 1)</text>
+<text matrix="1 0 0 1 -108 -252" transformations="translations" pos="128 784" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.21 (case 2)</text>
+<text matrix="1 0 0 1 44 -204" transformations="translations" pos="128 772" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.18 (case 1)</text>
+<text matrix="1 0 0 1 44 -204" transformations="translations" pos="128 760" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.18 (case 2)</text>
+<text matrix="1 0 0 1 44 -192" transformations="translations" pos="128 736" stroke="black" type="label" width="90.411" height="7.473" depth="2.49" valign="baseline">Lemma 3.18 (case 4)</text>
+<text matrix="1 0 0 1 44 -192" transformations="translations" pos="128 724" stroke="black" type="label" width="53.273" height="6.808" depth="0" valign="baseline">Lemma 3.19</text>
 <use matrix="1 0 0 1 44 -192" name="mark/disk(sx)" pos="124 728" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 44 -192" name="mark/disk(sx)" pos="124 740" size="normal" stroke="blue"/>
 <use matrix="1 0 0 1 44 -204" name="mark/disk(sx)" pos="124 764" size="normal" stroke="green"/>

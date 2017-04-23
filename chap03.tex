@@ -1,13 +1,15 @@
 \chapter{Operations with matrices}
+In this chapter, we look at classes of matrices from a different perspective. Unlike in the previous chapter, where we studied the structure of matrices avoiding a given set of forbidden pattern (usually just one), now we are given a class of matrices and we ask whether it can be described by forbidden patterns.
 
+When speaking about a class of matrices, unless stated otherwise, it is closed under interval minors, which means that whenever a matrix belongs to the class, all its minors belong there too. All classes discussed are also non-trivial. This means, there is at least one matrix of size $2\times1$, at least one matrix of size $1\times2$ and at least one matrix is non-empty in each class.
 
-When speaking about class of matrices, unless stated otherwise, they are closed under interval minors, which means that whenever a matrix belong to a class, all its minors belong there too. All classes discussed are also non-trivial. This means, there is at least one matrix of size $2\times1$, at least one matrix of size $1\times2$ and at least one matrix is non-empty in each class.
+While it is obvious that any class of matrices can be described by a set of forbidden patterns, as it is enough to forbid all matrices not contained in the class, it is no longer clear how complex can the forbidden set be.
 
 \begin{defn}
 Let $\class{M}$ be a class of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
 \end{defn}
 
-Let us start with a few simple observations, regarding classes of matrices and their bases. 
+We show that there are many classes of matrices having a finite basis but there are also classes that have an infinite basis. Let us start with a few simple observations, regarding classes of matrices and their bases. 
 
 \begin{obs}
 Let $\class{M}=\Avm{\class{P}}$ for some set of matrices $\class{P}$. Then $\class{M}$ is closed under interval minors.
@@ -184,10 +186,12 @@ Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\c
 \end{thm}
 \begin{proof}
 \begin{itemize}
-	\item[$\subseteq$] Assume $M\not\in\Avm{\R{\class{P}}}$ and without loss of generality, because $\Cl{\class{M}}$ is hereditary, let $M$ be minimal (with respect to interval minors). It follows that $M\in\R{\class{P}}$. As such, the matrix $M$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$; therefore, according to Observation~\ref{obs:art}, there is no articulations $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty. For contradiction, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, $M$ is a minor of $\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations (top-right and bottom-left corners) contain zero-entries, it even holds $M\im M'$. We also have $M\im P$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
+	\item[$\subseteq$] Consider a matrix~$M\not\in\Avm{\R{\class{P}}}$ and without loss of generality, because $\Cl{\class{M}}$ is closed under interval minors, let $M$ be minimal (with respect to interval minors). It follows that $M\in\R{\class{P}}$. Then, the matrix~$M$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$; therefore, according to Observation~\ref{obs:art}, there is no articulations $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty.
+	
+	For contradiction with the statement, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, it holds $M\im\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations contain zero-entries, it even holds $M\im M'$. We also know $P\im M$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
 	\item[$\supseteq$] First of all, $\Avm{\R{\class{P}}}$ is closed under the skew sum with $1\times1$ overlap. For contradiction, assume there are matrices $M_1,M_2\in\Avm{\R{\class{P}}}$ but $M=M_1\dsum_{1\times1}M_2\not\in\Avm{\R{\class{P}}}$. Then there exists a matrix~$P\in\R{\class{P}}$ such that $P\im M$. Because $P$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $P$, it follows that either $P\im M_1$ or $P\im M_2$ and we have a contradiction.
 
-It suffices to show that the inclusion holds for any $M\in\Avm{\R{\class{P}}}$ that is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
+It suffices to show that the inclusion holds for any matrix $M\in\Avm{\R{\class{P}}}$ that is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
 \end{itemize}
 \end{proof}
 
@@ -234,9 +238,11 @@ $Candy_{4,4,4}=\smm{
 There exists a matrix $P$ for which $\R{P}$ is infinite.
 \end{thm}
 \begin{proof}
-Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is a minimal matrix (with respect to minors) that is not the skew sum of two of its non-empty interval minors. According to Observation~\ref{obs:art}, the second condition holds as $Candy_{4,n,4}$ contains no non-trivial articulation. To show it is minimal, we need to consider any matrix $M\im Candy_{4,n,4}$ and argue that either $P\nim M$ or $M$ contains an articulation.
+Let $P=Candy_{4,1,4}$. For all $n>3$ it holds $P\im Candy_{4,n,4}$ and it suffices to show that each $Candy_{4,n,4}$ is a minimal matrix (with respect to minors) and it is not the skew sum of two of its non-empty interval minors. According to Observation~\ref{obs:art}, the second condition holds as $Candy_{4,n,4}$ contains no non-trivial articulation and the trivial ones are empty. To show it is minimal, we need to consider any matrix $M\im Candy_{4,n,4}$ and argue that either $P\nim M$ or $M$ contains an articulation.
 
-Thanks to Observation~\ref{obs:keep}, we can only consider one minoring operation at a time. It is easy to see that when a one-entry is changed to a zero-entry, then the matrix does not belong to $\R{P}$ anymore. Consider that rows $r_1,r_2,\dots,r_k$ are chosen to be merged into one with an elementwise OR. If $r_1<4$ or $r_k>n+3$ then $P$ is no longer an interval minor of such matrix. Otherwise, the original $Candy_{4,n,4}[r_1,n-r_1+2]$ becomes an articulation. Symmetrically, the same holds for columns which concludes the proof.
+Thanks to Observation~\ref{obs:keep}, as soon as we find a non-trivial articulation $M[r,c]$ such that $M[[r,k],[c]],M[[r],[c,l]]$ are non-empty, it will stay there in any interval minor, because we cannot delete one-entries $M[1,n-3],M[2,n-2],M[3,n-1]$ and $M[4,n]$ (and symmetrically $M[m-3,1],M[m-2,2],M[m-1,3],M[m,4]$) without loosing the condition $P\im M$. Therefore, we can only consider one minoring operation at a time.
+
+It is easy to see that when a one-entry is changed to a zero-entry, then the matrix does not belong to $\R{P}$ anymore. Consider that rows $r_1,r_2,\dots,r_k$ are chosen to be merged into one with an elementwise OR. If $r_1<4$ or $r_k>n+3$ then $P$ is no longer an interval minor of such matrix. Otherwise, the original $Candy_{4,n,4}[r_1,n-r_1+2]$ becomes an articulation. Symmetrically, the same holds for columns which concludes the proof.
 \end{proof}
 
 \begin{cor}

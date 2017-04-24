@@ -360,6 +360,7 @@ Let $P$ be a pattern avoiding all rotations of $P_1$, then $P$ is bounding. \qed
 A lot can be implied from this theorem. Here are two straightforward corollaries for which we do not know any other proof.
 
 \begin{cor}
+\label{cor:rowcol}
 For every pattern $P$: $\Avm{P}$ is row-bounded $\Leftrightarrow\Avm{P}$ is column-bounded.
 \end{cor}
 
@@ -367,40 +368,54 @@ For every pattern $P$: $\Avm{P}$ is row-bounded $\Leftrightarrow\Avm{P}$ is colu
 For every bounding pattern $P$ and every $P'\im P$ it holds $P'$ is bounding.
 \end{cor}
 
-\textbf{CURRENTLY HERE}
-
 \section{Chain rules}
-In this section, we study what happens when we combine multiple classes that are bounded or unbounded.
+Now that we know exactly what patterns are bounding, it is time to speak about the complexity of classes more in general. We are still going to be concerned with classes of matrices avoiding patterns, but they will avoid a set of patterns rather than just one pattern.
+
+First, we show that Corollary~\ref{cor:rowcol} does not hold in general. Next, we show that bounded classes are closed to intersection. At the end of the chapter, we prove the same is not true for unbounded classes of matrices and even more, an intersection of a few unbounded classes can be bounded hereditarily, which means that its every subset is bounded.
+
+It is easy to see that Lemma~\ref{lemma:H}, Lemma~\ref{lemma:First}, Lemma~\ref{lemma:I}, Lemma~\ref{lemma:I2} and Lemma~\ref{lemma:walkpat} can be generalized to our settings. Their proofs without change show that for every set of patterns~$\class{P}$, if a pattern~$P\in\class{P}$ looks like a described pattern, then any one-entry of $P$ is (row-)bounded in $\Avm{\class{P}}$. Therefore, we use the lemmata without restating them.
+
+We define classes of matrices to be bounded if they are both row-bounded and column-bounded. From what we proved so far, we see that for a pattern~$P$, the class~$\Avm{P}$ is row-bounded if and only of it is column-bounded. Once we consider classes avoiding sets of patterns, this does not have to be true.
+
+\begin{lemma}
+There exists a set of patters~$\class{P}$ such that the class~$\Avm{P}$ is row-bounded but column-unbounded.
+\end{lemma}
+\begin{proof}
+Let $\class{P}=\left\lbrace P=\smm{ &\bullet& \\\bullet& & \\ &\bullet& \\ & &\bullet},I_4=\smm{\bullet& & & \\ &\bullet& & \\ & &\bullet& \\ & & &\bullet}\right\rbrace$. We can use a similar construction to what we did in Lemma~\ref{lemma:manyints}, to prove $\Avm{\class{P}}$ is column-unbounded. The only difference is that the ``blocks'' are of size $4\times2$ and the whole matrix is transposed.
+
+To prove that the class~$\Avm{\class{P}}$ is row-bounded, we take an arbitrary matrix~$M\in\Avmax{\class{P}}$ and consider any row~$r$ of $M$. We need to prove that every one-entry of $I_4$ and $P$ is row-bounded.
+
+From Lemma~\ref{lemma:walkpat}, we know that every one-entry of $I_4$ is row-bounded (and column-bounded) in $\Avm{\class{P}}$. From Lemma~\ref{lemma:First}, one-entries $P[2,1]$ and $P[4,3]$ are row-bounded in $\Avm{\class{P}}$. From the first case of Lemma~\ref{lemma:I}, the one-entry~$P[3,2]$ is row-bounded in $\Avm{\class{P}}$.
+
+We prove that there are at most two zero-intervals usable for $P[1,2]$ in the row~$r$. For contradiction, let there be three zero-intervals~$z_1<z_2<z_3$. Consider a mapping of $P$ to $M$ created when a zero-entry of $z_3$ is changed to a one-entry used to map $P[1,2]$. Without loss of generality, the one-entry used to map $P[2,1]$ lies in columns of $z_3$ or just under the one-entry~$e$ bounding $z_3$ from left; otherwise, we could use $e$ to map $P[1,2]$ and find the pattern in $M$. Then, a one-entry between zero-intervals $z_1$ and $z_2$ together with the one-entries used to map $P[2,1],P[3,2]$ and $P[4,3]$ give us a mapping of $I_4$ and so a contradiction with $M\in \Avm{\class{P}}$.
+\end{proof}
 
 \begin{thm}
 \label{thm:boundunion}
-Let $\mathcal{P}$ and $\mathcal{Q}$ be classes of patterns. If both $\mathcal{P}$ and $\mathcal{Q}$ are bounded then $Av(\mathcal{P}\cup\mathcal{Q})$ is bounded.
+Let $\class{P}$ and $\class{Q}$ be classes of patterns. If both classes $\Avm{\class{P}}$ and $\Avm{\class{Q}}$ are bounded then $\Avm{\class{P}\cup\class{Q}}$ is bounded.
 \end{thm}
 \begin{proof}
-We show $comp_{\mathcal{P}\cup\mathcal{Q}}\leq comp_\mathcal{P}+comp_\mathcal{Q}=C$.
+Let $\class{R}=\class{P}\cup\class{Q}$. We show that $comp_{\class{R}}\leq comp_\mathcal{P}+comp_\mathcal{Q}=C$.
 
-For contradiction, let $M$ be a maximal matrix avoiding $\mathcal{P}\cup\mathcal{Q}$ having at least $C+1$ zero-intervals in a single row (or column). Without loss of generality it means there is more than $comp_\mathcal{P}$ zero-intervals usable for one-entries of the patterns from $\mathcal{P}$. Not let us change some zero-entries of $M$ to one-entries to get $M'\in Av(\mathcal{P})$. Clearly, it still contains more than $comp_\mathcal{P}$ zero-intervals usable for one-entries of the patterns from $\mathcal{P}$, which is a contradiction with the definition of $comp_\mathcal{P}$.
-
-Similarly, the same inequality holds also for the column-complexity of $\mathcal{P}\cup\mathcal{Q}$ and so the union is bounded.
+For contradiction, let a matrix $M\in\Avmax{\class{R}}$ have at least $C+1$ zero-intervals in a single row (or column). Without loss of generality, it means there is more than $comp_\class{P}$ zero-intervals usable for one-entries of the patterns from $\class{P}$. Let $M'\in\Avm{\class{P}}$ be a matrix created from $M$ by changing as many zero-entries to one-entries as possible. Clearly, it still contains more than $comp_\class{P}$ zero-intervals usable for one-entries of the patterns from $\class{P}$, which is a contradiction with the value of $comp_\class{P}$.
 \end{proof}
 
 Using induction, we can show that also a union of a finite number of bounded classes of finite sizes is bounded. Interestingly enough, unbounded classes are not closed the same way.
 
 \begin{thm}
-For every $1\leq i<j\leq4]$ is $\{P_i,P_j\}$ bounded.
+For every $1\leq i<j\leq4]$ is $\Avm{\{P_i,P_j\}}$ bounded.
 \end{thm}
 \begin{proof}
-Due to symmetries it is enough to only consider $i=1$ and $j=[1,2]$.
-
+We only show that $\Avm{P_1,P_2}$ is bounded. To prove $\Avm{P_1,P_3}$ is bounded, we can use the same steps. All other pairs are then symmetric to these two.
 \begin{itemize}
-	\item $\{P_1,P_2\}$ is row-bounded: from Lemma~\ref{lemma:First} we have that one-entries $P_1[2,1],P_1[3,3],P_2[2,3]$ and $P_3[3,1]$ are row-bounded. For $P_1[1,2]$ and $P_2[1,2]$ we prove there are at most two zero-intervals usable for each of them. Otherwise, if there are three zero-intervals $z_1<z_2<z_3$ usable for $P_1[1,2]$ then the one-entries used to map $P_1[2,1]$ and $P_1[3,3]$ in a mapping created when a zero-entry of $z_1$ changes to one-entry used to map $P_1[1,2]$ together with a one-entry in between $z_2$ and $z_3$ give us a mapping of $P_2$ to $M$. Symmetrically, the same goes for $P_2[1,2]$ and $z'_3$.
-	\item $\{P_1,P_2\}$ is column-bounded: from Lemma~\ref{lemma:First} combined with Observation~\ref{obs:transposebounded} we have that one-entries $P_1[1,2],P_1[3,3],P_2[1,2]$ and $P_3[3,1]$ are column-bounded. For $P_1[2,1]$ and $P_2[2,3]$ we prove there are at most two zero-intervals usable for each of them. Otherwise, if there are three zero-intervals $z_1<z_2<z_3$ (from top down) usable for $P_[2,1]$ then the one-entries used to map $P_1[1,2]$ and $P_1[3,3]$ in a mapping created when a zero-entry of $z_1$ changes to one-entry used to map $P_1[1,2]$ together with a one-entry in between $z_2$ and $z_3$ give us a mapping of $P_2$ to $M$. Symmetrically, the same goes for $P_2[2,3]$ and $z'_3$.
-	\item $\{P_1,P_3\}$ is row-bounded: we can use the same proof as when showing that $\{P_1,P_2\}$ is column-bounded.
-	\item $\{P_1,P_3\}$ is column-bounded: we can use the same proof as when showing that $\{P_1,P_2\}$ is row-bounded.
+	\item $\Avm{P_1,P_2}$ is row-bounded:\\
+	From Lemma~\ref{lemma:First}, we have that one-entries $P_1[2,1],P_1[3,3],P_2[2,3]$ and $P_3[3,1]$ are row-bounded. For $P_1[1,2]$ and $P_2[1,2]$, we prove there are at most two zero-intervals usable for each of them in each row of any matrix~$M\in\Avmax{P_1,P_2}$. For contradiction, let $z_1<z_2<z_3$ be three zero-intervals usable for $P_1[1,2]$ in a row~$r$ of $M$. The one-entries used to map $P_1[2,1]$ and $P_1[3,3]$ in a mapping created when a zero-entry of $z_1$ is changed to a one-entry used to map $P_1[1,2]$, together with a one-entry in between $z_2$ and $z_3$ give us a mapping of $P_2$ to $M$. Symmetrically, the same goes for $P_2[1,2]$.
+	\item $\Avm{P_1,P_2}$ is column-bounded:\\
+	The proof that all one-entries of $P_1$ and $P_2$ are column-bounded is the same.
 \end{itemize}
 \end{proof}
 
-We prove even stronger result by using a well known fact from the theory of ordered sets.
+We prove even stronger result for the class~$\Avm{P_1,P_2,P_3,P_4}$ by using a well known fact from the theory of ordered sets. It is due to \cite{higman} and states the following:
 
 \begin{fct}[Higman's lemma]
 \label{fct:Higman}
@@ -408,57 +423,48 @@ Let $A$ be a finite alphabet and $A^*$ be a set of finite sequences over $A$. Th
 \end{fct}
 
 \begin{thm}
-$\sigma=Av\left(\smm{ &\bullet& \\\bullet& & \\ & &\bullet},\smm{ &\bullet& \\ & &\bullet\\\bullet& & },\smm{\bullet& & \\ & &\bullet\\ &\bullet& },\smm{ & &\bullet\\\bullet& & \\ &\bullet& }\right)$ is bounded. Moreover, every subclass is bounded.
+The class~$\sigma=\Avm{P_1,P_2,P_3,P_4}$ is bounded. Moreover, its every subclass is bounded.
 \end{thm}
 \begin{proof}
-From Theorem~\ref{thm:boundedints} we know that elements of $\sigma$ fall into finitely many classes. For each we need to prove that it is bounded and also that it does not contain an infinite anti-chain. Knowing that we use Theorem~\ref{thm:boundunion} to obtain the result. Let us consider an $m$ by $n$ matrix $M\in\sigma$:
+While the previous two theorem already prove that $\sigma$ is bounded, we prove it by hand so that we can use the proofs to also show that every subclass of $\sigma$ is bounded.
+
+From Theorem~\ref{thm:boundedints}, we know that elements of $\sigma$ fall into finitely many categories. For each of them, we need to prove that it is bounded and also that it does not contain an infinite anti-chain. Then we use Theorem~\ref{thm:boundunion} to obtain the result. Let us consider any $m\times n$ matrix $M\in\sigma$:
 \begin{itemize}
 	\item $M$ only contains up to three non-empty rows (columns):\\
-		Clearly, if $M$ is maximal then it contains three rows made of one-entries and everything else is zero, so the number of one-intervals is bounded by three.\\
+		If $M$ is critical in $\sigma$ then it contains three rows made of one-entries and everything else is zero, so the number of one-intervals is bounded by three.\\
 		
-		We use words over alphabet~$A=\{a,b,c,d,e,f,g,h,i,j\}$ to describe each $M$ as follows. Let $r_1<r_2<r_3$ be the non-empty rows (if less then three are non-empty we choose extra values arbitrarily). We define $w_M\in A^*$ as follows. First, we use letter $g$ $r_1$ times, letter $h$ $r_2-r_1$ times, letter $i$ $r_3-r_2$ times and letter $j$ $m-r_3$ times to describe the number of rows of $M$. Then we describe columns from the first one to the last one as follows. For each 0 in $r_1$ we use letter $a$ and for 1, we use $ab$. For each 0 in $r_2$ we use letter $c$ and for 1, we use $cd$. For each 0 in $r_3$ we use letter $e$ and for 1, we use $ef$.
+		To proof there is no infinite anti-chain, we use Fact~\ref{fct:Higman}. To describe $M$ we use words over alphabet~$A=\{a,b,c,d,e,f,g,h,i,j\}$. Let $r_1<r_2<r_3$ be the non-empty rows (if less then three are non-empty we choose extra values arbitrarily). We define $w_M\in A^*$ as follows. First, we use a letter~$g$ $r_1$ times, letter $h$ $r_2-r_1$ times, letter $i$ $r_3-r_2$ times and letter $j$ $m-r_3$ times to describe the number of rows of $M$ and position of non-empty rows. Then we describe columns from the first one to the last one as follows. For each 0 in $r_1$ we use a letter $a$ and for 1, we use letters $ab$. For each 0 in $r_2$ we use a letter $c$ and for 1, we use letters $cd$. For each 0 in $r_3$ we use a letter $e$ and for 1, we use letters $ef$.
 		
-		If we have $w_M,w_{M'}\in A^*$ such that $w_M$ is a subsequence of $w_{M'}$ then we want to show that $M$ is an interval minor of $M'$. Let $r_1,r_2,r_3$ and $r_1',r_2',r_3'$ be the non-empty rows of $M$ and $M'$ respectively. Since the number of leading letters $g$ is not bigger in $w_M$, $M$ does not have more empty rows before $r_1$ than $M'$ does before $r_1'$ and similarly it has at most as many empty rows in between $r_1,r_2$ and $r_2,r_3$ and after $r_3$.
+		If we have $w_M,w_{M'}\in A^*$ such that $w_M$ is a subsequence of $w_{M'}$, then we want to show that $M$ is an interval minor of $M'$. Let $r_1,r_2,r_3$ and $r_1',r_2',r_3'$ be the non-empty rows of $M$ and $M'$ respectively. Since the number of leading letters $g$ is not bigger in $w_M$, $M$ does not have more empty rows before $r_1$ than $M'$ does before $r_1'$ and similarly for the other pairs of non-empty rows.
 
-		Now consider there is $ab$ in $w_M$ and it corresponds to some $a\dots b$ in $w_{M'}$. We can always assume that in $w_{M'}$ the ``$a$'' is the one exactly before $b$. It can only happen that $abcdeface$ is a subsequence of $\textbf{ab}cea\textbf{cd}eac\textbf{eface}$ if the bold letters are used and since they correspond to one-entries lying in the following columns, this indeed corresponds to an interval minor (but it clearly does not have to mean that $M$ is a submatrix of $M'$).
+		Now consider there is $ab$ in $w_M$ and it corresponds to some $a\dots b$ in $w_{M'}$. Without loss of generality, the letter $a$ in $w_{M'}$ is the one exactly before $b$. Clearly, one-entries of $M$ can be mapped to one-entries in $M'$ and we only need to check that two one-entries of two different columns of $M$ are not mapped to two one-entries of the same column of $M'$. But this is not hard to see and we have $M\im M'$ (but it does not have to hold that $M\leq M'$).
 
-		From Fact~\ref{fct:Higman} we have that $A^*$ is well ordered which means that matrices having at most three non-empty rows (columns) are well ordered (the construction can be extended to every fixed number of non-empty rows) and so they does not have an infitely long anti-chain.
-	\item one-entries of $M$ lie in at most two rows and one column (or vice versa):\\
-		The number of one-intervals of any such maximal $M$ is bounded by two.\\
+		From Fact~\ref{fct:Higman}, we have that $A^*$ is well ordered, which means that matrices having at most three non-empty rows (columns) are well ordered and so they does not have an infitely long anti-chain.
+	\item $M$ only contains at most two rows and one column (or vice versa):\\
+		The number of one-intervals of any critical matrix $M$ is bounded by two.\\
 		
-		We use words over alphabet~$A=\{a,b,c,d,e,f,g\}$ and for non-empty rows~$r_1,r_2$ and column~$c_1$ we define $w_M$ as follows. We first encode each column in such a way that for each 0 in $r_1$ we use letter $a$ and for 1, we use $ab$. For each 0 in $r_2$ we use letter $c$ and for 1, we use $cd$. Right before and after the description of column $c_1$ we put letter $g$. Next we encode each row in such a way that for each 0 in $c_1$ we use letter $e$ and for each 1 letters $ef$. Right before and after the descriptions of rows $r_1$ and $r_2$ we again place letter $g$.
+		We use words over alphabet~$A=\{a,b,c,d,e,f,g\}$ and for non-empty rows~$r_1,r_2$ and column~$c_1$, we define $w_M$ as follows. We first encode each column in such a way that for each 0 in $r_1$ we use a letter~$a$ and for 1, we use letters~$ab$. For each 0 in $r_2$ we use a letter~$c$ and for 1, we use letters~$cd$. Right before and after the description of column $c_1$, we put a letter $g$. Next, we encode each row in such a way that for each 0 in $c_1$ we use a letter~$e$ and for each 1 letters~$ef$. Right before and after the descriptions of rows $r_1$ and $r_2$ we again place a letter~$g$.
 		
 		Because of the distinct letters for encoding rows and columns we can apply the same analysis as we did in the previous case and since entries at $M[r_1,c_1]$ and $M[r_2,c_1]$ are separated from the rest by a special letter~$g$ there is no way to find a one-entry if it is not there.
 	\item $M$ avoids $\smm{ &\bullet\\\bullet& }$ (or $\smm{\bullet& \\ &\bullet}$):\\
-		From Proposition~\ref{prop:walking} we know $M$ is a walking matrix and any such maximal matrix only contains at most one one-intervals in each row and column.\\
+		From Proposition~\ref{prop:walking} we know $M$ is a walking matrix and any such critical matrix only contains at most one one-intervals in each row and column.\\
 		
-		We use words over alphabet~$A=\{a,b,c,d\}$ and encode $M$ as follows. We choose an arbitrary walk of $M$ containing all one-entries and index its entries as $w_1\dots w_{m+n-1}$. Starting from $w_1$ we encode $w_i$ so that $a$ stands for 0 and $ab$ for 1 if $w_{i+1}$ lies in the same row as $w_i$ and we use $c$ for 0 and $cd$ for 1 if $w_{i+1}$ lies in the same column as $w_i$.
+		We use words over alphabet~$A=\{a,b,c,d\}$ and encode $M$ as follows. We choose an arbitrary walk of $M$ containing all one-entries and index its entries as $w_1\dots w_{m+n-1}$. Starting from $w_1$, we encode $w_i$ so that a letter~$a$ stands for 0 and letters~$ab$ for 1, if $w_{i+1}$ lies in the same row as $w_i$, and we use a letter~$c$ for 0 and letters~$cd$ for 1, if $w_{i+1}$ lies in the same column as $w_i$. We always use $a$ or $ab$ for the last entry.
 \end{itemize}
 
-In the construction of words corresponding to matrices, we only made sure that $w_M\subseteq w_{M'}\Rightarrow M\im M'$ and the other impication does not hold. A different construction may lead to equivalence, but that is not necessary for our result.
+In the construction of words corresponding to matrices, we only made sure that $w_M\subseteq w_{M'}\Rightarrow M\im M'$ and the other implication does not need to hold. A different construction may lead to equivalence, but that is not necessary for our result.
 
-We now use distinct alphabets to discribe different classes and when we given a potentialy infinite class of matrices from $\sigma$, we know that inside each class there is at most finite number of minimal matrices such that all of the rest contain a smaller one inside. Using induction on Theorem~\ref{thm:boundunion}, we have that each class is bounded and by applying induction with Theorem~\ref{thm:boundunion} once again we get that the union of the classes is also bounded.
+We use distinct alphabets to describe different categories and when given a potentially infinite class of matrices from $\sigma$, we know that inside each category there is at most finite number of minimal matrices such that all of the rest contain a smaller one as an interval minor. Using induction on Theorem~\ref{thm:boundunion}, we have that each category is bounded and by applying induction with Theorem~\ref{thm:boundunion} once again, we get that the union of the categories is also bounded.
 \end{proof}
 
 \begin{obs}
-There exists a bounding pattern~$P$ having an unbounded subset of $Av(P)$.
+There exists a bounding pattern~$P$ having an unbounded subclass of $\Avm{P}$.
 \end{obs}
 \begin{proof}
-Let $P=I_n$ (identity matrix) for $n>3$. From Lemma~\ref{lemma:walkpat} we have that $P$ is bounding. On the other hand, $Av(I_n,P_1)$ is unbounded, because the construction used in the proof of Lemma~\ref{lemma:manyints} also works for this class.
+Let $P=I_n$ (identity matrix) for $n>3$. From Lemma~\ref{lemma:walkpat}, we have that $P$ is bounding. On the other hand, $\Avm{I_n,P_1}$ is unbounded, because the construction used in the proof of Lemma~\ref{lemma:manyints} also works for this class.
 \end{proof}
 
-We define matrices to be bounded if they are both row-bounded and column-bounded. From what we proved so far, we see that a pattern $P$ is row-bounded if and only of it is column-bounded. But once we look at collections of patterns, this does not have to be true.
-
-\begin{lemma}
-There exists a class of patters~$\mathcal{P}$, which is row-bounded but column-unbounded.
-\end{lemma}
-\begin{proof}
-Let $\mathcal{P}=\left\lbrace P=\smm{ &\bullet& \\\bullet& & \\ &\bullet& \\ & &\bullet},I_4=\smm{\bullet& & & \\ &\bullet& & \\ & &\bullet& \\ & & &\bullet}\right\rbrace$. We can use the same construction as we did in Lemma~\ref{lemma:manyints}, just transposed, to prove $Av(\mathcal{P})$ is column-unbounded.
-
-To prove that $\mathcal{P}$ is row-bounded, we take any $M$ maximal avoiding $\mathcal{P}$ and look at an arbitrary row. In Lemma~\ref{lemma:walkpat} we proved that patterns avoiding $\smm{ &\bullet\\\bullet& }$ are bounded and so every one-entry of $I_4$ is row-bounded. We need to proof the same for $P$. Using Lemma~\ref{lemma:First}, $P[2,1]$ and $P[4,3]$ are row-bounded. Using the first case of Lemma~\ref{lemma:I}, $P[3,2]$ is row-bounded. We prove that there are at most two zero-intervals usable for $P[1,2]$. For contradiction, let there be three -- $z_1<z_2<z_3$. It means there are at least two one-entries $e_1<e_2$ in between them. Now consider the partitioning of $P$ into $M$ when a zero-entry of $z_3$ is changed to one-entry used to map $P[1,2]$. Clearly, the one-entry used for mapping $P[2,1]$ lies under the left one-entry~$e$ bounding $z_3$ or in a latter column; otherwise we could use $e$ to map $P[1,2]$ and find the pattern in $M$. It may happen $e=e_2$, but still $e_1$ and the one-entries used for mapping $P[2,1],P[3,2]$ and $P[4,3]$ together give us a mapping of $I_4$ and so a contradiction with $M\in Av(\mathcal{P})$. It means that each one-entry of $P$ is also row-bounded and $Av(\mathcal{P})$ is row-bounded.
-\end{proof}
-
-\section{Complexity of one-entries}
+\section{Complexity of one-entries (probably to be delete)}
 So far we have been working with the whole patterns and determining their complexity. To make the results even more general, we can analyze the complexity of each one-entry.
 
 In spare time, I will have a look at this. 

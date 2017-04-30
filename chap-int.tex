@@ -1,5 +1,5 @@
 \chapter{Zero-intervals}
-\label{intervals}
+\label{chap:ints}
 In Chapter~\ref{chap:chars}, we characterized matrices avoiding small patterns. Their structure is very dependent on the pattern they avoid and the results are hard to generalize for arbitrary patterns. In this chapter, we look for a more general property that restricts the complexity of a class of matrices.
 
 \begin{defn}
@@ -97,7 +97,7 @@ $$\smm{	\bullet& &\bullet& &\bullet&\cdots&\bullet& &\bullet& &\bullet\\
 		 & & & & &\cdots& & &\bullet&\bullet&\bullet\\
 		 & & & & &\cdots&\bullet&\bullet&\bullet& & \\
 		 & & & & &\cdots&\bullet&\bullet&\bullet& & \\
-		\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+		\vdots&\vdots&\vdots&\vdots&\vdots&\Ddots&\vdots&\vdots&\vdots&\vdots&\vdots\\
 		 & &\bullet&\bullet&\bullet&\cdots& & & & & \\
 		 & &\bullet&\bullet&\bullet&\cdots& & & & & \\
 		\bullet&\bullet&\bullet& & &\cdots& & & & & \\
@@ -121,7 +121,7 @@ Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/manyints.pdf}
-\caption{Structure of a maximal matrix avoiding $P$ that has arbitrarily many one-intervals.}
+\caption{The structure of a critical matrix avoiding $P$ that has arbitrarily many zero-intervals.}
 \label{fig:manyints}
 \end{figure}
 \end{proof}
@@ -163,12 +163,12 @@ Let $P\in\Pat$ be a pattern having two non-empty lines. Then $\rc{\Avm{P}}\leq k
 \begin{proof}
 First, we assume the two non-empty lines of $P$ are rows $r_1<r_2$ (or symmetrically columns) and consider any matrix~$M\in\Avmax{P}$. From Observation~\ref{obs:emptyrows} and maximality of $M$, we have that the submatrices $M[[r_1-1],[n]]$ and $M[[m-r_2+1,m],[n]]$ contain no zero-entry. Therefore, we may restrict ourselves to the case when $r_1=1$ and $r_2=k$. From Corollary~\ref{cor:twocols}, we have that there are at most $k^2$ zero-intervals in each row of $M$ and there are at most two zero-intervals in each column of $M$.
 
-Let the two non-empty lines of $P$ be a row~$r$ and a column~$c$. Because of symmetry, we only show the bound for rows. For every one-entry~$e$ of $P$, except those in the row~$r$, there is at most one zero-interval usable for $e$ in each row of any $M\Avmax{P}$. For contradiction, assume there are two such zero-intervals $z_1$ and $z_2$ in the same row. Let Figure~\ref{fig:twolines} illustrate the situation where dashed and dotted lines form two mappings of $P$ to $M$ when a zero-entry of $z_1$ and $z_2$ respectively is changed to a one-entry used to map $e$. When we take the outer two vertical and horizontal lines, we get a mapping of $P$ that uses an existing one-entry in between $z_1$ and $z_2$ to map $e$. This is a contradiction with $\PnimM$.
+Let the two non-empty lines of $P$ be a row~$r$ and a column~$c$. Because of symmetry, we only show the bound for rows. For every one-entry~$e$ of $P$, except those in the row~$r$, there is at most one zero-interval usable for $e$ in each row of any $M\Avmax{P}$. For contradiction, assume there are two such zero-intervals $z_1$ and $z_2$ in the same row. Let Figure~\ref{fig:twolines} illustrate the situation where red and blue lines form two mappings of $P$ to $M$ when a zero-entry of $z_1$ and $z_2$ respectively is changed to a one-entry used to map $e$. When we take the outer two vertical and horizontal lines, we get a mapping of $P$ that uses an existing one-entry in between $z_1$ and $z_2$ to map $e$. This is a contradiction with $\PnimM$.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=70mm]{img/twolines.pdf}
-\caption{Dashed and dotted lines resembling two different mappings of a forbidden pattern, where two horizontal lines show the boundaries of the mapping of row~$r$ and the vertical lines show boundaries of the mapping of column~$c$.}
+\includegraphics[width=65mm]{img/twolinescol.pdf}
+\caption{Red and blue lines representing two different mappings of a forbidden pattern. The two horizontal lines show the boundaries of the mapping of row~$r$ and the vertical lines show the boundaries of the mapping of column~$c$.}
 \label{fig:twolines}
 \end{figure}
 
@@ -185,7 +185,7 @@ Let $P\in\Pat$ be one of the four matrices in Figure~\ref{fig:lemmaH}. Then ever
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\textwidth]{img/lemmaH.pdf}
-\caption{Patterns for which one-entries in row~$r_2$ and columns $[c_1,c_2]$ are row-bounded. One-entries are in the areas enclosed by bold lines and on bold lines.}
+\caption{The patterns for which all one-entries in the row~$r_2$ and the columns $[c_1,c_2]$ are row-bounded. One-entries of the patterns are inside the bold rectangles and on the bold lines.}
 \label{fig:lemmaH}
 \end{figure}
 \end{lemma}
@@ -224,17 +224,17 @@ Let $P\in\Pat$ be one of the three matrices in Figure~\ref{fig:lemmaI}. Then eve
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/lemmaI.pdf}
-\caption{Patterns for which one-entries in column~$c$ and rows $[r_1+1,r_2-1]$ are row-bounded. One-entries are in the areas enclosed by bold lines and on bold lines.}
+\caption{The patterns for which all one-entries in the column~$c$ and the rows~$[r_1+1,r_2-1]$ are row-bounded. One-entries of the patterns are inside the bold rectangles and on the bold lines.}
 \label{fig:lemmaI}
 \end{figure}
 \end{lemma}
 \begin{proof}
-Let $P$ be a submatrix of the first described matrix. We show that for each one-entry~$e$ from $P[[r_1+1,r_2-1],\{c\}]$ and every matrix $M\in\Avmax{P}$ there is at most one zero-interval usable for $e$ in $M$. For contradiction, assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Consider Figure~\ref{fig:lemmaI1}, where the dashed lines show a mapping of $P$ to $M$ created when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and the dotted lines show a mapping of $P$ to $M$ created when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map the column~$c$ to the columns of $M$ enclosed by the two outer vertical lines and map rows $r_1$ and $r_2$ again to rows enclosed by the corresponding two outer horizontal lines, we get a mapping of $P$ to $M$ and so a contradiction with $\PnimM$.
+Let $P$ be a submatrix of the first described matrix. We show that for each one-entry~$e$ from $P[[r_1+1,r_2-1],\{c\}]$ and every matrix $M\in\Avmax{P}$ there is at most one zero-interval usable for $e$ in $M$. For contradiction, assume there is a row~$r$ with two zero-intervals $z_1$ and $z_2$ usable for $e$. Consider Figure~\ref{fig:lemmaI1}, where the red lines show a mapping of $P$ to $M$ created when a zero-entry of $z_1$ is changed to a one-entry used to map $e$ and the blue lines show a mapping of $P$ to $M$ created when a zero-entry of $z_2$ is changed to a one-entry used to map $e$. If we map the column~$c$ to the columns of $M$ enclosed by the two outer vertical lines and map rows $r_1$ and $r_2$ again to rows enclosed by the corresponding two outer horizontal lines, we get a mapping of $P$ to $M$ and so a contradiction with $\PnimM$.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=100mm]{img/lemmaI1.pdf}
-\caption{}
+\includegraphics[width=100mm]{img/lemmaI1col.pdf}
+\caption{Red and blue lines representing two different mappings of a forbidden pattern. The four horizontal lines show the boundaries of the mapping of rows~$r_1$ and $r_2$ and the vertical lines show the boundaries of the mapping of the column~$c$.}
 \label{fig:lemmaI1}
 \end{figure}
 Proofs of cases two and three are similar to the first one and we skip them.
@@ -248,8 +248,8 @@ Let a pattern~$P\in\Pat$ be created from one of the matrices in Figure~\ref{fig:
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=50mm]{img/lemmaI2.pdf}
-\caption{Patterns for which one-entries in column~$c$ and rows $[r_1,r_2]$ are row-bounded. One-entries are on bold lines and the column $c$ is the second last.}
+\includegraphics[width=45mm]{img/lemmaI2.pdf}
+\caption{The patterns for which all one-entries in the column~$c$ and the rows~$[r_1,r_2]$ are row-bounded. One-entries of the patterns are on the bold lines and the column $c$ is the second last.}
 \label{fig:lemmaI2}
 \end{figure}
 \end{lemma}
@@ -292,7 +292,7 @@ First of all, if $P$ avoids $\smm{ &\bullet\\\bullet& }$ or $\smm{\bullet& \\ &\
 Let the three non-empty lines be three rows and let a pattern~$P$ have one-entries in at least three columns. Then it contains a $3\times3$ permutation matrix as a submatrix. Since the rotations of $P_1$ are avoided, the only feasible permutations are 123 and 321 and without loss of generality, we assume the first case. In Figure~\ref{fig:threelines} we see the structure of $P$. The capital letters stand for one-entries of the permutation and are chosen to be the left-most possible, letters $a-f$ stand each for a potential one-entry and the Greek letters stand each for a potential sequence of one-entries. Everything else is empty. Not all one-entries can be there at the same time, because that would create a mapping of $P_1$ or its rotation. We also need to find $\smm{\bullet& \\ &\bullet}\im P$. The following analysis only uses hereditary arguments, which means that if we prove that $P$ is bounding, we also prove that each submatrix of $P$ is bounding. With this in mind, we restrict ourselves to critical patterns.
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=70mm]{img/threelines.pdf}
+	\includegraphics[width=65mm]{img/threelines.pdf}
 	\caption{The structure of a pattern only having three non-empty rows and avoiding all rotations of $P_1$.}
 	\label{fig:threelines}
 \end{figure}
@@ -323,7 +323,7 @@ The same analysis also proves that if a pattern with the same restrictions only 
 Let $P$ be a pattern having two non-empty rows~$r_1,r_2$ and one non-empty column~$c_1$. Without loss of generality, we again assume permutation 123 is present and we distinguish three cases. Consider Figure~\ref{fig:twoplusone}:
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=120mm]{img/twoplusone.pdf}
+	\includegraphics[width=110mm]{img/twoplusone.pdf}
 	\caption{The structure of a pattern only having one-entries in two rows and one column that avoids all rotations of $P_1$.}
 	\label{fig:twoplusone}
 \end{figure}
@@ -345,7 +345,7 @@ Let $P$ be a pattern having two non-empty rows~$r_1,r_2$ and one non-empty colum
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=120mm]{img/caseana.pdf}
-	\caption{A figure showing which lemma can be used to proof row-boundness and column-boundness for each one-entry of patterns discussed in the case analysis. The left half of the picture deals with the situation where there are three non-empty rows and the right half with the situation where there are two non-empty rows and one non-empty column. Each case either contains a picture showing row-boundedness and column-boundeness or an arrow describing that the case can be easily reduced to a different one.}
+	\caption{A figure showing which lemma can be used to prove that each one-entry of patterns discussed in the case analysis is bounded. The patterns from the left half of the picture only contain three non-empty rows and the patterns from the right half only contain two non-empty rows and one non-empty column. Each case either contains a picture showing that each one-entry is row-bounded and column-bounded, or an arrow describing that the case can be reduced to a different one.}
 	\label{fig:pictproof1}
 \end{figure}
 The same analysis also proves that if a pattern~$P$ has two non-empty columns and one non-empty row then the pattern is bounding.
@@ -419,8 +419,10 @@ We prove even stronger result for the class~$\Avm{P_1,P_2,P_3,P_4}$ by using a w
 
 \begin{fct}[Higman's lemma]
 \label{fct:Higman}
-Let $A$ be a finite alphabet and $A^*$ be a set of finite sequences over $A$. Then $A^*$ is well quasi ordered with respect to the subsequence relation.
+Let $A$ be a finite alphabet and $A^*$ be a set of finite sequences over $A$ partially ordered by the subsequence relation. Then $A^*$ is well-quasi-ordered.
 \end{fct}
+
+In other words, whenever we have a potentially infinite $S\subseteq A^*$, there are sequences $a,b\in S$ such that $a$ is a subsequence of $b$. This also means that no such $S$ contains an infinite anti-chain.
 
 \begin{thm}
 The class~$\sigma=\Avm{P_1,P_2,P_3,P_4}$ is bounded. Moreover, its every subclass is bounded.

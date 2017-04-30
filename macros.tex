@@ -28,6 +28,13 @@
 \addcontentsline{toc}{chapter}{#1}
 }
 
+% This macro defines three dots sloping forwards
+\makeatletter
+\def\Ddots{\mathinner{\mkern1mu\raise\p@
+\vbox{\kern7\p@\hbox{.}}\mkern2mu
+\raise4\p@\hbox{.}\mkern2mu\raise7\p@\hbox{.}\mkern1mu}}
+\makeatother
+
 % Draw black "slugs" whenever a line overflows, so that we can spot it easily.
 \overfullrule=1mm
 
@@ -83,7 +90,6 @@
 \newcommand{\PsmM}{P\leq M}
 \newcommand{\PnsmM}{P\not\leq M}
 
-\newcommand{\Av}[1]{Av\left(#1\right)}
 \newcommand{\Avm}[1]{Av_{\im}\left(#1\right)}
 \newcommand{\Avmax}[1]{Av_{crit}\left(#1\right)}
 

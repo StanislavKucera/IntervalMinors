@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20170101204405" modified="D:20170220155644"/>
+<info created="D:20170101204405" modified="D:20170430220420"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -266,35 +266,35 @@ h
 <text matrix="1 0 0 1 0 24.3187" transformations="translations" pos="32 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
 <text matrix="1 0 0 1 0 24.3187" transformations="translations" pos="64 800" stroke="black" type="label" width="3.39" height="3.21" depth="0" valign="baseline" size="tiny">0</text>
 <text matrix="1 0 0 1 0 24.7968" transformations="translations" pos="48 800" stroke="black" type="label" width="3.667" height="2.456" depth="0" valign="baseline" size="tiny">$\bullet$</text>
-<path matrix="1 0 0 0.652174 0 292.174" stroke="black" dash="dotted">
+<path matrix="1 0 0 0.652174 0 292.174" stroke="blue">
 52 840 m
 52 748 l
 </path>
-<path matrix="1 0 0 0.652174 0 292.174" stroke="black" dash="dotted">
+<path matrix="1 0 0 0.652174 0 292.174" stroke="blue">
 72 840 m
 72 748 l
 </path>
-<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dotted">
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="blue">
 4 792 m
 116 792 l
 </path>
-<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dotted">
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="blue">
 4 772 m
 116 772 l
 </path>
-<path matrix="1 0 0 0.652174 -8 292.174" stroke="black" dash="dashed">
+<path matrix="1 0 0 0.652174 -8 292.174" stroke="red">
 48 748 m
 48 840 l
 </path>
-<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dashed">
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="red">
 4 784 m
 116 784 l
 </path>
-<path matrix="0.821429 0 0 1 0.714286 24" stroke="black" dash="dashed">
+<path matrix="0.821429 0 0 1 0.714286 24" stroke="red">
 4 768 m
 116 768 l
 </path>
-<path matrix="1 0 0 0.652174 -28 292.174" stroke="black" dash="dashed">
+<path matrix="1 0 0 0.652174 -28 292.174" stroke="red">
 48 748 m
 48 840 l
 </path>

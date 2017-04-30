@@ -1,9 +1,8 @@
 \chapter{Operations with matrices}
+\label{chap:ops}
 In this chapter, we look at classes of matrices from a different perspective. Unlike in the previous chapter, where we studied the structure of matrices avoiding a given set of forbidden pattern (usually just one), now we are given a class of matrices and we ask whether it can be described by forbidden patterns.
 
-When speaking about a class of matrices, unless stated otherwise, it is closed under interval minors, which means that whenever a matrix belongs to the class, all its minors belong there too. All classes discussed are also non-trivial. This means, there is at least one matrix of size $2\times1$, at least one matrix of size $1\times2$ and at least one matrix is non-empty in each class.
-
-While it is obvious that any class of matrices can be described by a set of forbidden patterns, as it is enough to forbid all matrices not contained in the class, it is no longer clear how complex can the forbidden set be.
+Recall that a class of matrices is set of matrices closed under interval minors. While it is obvious that any class of matrices can be described by a set of forbidden patterns, as it is enough to forbid all matrices not contained in the class, it is no longer clear how complex can the forbidden set be.
 
 \begin{defn}
 Let $\class{M}$ be a class of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
@@ -41,7 +40,7 @@ $\Avm{\smm{\bullet&\bullet\\\bullet&\bullet}}=\left(\Avm{\smm{\bullet&\circ\\\ci
 Something, we get a great use of later is a closure under the skew sum.
 
 \begin{defn}
-For a set of matrices $\class{M}$, let $\Cl{\class{M}}$ denote a class of matrices containing each $M\in\class{M}$ and closed under the skew sum and interval minors.
+For a set of matrices $\class{M}$, let $\Cl{\class{M}}$ denote the smallest class of matrices containing each $M\in\class{M}$ that is closed under the skew sum and interval minors.
 \end{defn}
 
 When speaking about graph minors, we can always imagine that the contractions of edges are done after all deletions. Similarly, an element derived from a matrix~$M$ by reapplying the skew sum and taking its interval minor can be also derived by taking an interval minor of the skew sum of an appropriate number of copies of $M$.
@@ -58,7 +57,7 @@ $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\c
 \begin{proof}
 The skew sum of an arbitrary number of copies of $\smm{\bullet&\circ\\\circ&\bullet}$ avoids both forbidden patterns and because the relation of being an interval minor is transitive, we have $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}\subseteq\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
 
-From Proposition~\ref{prop:twopatterns}, for every matrix~$M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$, it holds that for the top-right most walk~$w$ in $M$ such that there are no one-entries underneath it, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the skew sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the skew sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and all one-entries outside of it. Thus, we have the other inclusion.
+From Proposition~\ref{prop:twopatterns}, for every matrix~$M\in\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$, it holds that for the bottom-left extreme walk~$w$ in $M$, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$. Clearly, $\smm{\bullet&\bullet\\\bullet&\bullet}$ is an interval minor of the skew sum of three copies of $\smm{\bullet&\circ\\\circ&\bullet}$ and by the skew sum of multiple copies of $\smm{\bullet&\bullet\\\bullet&\bullet}$ we can then create the whole $w$ and all one-entries outside of it. Thus, we have the other inclusion.
 \end{proof}
 
 %\begin{prop}
@@ -206,7 +205,7 @@ Let $Nucleus_1=\smm{\bullet}$ and for $n>1$ let $Nucleus_n\in\bin^{n\times n+1}$
 \begin{center}
 $Nucleus_2=\smm{\bullet&\bullet& \\ &\bullet&\bullet}\ \ 
 Nucleus_3=\smm{ &\bullet&\bullet& \\\bullet& & &\bullet\\ &\bullet&\bullet& }\ \ 
-Nucleus_n=\smm{ & & & & & &\bullet&\bullet& \\ & & & & &\bullet& & &\bullet\\ & & & &\bullet& & &\bullet& \\ & & &\dots& & &\bullet& & \\ & &\bullet& & &\dots& & & \\ &\bullet& & &\bullet& & & & \\\bullet& & &\bullet& & & & & \\ &\bullet&\bullet& & & & & & \\}$.
+Nucleus_n=\smm{ & & & & & &\bullet&\bullet& \\ & & & & &\bullet& & &\bullet\\ & & & &\bullet& & &\bullet& \\ & & &\cdots& & &\bullet& & \\ & &\bullet& & &\cdots& & & \\ &\bullet& & &\bullet& & & & \\\bullet& & &\bullet& & & & & \\ &\bullet&\bullet& & & & & & \\}$.
 \end{center}
 \end{defn}
 

@@ -71,7 +71,7 @@ Given a matrix~$M\in\Avmax{P}$, consider an arbitrary row~$r$ of $M$. Without lo
 	\item $P[2,c]=1$: Clearly, there is a one-entry in rows $[r+l+1,m]$ underneath each $z_j$ and if we combine each such one-entry with a one-entry bounding corresponding $z_j$, we find a mapping of $\left(\{1\}^{2\times k^2}\right)^l$, contradicting $\PnimM$.
 	\item $P[2,c]=0$: For each $i\in[k^2]$, we define an extended interval $z^*_i$ to be the interval containing $z_i$ and also all entries on the row~$r$ between $z_i$ and $z_{i+1}$. Because of the Pigeonhole principle, we can find either $k$ consecutive extended intervals such that there are no one-entries in rows $[r+l+1,m]$ underneath them, or $k$ (not necessarily consecutive) extended intervals such that there is a one-entry in rows $[r+l+1,m]$ underneath each of them. Because each extended interval contains a one-entry, in the second case we find $\left(\{1\}^{k\times2}\right)^l$ as an intervals minor.
 	
-	In the first case, without loss of generality, assume $P[2,c_1]=1$ and it is the minimum such $c_1>c$. Let $z'_1,\dots,z'_k$ be the consecutive zero-intervals. Consider the mapping of $P^l$ created when a zero-entry of $z'_1$ is changed to a one-entry used to map $e$. Since $P[2,c_1]=1$ and there are no one-entries in rows $[r+l+1,m]$ underneath extended intervals $z'_1,\dots,z'_k$, $P^l[l+2,c_1]$ has to be mapped to the columns of $M$ after the end of $z'_k$. This leaves $k$ one-entries to be used to map potential one-entries in $P^l[\{l+2\},[c,c_1-1]]$ and so $P^l\im M$, which is again a contradiction.
+	In the first case, without loss of generality, assume $P[2,c_1]=1$ and it is the minimum such $c_1>c$. Let $z'_1,\dots,z'_k$ be the consecutive zero-intervals. Consider the mapping of $P^l$ created when a zero-entry of $z'_1$ is changed to a one-entry used to map $e$. Since $P[2,c_1]=1$ and there are no one-entries in rows $[r+l+1,m]$ underneath extended intervals $z'_1,\dots,z'_k$, $P^l[l+2,c_1]$ has to be mapped to the columns of $M$ after the end of $z'_k$. This leaves $k$ one-entries to be used to map potential one-entries in $P^l[\{l+2\},[c,c_1-1]]$ and so $P^l\im M$, which is again a contradiction. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -117,6 +117,7 @@ For every matrix $P$ such that $P_1\im P$, $\Avm{P}$ is unbounded.
 First, assume there is a mapping of $P_1$ into $P\in\Pat$ that maps $P_1[1,2]$ to a one-entry of the first row of $P$, $P_1[2,1]$ to a one-entry of the first column of $P$ and $P_1[3,3]$ to the bottom-right corner of $P$. Then, we use a similar construction as we did in the proof of Lemma~\ref{lemma:manyints} to find a matrix $M\in\Avmax{P}$ with $n$ zero-intervals for any $n$.
 
 Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_1,c_1],P[r_2,c_2]$ and $P[r_3,c_3]$ be one-entries that can be used to map $P_1[1,2]$, $P_1[2,1]$ and $P_1[3,3]$ respectively. We take a submatrix~$P':=P[[r_1,r_3],[c_2,c_3]]$. Such a matrix fulfills assumptions of the more restricted case above and we find a matrix $M'\in\Avmax{P'}$ having $n$ zero-intervals. We construct $M$ from $M'$ by simply adding new rows and columns containing only one-entries. We add $r_1-1$ rows in front of the first row and $k-r_3$ rows behind the last row. We also add $c_2-1$ columns in front of the first column and $l-c_3$ columns behind the last column. The constructed matrix~$M$ avoids $P$ an an interval minor because its submatrix $P'$ cannot be mapped to $M'$. At the same time, any change of a zero-entry of the $r_1$-th row of $M$ to a one-entry creates a copy of ${1}^{k\times l}$. The constructed matrix $M$ can be seen in Figure~\ref{fig:manyints}.
+\end{proof}
 
 \begin{figure}[!ht]
 \centering
@@ -124,7 +125,6 @@ Let $P$ be an arbitrary pattern containing $P_1$ as an interval minor. Let $P[r_
 \caption{The structure of a critical matrix avoiding $P$ that has arbitrarily many zero-intervals.}
 \label{fig:manyints}
 \end{figure}
-\end{proof}
 
 \subsection{Bounding patterns}
 \label{subsec:bound}
@@ -411,7 +411,7 @@ We only show that $\Avm{P_1,P_2}$ is bounded. To prove $\Avm{P_1,P_3}$ is bounde
 	\item $\Avm{P_1,P_2}$ is row-bounded:\\
 	From Lemma~\ref{lemma:First}, we have that one-entries $P_1[2,1],P_1[3,3],P_2[2,3]$ and $P_3[3,1]$ are row-bounded. For $P_1[1,2]$ and $P_2[1,2]$, we prove there are at most two zero-intervals usable for each of them in each row of any matrix~$M\in\Avmax{P_1,P_2}$. For contradiction, let $z_1<z_2<z_3$ be three zero-intervals usable for $P_1[1,2]$ in a row~$r$ of $M$. The one-entries used to map $P_1[2,1]$ and $P_1[3,3]$ in a mapping created when a zero-entry of $z_1$ is changed to a one-entry used to map $P_1[1,2]$, together with a one-entry in between $z_2$ and $z_3$ give us a mapping of $P_2$ to $M$. Symmetrically, the same goes for $P_2[1,2]$.
 	\item $\Avm{P_1,P_2}$ is column-bounded:\\
-	The proof that all one-entries of $P_1$ and $P_2$ are column-bounded is the same.
+	The proof that all one-entries of $P_1$ and $P_2$ are column-bounded is the same. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -425,23 +425,21 @@ Let $A$ be a finite alphabet and $A^*$ be a set of finite sequences over $A$ par
 In other words, whenever we have a potentially infinite $S\subseteq A^*$, there are sequences $a,b\in S$ such that $a$ is a subsequence of $b$. This also means that no such $S$ contains an infinite anti-chain.
 
 \begin{thm}
-The class~$\sigma=\Avm{P_1,P_2,P_3,P_4}$ is bounded. Moreover, its every subclass is bounded.
+The class~$\sigma=\Avm{P_1,P_2,P_3,P_4}$ is bounded. Moreover, every subclass of $\sigma$ is bounded.
 \end{thm}
 \begin{proof}
-While the previous two theorem already prove that $\sigma$ is bounded, we prove it by hand so that we can use the proofs to also show that every subclass of $\sigma$ is bounded.
-
-From Theorem~\ref{thm:boundedints}, we know that elements of $\sigma$ fall into finitely many categories. For each of them, we need to prove that it is bounded and also that it does not contain an infinite anti-chain. Then we use Theorem~\ref{thm:boundunion} to obtain the result. Let us consider any $m\times n$ matrix $M\in\sigma$:
+From Theorem~\ref{thm:boundedints}, we know that $\sigma$ is a union of finitely many classes of matrices. For each such class~$\class{M}$, we prove that every subclass $\class{M'}\subseteq\class{M}$ is also bounded, which we do by showing that there is only a finite number of critical matrices in $\class{M'}$. Then we use Theorem~\ref{thm:boundunion} to obtain the result.
 \begin{itemize}
-	\item $M$ only contains up to three non-empty rows (columns):\\
-		If $M$ is critical in $\sigma$ then it contains three rows made of one-entries and everything else is zero, so the number of one-intervals is bounded by three.\\
+	\item Let $\class{M}_1\subseteq\sigma$ be the class containing all matrices from $\sigma$ that have their one-entries in at most three rows and let $\class{M}\subseteq\class{M}_1$ be an arbitrary subclass.
 		
-		To proof there is no infinite anti-chain, we use Fact~\ref{fct:Higman}. To describe $M$ we use words over alphabet~$A=\{a,b,c,d,e,f,g,h,i,j\}$. Let $r_1<r_2<r_3$ be the non-empty rows (if less then three are non-empty we choose extra values arbitrarily). We define $w_M\in A^*$ as follows. First, we use a letter~$g$ $r_1$ times, letter $h$ $r_2-r_1$ times, letter $i$ $r_3-r_2$ times and letter $j$ $m-r_3$ times to describe the number of rows of $M$ and position of non-empty rows. Then we describe columns from the first one to the last one as follows. For each 0 in $r_1$ we use a letter $a$ and for 1, we use letters $ab$. For each 0 in $r_2$ we use a letter $c$ and for 1, we use letters $cd$. For each 0 in $r_3$ we use a letter $e$ and for 1, we use letters $ef$.
+		To proof there is no infinite anti-chain of critical matrices from $\class{M}$, we use Fact~\ref{fct:Higman}. To describe $M\in\class{M}$,č we use words over alphabet~$A=\{a,b,c,d,e,f,g,h,i,j\}$. Let $r_1<r_2<r_3$ be the non-empty rows (if less then three are non-empty we choose extra values arbitrarily). We define $w_M\in A^*$ as follows. First, we use a letter~$g$ $r_1$ times, letter $h$ $r_2-r_1$ times, letter $i$ $r_3-r_2$ times and letter $j$ $m-r_3$ times to describe the number of rows of $M$ and position of non-empty rows. Then we describe columns from the first one to the last one as follows. For each 0 in $r_1$ we use a letter $a$ and for 1, we use letters $ab$. For each 0 in $r_2$ we use a letter $c$ and for 1, we use letters $cd$. For each 0 in $r_3$ we use a letter $e$ and for 1, we use letters $ef$.
 		
 		If we have $w_M,w_{M'}\in A^*$ such that $w_M$ is a subsequence of $w_{M'}$, then we want to show that $M$ is an interval minor of $M'$. Let $r_1,r_2,r_3$ and $r_1',r_2',r_3'$ be the non-empty rows of $M$ and $M'$ respectively. Since the number of leading letters $g$ is not bigger in $w_M$, $M$ does not have more empty rows before $r_1$ than $M'$ does before $r_1'$ and similarly for the other pairs of non-empty rows.
 
 		Now consider there is $ab$ in $w_M$ and it corresponds to some $a\dots b$ in $w_{M'}$. Without loss of generality, the letter $a$ in $w_{M'}$ is the one exactly before $b$. Clearly, one-entries of $M$ can be mapped to one-entries in $M'$ and we only need to check that two one-entries of two different columns of $M$ are not mapped to two one-entries of the same column of $M'$. But this is not hard to see and we have $M\im M'$ (but it does not have to hold that $M\leq M'$).
 
 		From Fact~\ref{fct:Higman}, we have that $A^*$ is well ordered, which means that matrices having at most three non-empty rows (columns) are well ordered and so they does not have an infitely long anti-chain.
+	\item Let $\class{M}_2\subseteq\sigma$ be the class containing all matrices from $\sigma$ that have their one-entries in at most three non-empty columns:
 	\item $M$ only contains at most two rows and one column (or vice versa):\\
 		The number of one-intervals of any critical matrix $M$ is bounded by two.\\
 		
@@ -466,35 +464,35 @@ There exists a bounding pattern~$P$ having an unbounded subclass of $\Avm{P}$.
 Let $P=I_n$ (identity matrix) for $n>3$. From Lemma~\ref{lemma:walkpat}, we have that $P$ is bounding. On the other hand, $\Avm{I_n,P_1}$ is unbounded, because the construction used in the proof of Lemma~\ref{lemma:manyints} also works for this class.
 \end{proof}
 
-\section{Complexity of one-entries (probably to be delete)}
-So far we have been working with the whole patterns and determining their complexity. To make the results even more general, we can analyze the complexity of each one-entry.
-
-In spare time, I will have a look at this. 
-
-\begin{lemma}
-\label{lemma:cross}
-Let $P\in\Pat$ be a pattern such that all its one-entries are either in rows $r_1,r_2$ ($r_1<r_2$) and $P[[r_2],\{c\}]$. Then $P[r_1,c]$ is row-bounded.
-\end{lemma}
-\begin{proof}
-We prove there are at most $k^4$ zero-intervals usable for $P[r_1,c]$ in each row of any maximal matrix $M$ avoiding $P$. For contradiction, let there be more than $k^4$ of them ($zi_1,\dots,zi_{k^4}$) in some row and for each of them, consider the top most row $r'_j$ used to map $r_2$-th row of $P$ in a mapping created when a zero-entry of $zi_j$ is changed to a one-entry used to map $P[r_1,c]$. Then pairs $[zi_1,r'_1],[zi_2,r'_2],\dots,[zi_{k^4},r'_{k^4}]$ form a sequence of distinct pairs and thanks to the Pigeonhole principle, there is a subsequence of length at least $k^2$ such that the values of $r'_j$ are either non-increasing or non-decreasing. Without loss of generality, assume they are non-decreasing and let $zi'_1,\dots,zi'_{k^2}$ be their corresponding zero-intervals.
-
-What if $P[r_2,c]=0$? TODO
-\end{proof}
-
-\begin{thm}
-Let $P$ be a pattern. Any one-entry $P[r,c]$ is row-unbounded if (and only if) there is a trivially unbounded one-entry $P[r,c']$ and we cannot apply the fourth case of Lemma~\ref{lemma:H} nor Lemma~\ref{lemma:cross} to $P[r,c]$.
-\end{thm}
-\begin{proof}
-Without loss of generality, let $P[r,c']$ be part of mapping of $P_1$, where $P_1[1,2]$ is mapped to it. Let $P_1[2,1]$ be mapped to $P[r_2,c_2]$ and $P_1[3,3]$ be mapped to $P[r_3,c_3]$. We go through all potential one-entries $P[r,c]$ and show that either we can use one of the lemmata mentioned in the statement or the one-entry is row-unbounded.
-\begin{itemize}
-	\item $c<c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound2}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use $P[r,c],P[r',c']$ and $P[r_3,c_3]$ to again find either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded once again.
-	\item $c=c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first assume there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_3$, entries $P[r,c],P[r',c']$ and $P[r_3,c_3]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_3$, then what?
-	
-	Cannot just use lemma even if it was proved.
-	
-	TOOD
-	\item $c_2<c<c_3$: In this case $P[r,c]$ is trivially unbounded as together with $P[r_2,c_2]$ and $P[r_3,c_3]$ it forms $P_1$.
-	\item $c=c_3$: If there is no one-entry in $P[[r-1],[c+1,l]]$ nor $P[[r+1,k],[c+1,l]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c+1,l]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use the construction from Lemma~\ref{lemma:unbound} to show $P[r,c]$ is row-unbounded once again.
-	\item $c>c_3$: There are three cases to go through and we can handle them the same way as we did in case $c<c_2$.
-\end{itemize}
-\end{proof}
+%\section{Complexity of one-entries (probably to be delete)}
+%So far we have been working with the whole patterns and determining their complexity. To make the results even more general, we can analyze the complexity of each one-entry.
+%
+%In spare time, I will have a look at this. 
+%
+%\begin{lemma}
+%\label{lemma:cross}
+%Let $P\in\Pat$ be a pattern such that all its one-entries are either in rows $r_1,r_2$ ($r_1<r_2$) and $P[[r_2],\{c\}]$. Then $P[r_1,c]$ is row-bounded.
+%\end{lemma}
+%\begin{proof}
+%We prove there are at most $k^4$ zero-intervals usable for $P[r_1,c]$ in each row of any maximal matrix $M$ avoiding $P$. For contradiction, let there be more than $k^4$ of them ($zi_1,\dots,zi_{k^4}$) in some row and for each of them, consider the top most row $r'_j$ used to map $r_2$-th row of $P$ in a mapping created when a zero-entry of $zi_j$ is changed to a one-entry used to map $P[r_1,c]$. Then pairs $[zi_1,r'_1],[zi_2,r'_2],\dots,[zi_{k^4},r'_{k^4}]$ form a sequence of distinct pairs and thanks to the Pigeonhole principle, there is a subsequence of length at least $k^2$ such that the values of $r'_j$ are either non-increasing or non-decreasing. Without loss of generality, assume they are non-decreasing and let $zi'_1,\dots,zi'_{k^2}$ be their corresponding zero-intervals.
+%
+%What if $P[r_2,c]=0$? TODO
+%\end{proof}
+%
+%\begin{thm}
+%Let $P$ be a pattern. Any one-entry $P[r,c]$ is row-unbounded if (and only if) there is a trivially unbounded one-entry $P[r,c']$ and we cannot apply the fourth case of Lemma~\ref{lemma:H} nor Lemma~\ref{lemma:cross} to $P[r,c]$.
+%\end{thm}
+%\begin{proof}
+%Without loss of generality, let $P[r,c']$ be part of mapping of $P_1$, where $P_1[1,2]$ is mapped to it. Let $P_1[2,1]$ be mapped to $P[r_2,c_2]$ and $P_1[3,3]$ be mapped to $P[r_3,c_3]$. We go through all potential one-entries $P[r,c]$ and show that either we can use one of the lemmata mentioned in the statement or the one-entry is row-unbounded.
+%\begin{itemize}
+%	\item $c<c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound2}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use $P[r,c],P[r',c']$ and $P[r_3,c_3]$ to again find either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded once again.
+%	\item $c=c_2$: If there is no one-entry in $P[[r-1],[c-1]]$ nor $P[[r+1,k],[c-1]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first assume there is a one-entry in $P[[r-1],[c-1]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_3$, entries $P[r,c],P[r',c']$ and $P[r_3,c_3]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_3$, then what?
+%	
+%	Cannot just use lemma even if it was proved.
+%	
+%	TOOD
+%	\item $c_2<c<c_3$: In this case $P[r,c]$ is trivially unbounded as together with $P[r_2,c_2]$ and $P[r_3,c_3]$ it forms $P_1$.
+%	\item $c=c_3$: If there is no one-entry in $P[[r-1],[c+1,l]]$ nor $P[[r+1,k],[c+1,l]]$, then the fourth case of Lemma~\ref{lemma:H} can be used for $P[r,c]$. Otherwise, first consider there is a one-entry in $P[[r-1],[c+1,l]]$, then we can use the construction from Lemma~\ref{lemma:unbound3}. In the last case, assume there is a one-entry $P[r',c']$ in $P[[r+1,k],[c-1]]$, then if $r'!=r_2$, entries $P[r,c],P[r',c']$ and $P[r_2,c_2]$ form either $P_1$ or $P_2$ and $P[r,c]$ is trivially row-unbounded. If $r'=r_2$, then we use the construction from Lemma~\ref{lemma:unbound} to show $P[r,c]$ is row-unbounded once again.
+%	\item $c>c_3$: There are three cases to go through and we can handle them the same way as we did in case $c<c_2$.
+%\end{itemize}
+%\end{proof}

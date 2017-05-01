@@ -2,13 +2,9 @@
 \textbf{TODO}:
 \begin{itemize}
 	\item Fix or rewrite Lemma~\ref{lemma:maxmult}.
-	\item Characterize or exclude $P_9$.
 	\item Consider adding more patterns/generalizations.
-	\item Consider proving Proposition 3.9 (currently commented).
-	\item Consider rewriting Observation~\ref{obs:rel}.
 	\item Figure out what to do with Theorem 4.31.
-	\item Fix or remove Lemma 4.33.
-	\item Try to do something with squares at the end of proofs.
+	\item Consider fixing Lemma 4.33 (currently commented).
 \end{itemize}
 
 A binary matrix (or 0--1 matrix) is a matrix with ones and zeroes as its entries. In the thesis, we only consider binary matrices and so we omit the word binary. We say that a matrix~$M$ contains a matrix~$P$ as an interval minor, if $P$ can be created from $M$ by a sequence of deletion of one-entries and merges of neighboring rows or columns. Otherwise, we say $M$ avoids $P$. To distinguish among matrices and to indicate the relationship, we usually call the matrix~$P$ a \emph{pattern}.
@@ -20,7 +16,7 @@ While a lot is know about matrices in general, because they can intuitively repr
 
 To get familiar with definitions and pattern avoidance in general, in Chapter~\ref{chap:chars}, we focus on small patterns (having up to four one-entries only) and describe the common structure of matrices avoiding them.
 
-We then turn our focus elsewhere in Chapter~\ref{chap:ops}, and instead of looking for a structure of matrices avoiding a pattern, we rather find for a class of matrices (closed under interval minors) the smallest set of forbidden patterns that describes the class. We show that while there are many infinite classes of matrices that can be characterized by a finite number of forbidden patterns, there are also other classes for which this cannot be achieved.
+We then turn our focus elsewhere in Chapter~\ref{chap:ops}, and instead of looking for a structure of matrices avoiding a pattern, given a class of matrices (closed under interval minors) we find the smallest set of forbidden patterns that characterizes the class. We introduce the skew sum of two matrices and show that classes of matrices closed under the skew sum can always be described by a finite number of forbidden pattern. Using the operation more, we show that there are also other classes for which this cannot be achieved.
 
 Because it is very useful to study extremal questions like the maximum number of one-entries of a matrix from a given class of matrices, in Chapter~\ref{chap:ints}, we study a variant of such complexity question, where we instead focus on the maximum number~$k$ of appearances of pairs ``01'' and ``10'' on a single line of a matrix from a given class of matrices. We show that even for classes that are described by just one forbidden pattern, $k$ can be unbounded, and we characterize exactly for which pattern this holds. Then we generalize the approach and show what influence an intersection of classes has on the number $k$.
 
@@ -165,14 +161,13 @@ Moreover, the same holds for $Ex_{\preceq}(P,m,n).$
 \end{lemma}
 \begin{proof}
 If $k>m\vee l>m$, we have $P\nim\{1\}^{m,n}$. Otherwise, let $P[r,c]=1$ and consider Figure~\ref{fig:minimalist}. Consider a matrix~$M$ such that the first $r-1$ rows, the last $k-r$ rows, the first $c-1$ column and the last $l-c$ column contain no zero-entry and the rest is empty. Then $P\not\leq M$ and even $P\nim M$. We can also see that $|M|=mn-(m-k+1)(n-l+1)=(l-1)m+(k-1)n-(k-1)(l-1)$.
-
+\end{proof}
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/minimalist.pdf}
 \caption{An example of a matrix~$M$ avoiding a pattern~$P$ as an interval minor.}
 \label{fig:minimalist}
 \end{figure}
-\end{proof}
 
 The following definition is due to \cite{cibulka}.
 
@@ -220,7 +215,8 @@ Let $P=\{1\}^{2\times l}$ be a pattern, then $P$ is weakly minimalist.
 \end{fct}
 \begin{proof}
 Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{2\times l}$ as an interval minor and let $A_i$ be the set of column indices $j$ such that both $M[[i],\{j\}]$ and $M[[i+1,m],\{j\}]$ are non-empty. Clearly, $|A_i|\leq l-1$; otherwise, $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ appears in at least $b_j-1$ of sets $A_i$, $1\leq i\leq m-1$. It follows that
-$$|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-1)+n\leq\sum\limits_{i=1}^{m-1}|A_i|+n\leq(l-1)(m-1)+n$$
+
+$|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-1)+n\leq\sum\limits_{i=1}^{m-1}|A_i|+n\leq(l-1)(m-1)+n$.
 \end{proof}
 
 This result shows an example of a weakly minimalist matrix that is not strongly minimalist. Consider a matrix~$\smm{\bullet&\bullet\\\bullet&\bullet}$. It is, thanks to Fact~\ref{fct:2weak} weakly minimalist, but it is known due to \cite{p33} that it is not strongly minimalist.
@@ -231,7 +227,8 @@ Let $P=\{1\}^{3\times l}$ be a pattern, then $P$ is weakly minimalist.
 \end{fct}
 \begin{proof}
 Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{3\times l}$ as an interval minor and let $A_i$ be a set of column indices $j$ such that both $M[[i-1],\{j\}]$ and $M[[i+1,m],\{j\}]$ are non-empty and $M[i,j]=1$. Clearly $|A_i|\leq l-1$, otherwise $P\preceq M$. Let $b_j$ denote the number of one-entries in the $j$-th column. Each column~$j$ of $M$ (for which $b_j\geq2$) appears in exactly $b_j-2$ of sets $A_i$, $2\leq i\leq m-1$. It follows that
-$$|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-2)+2n\leq\sum\limits_{i=2}^{m-1}|A_i|+2n\leq(l-1)(m-2)+2n$$
+
+$|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-2)+2n\leq\sum\limits_{i=2}^{m-1}|A_i|+2n\leq(l-1)(m-2)+2n$.
 \end{proof}
 
 We now show that the third part of Fact~\ref{fct:minimalist} is also safe for weakly minimalist patterns.

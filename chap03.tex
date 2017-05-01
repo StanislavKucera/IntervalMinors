@@ -49,7 +49,7 @@ When speaking about graph minors, we can always imagine that the contractions of
 For every set of matrices $\class{P}$, each $M\in\Cl{\class{P}}$ is an interval minor of the skew sum of multiple copies of $P$.
 \end{obs}
 
-What follows are two simple results of the relation of closures under the skew sum and the description using interval minors that we greatly generalize in the next section.
+What follows is a simple result of the relation of a closure under the skew sum and the description using interval minors. We greatly generalize this result in the next section.
 
 \begin{prop}
 $\Cl{\smm{\bullet&\circ\\\circ&\bullet}}=\Avm{\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet},\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}}$.
@@ -133,7 +133,7 @@ Let $\class{P}$ be a set of matrices. There is a minimal (with respect to interv
 \begin{proof}
 \begin{itemize}
 	\item[$\Rightarrow$] Let $P_1\in\bin^{k_1\times l_1}$ and $P_2\in\bin^{k_2\times l_2}$. While $P\nim P_1\dsum_{1\times1}0^{k_2\times l_2}$ and $P\nim0^{k_1\times l_1}\dsum_{1\times1}P_2$, we have $P\im P_1\dsum_{1\times1}0^{k_2\times l_2}\dsum0^{k_1\times l_1}\dsum_{1\times1}P_2$.
-	\item[$\Leftarrow$] If there is no minimal matrix~$P\in\class{P}$ that is the skew sum of its non-empty interval minors, we want to show it makes $\Avm{\class{P}}$ closed under the skew sum with $1\times1$ overlap. From Observation~\ref{obs:art}, for every $P\class{P}$ there are no $r,c$ that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty. Let $M_1,M_2\in\Avm{P}$ be arbitrary matrices and let $M=M_1\dsum_{1\times1}M_2$. The matrix~$M$ contains a non-trivial articulation and from Observation~\ref{obs:keep} it follows $M\in\Avm{P}$ for each minimal $P\in\class{P}$; thus, $M\in\Avm{\class{P}}$.
+	\item[$\Leftarrow$] If there is no minimal matrix~$P\in\class{P}$ that is the skew sum of its non-empty interval minors, we want to show it makes $\Avm{\class{P}}$ closed under the skew sum with $1\times1$ overlap. From Observation~\ref{obs:art}, for every $P\in\class{P}$ there are no $r,c$ that $P[r,c]$ is an articulation and $P[[r,k],[c]],P[[r],[c,l]]$ are non-empty. Let $M_1,M_2\in\Avm{P}$ be arbitrary matrices and let $M=M_1\dsum_{1\times1}M_2$. The matrix~$M$ contains a non-trivial articulation and from Observation~\ref{obs:keep} it follows $M\in\Avm{P}$ for each minimal $P\in\class{P}$; thus, $M\in\Avm{\class{P}}$. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -148,7 +148,7 @@ Let $\class{P}$ be a set of matrices, then for all matrices $M\in\Mat$ it holds 
 	\item[$\Rightarrow$] With Observation~\ref{obs:0to1} in mind, consider the skew sum with $1\times1$ overlap of multiple copies of elements of $\class{P}$ and let the sequence contain an articulation between each pair of consecutive copies of matrices from $P$, together with the trivial articulations~$M[m,1]$ and $M[1,n]$.
 	
 	Between each pair of consecutive articulations, we have a matrix from $\class{P}$ and so the statement holds. When we take an arbitrary interval minor and keep original articulations, each matrix between two consecutive articulations only contains at most one original copy of some matrix~$P\in\class{P}$, but it may happen that the bottom-left and top-right corners become one-entries even though they were zero-entries before. The matrix does not have to be an interval minor of $P$ anymore, but it is an interval minor of $\smm{1}\dsum P\dsum\smm{1}$ for the corresponding $P\in\class{P}$.
-	\item[$\Leftarrow$] We can simply blow up each matrix~$M'$ between two consecutive articulation to the skew sum of three copies of the corresponding matrix $P$ and because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$ it holds $M\in\Cl{\class{P}}$.
+	\item[$\Leftarrow$] We can simply blow up each matrix~$M'$ between two consecutive articulation to the skew sum of three copies of the corresponding matrix $P$ and because $M'\im\smm{1}\dsum P\dsum\smm{1}\im P\dsum P\dsum P$ it holds $M\in\Cl{\class{P}}$. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -166,7 +166,7 @@ There are no $X_1,X_2$ non-empty interval minors of $X$ such that $X=X_1\dsum{1\
 
 Without loss of generality, we assume $X\in\Pat$ has at least $2m+5$ rows. Let $X'$ denote a matrix created from $X$ by deletion of the first row. We have $X'\in\Avm{\class{P}}$ and from minimality of $X$ also $X'\in\Cl{M}$. From Lemma~\ref{lemma:artic}, there is a sequence of articulations of $X'$ on a reverse walk such that each matrix between two consecutive articulations is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$. Let $X'[r,c]$ be the first articulation from the sequence (sorted by the second coordinate in ascending order) for which $c>1$. The matrix between $X'[r,c]$ and the previous articulation in the sequence is an interval minor of $\smm{1}\dsum M\dsum\smm{1}$, which also means that $c\leq n+2$. Since $X[r,c]$ is not an articulation, it must hold that $X[1,c_1]=1$ for some $c_1<c\leq n+2$. Symmetrically, let $X''$ denote a matrix created from $X$ by deletion of the last row. Following the same steps we did before, we get the last articulation $X''[r,c]$ such that $c<l$ and the observation that $c\geq l-n-1$. Since $X[r,c]$ is not an articulation, it must hold that $X[k,c_2]=1$ for some $c_2>c\geq l-n-1$.
 
-We showed that a matrix~$Y\in\bin^{(m+1)\times2}$ such that the only one-entries are $Y[1,1]$ and $Y[m+1,2]$ is an interval minor of $X$. To reach a contradiction, it suffices to show that there is a matrix~$P\in\class{P}$ such that $P\im Y$. For contradiction, let $Y\in\Avm{\class{P}}$ and since $Y\im X$ and $X$ is minimum such that $X\not\in\Cl{M}$ it holds $Y\in\Cl{M}$. But this cannot be, because $Y$ contains no non-trivial articulation and from Observation~\ref{obs:keep}, we know that every matrix $Z\in\Cl{M}$ bigger than $m\times n$ contains at least one.
+We showed that a matrix~$Y\in\bin^{(m+1)\times2}$ such that the only one-entries are $Y[1,1]$ and $Y[m+1,2]$ is an interval minor of $X$. To reach a contradiction, it suffices to show that there is a matrix~$P\in\class{P}$ such that $P\im Y$. For contradiction, let $Y\in\Avm{\class{P}}$ and since $Y\im X$ and $X$ is minimum such that $X\not\in\Cl{M}$ it holds $Y\in\Cl{M}$. But this cannot be, because $Y$ contains no non-trivial articulation and from Observation~\ref{obs:keep}, we know that every matrix $Z\in\Cl{M}$ bigger than $m\times n$ contains at least one. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -190,7 +190,7 @@ Let $\class{M}$ and $\class{P}$ be sets of matrices such that $\class{M}=\Avm{\c
 	For contradiction with the statement, assume $M\in\Cl{\class{M}}$. According to Lemma~\ref{lemma:artic} and the fact $M$ contains no non-trivial articulation, it holds $M\im\smm{1}\dsum M'\dsum\smm{1}$ for some $M'\in\class{M}$. Because the trivial articulations contain zero-entries, it even holds $M\im M'$. We also know $P\im M$ for some $P\in\class{P}$, which together give us a contradiction with $\class{M}=\Avm{\class{P}}$.
 	\item[$\supseteq$] First of all, $\Avm{\R{\class{P}}}$ is closed under the skew sum with $1\times1$ overlap. For contradiction, assume there are matrices $M_1,M_2\in\Avm{\R{\class{P}}}$ but $M=M_1\dsum_{1\times1}M_2\not\in\Avm{\R{\class{P}}}$. Then there exists a matrix~$P\in\R{\class{P}}$ such that $P\im M$. Because $P$ is not a skew sum with $1\times1$ overlap of non-empty interval minors of $P$, it follows that either $P\im M_1$ or $P\im M_2$ and we have a contradiction.
 
-It suffices to show that the inclusion holds for any matrix $M\in\Avm{\R{\class{P}}}$ that is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$.
+It suffices to show that the inclusion holds for any matrix $M\in\Avm{\R{\class{P}}}$ that is not a skew sum with $1\times1$ overlap of non-empty interval minors of $M$. From Observation~\ref{obs:art}, we know that $M$ does not contain any non-trivial articulation and those trivial ones are empty. Thus, $M\in\Avm{\class{P}}=\class{M}$ and so $M\in\Cl{\class{M}}$. \qedhere
 \end{itemize}
 \end{proof}
 

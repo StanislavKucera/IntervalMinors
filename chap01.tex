@@ -7,13 +7,13 @@
 
 \chapter{Characterizations}
 \label{chap:chars}
-Our goal in this chapter is to describe what matrices avoiding small patterns as interval minors look like.
+Our goal in this chapter is to describe for a given small pattern the structure of matrices avoiding it as an interval minor.
 
-Algorithmically speaking, deciding whether a pattern is contained in a matrix is hard, even if both matrices are permutation matrices, see \cite{complex}. We do not consider complexity questions here, but given a small pattern, we show that matrices avoiding the pattern have a quite simple structure. However, the structure gets significantly richer as soon as the pattern contains at least four one-entries.
+Algorithmically speaking, deciding whether a pattern is contained in a matrix is NP-hard, even if both matrices are permutation matrices, see \cite{complex}. We do not consider complexity questions here, but for small patterns, we show that matrices avoiding them have a quite simple structure. However, the structure gets significantly more complex as soon as we allow the pattern to contain at least four one-entries.
 
-To allow ourselves to go through cases efficiently, we first show that to some extent, we can assume there are no empty lines in the pattern without loss of generality.
+To go through cases efficiently, we first show that to some extent, we can assume, without loss of generality, there are no empty lines in studied patterns.
 
-Before we dive into the characterizations, let us introduce some useful notions.
+Before we dive into characterizations, let us introduce some useful notion.
 
 \begin{defn}
 A \emph{walk} in a matrix~$M$ is a contiguous sequence of its entries, beginning in the top-left corner and ending in the bottom-right one. If $M[i,j]$ occurs in the sequence, its successor is either $M[i+1,j]$ or $M[i,j+1]$. Symmetrically, a \emph{reverse walk} in $M$ is a contiguous sequence of its entries, beginning in the top-right corner and ending in the bottom-left one.
@@ -34,10 +34,10 @@ For a matrix~$M\in\Mat$ and integers $r,c$, we say $M[r,c]$ is
 \end{defn}
 
 \begin{defn}
-For a matrix~$M\in\Mat$ and integers $r,c$, we say $M[r,c]$ is \emph{bottom-left extreme} if it is bottom-left empty and the submatrix~$M[[r,m],[c]]$ is not empty. Similarly, $M[r,c]$ is \emph{bottom-right extreme} if it is bottom-right empty and the submatrix~$M[[r,m],[c,n]]$ is not empty. A walk in $M$ is \emph{bottom-left extreme} if it contains all bottom-left extreme elements of $M$. A reverse walk in $M$ is \emph{bottom-right extreme} if it contains all bottom-right extreme elements of $M$.
+For a matrix~$M\in\Mat$ and integers $r,c$, we say that an entry~$M[r,c]$ is \emph{bottom-left extreme}, if it is bottom-left empty and the submatrix~$M[[r,m],[c]]$ is not empty. Similarly, $M[r,c]$ is \emph{bottom-right extreme} if it is bottom-right empty and the submatrix~$M[[r,m],[c,n]]$ is not empty. A walk in $M$ is \emph{bottom-left extreme} if it contains all bottom-left extreme elements of $M$. A reverse walk in $M$ is \emph{bottom-right extreme} if it contains all bottom-right extreme elements of $M$.
 \end{defn}
 
-It is easy to see that there is exactly one bottom-left extreme walk and exactly one bottom-right extreme walk in every matrix.
+It is easy to see that there is exactly one bottom-left extreme walk and exactly one bottom-right extreme walk in every non-empty matrix.
 
 \begin{defn}
 For matrices $M\in\Mat$ and $N\in\bin^{m\times l}$, we define $M\hsum N\in\bin^{m\times(n+l)}$ to be the matrix created from $M$ by appending the columns of~$N$ at the end of $M$.
@@ -47,7 +47,7 @@ For matrices $M\in\Mat$ and $N\in\bin^{m\times l}$, we define $M\hsum N\in\bin^{
 \label{sec:empty}
 From the definition of matrix containment, zero-entries of the pattern pose no restrictions on the tested matrix, so, intuitively, adding new empty lines to a pattern should not influence the structure of matrices avoiding the pattern by much.
 
-We first show that adding empty lines as first or last lines of the pattern indeed does next to no difference. On the other hand, inserting empty lines in between non-empty lines becomes a bit more tricky and we only describe what happens when we extend a pattern of size $k\times2$ (or symmetrically $2\times k$).
+We first show that adding empty lines as first or last lines of the pattern indeed does next to no difference. On the other hand, inserting empty lines in between non-empty lines becomes a bit more tricky and we only describe what happens when we extend a pattern of size $k\times2$ (or symmetrically $2\times k$) by a single empty column (row).
 
 \begin{obs}
 \label{obs:emptyrows}
@@ -56,87 +56,93 @@ For matrices~$P\in\Pat$ and $M\in\Mat$, let $P'=P\hsum\{0\}^{k\times1}$ and let 
 \begin{proof}
 \begin{itemize}
 	\item[$\Rightarrow$] The last column of $P'$ can always be mapped just to the last column of $M'$ and $P'[[k],[l]]$ can be mapped to $M'[[m],[n]]$ the same way $P$ is mapped to $M$.
-	\item[$\Leftarrow$] Taking the restriction of the mapping of $P'$ to $M'$ we get a mapping of $P$ to $M$. \qedhere
+	\item[$\Leftarrow$] Taking the restriction of the mapping of $P'$ to $M'$, we get a mapping of $P$ to $M$. \qedhere
 \end{itemize}
 \end{proof}
 
-The analogous proof can be also used to characterize matrices avoiding patterns after we add an empty column as the first column or an empty row as the first or the last row. Using induction, we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$, where $P$ is derived from $P'$ by excluding all empty leading or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of leading or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not need to consider patterns having empty rows or columns on their boundary.
+The analogous proof can be also used to characterize matrices avoiding patterns after adding an empty column as the first column or an empty row as the first or the last row. Using induction, we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$, where $P$ is derived from $P'$ by excluding all empty leading or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of leading or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not to consider patterns having empty rows or columns on their boundary.
 
-The following machinery shows what happens after we add empty columns in between two columns of a pattern that only has two columns. The size of the patterns is significant, because it allows us to prove that matrices avoiding them have a very simple structure. That is going to be achieved by employing a notion of intervals of one-entries. More about these intervals and their counterpart -- zero-intervals can be find in the last chapter of the thesis.
+We now show what happens when we add an empty column in between two columns of a pattern that only has two columns. It is going to be achieved by employing a notion of intervals of one-entries. More about these intervals and their counterpart -- zero-intervals can be found in the last chapter of the thesis.
 
 \begin{defn}
-A \emph{one-interval} of a matrix~$M$ is a sequence of consecutive one-entries in a single line of $M$ bounded from both sides by zero-entries or the edges of matrix.
+A \emph{one-interval} of a matrix~$M$ is a sequence of consecutive one-entries of a single line of $M$ bounded from each side by a zero-entry or the edge of the matrix.
 \end{defn}
 
 \begin{defn}
-A matrix~$M$ avoiding a pattern~$P$ is \emph{critical} if after a change of any zero-entry to one-entry $M$ no longer avoids $P$.
+For a class of matrices~$\class{M}$, a matrix~$M\in\class{M}$ is \emph{critical} in $\class{M}$ if after a change of any zero-entry to one-entry the matrix no longer belongs to $\class{M}$. For a pattern~$P$, we denote by $\Avmax{P}$ the set of all matrices critical in $\Avm{P}$. 
 \end{defn}
 
 \begin{lemma}
 \label{lemma:twocols}
-Let $P\in\bin^{k\times2}$ and let $M\in\Mat$ be a critical matrix avoiding $P$, then $M$ contains at most one one-interval in each row.
+Let $P\in\bin^{k\times2}$ be a pattern and let $M\in\Avmax{P}$ be a matrix, then $M$ contains at most one one-interval in each row.
 \end{lemma}
 \begin{proof}
-For contradiction, assume there are at least two one-intervals in a row of $M$. Because $M$ is critical, changing any zero-entry~$e$ in between one-intervals $o_1$ and $o_2$ creates a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',2]$.
+For contradiction, assume there are at least two one-intervals in a row of $M$. Because $M$ is critical in $\Avm{P}$, changing any zero-entry~$e$ in between one-intervals $o_1$ and $o_2$ creates a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',2]$.
 
 In the first case, the same mapping also maps $P$ to $M$ if we use a one-entry from $o_1$ instead of $e$; thus, $\PnimM$ and we reach a contradiction. In the second case, the mapping can use a one-entry from $o_2$ instead of $e$; therefore, we again get a contradiction with $\PnimM$. Since $e$ is not usable for any one-entry of $P$, we can change it to a one-entry and get a contradiction with $M$ being critical.
 \end{proof}
 
 \begin{lemma}
 \label{lemma:maxmult}
-Let $P\in\bin^{k\times2}$ and for any $l\geq1$ let $P^l\in\bin^{k\times(l+2)}$ be a pattern created from $P$ by adding $l$ new empty columns in between the two columns of $P$. If an $m\times n$ matrix $M\in\Avm{P^l}$ is critical, then each row of $M$ is either empty or it contains a single one-interval of length at least $l+1$ (or length $m$ if $m<l+1$).
+Let $P\in\bin^{k\times3}$ be a pattern such that its middle column is empty. Every row of any matrix~$M\in\Avmax{P}$ is either empty or it contains a single one-interval of length at least $2$ (or length $m$ if $m<2$).
 \end{lemma}
 \begin{proof}
-The same proof as in Lemma~\ref{lemma:twocols} shows that there is at most one one-interval in each row. To prove that each one-interval contains at least $l+1$ one-entries, we proceed by induction on $l$:
-
-First, let $l=1$. For contradiction, let there be only one one-entry~$M[r,c]$ in a row~$r$ of some critical matrix~$M\in\Avm{P^1}$:
+Let a matrix~$M\in\Avmax{P}$. The same proof as in Lemma~\ref{lemma:twocols} shows that there is at most one one-interval in each row of $M$. For contradiction, let there be only one one-entry~$M[r,c]$ in a row~$r$:
 \begin{itemize}
-	\item $c=1$: we can set $M[r,c+1]=1$ and the matrix still avoids $P^l$, which is a contradiction with $M$ being critical.
-	\item $c=n$: we can set $M[r,c-1]=1$ and the matrix still avoids $P^l$, which is a contradiction with $M$ being critical.
-	\item otherwise: consider zero-entries $e_l=M[r,c-1]$ and $e_r=M[r,c+1]$. For contradiction, assume we can change neither $e_l$ nor $e_r$ to a one-entry without creating the pattern. This means that if $e_l=1$ then some $P^l[r_1,1]$ can be mapped to it. Let $m_l$ be the corresponding mapping. At the same time, if $e_r=1$ then some $P^l[r_2,3]$ can be mapped to it and $m_r$ is the corresponding mapping. We show that the two mappings can be combined to a mapping of $P^l$ to $M$ giving a contradiction.
+	\item $c=1$: we can set $M[r,c+1]=1$ and the matrix still avoids $Pl$, which is a contradiction with $M$ being critical in $\Avm{P}$.
+	\item $c=n$: we can set $M[r,c-1]=1$ and the matrix still avoids $P$, which is a contradiction with $M$ being critical in $\Avm{P}$.
+	\item otherwise: consider zero-entries $e_l=M[r,c-1]$ and $e_r=M[r,c+1]$. For contradiction, assume we can change neither $e_l$ nor $e_r$ to a one-entry without creating a mapping of the pattern. It means that if we set $e_l=1$ then some $P[r_1,1]$ can be mapped to it. Let $m_l$ be the corresponding mapping. At the same time, if we set $e_r=1$ then some $P[r_2,3]$ can be mapped to it and $m_r$ is the corresponding mapping. We show that the two mappings can be combined to a mapping of $P$ to $M$, giving a contradiction.
 	
 	Without loss of generality, in both mappings, the empty column of $P$ is mapped exactly to the column~$c$ of $M$. We need to describe how to partition $M$ into $k$ rows. Consider Figure~\ref{fig:emptymid}:
 	\begin{itemize}
-		\item $r_1\neq r_2$: Without loss of generality, we assume $r_1>r_2$. Let $r_3$ be the first row of the interval where the row~$r_1$ is mapped in $m_l$ and let $r_4$ be the last row of the interval where the row~$r_1$ is mapped in $m_r$. From the mapping~$m_l$, we know that the first $r_1-1$ rows of $P$ can be mapped to rows $[1,r_3-1]$ of $M$ and from the mapping~$m_r$, we know that the last $k-r_1$ rows of $P$ can be mapped to rows $[r_4+1,m]$ of $M$. Therefore, we can use the row interval $[r_3,r_4]$ of $M$ to map the row~$r_1$ of $P$ without using one-entries $e_l$ and $e_r$.
-		\item $r_1=r_2$: Let $[r_3,r_4]$ be the interval where the row~$r_1$ is mapped in $m_l$ and let $[r_5,r_6]$ be the interval where the row~$r_1$ is mapped in $m_r$. Without loss of generality, let $r_3<r_5$. From $m_l$ being a mapping, we know that the first $r_1-1$ rows of $P$ can be mapped to rows $[1,r_3-1]$ of $M$. Without loss of generality let $r_4<r_6$. From $m_r$ being a mapping, we know that the last $k-r_1$ rows of $P$ can be mapped to rows $[r_6+1,m]$ of $M$. Therefore, we can map the row~$r_1$ of $P$ to the row interval~$[r_3,r_6]$ of $M$ without using one-entries $e_l$ and $e_r$.
+		\item $r_1\neq r_2$: Without loss of generality, we assume $r_1>r_2$. Let $r_3$ be the first row of the interval where the row~$r_1$ is mapped in $m_l$ and let $r_4$ be the last row of the interval where the row~$r_1$ is mapped in $m_r$. From the mapping~$m_l$, we know that the first $r_1-1$ rows of $P$ can be mapped to rows $[1,r_3-1]$ and from the mapping~$m_r$, we know that the last $k-r_1$ rows of $P$ can be mapped to rows $[r_4+1,m]$. From the mapping~$m_r$, we know that the row~$r_1$ can be mapped to rows $[r_3,r_4]$; thus, we have a mapping of $P$ to $M$.
+		\item $r_1=r_2$: Let $[r_3,r_4]$ be the interval where the row~$r_1$ is mapped in $m_l$ and let $[r_5,r_6]$ be the interval where the row~$r_1$ is mapped in $m_r$. Without loss of generality, let $r_3<r_5$. From the mapping~$m_l$, we know that the first $r_1-1$ rows of $P$ can be mapped to rows $[1,r_3-1]$. Without loss of generality, let $r_4<r_6$. From the mapping~$m_r$, we know that the last $k-r_1$ rows of $P$ can be mapped to rows $[r_6+1,m]$. Therefore, we can map the row~$r_1$ of $P$ to the row interval~$[r_3,r_6]$ without using one-entries $e_l$ and $e_r$.
 	\end{itemize}
 \end{itemize}
+We showed that either $e_l$ or $e_r$ can be changed to a one-entry, which is a contradiction with $M$ being critical in $\Avm{P}$.
+\end{proof}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\textwidth]{img/emptymidcol.pdf}
-\caption{Red and blue lines representing mappings $m_l$ and $m_r$ of the forbidden pattern. The two horizontal lines show the boundaries of the mapping of row~$r$ and the vertical lines show the boundaries of the mapping of column~$c$.}
+\includegraphics[width=130mm]{img/emptymidcol.pdf}
+\caption{Red and blue lines representing mappings $m_l$ and $m_r$ of the forbidden pattern. The two horizontal lines show the boundaries of the mapping of the row~$r$ and the vertical lines show the boundaries of the mapping of the column~$c$.}
 \label{fig:emptymid}
 \end{figure}
-We showed that either $e_l$ or $e_r$ can be changed to a one-entry, which is a contradiction with $M$ being critical.
 
-Now assume the statement holds for every $l'<l$. For contradiction, let $M\in\Avm{P^l}$ be a critical matrix having less then $l+1$ one-entries in a one-interval. Let $M'$ be a matrix created from $M$ by deletion of the last one-entry in each row that contains at least two one-entries.
+Similarly, we can prove that for every pattern~$P\in\Pat$ such that all $(l-2)$ middle columns are empty, every matrix from $\Avmax{P}$ that contains at least $l$ one-entries in each row, contains at least $l+1$ one-entries in each row. On the other hand, it cannot be generalized further, as we show in the following proposition.
 
-If $P^{l-1}\nim M'$ then, from the induction hypothesis, we can add some one-entries to $M'$ so that each row containing a one-entry now contains a one-interval of length at least $l$ and the new matrix~$M'$ still avoids $P^{l-1}$. We then create $M''$ from $M'$ by appending one more one-entry to every row~$r$ of $M'$ that contains a one-entry as follows. Let $o$ be the single one-interval in the row~$r$. If there is a zero-entry bounding $o$ from the right, then we change the zero-entry to a one-entry. If there is no such zero-entry, then we change the zero-entry that bounds $o$ from the left side to a one-entry.
+\begin{prop}
+For every integer $l>3$, there exists a pattern~$P\in\Pat$ such that all $(l-2)$ middle columns are empty and there exists a matrix~$M\in\Avmax{P}$ containing a row with a single one-entry.
+\end{prop}
+\begin{proof}
+We only show the construction for $l=4$ and $l=5$ because the first construction can easily be extended for every even $l$ and the latter for every odd $l$. For $l\in\{3,4\}$, let $P_l$ be the forbidden pattern and $M_l\in\Avmax{P}$ be the critical matrix that has a single one-entry in some row:
 
-The matrix~$M''$ avoids $P^{l}$ as an interval minor, because no new one-entries appended from the left side can be used for any mapping of $P^l$ and if some new one-entries are used for a mapping of $P^l$ to $M''$ then we have a mapping of $P^{l-1}$ to $M'$, which is a contradiction. Because the matrix~$M''\in\Avm{P^l}$ and it is created from $M$ by appending one-entries, we have a contradiction with $M$ being critical.
+$P_4=\smm{\circ&\circ&\circ&\bullet\\\bullet&\circ&\circ&\circ\\\circ&\circ&\circ&\bullet\\\bullet&\circ&\circ&\circ}
+\ M_4=\smm{\bullet&\bullet&\bullet&\bullet&\circ\\\bullet&\bullet&\bullet&\bullet&\bullet\\\circ&\circ&\bullet&\circ&\circ\\\bullet&\bullet&\bullet&\bullet&\bullet\\\circ&\bullet&\bullet&\bullet&\bullet}\hspace{3mm}
+\ P_5=\smm{\circ&\circ&\circ&\circ&\bullet\\\bullet&\circ&\circ&\circ&\circ\\\circ&\circ&\circ&\circ&\bullet\\\bullet&\circ&\circ&\circ&\circ}
+\ M_5=\smm{\bullet&\bullet&\bullet&\bullet&\bullet&\circ&\circ\\\bullet&\bullet&\bullet&\bullet&\bullet&\bullet&\bullet\\\circ&\circ&\circ&\bullet&\circ&\circ&\circ\\\bullet&\bullet&\bullet&\bullet&\bullet&\bullet&\bullet\\\circ&\circ&\bullet&\bullet&\bullet&\bullet&\bullet}$
 
-If $P^{l-1}\im M'$ then we delete every one-entry~$M'[r,c]$ such that the same one-entry in the matrix~$M$ is the only one-entry in its row and $c>1$, and we change $M'[r,c-1]$ to be a one-entry. Now it holds $P^{l-1}\nim M'$. Otherwise, some newly created one-entry is used in some mapping of $P^{l-1}$. It cannot be used to map any $P^{l-1}[r',l]$ because then we would have $P^l\im M$
+It is easy to check that $M_l\in\Avm{P_l}$ and that changing a zero-entry to a one-entry creates a mapping of the forbidden pattern.
 \end{proof}
 
 \begin{thm}
 \label{thm:emptymiddle}
-Let $P\in\bin^{k\times2}$ and for any integer $l\geq1$ let $P^l\in\bin^{k\times(l+2)}$ be a pattern created from $P$ by adding $l$ new empty columns in between the two columns of $P$. For all matrices $M\in\Mat$ it holds $M\in\Avm{P^l}\Leftrightarrow$ there exists a matrix $N\in\bin^{m\times(n-l)}$ such that $N\in\Avm{P}$ is critical and $M$ is a submatrix of an elementwise OR of $l+1$ shifted copies of $N$ ($N\hsum\{0\}^{m\times l},\{0\}^{m\times 1}\hsum N\hsum\{0\}^{m\times(l-1)},\dots,\{0\}^{m\times(l-1)}\hsum N\hsum\{0\}^{m\times1},\{0\}^{m\times l}\hsum N$).
+Let $P\in\bin^{k\times2}$ be a pattern and let $P'\in\bin^{k\times3}$ be the pattern created from $P$ by appending a new empty column in between the two columns of $P$. For all matrices $M\in\Mat$ it holds $M\in\Avm{P'}\Leftrightarrow$ there exists a matrix $N\in\bin^{m\times(n-1)}$ such that $N\in\Avmax{P}$ and $M$ is a submatrix of the elementwise OR of $N\hsum\{0\}^{m\times1}$ and $\{0\}^{m\times1}\hsum N$.
 \end{thm}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] Without loss of generality, let $M$ be critical. We know from Lemma~\ref{lemma:maxmult} that each row of $M$ contains either no one-entry or a single one-interval of length at least $l+1$. Let a matrix~$N$ be created from $M$ by deleting the last $l$ one-entries from each row and excluding the last $l$ columns. Clearly, $M$ is equal to an elementwise OR of $l+1$ copies of $N$. If $P\im N$ then each mapping of $P$ can be extended to a mapping of $P^l$ to $M$ by mapping each $P^l[r_1,1]$ to the same one-entry where $P[r_1,1]$ is mapped in $N\hsum\{0\}^{m\times l}$ and mapping each $P^l[r_2,l+2]$ to the same one-entry where $P[r_2,2]$ is mapped in $\{0\}^{m\times l}\hsum N$.
-	\item[$\Leftarrow$] Let $M$ be equal to an elementwise OR of $l+1$ copies of $N$. For contradiction, assume $P^l\im M$ and consider any mapping of $P^l$ to $M$. Without loss of generality, one-entries of the first column of $P^l$ are mapped to those one-entries of $M$ created from $N\hsum\{0\}^{m\times l}$. If there is one-entry $P^l[r,1]$ mapped to a one-entry of $M$ not created from $N\hsum\{0\}^{m\times l}$, we just take the first one-entry in the row instead. Symmetrically, all one-entries of the last column of $P^l$ are mapped to one-entries created from $\{0\}^{m\times1}\hsum N$. The same one-entries of $N$ can be used to map $P$ to $N$, which is a contradiction. \qedhere
+	\item[$\Rightarrow$] Without loss of generality, let the matrix $M$ be critical in $\Avm{P'}$. We know from Lemma~\ref{lemma:maxmult} that each row of $M$ contains either no one-entry or a single one-interval of length at least $2$. Let a matrix~$N$ be created from $M$ by deletion of the last one-entry from each row and deletion of the last column. Clearly, $M$ is equal to the elementwise OR of $N\hsum\{0\}^{m\times1}$ and $\{0\}^{m\times1}\hsum N$. If $P\im N$ then each mapping of $P$ to $N$ can be extended to a mapping of $P'$ to $M$ by mapping each $P'[r_1,1]$ to the same one-entry where $P[r_1,1]$ is mapped in $N\hsum\{0\}^{m\times1}$ and mapping each $P'[r_2,3]$ to the same one-entry where $P[r_2,2]$ is mapped in $\{0\}^{m\times1}\hsum N$.
+	\item[$\Leftarrow$] Let a matrix~$M$ be equal to the elementwise OR of $N\hsum\{0\}^{m\times1}$ and $\{0\}^{m\times1}\hsum N$. For contradiction, assume $P'\im M$ and consider any mapping of $P'$ to $M$. Without loss of generality, one-entries of the first column of $P'$ are mapped to those one-entries of $M$ created from $N\hsum\{0\}^{m\times1}$. If there is a one-entry~$P'[r,1]$ mapped to a one-entry of $M$ not created from $N\hsum\{0\}^{m\times1}$, we just take the first one-entry in the row instead. Symmetrically, all one-entries of the last column of $P'$ are mapped to one-entries created from $\{0\}^{m\times1}\hsum N$. The same one-entries of $N$ can be used to map $P$ to $N$, which is a contradiction. \qedhere
 \end{itemize}
 \end{proof}
 
-The symmetric characterization also holds when adding empty rows to a pattern that only has two rows. We can see in the following proposition that the straightforward generalization of the statement for bigger patterns does not hold.
+The symmetric characterization also holds when adding an empty row to a pattern that only has two rows. We can see in the following proposition that the straightforward generalization of the statement for bigger patterns does not hold.
 
 \begin{prop}
-There exists a matrix $P\in\Pat$ such that for each $P'\in\bin^{k\times(l+1)}$ created from $P$ by adding a single empty column in between two existing columns, there exists a matrix~$N$ avoiding $P$ such that the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$ contains $P'$ as an interval minor.
+There exists a matrix~$P\in\Pat$ such that for each pattern~$P'\in\bin^{k\times(l+1)}$ created from $P$ by appending a new empty column in between the two existing columns, there exists a matrix~$N\in\Avm{P}$ such that the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$ contains $P'$ as an interval minor.
 \end{prop}
 \begin{proof}
-Later in this chapter, we characterize the class of matrices avoiding pattern~$P_8$. For the result, look at Proposition~\ref{prop:p72}. Let $N\in\Avm{P_8}$ be any matrix containing $P_5$ as an interval minor. Let a matrix $M$ be equal the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$. Then $\smm{\bullet&\circ&\bullet&\bullet\\ &\circ&\bullet& },\smm{\bullet&\bullet&\circ&\bullet\\ &\bullet&\circ& }\im M$.
+Later in this chapter, we characterize the class of matrices avoiding pattern~$\smm{\bullet&\bullet&\bullet\\ &\bullet& }$. See Proposition~\ref{prop:p72}. Let $N\in\Avm{\smm{\bullet&\bullet&\bullet\\ &\bullet& }}$ be any matrix containing $\smm{\bullet& &\bullet\\ &\bullet& }$ as an interval minor. Let a matrix $M$ be equal to the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$. Then $\smm{\bullet&\circ&\bullet&\bullet\\ &\circ&\bullet& }\im M$ and $\smm{\bullet&\bullet&\circ&\bullet\\ &\bullet&\circ& }\im M$.
 \end{proof}
 
 Next, we describe the structure of matrices avoiding certain small patterns. We restrict ourselves to patterns with no empty lines. If $\PnimM$ then also $P^\top\nim M^\top$ and this holds for all rotations and mirrors of $P$ and $M$ and so we only mention these symmetries.

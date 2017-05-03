@@ -1,8 +1,8 @@
-\chapter{Operations with matrices}
+\chapter{The basis of a class of matrices}
 \label{chap:ops}
-In this chapter, we look at classes of matrices from a different perspective. Unlike in the previous chapter, where we studied the structure of matrices avoiding a given set of forbidden pattern (usually just one), now we are given a class of matrices and we ask whether it can be described by forbidden patterns.
+In this chapter, we look at classes of matrices from a different perspective. Unlike in the previous chapter, where we studied the structure of matrices avoiding a given set of forbidden patterns (usually just one), we are given a class of matrices and a question whether the class can be described by forbidden patterns.
 
-Recall that a class of matrices is set of matrices closed under interval minors. While it is obvious that any class of matrices can be described by a set of forbidden patterns, as it is enough to forbid all matrices not contained in the class, it is no longer clear how complex can the forbidden set be.
+Recall that a class of matrices is set of matrices closed under interval minors. While it is obvious that any class of matrices can be described by a set of forbidden patterns, as it suffices to forbid all matrices not contained in the class, it is no longer clear how complex the set can be.
 
 \begin{defn}
 Let $\class{M}$ be a class of matrices. The \emph{basis} of $\class{M}$ is a set of all minimal (with respect to minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$.
@@ -17,6 +17,9 @@ Let $\class{M}=\Avm{\class{P}}$ for some set of matrices $\class{P}$. Then $\cla
 \begin{obs}
 Every finite class of matrices has a finite basis.
 \end{obs}
+\begin{proof}
+Let $\class{M}$ be a finite class of matrices, let $m$ be the maximum number of rows a matrix from $\class{M}$ has and let $n$ be the maximum number of columns a matrix from $\class{M}$ has. We define a set of matrices~$\class{P}$ to contain all matrices of size smaller or equal to $m\times n$ that do not belong to $\class{M}$ and we add $\{0\}^{m\times(n+1)}$ and $\{0\}^{(m+1)\times n}$. Clearly, $\class{P}$ is finite and $\class{M}=\Avm{\class{P}}$.
+\end{proof}
 
 \section{The skew and direct sums}
 In the realm of permutations, the skew and direct sums are very useful operations. What follows is a direct generalization to our settings and a few simple results. More interesting statements and the relation with interval minors follow in the next section.
@@ -170,7 +173,7 @@ We showed that a matrix~$Y\in\bin^{(m+1)\times2}$ such that the only one-entries
 \end{itemize}
 \end{proof}
 
-\section{Basis}
+\section{Bases}
 We recall that the basis of a class of matrices $\class{M}$ is a set of all minimal (with respect to interval minors) matrices $\class{P}$ such that $\class{M}=\Avm{\class{P}}$. It goes without saying that it does not make sense to consider a basis of a set of matrices that is not closed under interval minors.
 
 So far, we showed that whenever $\class{M}$ is finite, its basis is also finite. The same hold when $\class{M}=\Cl{M}$ for some $M$. We show next that, unlike in graph theory, there are classes that does not have a finite basis. Moreover, we show that even for a class $\class{M}$ with finite basis, its closure $\Cl{\class{M}}$ can have an infinite basis.

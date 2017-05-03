@@ -5,9 +5,9 @@
 \newsavebox{\smlmatc}
 \savebox{\smlmatc}{$\smm{\bullet&\bullet&\bullet\\ &\bullet& }$}
 
-\chapter{Characterizations}
+\chapter{Small interval minors}
 \label{chap:chars}
-Our goal in this chapter is to describe for a given small pattern the structure of matrices avoiding it as an interval minor.
+Our goal in this chapter is to describe, for a given small pattern, the structure of matrices avoiding it as an interval minor.
 
 Algorithmically speaking, deciding whether a pattern is contained in a matrix is NP-hard, even if both matrices are permutation matrices, see \cite{complex}. We do not consider complexity questions here, but for small patterns, we show that matrices avoiding them have a quite simple structure. However, the structure gets significantly more complex as soon as we allow the pattern to contain at least four one-entries.
 
@@ -147,9 +147,9 @@ Later in this chapter, we characterize the class of matrices avoiding pattern~$\
 
 Next, we describe the structure of matrices avoiding certain small patterns. We restrict ourselves to patterns with no empty lines. If $\PnimM$ then also $P^\top\nim M^\top$ and this holds for all rotations and mirrors of $P$ and $M$ and so we only mention these symmetries.
 
-\section{Patterns having two one-entries and their generalization}
+\section{Patterns having two one-entries}
 \label{sec:2ones}
-These are, up to rotation and mirroring, the only patterns having two one-entries and no empty lines:
+These are, up to rotation, the only patterns having two one-entries and no empty lines:
 $$P_1=\smm{\bullet&\bullet}\ \ 
 \ P_2=\smm{ &\bullet\\\bullet& }$$
 They can be generalized to:
@@ -157,7 +157,7 @@ $$P'_1=\smm{\bullet&\bullet&\cdots&\bullet&\bullet}\ \
 \ P'_2=\smm{ & & & &\bullet\\ & & &\bullet& \\ & &\Ddots& & \\ &\bullet& & & \\\bullet& & & & }$$
 
 \begin{prop}
-Let $P'_1=1^{1\times k}$. For all matrices $M$: $P'_1\nim M\Leftrightarrow M$ has at most $k-1$ non-empty columns.
+Let $P'_1=\{1\}^{1\times k}$. For all matrices $M$: $P'_1\nim M\Leftrightarrow M$ has at most $k-1$ non-empty columns.
 \end{prop}
 \begin{proof}
 \begin{itemize}
@@ -166,20 +166,21 @@ Let $P'_1=1^{1\times k}$. For all matrices $M$: $P'_1\nim M\Leftrightarrow M$ ha
 \end{itemize}
 \end{proof}
 
+\pagebreak
 \begin{prop}
 \label{prop:walking}
 Let $P'_2\in\bin^{k\times k}$. For all matrices $M$: $P'_2\nim M\Leftrightarrow$ there are $k-1$ walks in $M$ such that each one-entry of $M$ belongs to at least one walk.
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] When one-entries of a matrix~$M$ cannot fit into $k-1$ walks, then there are $k$ one-entries such that no pair can fit to a single walk and those give us a mapping of $P'_2$.
+	\item[$\Rightarrow$] When all one-entries of a matrix~$M$ cannot fit into $k-1$ walks, then there are $k$ one-entries such that no pair can fit to a single walk and those give us a mapping of $P'_2$.
 	\item[$\Leftarrow$] A matrix~$M$ containing one-entries in at most $k-1$ walks avoids $P'_2$. \qedhere
 \end{itemize}
 \end{proof}
 
 \section{Patterns having three one-entries}
 \label{sec:3ones}
-These are up to rotation and mirroring the only patterns having three one-entries and no empty lines that we did not characterize so far:
+These are, up to rotation and mirroring, the only patterns having three one-entries and no empty lines that we did not characterize so far:
 $$P_3=\smm{\bullet&\bullet\\\bullet& }\ \ 
 \ P_4=\smm{\bullet& &\bullet\\ &\bullet& }\ \ 
 \ P_5=\smm{ &\bullet&\bullet\\\bullet& & }\ \ 
@@ -201,17 +202,18 @@ For all matrices $M\in\Mat$: $P_3\nim M\Leftrightarrow$ there exist a row~$r$ an
 \end{figure}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] If $M$ is a walking matrix then we set $r=c=1$. Otherwise, there are one-entries $M[r,c']$ and $M[r',c]$ such that $r'<r$ and $c'<c$. If $M[r,c]$ is not top-left, top-right or bottom-left empty then $\PimM$. If $M[[r,m],[c,n]]$ is not a walking matrix then it contains $\smm{ &\bullet\\\bullet& }$ and together with $M[r,c']$ it gives us the forbidden pattern.
-	\item[$\Leftarrow$] For contradiction, assume that a matrix~$M$ described in Figure~\ref{fig:p12} contains $P_3$ as an interval minor. Without loss of generality, let $P_3[1,1]$ be mapped to a one-entry in the $r$-th row. Then both $P_3[1,2]$ and $P_3[2,1]$ need to be mapped to $M'$, which is a contradiction because it is not a walking matrix. \qedhere
+	\item[$\Rightarrow$] If $M$ is a walking matrix then we set $r=c=1$. Otherwise, there are one-entries $M[r,c']$ and $M[r',c]$ such that $r'<r$ and $c'<c$. If an entry~$M[r,c]$ is not top-left, top-right or bottom-left empty then $P_3\im M$. If the submatrix~$M[[r,m],[c,n]]$ is not a walking matrix then it contains $\smm{ &\bullet\\\bullet& }$ and together with the one-entry~$M[r,c']$ it gives us a mapping of $P_3$.
+	\item[$\Leftarrow$] For contradiction, assume that a matrix~$M$ described in Figure~\ref{fig:p12} contains $P_3$ as an interval minor. Without loss of generality, let $P_3[1,1]$ be mapped to a one-entry in the $r$-th row. Then both $P_3[1,2]$ and $P_3[2,1]$ need to be mapped to $M'$, which is a contradiction with it being a walking matrix. \qedhere
 \end{itemize}
 \end{proof}
 
+\pagebreak
 \begin{prop}
-For all matrices $M$: $P_4\nim M\Leftrightarrow M=M_1\hsum M_2$, where $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$.
+For all matrices $M$: $P_4\nim M\Leftrightarrow$ there are matrices~$M_1,M_2$ such that  $M=M_1\hsum M_2$, $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$.
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] Let $e=M[r,c]$ be an arbitrary top-most one-entry in $M$. It holds $\smm{\bullet& \\ &\bullet}\nim M[[m],[c-1]]$, as otherwise, together with $e$ it forms $P_4$. If we also have $\smm{ &\bullet\\\bullet& }\nim M[[m],[c,n]]$ then we are done. For contradiction, let $e_1,\ e_2$ be any two one-entries forming $\smm{ &\bullet\\\bullet& }$ in $M[[m],[c,n]]$. Symmetrically, let $e'_1,\ e'_2$ be any two one-entries forming $\smm{\bullet& \\ &\bullet}$ in $M[[m],[c]]$. Without loss of generality, let $e_2$ be lower than $e'_2$ and then, together with $e'_1$ and $e_1$ it forms $P_4$ as an interval minor of $M$, giving us a contradiction. 
+	\item[$\Rightarrow$] Let $e=M[r,c]$ be an arbitrary top-most one-entry in $M$. It holds $\smm{\bullet& \\ &\bullet}\nim M[[m],[c-1]]$; otherwise, we have a mapping of $P_4$ to $M$. If we also have $\smm{ &\bullet\\\bullet& }\nim M[[m],[c,n]]$ then we are done. For contradiction, let $e_1,\ e_2$ be any two one-entries forming $\smm{ &\bullet\\\bullet& }$ in $M[[m],[c,n]]$. Symmetrically, let $e'_1,\ e'_2$ be any two one-entries forming $\smm{\bullet& \\ &\bullet}$ in $M[[m],[c]]$. Without loss of generality, let $e_2$ be no higher than $e'_2$ and then, together with $e'_1$ and $e_1$ it gives us a mapping of $P_4$ to $M$, giving a contradiction. 
 	\item[$\Leftarrow$] For contradiction, let $P_4\im M$ and consider an arbitrary mapping. Consider the one-entry of $M$, where $P_4[2,2]$ is mapped. If it is in $M_1$ then $\smm{\bullet& \\ &\bullet}\im M_1$ and we get a contradiction. Otherwise, we have $\smm{ &\bullet\\\bullet& }\im M_2$, which is again a contradiction. \qedhere
 \end{itemize}
 \end{proof}
@@ -221,8 +223,8 @@ For all matrices $M\in\Mat$: $P_5\nim M\Leftrightarrow$ for every one-entry $M[r
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] For contradiction, assume there is a one-entry~$M[r,c]$ on $w$ such that there are two non-empty columns in $M[[r-1],[c+1,n]]$. Then a one-entry from each of those columns and $M[r,c]$ together give us $P_5\im M$ and a contradiction. 
-	\item[$\Leftarrow$] For contradiction, let $P_5\im M$. Without loss of generality, $P_5[2,1]$ is mapped to a one-entry~$M[r,c]$ from $w$. Then $\smm{\bullet&\bullet}\im M[[r-1],[c+1,n]]$, which is a contradiction with it having one-entries in at most one column. \qedhere
+	\item[$\Rightarrow$] For contradiction, assume there is a one-entry~$M[r,c]$ on $w$ such that there are two non-empty columns in $M[[r-1],[c+1,n]]$. Then a one-entry from each of those columns and $M[r,c]$ together give us a mapping of $P_5$ to $M$, and a contradiction. 
+	\item[$\Leftarrow$] For contradiction, let $P_5\im M$ and consider any such mapping. Without loss of generality, $P_5[2,1]$ is mapped to a one-entry~$M[r,c]$ from $w$. Then $\smm{\bullet&\bullet}\im M[[r-1],[c+1,n]]$, which is a contradiction with it having one-entries in at most one column. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -231,8 +233,8 @@ For all matrices $M$: $P_6\nim M\Leftrightarrow$ for every one-entry $M[r,c]$ on
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] For contradiction, assume there are $r,c$ such that $M[r,c]$ is a one-entry on $w$ and $M[[r-1],[c-1]]$ is not a walking matrix. It means that $\smm{ &\bullet\\\bullet& }\im M[[r-1],[c-1]]$ and together with $M[r,c]$ it gives us the forbidden pattern and a contradiction.
-	\item[$\Leftarrow$] For contradiction, let $P_6\im M$ and consider an arbitrary mapping of $P_6$. Without loss of generality, let $P_6[3,3]$ be mapped to $M[r,c]$ such that there is no other one-entry in $M[[r,m],[c,n]]$. Then, $M[r,c]$ lies on $w$ and $M[[r],[c]]$ is a walking matrix and so $M[r,c]$ cannot be used to map $P_6[3,3]$, which is a contradiction. \qedhere
+	\item[$\Rightarrow$] For contradiction, assume there are integers~$r,c$ such that $M[r,c]$ is a one-entry on $w$ and $M[[r-1],[c-1]]$ is not a walking matrix. It means that $\smm{ &\bullet\\\bullet& }\im M[[r-1],[c-1]]$ and together with $M[r,c]$ it gives us a mapping of the forbidden pattern, and a contradiction.
+	\item[$\Leftarrow$] For contradiction, let $P_6\im M$ and consider an arbitrary mapping of $P_6$. Without loss of generality, let $P_6[3,3]$ be mapped to some one-entry~$M[r,c]$ on $w$. Then, $M[[r],[c]]$ is not a walking matrix and we have a contradiction. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -247,20 +249,20 @@ $$P_7=\smm{\bullet&\bullet\\\bullet&\bullet}\ \
 \label{lemma:p33}
 For any matrix $M$: $P_7\nim M\Rightarrow$ there exist integers $r,c$ such that $M[r,c]$ is either
 \begin{enumerate}
-\item a one-entry and $(r,c)\in\{(1,1),(1,n),(m,1),(m,n)\}$ or
-\item top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$ or
+\item a one-entry and $(r,c)\in\{(1,1),(1,n),(m,1),(m,n)\}$, or
+\item top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$, or
 \item top-left and bottom-right empty and $(r,c)\not\in\{(1,n),(m,1)\}$.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
-If there is a one-entry in any corner then the first condition is satisfied. Otherwise, consider $M[2,1]$. It is trivially bottom-left empty and if there is no one-entry in the first row of $M$ then the second condition is satisfied. Therefore, let $M[1,c_t]$ be a one-entry in the first row. Symmetrically, let $M[m,c_b]$ be a one-entry in the last row, let $M[r_l,1]$ be a one-entry in the first column and let $M[r_r,n]$ be a one-entry in the last column.
+If there is a one-entry in any corner then the first condition is satisfied. Otherwise, consider the entry~$M[2,1]$. It is trivially bottom-left empty and if there is no one-entry in the first row of $M$ then the second condition is satisfied. Therefore, let $M[1,c_t]$ be a one-entry in the first row. Symmetrically, let $M[m,c_b]$ be a one-entry in the last row, let $M[r_l,1]$ be a one-entry in the first column and let $M[r_r,n]$ be a one-entry in the last column.
 
-It cannot happen that $c_t<c_b$ and $r_r>r_l$ (or symmetrically $c_t>c_b$ and $r_r<r_l$), because then $P_7\im M$. Without loss of generality, let $c_t\geq c_b$ and $r_r\geq r_l$. The matrix $M[[r_r-1],[c_t+1,n]]$ is empty; otherwise, any one-entry there, together with $M[1,c_t],M[m,c_b]$ and $M[r_r,1]$ forms the forbidden pattern. Similarly, the matrix $M[[r_r+1,m],[c_t-1]]$ is also empty. Thus $M[r_t,c_t]$ is top-right and bottom-left empty and it is not a corner, because those are empty.
+It cannot at the same time happen that $c_t<c_b$ and $r_r>r_l$ (or symmetrically $c_t>c_b$ and $r_r<r_l$), because then $P_7\im M$. Without loss of generality, let $c_t\geq c_b$ and $r_r\geq r_l$. The submatrix~$M[[r_r-1],[c_t+1,n]]$ is empty; otherwise, any one-entry there, together with $M[1,c_t],M[m,c_b]$ and $M[r_r,1]$ forms the forbidden pattern. Similarly, the matrix $M[[r_r+1,m],[c_t-1]]$ is also empty. Thus $M[r_t,c_t]$ is top-right and bottom-left empty and it is not a corner, satisfying the second condition.
 \end{proof}
 
 \begin{prop}
 \label{prop:p33}
-For all matrices $M\in\Mat$: $P_7\nim M\Leftrightarrow$ there are integers $r,c$ such that either (see Figure~\ref{fig:p33})
+For all matrices $M\in\Mat$: $P_7\nim M\Leftrightarrow$ there are integers $r,c$ such that either (see Figure~\ref{fig:p33}):
 \begin{enumerate}
 	\item $M[r,c]$ is top-right empty and bottom-left empty, $\smm{\bullet&\bullet\\\bullet& }\nim M[[r],[c]]$ and $\smm{ &\bullet\\\bullet&\bullet}\nim M[[r,m],[c,n]]$, or
 	\item $M[r,c]$ is top-left empty and bottom-right empty, $\smm{\bullet&\bullet\\ &\bullet}\nim M[[r],[c,n]]$ and $\smm{\bullet& \\\bullet&\bullet}\nim M[[r,m],[c]]$.
@@ -279,21 +281,21 @@ We let $M_1=M[[r],[c]],\ M_2=M[[r,m],[c,n]],\ M_3=M[[r],[c,n]]$ and $M_4=M[[r,m]
 
 If $M\in\bin^{2\times2}$ then it either avoids $\smm{ &\bullet\\\bullet&\bullet}$ or $\smm{\bullet&\bullet\\\bullet& }$ and we are done.
 
-For a bigger matrix $M$, from Lemma~\ref{lemma:p33}, there is an element $M[r,c]$ satisfying some conditions. If there is a one-entry in any corner, we are done because the matrix cannot contain one of the rotations of $\smm{\bullet&\bullet\\\bullet& }$. Otherwise, assume $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(1,1)\}$. Let $M_1=M[[r],[c]]$ and $M_2=M[[r,m],[c,n]]$. If $M_1$ is non-empty, then $\smm{ &\bullet\\\bullet&\bullet}\nim M_2$. Symmetrically, $\smm{\bullet&\bullet\\\bullet& }\nim M_1$ if $M_2$ is non-empty. If one of them is empty, the other is a smaller matrix avoiding $P$ as an interval minor and the statement follows from the induction.
-	\item[$\Leftarrow$] Without loss of generality, assume a matrix $M$ looks like the left matrix in Figure~\ref{fig:p33}. For contradiction, let $\PimM$. We can partition $M$ into four quadrants such that there is at least one one-entry in each of them. It does not matter where we partition it, every time we either get $\smm{\bullet&\bullet\\\bullet& }\im M_1$ or $\smm{ &\bullet\\\bullet&\bullet}\im M_2$, which is a contradiction. \qedhere
+For a bigger matrix $M$, from Lemma~\ref{lemma:p33}, there is an entry~$M[r,c]$ satisfying some conditions. If there is a one-entry in any corner, we are done because the matrix cannot contain one of the rotations of $\smm{\bullet&\bullet\\\bullet& }$. Otherwise, assume $M[r,c]$ is both top-right and bottom-left empty and $(r,c)\not\in\{(1,1),(m,n)\}$. If $M_1$ is non-empty, then $\smm{ &\bullet\\\bullet&\bullet}\nim M_2$. Symmetrically, $\smm{\bullet&\bullet\\\bullet& }\nim M_1$ if $M_2$ is non-empty. If one of them is empty, the other is a smaller matrix avoiding $P_7$ as an interval minor and the statement follows from the induction hypothesis.
+	\item[$\Leftarrow$] Let $P_7\im M$. Every mapping of $P_7$ partitions $M$ into four non-empty quadrants; thus, there are no integers $r,c$ satisfying the conditions. \qedhere
 \end{itemize}
 \end{proof}
 
 \begin{lemma}
 \label{lemma:p72}
-For all matrices $M$: $P_8\nim M\Rightarrow M=M_1\hsum M_2$ where
+For all matrices $M$: $P_8\nim M\Rightarrow$ there are matrices~$M_1,M_2$ such that $M=M_1\hsum M_2$ and
 \begin{enumerate}
-\item $\smm{\bullet&\bullet\\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$ or
+\item $\smm{\bullet&\bullet\\ &\bullet}\nim M_1$ and $\smm{ &\bullet\\\bullet& }\nim M_2$, or
 \item $\smm{\bullet& \\ &\bullet}\nim M_1$ and $\smm{\bullet&\bullet\\\bullet& }\nim M_2$.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
-Let $e=M[r,c]$ be an arbitrary top-most one-entry of $M$. It holds $\smm{\bullet&\bullet\\ &\bullet}\nim M[[m],[c-1]]$; otherwise, together with $e$ it would form the whole $P_8$. Symmetrically, $\smm{\bullet&\bullet\\\bullet& }\nim M[[m],[c+1,n]]$. For contradiction with statement, let $e_1,\ e_2$ (none of them equal to $e$) be any two one-entries forming $\smm{\bullet& \\ &\bullet}$ in $M[[m],[c]]$ and let $e'_1,\ e'_2$ be any two one-entries forming $\smm{ &\bullet\\\bullet& }$ in $M[[m],[c,n]]$. Without loss of generality, $e'_2$ is lower than $e_2$ and together with $e_1,\ e$ and $e'_1$ it gives us a mapping of $P_8$ to $M$, which is a contradiction.
+Let $e=M[r,c]$ be an arbitrary top-most one-entry of the matrix~$M$. It holds $\smm{\bullet&\bullet\\ &\bullet}\nim M[[m],[c-1]]$; otherwise, we have a mapping of $P_8$ to $M$. Symmetrically, $\smm{\bullet&\bullet\\\bullet& }\nim M[[m],[c+1,n]]$. For contradiction with the statement, let $e_1,\ e_2$ (none of them equal to $e$) be any two one-entries forming $\smm{\bullet& \\ &\bullet}$ in $M[[m],[c]]$ and let $e'_1,\ e'_2$ be any two one-entries forming $\smm{ &\bullet\\\bullet& }$ in $M[[m],[c,n]]$. Without loss of generality, $e'_2$ is no higher than $e_2$ and together with $e_1,\ e$ and $e'_1$ it gives us a mapping of $P_8$ to $M$, which is a contradiction.
 \end{proof}
 
 \begin{prop}
@@ -308,18 +310,18 @@ For all matrices $M\in\Mat$: $P_8\nim M\Leftrightarrow$ there are integers $r,c_
 \end{figure}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] From Lemma~\ref{lemma:p72}, we know $M=M_1'\hsum M_2'$, where $\smm{\bullet&\bullet\\ &\bullet}\nim M_1'$ and $\smm{ &\bullet\\\bullet& }\nim M_2'$ (or symmetrically the second case). From Proposition~\ref{prop:p31}, we have that $M_1'$ looks like $M[[m],[c_2-1]$ in Figure~\ref{fig:p72} and $M[[m],[c_2,n]]$ forms a walking matrix. Without loss of generality, $M[[r-1],\{c_1\}]$ and $M[\{r\},[c_1+1,c_2-1]]$ are non-empty; otherwise, we extend $M_1$ to cover the whole $M[[m],[c_2-1]$. If there are two different columns in $M_2'$ having a one-entry above the $r$-th row, together with one-entries in $M[[r-1],\{c_1\}]$ and $M[\{r\},[c_1+1,c_2-1]]$ they form a mapping of $P_8$.
+	\item[$\Rightarrow$] From Lemma~\ref{lemma:p72}, we know there are matrices~$M_1',M_2'$ such that $M=M_1'\hsum M_2'$, $\smm{\bullet&\bullet\\ &\bullet}\nim M_1'$ and $\smm{ &\bullet\\\bullet& }\nim M_2'$ (or symmetrically the second case). Let $c_2$ be the first column appended from $M_2'$. From Proposition~\ref{prop:p31}, we have integers $r',c'$ such that $M_1'[r',c']$ is top-left, top-right and bottom-right empty and $\smm{\bullet& \\ &\bullet}\im M_1'[[r',m],[c']]=M_1$. Let us set $r=r'$ and $c_1=c'$. We also have that $M[[m],[c_2,n]]$ is a walking matrix. Without loss of generality, $M[[r-1],\{c_1\}]$ and $M[\{r\},[c_1+1,c_2-1]]$ are non-empty; otherwise, we extend $M_1$ to cover the whole $M[[m],[c_2-1]$. There are no two different columns in $M_2'$ having a one-entry above the $r$-th row; otherwise, together with one-entries in $M[[r-1],\{c_1\}]$ and $M[\{r\},[c_1+1,c_2-1]]$ they would give us a mapping of $P_8$ to $M$.
 	\item[$\Leftarrow$] A one-entry~$P_8[2,2]$ can not be mapped anywhere but to the $r$-th row, but in that case, there are at most two columns having one-entries above it. \qedhere
 \end{itemize}
 \end{proof}
 
 \begin{prop}
-For all matrices $M\in\Mat$: $P_9\nim M\Leftrightarrow$ for every one-entry $M[r,c]$ on the bottom-right extreme reverse walk~$w$ and every one-entry $M[r',c']$ on the top-left extreme reverse walk~$w'$, if $r>r'+3$ and $c>c'+3$ then $M[[r'+1,r-1],[c'+1,c-1]]$ is a walking matrix.
+For all matrices $M\in\Mat$: $P_9\nim M\Leftrightarrow$ for every one-entry~$M[r,c]$ on the bottom-right extreme reverse walk~$w$ and every one-entry~$M[r',c']$ on the top-left extreme reverse walk~$w'$, if $r>r'+3$ and $c>c'+3$ then $M[[r'+1,r-1],[c'+1,c-1]]$ is a walking matrix.
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] Let $w$ be the bottom-right extreme reverse walk and let $w'$ be the top-left extreme reverse walk in $M$. If there are one-entries $M[r,c]$ on $w$ and $M[r',c']$ such that $\smm{ &\bullet\\\bullet& }\im M[[r'+1,r-1],[c'+1,c-1]]$, we have a contradiction with $P_9\nim M$.
-	\item[$\Leftarrow$] For contradiction, let $P_9\im M$. Without loss of generality, in any mapping of $P_9$, the element~$P_9[4,4]$ is mapped to some one-entry~$M[r,c]$ on $w$ and the element~$P_9[1,1]$ is mapped to some one-entry~$M[r',c']$ on $w'$. This means that $\smm{ &\bullet\\\bullet& }\im M[[r'+1,r-1],[c'+1,c-1]]$, which is a contradiction with it being a walking matrix. \qedhere
+	\item[$\Rightarrow$] If there are one-entries~$M[r,c]$ on $w$ and $M[r',c']$ on $w'$ such that $\smm{ &\bullet\\\bullet& }\im M[[r'+1,r-1],[c'+1,c-1]]$, we have a a mapping of $P_9$ to $M$.
+	\item[$\Leftarrow$] For contradiction, let $P_9\im M$ and consider any mapping. Without loss of generality, the one-entry~$P_9[4,4]$ is mapped to some one-entry~$M[r,c]$ on $w$ and the one-entry~$P_9[1,1]$ is mapped to some one-entry~$M[r',c']$ on $w'$. This means that $\smm{ &\bullet\\\bullet& }\im M[[r'+1,r-1],[c'+1,c-1]]$, which is a contradiction with it being a walking matrix. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -330,11 +332,11 @@ We only describe the structure of matrices avoiding one particular set of patter
 
 \begin{prop}
 \label{prop:twopatterns}
-Let $P_{10}=\smm{\circ&\circ&\bullet\\\bullet&\circ&\circ}$ and $P_{11}=\smm{\circ&\bullet\\\circ&\circ\\\bullet&\circ}$, then for all matrices $M$: $\{P_{10},P_{11}\}\nim M\Leftrightarrow$ for the bottom-left extreme walk~$w$ in $M$, each one-entry $M[r,c]$ is either on $w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$.
+Let $P_{10}=\smm{\circ&\circ&\bullet\\\bullet&\circ&\circ}$ and $P_{11}=\smm{\circ&\bullet\\\circ&\circ\\\bullet&\circ}$, then for a matrix~$M$: $\{P_{10},P_{11}\}\nim M\Leftrightarrow$ for every $r<m$ and $c>0$, if $M[r,c]$ is a one-entry then it either is on the bottom-left extreme walk~$w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$.
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] For contradiction, assume there is a one-entry anywhere but on $w$ or directly diagonally next to any bottom-left corner of $w$. Then this one-entry together with at least one bottom-left corner of $w$ give us a mapping of $P_{10}$ or $P_{11}$ and a contradiction.
-	\item[$\Leftarrow$] For any one-entry~$e$, from the description of $M$, there is no one-entry that creates $P_{10}$ or $P_{11}$ with $e$. \qedhere
+	\item[$\Rightarrow$] Assume there are $r<m$ and $c>0$ and a one-entry~$M[r,c]$ outside of $w$ such that $M[r+1,c]$ (or $M[r,c-1]$) is outside of $w$. The one-entry~$M[r,c]$ is not bottom-left extreme and so there is a one-entry in $M'=M[[r+1,m],[c-1]]$. The entry~$M[r+1,c]$ is not bottom-left extreme and because $M'$ is non-empty, $M[r+1,c]$ is not bottom-left empty. Any one-entry in $M[[r+2,m],[c-1]]$ together with $M[r,c]$ give us a mapping of $P_{11}$ ($P_{10}$).
+	\item[$\Leftarrow$] For any one-entry~$M[r,c]$, there are one-entries in neither $M[[r+2,m],[c-1]]$ nor $M[[r+1,m],[c-2]]$. \qedhere
 \end{itemize}
 \end{proof}

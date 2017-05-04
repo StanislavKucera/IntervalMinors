@@ -1,0 +1,7 @@
+% Metadata to be stored in PDF, see documentation of the pdfx package for more details.
+
+\Author{Stanislav Kučera}
+\Title{Hereditary classes of binary matrices}
+\Keywords{binary matrix\sep pattern--avoidance\sep interval minor}
+\Subject{Interval minors of binary matrices were introduced by Jacob Fox in the study of Stanley--Wilf limits. We study what can be implied from their relation to the theory of pattern avoidance of submatrices, which is a very popular area of discrete mathematics. We start by characterizing matrices avoiding small interval minors. We then consider classes of matrices closed under interval minors and we find classes of matrices that cannot be described by a finite number of forbidden interval minors. We also define and study a variant of a classical extremal Tur{\'a}n-type question studied in the area of combinatorics of permutations and binary matrices and in combinatorial geometry.}
+\Publisher{Charles University}

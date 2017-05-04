@@ -4,13 +4,13 @@ A binary matrix (or 0--1 matrix) is a matrix with ones and zeroes as its entries
 When working with matrices, we always index rows from top to bottom and columns from left to right, starting with one. When we speak about a row~$r$, we mean a row with index $r$. A \emph{line} of a matrix is either a row or a column.
 
 \section{The main results}
-While a lot is know about matrices in general, because they can intuitively represent much more complex objects, interval minors are a fairly new topic and so we have a choice of the direction from which we want to approach them.
+While a lot is known about matrices in general, because they can intuitively represent much more complex objects, interval minors are a fairly new topic and so we have a choice of the direction from which we want to approach them.
 
 To get familiar with definitions and pattern avoidance in general, in Chapter~\ref{chap:chars}, we focus on small patterns (having up to four one-entries only) and describe the common structure of matrices avoiding them.
 
-We then turn our focus elsewhere in Chapter~\ref{chap:ops}, and instead of looking for a structure of matrices avoiding a pattern, given a class of matrices (closed under interval minors) we find the smallest set of forbidden patterns that characterizes the class. We introduce the skew sum of two matrices and show that classes of matrices closed under the skew sum can always be described by a finite number of forbidden pattern. Using the operation more, we show that there are also other classes for which this cannot be achieved.
+We then turn our focus elsewhere in Chapter~\ref{chap:ops}, and instead of looking for a structure of matrices avoiding a pattern, given a class of matrices (closed under interval minors) we find its basis -- the smallest set of forbidden patterns that characterizes the class. We introduce the skew sum of two matrices and show that the closure under the skew sum of a single matrix always has finite basis. We finish the chapter by showing a class of matrices with finite basis such that its closure under the skew sum has an infinite basis.
 
-Because it is very useful to study extremal questions like the maximum number of one-entries of a matrix from a given class of matrices, in Chapter~\ref{chap:ints}, we study a variant of such complexity question, where we instead focus on the maximum number~$k$ of appearances of pairs ``01'' and ``10'' on a single line of a matrix from a given class of matrices. We show that even for classes that are described by just one forbidden pattern, $k$ can be unbounded, and we characterize exactly for which pattern this holds. Then we generalize the approach and show what influence an intersection of classes has on the number $k$.
+Because it is very useful to study extremal questions like the maximum number of one-entries of a matrix from a given class of matrices, in Chapter~\ref{chap:ints}, we study a variant of such complexity question, where we instead focus on the maximum number~$k$ of appearances of pairs ``01'' and ``10'' in a single line of a matrix from a given class. We show that even for classes that are described by just one forbidden pattern, $k$ can be unbounded, and we characterize exactly which patterns cause their class to be unbounded. We conclude the thesis by showing that while the intersection of bounded classes is always bounded, there are unbounded classes intersection of which is even hereditarily bounded.
 
 \section{Preliminaries}
 \begin{ntn}
@@ -21,7 +21,11 @@ For $n\in\mathbb{N}$, let $[n]:=\{1,2,\dots,n\}$ and for $m\in\mathbb{N}$ such t
 For a matrix~$M\in\Mat$, $R\subseteq[m]$ and $C\subseteq[n]$, let $M[R,C]$ denote a submatrix of $M$ induced by row indices in $R$ and column indices in $C$. Furthermore, for $r\in[m]$ and $c\in[n]$, let $M[r,c]:=M[\{r\},\{c\}]$.
 \end{ntn}
 
-The pattern avoidance for matrices is a generalization of a long studied theory of pattern avoidance for permutations. There are two generally used ways to define this generalization, either we avoid a matrix pattern as a submatrix or as an interval minor. While this thesis works almost exclusively with the latter, to better introduce the whole area, we start by defining the more know of the two approaches.
+\begin{defn}
+We say a matrix~$M\in\Mat$ is empty, if there is no one-entry in $M$ and we denote it as $M=\{0\}^{m\times n}$. Otherwise, it is non-empty. By $\{1\}^{m\times n}$ we denote the matrix of size $m\times n$ without zero-entries. Similarly, a row (column) of $M$ is non-empty if it contains a one-entry and empty otherwise.
+\end{defn}
+
+The pattern avoidance for matrices is a generalization of a long studied theory of pattern avoidance for permutations. There are two generally used ways to define this generalization, either we avoid a matrix pattern as a submatrix or as an interval minor. While this thesis works almost exclusively with the latter, to better introduce the whole area, we start by defining the more common of the two approaches.
 
 \begin{defn}
 We say a matrix~$M\in\Mat$ \emph{contains} a pattern~$P\in\Pat$ \emph{as a submatrix} and denote it by $\PsmM$ if there are $R\subseteq[m]$ and $C\subseteq[n]$ such that $M'=M[R,C]\in\Pat$ and for every $r\in R$ and $c\in C$, if $P[r,c]=1$ then $M'[r,c]=1$.
@@ -46,7 +50,14 @@ For simplicity, we do not consider a deletion of a line to be a separate operati
 Consider matrices $P$ and $M$ and let $P\im M$. A \emph{mapping} of $P$ to $M$ is a function that maps each row of $P$ to an interval of rows of $M$ and each column of $P$ to an interval of columns of $M$ in such a way that if $P[r,c]=1$ and $r$ is mapped to $R$ and $c$ is mapped to $C$, there is a one-entry in $M[R,C]$. An \emph{interval of rows} (columns) is a set of consecutive rows (columns). We say that an entry~$P[r,c]$ is mapped to an entry~$M[r',c']$ in a fixed mapping of $P$ to $M$, in which $r$ is mapped to $R$ and $c$ is mapped to $C$, if $r'\in R$ and $c'\in C$ and if $P[r,c]=1$ then we also require $M[r',c']=1$.
 \end{defn}
 
-Each mapping of a pattern~$P$ to a matrix~$M$ corresponds to a \emph{partitioning} of $M$ to intervals of rows and columns that creates a block structure. On the other hand, if we find a partitioning of $M$ to blocks such that for each one-entry $P[r,c]$ there is a one-entry in the block that can be indexed $[r,c]$ then we have a mapping of $P$ to $M$ and so $P\im M$. This means:
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=90mm]{img/mapping.pdf}
+\caption{An example of a mapping of a pattern~$P$ to a matrix~$M$.}
+\label{fig:mapping}
+\end{figure}
+
+Each mapping of a pattern~$P$ to a matrix~$M$ corresponds to a \emph{partitioning} of $M$ to intervals of rows and columns that creates a block structure. See Figure~\ref{fig:mapping}. On the other hand, if we find a partitioning of $M$ to blocks such that for each one-entry $P[r,c]$ there is a one-entry in the block that can be indexed $[r,c]$ then we have a mapping of $P$ to $M$ and so $P\im M$. This means:
 
 \begin{obs}
 For all matrices $P$ and $M$, there is a mapping of $P$ to $M\Leftrightarrow\PimM$. \qed
@@ -59,7 +70,7 @@ While pattern avoidance in terms of submatrices and interval minors seem to be v
 For all matrices $P$ and $M$, $\PsmM\Rightarrow\PimM$.
 \end{obs}
 
-As said at the beginning of the section, both approaches generalize pattern avoidance for permutations and so it makes sense that they are equal for permutation matrices -- matrices having exactly one one-entry in each line.
+As mentioned at the beginning of the section, both approaches generalize pattern avoidance for permutations and so it makes sense that they are equal for permutation matrices -- matrices having exactly one one-entry in each line.
 
 \begin{obs}
 \label{obs:perm}
@@ -98,7 +109,7 @@ Let $P$ and $M$ be matrices, $\PimM\Leftrightarrow P^T\im M^T$.
 \section{Pattern avoidance}
 Pattern avoidance is a general topic in combinatorics. A lot of attention is directed towards permutations, see books \cite{bona, kitaev} for references. It is a natural generalization to regard permutations as permutation matrices and consider matrix avoidance. This is mainly studied in terms of submatrices, so we discuss some interesting results in this section.
 
-Interval minors are, on the other hand, a fairly new topic first defined by Jacob Fox in \cite{fox} as a tool to prove results about permutations in the study of Stanley--Wilf limits. Since then, a little has been discovered about the theory of interval minors. Nevertheless, we mention some results at the end of this section.
+Interval minors are, on the other hand, a fairly new topic first defined by Jacob Fox in \cite{fox} as a tool to prove results about permutations in the study of Stanley--Wilf limits. Since then, little has been discovered about the theory of interval minors. Nevertheless, we mention some results at the end of this section.
 
 Let us go back to submatrices for now. The question that is particularly interesting is to determine the maximum number of one-entries that a matrix avoiding a given pattern can have. This property describes complexity of a pattern and can be used for example to prove algorithmic complexity, see \cite{efrat}.
 
@@ -154,6 +165,7 @@ Moreover, the same holds for $Ex_{\preceq}(P,m,n).$
 \begin{proof}
 If $k>m\vee l>m$, we have $P\nim\{1\}^{m,n}$. Otherwise, let $P[r,c]=1$ and consider Figure~\ref{fig:minimalist}. Consider a matrix~$M$ such that the first $r-1$ rows, the last $k-r$ rows, the first $c-1$ column and the last $l-c$ column contain no zero-entry and the rest is empty. Then $P\not\leq M$ and even $P\nim M$. We can also see that $|M|=mn-(m-k+1)(n-l+1)=(l-1)m+(k-1)n-(k-1)(l-1)$.
 \end{proof}
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=120mm]{img/minimalist.pdf}
@@ -171,7 +183,7 @@ m\cdot n & k>m\text{ or } l>m \\
 \end{array}$$
 \end{defn}
 
-We use the adjective ``strongly'' to further distinguish minimalist pattern from weakly minimalist patterns defined next.
+We use the adjective ``strongly'' to further distinguish minimalist patterns from weakly minimalist patterns defined next.
 
 \begin{defn}
 A pattern~$P\in\{0,1\}^{k\times l}$ is \emph{weakly minimalist} if
@@ -211,7 +223,7 @@ Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{2\times l}$ as an interval minor a
 $|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-1)+n\leq\sum\limits_{i=1}^{m-1}|A_i|+n\leq(l-1)(m-1)+n$.
 \end{proof}
 
-This result shows an example of a weakly minimalist matrix that is not strongly minimalist. Consider a matrix~$\smm{\bullet&\bullet\\\bullet&\bullet}$. It is, thanks to Fact~\ref{fct:2weak} weakly minimalist, but it is known due to \cite{p33} that it is not strongly minimalist.
+This result shows an example of a weakly minimalist matrix that is not strongly minimalist. Consider the matrix~$\smm{\bullet&\bullet\\\bullet&\bullet}$. It is, thanks to Fact~\ref{fct:2weak} weakly minimalist, but it is known due to \cite{p33} that it is not strongly minimalist.
 
 \begin{fct}[\cite{bigraphs}]
 \label{fct:3weak}
@@ -223,7 +235,7 @@ Let $M\in\Mat$ be a matrix avoiding $P=\{1\}^{3\times l}$ as an interval minor a
 $|M|=\sum\limits_{j=1}^nb_j=\sum\limits_{j=1}^n(b_j-2)+2n\leq\sum\limits_{i=2}^{m-1}|A_i|+2n\leq(l-1)(m-2)+2n$.
 \end{proof}
 
-We now show that the third part of Fact~\ref{fct:minimalist} is also safe for weakly minimalist patterns.
+We now show that the third part of Fact~\ref{fct:minimalist} also holds for weakly minimalist patterns.
 
 \begin{lemma}
 Let $P\in\Pat$ be a weakly minimalist pattern having at least two one-entries. Then a pattern~$P'$ created from $P$ be deletion of a one-entry is also weakly minimalist.

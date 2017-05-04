@@ -1,26 +1,26 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-Throughout the thesis, we have been looking from multiple angles at classes of binary matrices. In particular, we studied properties of matrices containing or avoiding other, smaller matrices as interval minors.
+Throughout the thesis, we have been looking from multiple angles at classes of binary matrices. In particular, we studied properties of matrices containing or avoiding small interval minors.
 
 \paragraph{Small interval minors}
 We started by describing the structure of matrices avoiding some small patterns. We managed to characterize all matrices avoiding patterns having up to three one-entries and also showed how to generalize some of the characterizations for much bigger patterns. Even for very small patterns (only having four one-entries), the structure of matrices avoiding them became very rich and hard to properly describe.
 
-So instead, we began to consider how a small change of the pattern influences the structure of matrices avoiding the pattern. This was mainly looked at when adding empty lines to the pattern. We showed for patterns of size $k\times2$ what matrices avoiding its blown version look like, but we are unable to generalize the result (or show something similar) when the pattern we are working with is bigger. So the question, answer for which could later be used to describe complexity of some patterns or help enumerate matrices from some class, is:
+So instead, we began to consider how a small change of the pattern influences the structure of matrices avoiding the pattern. This was mainly looked at when adding empty lines to the pattern. We showed for patterns of size $k\times2$ what matrices avoiding its blown version look like and discussed that we are unable to generalize the result (or show something similar) when the pattern we are working with is bigger. So the question, answer to which could later be used to describe complexity of some patterns or help enumerate matrices from some class, is:
 \begin{ques}
 What can we say about matrices avoiding a pattern with added empty line with respect to the matrices avoiding the original pattern?
 \end{ques}
 
 \paragraph{The basis of a class of matrices}
-After dealing with small patterns, we defined an operation of the direct sum and a closure under the direct and began to explore how it relates with classes of matrices. Once again we started by considering some small cases, where we observed that the closure can be describe by forbidden patterns very naturally. Later, we considered the direct sum with an overlap, which allowed us to restate the characterizations from the previous chapter in a much easier way.
+After dealing with small patterns, we defined an operation of the skew sum and the closure under the skew and began to explore how it relates with classes of matrices. Once again, we started by considering some small cases, where we observed that the closure can be described by forbidden patterns very naturally. Later, we considered the skew sum with an overlap, which allowed us to restate the characterizations from the second chapter in a much easier way.
 
-We also introduced a notion of articulation that allowed us to proof a strong result saying that any matrix closed under the direct sum can always be describe by a finite set of forbidden patterns.
+We also introduced a notion of articulations that allowed us to prove a strong result saying that any matrix closed under the skew sum can always be described by a finite set of forbidden patterns.
 
-In order to generalize the result, we started looking at sets of matrices and ultimately, we showed that there are set of matrices with finite basis, whose closure cannot be described with a finite number of forbidden minors.
+In order to generalize the result, we started looking at sets of matrices and ultimately, we showed that there are sets of matrices with finite basis whose closure cannot be described with a finite number of forbidden minors.
 
 \paragraph{Zero-intervals}
-In the last chapter, we studies a property of a class of matrices that in some terms describes the complexity of inclusion maximal matrices from the class.
+In the last chapter, we studied a property of a class of matrices that in some terms describes the complexity of critical matrices from the class.
 
-To bring the notion back to the pattern avoiding, we defined a pattern~$P$ to be bounding if and only of the class~$\Avm{P}$ is bounded and we showed that a pattern is bounding if and only if it avoids all rotations of $P_1=\smm{ &\bullet& \\\bullet& & \\ & &\bullet}$.
+To bring the notion back to pattern avoiding, we defined a pattern~$P$ to be bounding if and only if the class~$\Avm{P}$ is bounded and we showed that a pattern is bounding if and only if it avoids all rotations of $P_1=\smm{ &\bullet& \\\bullet& & \\ & &\bullet}$.
 
 To show for a pattern that it is bounding meant to show that each one-entry it contains is bounded. It may be an interesting generalization to show for each one-entry whether it is bounded or unbounded in its pattern. On our way, we only saw one type of unbounded one-entries, and those are $P_1[2,1]$ for rows, $P_1[1,2]$ for columns and corresponding one-entries in the rotations of $P_1$. Let us call these one-entries \emph{trivially unbounded}.
 
@@ -44,19 +44,19 @@ $$\smm{	 & &\circ& &\bullet& & &\circ& &\bullet&\cdots&\bullet& & &\circ& &\bull
 		 }$$
 We see that $\PnimM$ because we always need to map $P[2,1]$ and $P[3,3]$ to just one ``block'' of one-entries of $M$, which only leaves a zero-entry where we need to map $P[1,3]$ or $P[2,4]$.
 
-When we change any marked zero-entry of the first row into a one-entry, we get a matrix containing a minor of $\{1\}^{3\times4}$; therefore, containing $P$ as an interval minor. In case $M$ is not maximal, we can add more one-entries to make it maximal but it will still contain a row with $n$ one-intervals.
+When we change any marked zero-entry of the first row into a one-entry, we get a matrix containing a minor of $\{1\}^{3\times4}$; therefore, containing $P$ as an interval minor. In case $M$ is not critical, we can add more one-entries to make it critical but it will still contain a row with $n$ one-intervals.
 \end{proof}
 Our tools are not strong enough to let us characterize unbounded one-entries. Based on our attempts, we state the following conjecture:
 \begin{conj}
 Every row-unbounded one-entry share a row with a trivially row-unbounded one-entry.
 \end{conj}
 
-Throughout the chapter, we work with arguments such that if something holds for a matrix, it also holds for every submatrix. While it seems completely natural, we are unable to decide the following question:
+Throughout the chapter, we work with arguments such that if something holds for a matrix, it also holds for every submatrix. While it seems completely natural, we are unable to resolve the following question:
 \begin{ques}
-Can a non-bounding pattern become bounding after a one-entry is changed to a zero-entry?
+Can a bounding pattern become non-bounding after a one-entry is deleted?
 \end{ques}
 
-Using our machinery, we showed that while the union of bounding sets of patterns is always bounding again, the union of non-bounding sets may become bounding. For the class of matrices avoiding all rotations of $P_1$, we even showed that every subclass is also bounded. The same remains open for other sets of patterns:
+We showed that while the intersection of bounded classes of matrices is always bounded, the intersection of unbounded classes may become bounded. For the class of matrices avoiding all rotations of $P_1$, we even showed that every subclass is also bounded. The same remains open for other classes of matrices:
 \begin{ques}
 Is $\Avm{\smm{ &\bullet& \\\bullet& & \\ & &\bullet},\smm{ &\bullet& \\ & &\bullet\\\bullet& & }}$ hereditarily bounded?
 \end{ques}

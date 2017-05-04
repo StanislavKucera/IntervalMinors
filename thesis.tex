@@ -25,12 +25,19 @@
 % \setlength\headheight{0mm}
 % \let\openright=\cleardoublepage
 
+%% Generate PDF/A-2u
+\usepackage[a-2u]{pdfx}
+
 %% Character encoding: usually latin2, cp1250 or utf8:
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
+
+%% Prefer Latin Modern fonts
+\usepackage{lmodern}
 
 %% Further useful packages (included in most LaTeX distributions)
 \usepackage{amsmath}        % extensions for typesetting of math
 \usepackage{amsfonts}       % math fonts
+\usepackage{amssymb}
 \usepackage{amsthm}         % theorems, definitions, etc.
 \usepackage{bbding}         % various symbols (squares, asterisks, scissors, ...)
 \usepackage{bm}             % boldface symbols (\bm)
@@ -44,8 +51,6 @@
 \usepackage{booktabs}       % improved horizontal lines in tables
 \usepackage{paralist}       % improved enumerate and itemize
 \usepackage[usenames]{xcolor}  % typesetting in color
-%\usepackage{mathdots}
-\usepackage{lineno}
 
 %%% Basic information on the thesis
 
@@ -79,17 +84,19 @@
 % An optional dedication: you can thank whomever you wish (your supervisor,
 % consultant, a person who lent the software, etc.)
 \def\Dedication{%
-Dedication.
+I would very much like to thank my supervisor, V{\'i}t Jel{\'i}nek. He has been the one who sparked my interest in discrete mathematics and getting my first A from his exam was probably the base of all my school achievements. Somehow, he always knew when to step up and when to give me space and it is safe to say that his mentoring determined my future for a few upcoming years.
+I would also like to thank my classmate and friend, Adam Horn{\'a}{\v{c}}ek, who has been there for me when I needed him.
+This work was supported by the Neuron Fund for Support of Science.
 }
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\Abstract{%
-Interval minors of binary matrices were introduced by Jacob Fox in the study of Stanley-Wilf limits. We study what can be implied from their relation to the theory of pattern avoidance of submatrices, which is a very popular area of discrete mathematics. We start be characterizing matrices avoiding small interval minors. We then consider classes of matrices closed under interval minors and with some help of the operation of skew sum, we find classes of matrices that cannot be described by a finite number of forbidden interval minors. We also define and study a variant of a classical extremal Tur{\'a}n-type question studied in the area of combinatorics of permutations and binary matrices and in combinatorial geometry.
+Interval minors of binary matrices were introduced by Jacob Fox in the study of Stanley--Wilf limits. We study what can be implied from their relation to the theory of pattern avoidance of submatrices, which is a very popular area of discrete mathematics. We start by characterizing matrices avoiding small interval minors. We then consider classes of matrices closed under interval minors and we find classes of matrices that cannot be described by a finite number of forbidden interval minors. We also define and study a variant of a classical extremal Tur{\'a}n-type question studied in the area of combinatorics of permutations and binary matrices and in combinatorial geometry.
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces
 \def\Keywords{%
-{binary matrix} {pattern--avoiding} {interval minor}
+{binary matrix} {pattern--avoidance} {interval minor}
 }
 
 %% The hyperref package for clickable links in PDF and also for storing
@@ -106,7 +113,6 @@ Interval minors of binary matrices were introduced by Jacob Fox in the study of 
 
 % Title page and various mandatory informational pages
 \begin{document}
-\linenumbers
 \include{title}
 
 %%% A page with automatically generated table of contents of the master thesis
@@ -125,7 +131,7 @@ Interval minors of binary matrices were introduced by Jacob Fox in the study of 
 \include{bibliography}
 
 %%% Figures used in the thesis (consider if this is needed)
-\listoffigures
+%\listoffigures
 
 %%% Tables used in the thesis (consider if this is needed)
 %%% In mathematical theses, it could be better to move the list of tables to the beginning of the thesis.

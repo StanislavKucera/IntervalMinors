@@ -34,7 +34,7 @@ For a matrix~$M\in\Mat$ and integers $r,c$, we say $M[r,c]$ is
 \end{defn}
 
 \begin{defn}
-For a matrix~$M\in\Mat$ and integers $r,c$, we say that an entry~$M[r,c]$ is \emph{bottom-left extreme}, if it is bottom-left empty and the submatrix~$M[[r,m],[c]]$ is not empty. Similarly, $M[r,c]$ is \emph{bottom-right extreme} if it is bottom-right empty and the submatrix~$M[[r,m],[c,n]]$ is not empty. A walk in $M$ is \emph{bottom-left extreme} if it contains all bottom-left extreme elements of $M$. A reverse walk in $M$ is \emph{bottom-right extreme} if it contains all bottom-right extreme elements of $M$.
+For a matrix~$M\in\Mat$ and integers $r,c$, we say that an entry~$M[r,c]$ is \emph{top-left extreme}, if it is top-left empty and the submatrix~$M[[r],[c]]$ is not empty. Similarly, $M[r,c]$ is \emph{bottom-right extreme} if it is bottom-right empty and the submatrix~$M[[r,m],[c,n]]$ is not empty. A walk in $M$ is \emph{top-left extreme} if it contains all top-left extreme elements of $M$. A reverse walk in $M$ is \emph{bottom-right extreme} if it contains all bottom-right extreme elements of $M$.
 \end{defn}
 
 It is easy to see that there is exactly one bottom-left extreme walk and exactly one bottom-right extreme walk in every non-empty matrix.
@@ -60,7 +60,7 @@ For matrices~$P\in\Pat$ and $M\in\Mat$, let $P'=P\hsum\{0\}^{k\times1}$ and let 
 \end{itemize}
 \end{proof}
 
-The analogous proof can be also used to characterize matrices avoiding patterns after adding an empty column as the first column or an empty row as the first or the last row. Using induction, we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$, where $P$ is derived from $P'$ by excluding all empty leading or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of leading or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not to consider patterns having empty rows or columns on their boundary.
+The analogous proof can be also used to characterize matrices avoiding patterns after adding an empty column as the first column or an empty row as the first or the last row. Using induction, we can easily show that a pattern $P'$ is avoided by a matrix $M'$ if and only if $P$ is avoided by $M$, where $P$ is derived from $P'$ by excluding all empty leading or ending rows and columns and $M$ is derived from $M'$ by excluding the same number of leading or ending rows and columns. Therefore, when characterizing matrices avoiding a forbidden pattern, we do not need to consider patterns having empty rows or columns on their boundary.
 
 We now show what happens when we add an empty column in between two columns of a pattern that only has two columns. It is going to be achieved by employing a notion of intervals of one-entries. More about these intervals and their counterpart -- zero-intervals can be found in the last chapter of the thesis.
 
@@ -74,12 +74,12 @@ For a class of matrices~$\class{M}$, a matrix~$M\in\class{M}$ is \emph{critical}
 
 \begin{lemma}
 \label{lemma:twocols}
-Let $P\in\bin^{k\times2}$ be a pattern and let $M\in\Avmax{P}$ be a matrix, then $M$ contains at most one one-interval in each row.
+For every $l>1$, let $P\in\bin^{k\times l}$ be a pattern such that only the first and the last columns are non-empty and let $M\in\Avmax{P}$ be a matrix, then $M$ contains at most one one-interval in each row.
 \end{lemma}
 \begin{proof}
-For contradiction, assume there are at least two one-intervals in a row of $M$. Because $M$ is critical in $\Avm{P}$, changing any zero-entry~$e$ in between one-intervals $o_1$ and $o_2$ creates a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',2]$.
+For contradiction, assume there are at least two one-intervals in a row of $M$. Because $M$ is critical in $\Avm{P}$, changing any zero-entry~$e$ in between one-intervals $o_1$ and $o_2$ creates a mapping of the forbidden pattern. Such a mapping uses the changed one-entry to map some element $P[r',1]$ or $P[r',l]$.
 
-In the first case, the same mapping also maps $P$ to $M$ if we use a one-entry from $o_1$ instead of $e$; thus, $\PnimM$ and we reach a contradiction. In the second case, the mapping can use a one-entry from $o_2$ instead of $e$; therefore, we again get a contradiction with $\PnimM$. Since $e$ is not usable for any one-entry of $P$, we can change it to a one-entry and get a contradiction with $M$ being critical.
+In the first case, the same mapping also maps $P$ to $M$ if we use a one-entry from $o_1$ instead of $e$; thus, $\PimM$ and we reach a contradiction. In the second case, the mapping can use a one-entry from $o_2$ instead of $e$; therefore, we again get a contradiction with $\PnimM$. Since $e$ is not usable for any one-entry of $P$, we can change it to a one-entry and get a contradiction with $M$ being critical.
 \end{proof}
 
 \begin{lemma}
@@ -89,7 +89,7 @@ Let $P\in\bin^{k\times3}$ be a pattern such that its middle column is empty. Eve
 \begin{proof}
 Let a matrix~$M\in\Avmax{P}$. The same proof as in Lemma~\ref{lemma:twocols} shows that there is at most one one-interval in each row of $M$. For contradiction, let there be only one one-entry~$M[r,c]$ in a row~$r$:
 \begin{itemize}
-	\item $c=1$: we can set $M[r,c+1]=1$ and the matrix still avoids $Pl$, which is a contradiction with $M$ being critical in $\Avm{P}$.
+	\item $c=1$: we can set $M[r,c+1]=1$ and the matrix still avoids $P$, which is a contradiction with $M$ being critical in $\Avm{P}$.
 	\item $c=n$: we can set $M[r,c-1]=1$ and the matrix still avoids $P$, which is a contradiction with $M$ being critical in $\Avm{P}$.
 	\item otherwise: consider zero-entries $e_l=M[r,c-1]$ and $e_r=M[r,c+1]$. For contradiction, assume we can change neither $e_l$ nor $e_r$ to a one-entry without creating a mapping of the pattern. It means that if we set $e_l=1$ then some $P[r_1,1]$ can be mapped to it. Let $m_l$ be the corresponding mapping. At the same time, if we set $e_r=1$ then some $P[r_2,3]$ can be mapped to it and $m_r$ is the corresponding mapping. We show that the two mappings can be combined to a mapping of $P$ to $M$, giving a contradiction.
 	
@@ -139,7 +139,7 @@ Let $P\in\bin^{k\times2}$ be a pattern and let $P'\in\bin^{k\times3}$ be the pat
 The symmetric characterization also holds when adding an empty row to a pattern that only has two rows. We can see in the following proposition that the straightforward generalization of the statement for bigger patterns does not hold.
 
 \begin{prop}
-There exists a matrix~$P\in\Pat$ such that for each pattern~$P'\in\bin^{k\times(l+1)}$ created from $P$ by appending a new empty column in between the two existing columns, there exists a matrix~$N\in\Avm{P}$ such that the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$ contains $P'$ as an interval minor.
+There exists a matrix~$P\in\Pat$ such that for each pattern~$P'\in\bin^{k\times(l+1)}$ created from $P$ by inserting a new empty column in between the two existing columns, there exists a matrix~$N\in\Avm{P}$ such that the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$ contains $P'$ as an interval minor.
 \end{prop}
 \begin{proof}
 Later in this chapter, we characterize the class of matrices avoiding pattern~$\smm{\bullet&\bullet&\bullet\\ &\bullet& }$. See Proposition~\ref{prop:p72}. Let $N\in\Avm{\smm{\bullet&\bullet&\bullet\\ &\bullet& }}$ be any matrix containing $\smm{\bullet& &\bullet\\ &\bullet& }$ as an interval minor. Let a matrix $M$ be equal to the elementwise OR of $N\hsum\{0\}^{m\times 1}$ and $\{0\}^{m\times 1}\hsum N$. Then $\smm{\bullet&\circ&\bullet&\bullet\\ &\circ&\bullet& }\im M$ and $\smm{\bullet&\bullet&\circ&\bullet\\ &\bullet&\circ& }\im M$.
@@ -332,11 +332,11 @@ We only describe the structure of matrices avoiding one particular set of patter
 
 \begin{prop}
 \label{prop:twopatterns}
-Let $P_{10}=\smm{\circ&\circ&\bullet\\\bullet&\circ&\circ}$ and $P_{11}=\smm{\circ&\bullet\\\circ&\circ\\\bullet&\circ}$, then for a matrix~$M$: $\{P_{10},P_{11}\}\nim M\Leftrightarrow$ for every $r<m$ and $c>0$, if $M[r,c]$ is a one-entry then it either is on the bottom-left extreme walk~$w$ or both $M[r+1,c]$ and $M[r,c-1]$ are on $w$.
+Let $P_{10}=\smm{\bullet&\circ&\circ\\\circ&\circ&\bullet}$ and $P_{11}=\smm{\bullet&\circ\\\circ&\circ\\\circ&\bullet}$, then for a matrix~$M$: $\{P_{10},P_{11}\}\nim M\Leftrightarrow$ for every $r>1$ and $c>1$, if $M[r,c]$ is a one-entry then it either is on the top-left extreme walk~$w$ or both $M[r-1,c]$ and $M[r,c-1]$ are on $w$.
 \end{prop}
 \begin{proof}
 \begin{itemize}
-	\item[$\Rightarrow$] Assume there are $r<m$ and $c>0$ and a one-entry~$M[r,c]$ outside of $w$ such that $M[r+1,c]$ (or $M[r,c-1]$) is outside of $w$. The one-entry~$M[r,c]$ is not bottom-left extreme and so there is a one-entry in $M'=M[[r+1,m],[c-1]]$. The entry~$M[r+1,c]$ is not bottom-left extreme and because $M'$ is non-empty, $M[r+1,c]$ is not bottom-left empty. Any one-entry in $M[[r+2,m],[c-1]]$ together with $M[r,c]$ give us a mapping of $P_{11}$ ($P_{10}$).
-	\item[$\Leftarrow$] For any one-entry~$M[r,c]$, there are one-entries in neither $M[[r+2,m],[c-1]]$ nor $M[[r+1,m],[c-2]]$. \qedhere
+	\item[$\Rightarrow$] Assume there are $r>1$ and $c>1$ and a one-entry~$M[r,c]$ outside of $w$ such that $M[r-1,c]$ (or $M[r,c-1]$) is outside of $w$. The one-entry~$M[r,c]$ is not top-left extreme and so there is a one-entry in $M'=M[[r-1],[c-1]]$. The entry~$M[r-1,c]$ is not top-left extreme and because $M'$ is non-empty, $M[r-1,c]$ is not top-left empty, and so we have $r>2$. Any one-entry in $M[[r-2],[c-1]]$ together with $M[r,c]$ give us a mapping of $P_{11}$ ($P_{10}$).
+	\item[$\Leftarrow$] For any one-entry~$M[r,c]$, there are one-entries in neither $M[[r-2],[c-1]]$ nor $M[[r-1],[c-2]]$. \qedhere
 \end{itemize}
 \end{proof}
